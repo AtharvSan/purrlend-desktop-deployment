@@ -58,6 +58,7 @@ export enum CustomMarket {
   proto_avalanche_v3 = 'proto_avalanche_v3',
   proto_polygon_v3 = 'proto_polygon_v3',
   proto_arbitrum_v3 = 'proto_arbitrum_v3',
+  proto_hyperevm_v3 = 'proto_hyperevm_v3',
   // v3.0.1 fork
   proto_fork_v3 = 'proto_fork_v3',
   // v2
@@ -511,6 +512,26 @@ export const marketsData: {
     halIntegration: {
       URL: 'https://app.hal.xyz/recipes/aave-v3-track-health-factor',
       marketName: 'arbitrum',
+    },
+  },
+  [CustomMarket.proto_hyperevm_v3]: {
+    marketTitle: 'HyperEVM',
+    v3: true,
+    // market: CustomMarket.proto_hyperevm_v3,
+    chainId: 999,
+    enabledFeatures: {
+      incentives: false,
+      faucet: false,
+    },
+    // subgraphUrl: `https://api.goldsky.com/api/public/project_cmd1ugj6l3xr201ulblpe387r/subgraphs/my-aave-hyperevm/1.0.3/gn`,
+    addresses: {
+      LENDING_POOL_ADDRESS_PROVIDER: '0x18Ee75CA8A42c80F6A0334271610531018813263'.toLowerCase(),
+      LENDING_POOL: '0x1500Bd832ce85Ab160AF37D43D99696D33E8aD92',
+      WETH_GATEWAY: '0x5FB6846df2e425a15374F995EE6539e984f0961a',
+      WALLET_BALANCE_PROVIDER: '0x4D268f1B7C99B06a90EDc3B1C2AbC1E671AA2faC',
+      UI_POOL_DATA_PROVIDER: '0x7c71586932468BfA8eE66751a0D0711deDb32bD7',
+      UI_INCENTIVE_DATA_PROVIDER: '0xA3b1b4D467089E2496250EdCF00FdBD8CeaedC40',
+      COLLECTOR: '0x4ac5EB1EF9313c10bBdbcF1C6f5723Aa8106C14f',
     },
   },
 } as const;

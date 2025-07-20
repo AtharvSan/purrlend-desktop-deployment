@@ -340,4 +340,17 @@ export const networkConfigs: Record<string, BaseNetworkConfig> = {
       url: 'https://app.multichain.org/#/router',
     },
   },
+  [999]: {
+    name: 'HyperEVM',
+    publicJsonRPCUrl: ['https://rpc.hyperliquid.xyz/evm'],
+    publicJsonRPCWSUrl: '',
+    // protocolDataUrl: '',
+    baseUniswapAdapter: '0x0',
+    baseAssetSymbol: 'HYPE',
+    wrappedBaseAssetSymbol: 'WHYPE',
+    baseAssetDecimals: 18,
+    explorerLink: 'https://hyperscan.com',
+    isTestnet: false,
+    networkLogoPath: '/icons/networks/hyperevm.svg',
+  },
 } as const;

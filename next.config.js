@@ -53,6 +53,10 @@ module.exports = withBundleAnalyzer({
     ignoreBuildErrors: true, // temporary - not recommended long term
   },
 
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/i,

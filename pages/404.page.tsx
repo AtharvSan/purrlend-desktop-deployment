@@ -5,7 +5,6 @@ import { MainLayout } from 'src/layouts/MainLayout';
 import { uiConfig } from 'src/uiConfig';
 
 export default function Aave404Page() {
-  const theme = useTheme();
 
   return (
     <>

@@ -1,8 +1,6 @@
-import { Trans } from '@lingui/macro';
-import { Box, Button, Paper, Typography, useTheme } from '@mui/material';
-import Link from 'next/link';
+// import { Trans } from '@lingui/macro';
+import { Box, Typography, useTheme } from '@mui/material';
 import { ContentContainer } from 'src/components/ContentContainer';
-import { TopInfoPanel } from 'src/components/TopInfoPanel/TopInfoPanel';
 import { MainLayout } from 'src/layouts/MainLayout';
 import { uiConfig } from 'src/uiConfig';
 

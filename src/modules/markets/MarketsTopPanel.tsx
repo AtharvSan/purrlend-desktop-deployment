@@ -11,6 +11,7 @@ import { TopInfoPanel } from '../../components/TopInfoPanel/TopInfoPanel';
 import { TopInfoPanelItem } from '../../components/TopInfoPanel/TopInfoPanelItem';
 import { useAppDataContext } from '../../hooks/app-data-provider/useAppDataProvider';
 import { uiConfig } from 'src/uiConfig';
+import { networkConfigs } from 'src/ui-config/networksConfig';
 
 export const MarketsTopPanel = () => {
   const { reserves, loading } = useAppDataContext();

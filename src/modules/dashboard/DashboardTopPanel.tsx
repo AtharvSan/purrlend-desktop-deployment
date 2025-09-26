@@ -112,7 +112,7 @@ export const DashboardTopPanel = () => {
           fontSize: '32px',
           lineHeight: '1em',
           letterSpacing: '-0.02em',
-          }}>HyperEVM Market</Typography></Box>
+          }}> {currentNetworkConfig.name} Market</Typography></Box>
 
       <Box sx={{
         display: 'flex',

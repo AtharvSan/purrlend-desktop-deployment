@@ -11,19 +11,29 @@ export function GraphLegend({
   ],
 }: GraphLegendProps) {
   return (
-    <Box>
+    <Box sx={{
+      display: 'flex',
+      justifyContent: 'end',
+      mt: '15px'
+    }}>
       {labels.map((label) => (
-        <Box key={label.text} sx={{ display: 'inline-flex', alignItems: 'center', mr: 6 }}>
+        <Box key={label.text} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'end',alignItems: 'center', mr: 6 }}>
           <Box
             sx={{
-              width: 6,
-              height: 6,
+              width: 10,
+              height: 10,
               backgroundColor: label.color,
               mr: '11px',
               borderRadius: '50%',
             }}
           />
-          <Typography variant="description" color="text.secondary">
+          <Typography sx={{
+            fontWeight: 400,
+            fontSize: '14px',
+            lineHeight: '1em',
+            letterSpacing: '0em',
+            color: '#061512',
+            }}>
             {label.text}
           </Typography>
         </Box>

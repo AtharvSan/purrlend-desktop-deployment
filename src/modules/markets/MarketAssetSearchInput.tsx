@@ -3,6 +3,7 @@ import { XCircleIcon } from '@heroicons/react/solid';
 import { Box, IconButton, InputBase, useMediaQuery, useTheme } from '@mui/material';
 import debounce from 'lodash/debounce';
 import { useMemo, useRef, useState } from 'react';
+import { uiConfig } from 'src/uiConfig';
 
 interface MarketAssetSearchInputProps {
   onSearchTermChange: (value: string) => void;
@@ -69,17 +70,28 @@ export const MarketAssetSearchInput = ({ onSearchTermChange }: MarketAssetSearch
           display: 'flex',
           alignItems: 'center',
           gap: 2,
-          border: `1px solid ${theme.palette.divider}`,
-          borderRadius: '6px',
-          height: '36px',
+          // border: `1px solid ${theme.palette.divider}`,
+          // borderRadius: '6px',
+          height: '40px',
         })}
       >
-        <Box sx={{ ml: 2, mt: 1 }}>
-          <SearchIcon height={16} />
+        <Box sx={{ ml: 3, mt: 1 }}>
+          <img src={uiConfig.search} alt="search icon" />
         </Box>
         <InputBase
           inputRef={inputEl}
-          sx={{ width: '275px' }}
+          sx={{ 
+          width: '270px', 
+          color: '#828282', 
+          fontWeight: 400, 
+          fontSize: '15px', 
+          lineHeight: '1em', 
+          // letterSpacing: '-0.02em',
+          '& .MuiInputBase-input::placeholder': {
+            color: '#828282',
+            opacity: 1
+            }
+          }}
           placeholder="Search asset name, symbol, or address"
           value={searchTerm}
           onChange={(e) => {

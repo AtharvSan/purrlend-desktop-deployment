@@ -3,6 +3,7 @@ import { Box, SvgIcon } from '@mui/material';
 
 import { NoData } from '../../../components/primitives/NoData';
 import { ListItemIsolationBadge } from './ListItemIsolationBadge';
+import { uiConfig } from 'src/uiConfig';
 
 interface ListItemCanBeCollateralProps {
   isIsolated: boolean;
@@ -16,9 +17,8 @@ export const ListItemCanBeCollateral = ({
   const CollateralStates = () => {
     if (usageAsCollateralEnabled && !isIsolated) {
       return (
-        <SvgIcon sx={{ color: 'success.main', fontSize: { xs: '20px', xsm: '24px' } }}>
-          <CheckIcon />
-        </SvgIcon>
+        // tickmark icon
+        <img src={uiConfig.tick} alt="tick" />
       );
     } else if (usageAsCollateralEnabled && isIsolated) {
       return (

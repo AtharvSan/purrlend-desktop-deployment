@@ -30,10 +30,23 @@ export const IncentivesCard = ({
         alignItems: align || { xs: 'flex-end', xsm: 'center' },
         justifyContent: 'center',
         textAlign: 'center',
+        // backgroundColor: 'red'
       }}
     >
       {value.toString() !== '-1' ? (
-        <FormattedNumber value={value} percent variant={variant} symbolsVariant={symbolsVariant} />
+        <FormattedNumber 
+        value={value} 
+        color={'#061512'} 
+        fontWeight={400} 
+        fontSize={'16px'} 
+        size={'16px'}
+        lineHeight={'1em'} 
+        letterSpacing={'-0.02em'} 
+        percent 
+        variant={variant} 
+        symbolsColor='#828282' 
+        symbolsVariant={symbolsVariant}
+        />
       ) : (
         <NoData variant={variant} color="text.secondary" />
       )}

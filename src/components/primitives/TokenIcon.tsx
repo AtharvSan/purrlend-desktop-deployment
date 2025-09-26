@@ -20,6 +20,7 @@ interface ATokenIconProps {
  * This component is probably hugely over engineered & unnecessary.
  * I'm looking forward for the pr which evicts it.
  */
+
 export function Base64Token({
   symbol,
   onImageGenerated,
@@ -34,32 +35,54 @@ export function Base64Token({
 
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    if (!loading && ref.current && ref.current?.contentDocument) {
-      if (aToken) {
-        // eslint-disable-next-line
-        const inner = ref.current?.contentDocument?.childNodes?.[0] as any;
-        const oldWidth = inner.getAttribute('width');
-        const oldHeight = inner.getAttribute('height');
-        const vb = inner.getAttribute('viewBox');
-        inner.setAttribute('x', 25);
-        inner.setAttribute('width', 206);
-        inner.setAttribute('y', 25);
-        inner.setAttribute('height', 206);
-        if (!vb) {
-          inner.setAttribute('viewBox', `0 0 ${oldWidth} ${oldHeight}`);
+    if (!loading && ref.current && ref.current.contentDocument) {
+      try {
+        const doc = ref.current.contentDocument;
+        // Prefer the <svg> element, fall back to documentElement
+        const inner =
+          (doc.querySelector && (doc.querySelector('svg') as SVGElement | null)) ||
+          (doc.documentElement as SVGElement | null);
+
+        if (!inner || !(inner instanceof Element)) {
+          // nothing useful to do
+          return;
         }
 
-        aRef.current?.appendChild(inner);
-        const s = new XMLSerializer().serializeToString(aRef.current as unknown as Node);
+        if (aToken) {
+          // read existing attrs safely
+          const oldWidth = inner.getAttribute('width') ?? '';
+          const oldHeight = inner.getAttribute('height') ?? '';
+          const vb = inner.getAttribute('viewBox');
 
-        onImageGenerated(
-          `data:image/svg+xml;base64,${window.btoa(unescape(encodeURIComponent(s)))}`
-        );
-      } else {
-        const s = new XMLSerializer().serializeToString(ref.current?.contentDocument);
-        onImageGenerated(
-          `data:image/svg+xml;base64,${window.btoa(unescape(encodeURIComponent(s)))}`
-        );
+          // set attributes we need
+          inner.setAttribute('x', '25');
+          inner.setAttribute('y', '25');
+          inner.setAttribute('width', '206');
+          inner.setAttribute('height', '206');
+          if (!vb && oldWidth && oldHeight) {
+            inner.setAttribute('viewBox', `0 0 ${oldWidth} ${oldHeight}`);
+          }
+
+          // importNode to move a copy into current document safely
+          const imported = document.importNode(inner, true);
+          aRef.current?.appendChild(imported);
+
+          const s = new XMLSerializer().serializeToString(aRef.current as Node);
+          onImageGenerated(
+            `data:image/svg+xml;base64,${window.btoa(unescape(encodeURIComponent(s)))}`
+          );
+        } else {
+          // serialize the element (not the whole document) for consistency
+          const toSerialize = inner; // element
+          const s = new XMLSerializer().serializeToString(toSerialize as Node);
+          onImageGenerated(
+            `data:image/svg+xml;base64,${window.btoa(unescape(encodeURIComponent(s)))}`
+          );
+        }
+      } catch (err) {
+        // very defensive: if cross-origin or other error happens, skip gracefully
+        // optionally console.warn(err)
+        console.warn('Failed to compose token svg', err);
       }
     }
   }, [loading, aToken]);
@@ -203,11 +226,38 @@ export function MultiTokenIcon({ symbols, badgeSymbol, ...rest }: MultiTokenIcon
   );
 }
 
+// export function TokenIcon({ symbol, ...rest }: TokenIconProps) {
+//   const symbolChunks = symbol.split('_');
+//   if (symbolChunks.length > 1) {
+//     const [badge, ...symbols] = symbolChunks;
+//     return <MultiTokenIcon {...rest} symbols={symbols} badgeSymbol={'/pools/' + badge} />;
+//   }
+//   return <SingleTokenIcon symbol={symbol} {...rest} />;
+// }
+
 export function TokenIcon({ symbol, ...rest }: TokenIconProps) {
-  const symbolChunks = symbol.split('_');
+  // Defensive: if symbol is null/undefined/empty, render a fallback and log once
+  if (!symbol) {
+    // optional: send to analytics or add more context
+    // eslint-disable-next-line no-console
+    console.warn('TokenIcon: missing symbol prop', rest);
+    // Render a small fallback — adjust to whatever you want as fallback UI
+    return (
+      <Icon {...rest} sx={{ display: 'flex', position: 'relative', borderRadius: '50%', ...rest.sx }}>
+        {/* tiny empty circle / placeholder. You can also use an inline SVG or default image */}
+        <svg width="100%" height="100%" viewBox="0 0 24 24" aria-hidden>
+          <circle cx="12" cy="12" r="10" fill="rgba(0,0,0,0.06)" />
+        </svg>
+      </Icon>
+    );
+  }
+
+  // Coerce to string and split safely
+  const symbolChunks = String(symbol).split('_');
+
   if (symbolChunks.length > 1) {
     const [badge, ...symbols] = symbolChunks;
-    return <MultiTokenIcon {...rest} symbols={symbols} badgeSymbol={'/pools/' + badge} />;
+    return <MultiTokenIcon {...rest} symbols={symbols} badgeSymbol={`/pools/${badge}`} />;
   }
   return <SingleTokenIcon symbol={symbol} {...rest} />;
 }

@@ -42,17 +42,16 @@ export const InfoWrapper = ({
           </Typography>
         </Box>
 
-        <Box
-          sx={{
-            width: '56px',
-            height: '56px',
-            borderRadius: '50%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            bgcolor: `${color}.main`,
-          }}
-        >
+        <Box sx={{
+        width: '56px',
+        height: '56px',
+        borderRadius: '8px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#FD94441A',
+        borderColor: '#FD944440',
+        }}>
           {topValue}
         </Box>
       </Box>

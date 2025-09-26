@@ -56,9 +56,17 @@ export const HealthFactorNumber = ({
       {onInfoClick && (
         <Button
           onClick={onInfoClick}
-          variant="surface"
+          variant="surfaceWhite"
           size="small"
-          sx={{ minWidth: 'unset', ml: { xs: 0, xsm: 2 } }}
+          sx={{ 
+            minWidth: 'unset', 
+            ml: { xs: 0, xsm: 2 },
+            borderRadius: '32px',
+            // border: '1px solid',
+            // borderColor: 'rgba(6, 21, 18, 0.15)',
+            // backgroundColor: 'rgba(255, 255, 255, 1)',
+            color: 'rgba(6, 21, 18, 1)',
+          }}
         >
           <Trans>Risk details</Trans>
         </Button>

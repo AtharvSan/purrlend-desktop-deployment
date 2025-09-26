@@ -5,19 +5,22 @@ import {
   ExclamationIcon,
   InformationCircleIcon,
 } from '@heroicons/react/outline';
+import { FormatUnderlined } from '@mui/icons-material';
 import { SvgIcon, Theme, ThemeOptions } from '@mui/material';
 import { createTheme } from '@mui/material/styles';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { ColorPartial } from '@mui/material/styles/createPalette';
 import React from 'react';
+import { uiConfig } from 'src/uiConfig';
 
 const theme = createTheme();
 const {
   typography: { pxToRem },
 } = theme;
 
-const FONT = 'Inter, Arial';
+// const FONT = 'Inter, Arial';
+const FONT = 'Geist';
 
 declare module '@mui/material/styles/createPalette' {
   interface PaletteColor extends ColorPartial {}
@@ -194,6 +197,9 @@ export const getDesignTokens = (mode: 'light' | 'dark') => {
         aaveGradient: 'linear-gradient(248.86deg, #B6509E 10.51%, #2EBAC6 93.41%)',
         newGradient: 'linear-gradient(79.67deg, #8C3EBC 0%, #007782 95.82%)',
       },
+      purr: {
+        main: getColor('#FF7E09', '#FF7A00'),
+      }
     },
     spacing: 4,
     typography: {
@@ -246,7 +252,7 @@ export const getDesignTokens = (mode: 'light' | 'dark') => {
         fontWeight: 600,
         letterSpacing: pxToRem(0.15),
         lineHeight: pxToRem(20),
-        fontSize: pxToRem(14),
+        fontSize: pxToRem(16),
       },
       subheader2: {
         fontFamily: FONT,
@@ -344,6 +350,13 @@ export const getDesignTokens = (mode: 'light' | 'dark') => {
         lineHeight: pxToRem(20),
         fontSize: pxToRem(14),
       },
+      secondary24: {
+        fontFamily: FONT,
+        fontWeight: 500,
+        letterSpacing: '-2%',
+        lineHeight: '100%',
+        fontSize: pxToRem(24),
+      },
       main12: {
         fontFamily: FONT,
         fontWeight: 600,
@@ -413,12 +426,53 @@ export function getThemedComponents(theme: Theme) {
             style: {
               color: theme.palette.common.white,
               border: '1px solid',
-              borderColor: '#EBEBED1F',
-              backgroundColor: '#383D51',
+              borderColor: 'rgba(255, 255, 255, 0.2)',
+              backgroundColor: 'rgba(6, 21, 18, 1)',
               '&:hover, &.Mui-focusVisible': {
-                backgroundColor: theme.palette.background.header,
+                backgroundColor: 'rgba(6, 21, 18, 1)',
               },
             },
+          },
+          {
+            props: { variant: 'surfaceWhite' },
+            style: {
+              color: 'rgba(6, 21, 18, 1)',
+              border: '1px solid',
+              borderColor: 'rgba(255, 255, 255, 0.2)',
+              backgroundColor: 'rgba(255, 255, 255, 1)',
+              '&:hover, &.Mui-focusVisible': {
+                backgroundColor: 'rgba(255, 255, 255, 1)',
+              },
+            },
+          },
+          {
+            props: { variant: 'purrButton'},
+            style: {
+              color: theme.palette.common.white,
+              backgroundColor: '#FF7E09',
+              '&:hover, &.Mui-focusVisible': {
+                backgroundColor: '#FF7A00',
+                boxShadow: '0px 4px 10px 0 rgba(255, 126, 9, 0.39)',
+              },
+              boxShadow: '0px 4px 10px 0 rgba(255, 126, 9, 0.39)',
+            }
+          },
+          {
+            props: { variant: 'purrButtonNav'},
+            style: {
+              color: theme.palette.common.white,
+              backgroundColor: '#FF7E09',
+              '&:hover, &.Mui-focusVisible': {
+                backgroundColor: '#FF7A00',
+                boxShadow: '0px 4px 10px 0 rgba(255, 126, 9, 0.39)',
+              },
+              width: '240px',
+              height: '50px',
+              borderRadius: 10,
+              padding: 16,
+              // gap: 10,
+              boxShadow: '0px 4px 10px 0 rgba(255, 126, 9, 0.39)',
+            }
           },
           {
             props: { variant: 'gradient' },
@@ -471,6 +525,10 @@ export function getThemedComponents(theme: Theme) {
         },
       },
       MuiLink: {
+        styleOverrides: {
+          fontWeight: 600,
+          fontSize: '14px',
+        },
         defaultProps: {
           variant: 'description',
         },
@@ -491,13 +549,13 @@ export function getThemedComponents(theme: Theme) {
         styleOverrides: {
           root: {
             '.MuiMenuItem-root+.MuiDivider-root, .MuiDivider-root': {
-              marginTop: '4px',
-              marginBottom: '4px',
+              marginTop: '0px',
+              marginBottom: '0px',
             },
           },
           padding: {
-            paddingTop: '4px',
-            paddingBottom: '4px',
+            paddingTop: '0px',
+            paddingBottom: '0px',
           },
         },
       },
@@ -602,34 +660,41 @@ export function getThemedComponents(theme: Theme) {
       MuiSwitch: {
         styleOverrides: {
           root: {
-            height: 20 + 6 * 2,
-            width: 34 + 6 * 2,
-            padding: 6,
+            width: 40,
+            height: 24,
+            padding: 0,
+            boxSizing: 'border-box', // IMPORTANT: include border in width/height calculations
+            border: '1px solid',
+            borderRadius: 32,
+            backgroundColor: 'rgba(24, 204, 111, 0.1)',
+            transition: 'background-color 200ms, border-color 200ms',
           },
           switchBase: {
-            padding: 8,
+            // use padding computed from inner height: (height - 2*border - thumbHeight) / 2
+            // = (24 - 2 - 18) / 2 = 2
+            padding: 2,
             '&.Mui-checked': {
-              transform: 'translateX(14px)',
-              '& + .MuiSwitch-track': {
-                backgroundColor: theme.palette.success.main,
-                opacity: 1,
-              },
+              transform: 'translateX(12px)', // computed for 22px thumb
+            },
+            // ensure checked + disabled keeps same translate
+            '&.Mui-checked.Mui-disabled': {
+              transform: 'translateX(12px)',
             },
             '&.Mui-disabled': {
-              opacity: theme.palette.mode === 'dark' ? 0.3 : 0.7,
+              opacity: theme => (theme.palette.mode === 'dark' ? 0.3 : 0.7),
             },
           },
           thumb: {
-            color: theme.palette.common.white,
-            borderRadius: '6px',
-            width: '16px',
-            height: '16px',
-            boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.12)',
+            width: 22,
+            height: 18,
+            boxSizing: 'border-box',
+            boxShadow: 'none',
+            borderRadius: 32,
+            border: '1px solid rgba(255,255,255,0.25)',
+            backgroundColor: 'rgba(24, 204, 111, 1)',
           },
           track: {
-            opacity: 1,
-            backgroundColor: theme.palette.action.active,
-            borderRadius: '8px',
+            display: 'none', // root acts as the visual track
           },
         },
       },
@@ -667,6 +732,7 @@ export function getThemedComponents(theme: Theme) {
               padding: 0,
               opacity: 1,
               '.MuiSvgIcon-root': {
+                color: 'rgba(47, 117, 248, 1)',
                 fontSize: pxToRem(20),
               },
             },
@@ -695,9 +761,10 @@ export function getThemedComponents(theme: Theme) {
         defaultProps: {
           iconMapping: {
             error: (
-              <SvgIcon color="error">
-                <ExclamationIcon />
-              </SvgIcon>
+              <img src={uiConfig.triangleExclamation} alt="error Icon" />
+              // <SvgIcon color="error">
+              //   <ExclamationIcon />
+              // </SvgIcon>
             ),
             info: (
               <SvgIcon color="info">
@@ -720,8 +787,10 @@ export function getThemedComponents(theme: Theme) {
           {
             props: { severity: 'error' },
             style: {
-              color: theme.palette.error['100'],
-              background: theme.palette.error['200'],
+              // color: theme.palette.error['100'],
+              color: '#FF7E09',
+              // background: theme.palette.error['200'],
+              background: '#FF7E091A',
               a: {
                 color: theme.palette.error['100'],
               },
@@ -759,8 +828,9 @@ export function getThemedComponents(theme: Theme) {
           {
             props: { severity: 'warning' },
             style: {
-              color: theme.palette.warning['100'],
-              background: theme.palette.warning['200'],
+              color: 'rgba(59, 144, 255, 1)',
+              background: 'rgba(49, 94, 255, 0.1)',
+              borderRadius: '8px',
               a: {
                 color: theme.palette.warning['100'],
               },

@@ -1,5 +1,5 @@
 import { Trans } from '@lingui/macro';
-import { Box, Button, InputBase, Link, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Box, Button, colors, InputBase, Link, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { UnsupportedChainIdError } from '@web3-react/core';
 import { NoEthereumProviderError } from '@web3-react/injected-connector';
 import { UserRejectedRequestError } from '@web3-react/walletconnect-connector';
@@ -27,36 +27,40 @@ const WalletRow = ({ walletName, walletType }: WalletRowProps) => {
         return (
           <img
             src={`/icons/wallets/browserWallet.svg`}
-            width="24px"
-            height="24px"
+            width="32px"
+            height="32px"
             alt={`browser wallet icon`}
+            style={{ marginRight: '6px' }}
           />
         );
       case WalletType.WALLET_CONNECT:
         return (
           <img
             src={`/icons/wallets/walletConnect.svg`}
-            width="24px"
-            height="24px"
+            width="32px"
+            height="32px"
             alt={`browser wallet icon`}
+            style={{ marginRight: '6px' }}
           />
         );
       case WalletType.WALLET_LINK:
         return (
           <img
             src={`/icons/wallets/coinbase.svg`}
-            width="24px"
-            height="24px"
+            width="32px"
+            height="32px"
             alt={`browser wallet icon`}
+            style={{ marginRight: '6px' }}
           />
         );
       case WalletType.TORUS:
         return (
           <img
             src={`/icons/wallets/torus.svg`}
-            width="24px"
-            height="24px"
+            width="32px"
+            height="32px"
             alt={`browser wallet icon`}
+            style={{ marginRight: '6px' }}
           />
         );
       case WalletType.FRAME:
@@ -78,16 +82,26 @@ const WalletRow = ({ walletName, walletType }: WalletRowProps) => {
       variant="outlined"
       sx={{
         display: 'flex',
+        // backgroundColor: 'red',
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'left',
         width: '100%',
+        height: '64px',
         mb: '8px',
+        borderRadius: '16px',
+        border: '1px solid',
+        borderColor: 'rgba(215, 215, 215, 1)',
       }}
       size="large"
       onClick={() => connectWallet(walletType)}
-      endIcon={getWalletIcon(walletType)}
+      startIcon={getWalletIcon(walletType)}
     >
-      {walletName}
+      <Typography sx={{
+      fontWeight: 500,
+      fontSize: '20px',
+      lineHeight: '1em',
+      letterSpacing: '-0.02em',
+      }}>{walletName}</Typography>
     </Button>
   );
 };
@@ -161,8 +175,8 @@ export const WalletSelector = () => {
   };
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-      <TxModalTitle title="Connect a wallet" />
+    <Box sx={{ display: 'flex', flexDirection: 'column'}}>
+    <TxModalTitle title="Connect Wallet"/>
       {error && <Warning severity="error">{handleBlocking()}</Warning>}
       <WalletRow
         key="browser_wallet"
@@ -180,8 +194,8 @@ export const WalletSelector = () => {
         walletType={WalletType.WALLET_LINK}
       />
       <WalletRow key="torus_wallet" walletName="Torus" walletType={WalletType.TORUS} />
-      <WalletRow key="frame_wallet" walletName="Frame" walletType={WalletType.FRAME} />
-      <Box sx={{ display: 'flex', alignItems: 'center', mb: 1, padding: '10px 0' }}>
+      {/* <WalletRow key="frame_wallet" walletName="Frame" walletType={WalletType.FRAME} /> */}
+      {/* <Box sx={{ display: 'flex', alignItems: 'center', mb: 1, padding: '10px 0' }}>
         <Typography variant="subheader1" color="text.secondary">
           <Trans>Track wallet balance in read-only mode</Trans>
         </Typography>
@@ -245,7 +259,7 @@ export const WalletSelector = () => {
           Providers. Your access to the wallet might be reliant on the External Provider being
           operational.
         </Trans>
-      </Typography>
+      </Typography> */}
     </Box>
   );
 };

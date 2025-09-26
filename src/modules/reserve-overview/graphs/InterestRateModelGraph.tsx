@@ -187,12 +187,7 @@ export const InterestRateModelGraph = withTooltip<AreaProps, TooltipData>(
       [innerWidth]
     );
     const yValueScale = useMemo(() => {
-      const maxY = reserve.stableBorrowRateEnabled
-        ? Math.max(
-            max(data, (d) => getStableBorrowRate(d)) as number,
-            max(data, (d) => getVariableBorrowRate(d)) as number
-          )
-        : (max(data, (d) => getVariableBorrowRate(d)) as number);
+      const maxY = (max(data, (d) => getVariableBorrowRate(d)) as number);
       return scaleLinear({
         range: [innerHeight, 0],
         domain: [0, (maxY || 0) * 1.1],
@@ -240,16 +235,15 @@ export const InterestRateModelGraph = withTooltip<AreaProps, TooltipData>(
             <GridRows
               scale={yValueScale}
               width={innerWidth}
-              strokeDasharray="3,3"
-              stroke={theme.palette.divider}
+              stroke='#E8E8E8'
               pointerEvents="none"
               numTicks={3}
             />
 
             {/* Variable Borrow APR Line */}
             <LinePath
-              stroke="#B6509E"
-              strokeWidth={2}
+              stroke="#18CC6F"
+              strokeWidth={1}
               data={data}
               x={(d) => dateScale(getDate(d)) ?? 0}
               y={(d) => yValueScale(getVariableBorrowRate(d)) ?? 0}
@@ -257,7 +251,7 @@ export const InterestRateModelGraph = withTooltip<AreaProps, TooltipData>(
             />
 
             {/* Stable Borrow APR Line */}
-            {reserve.stableBorrowRateEnabled && (
+            {/* {reserve.stableBorrowRateEnabled && (
               <LinePath
                 stroke="#E7C6DF"
                 strokeWidth={2}
@@ -266,7 +260,7 @@ export const InterestRateModelGraph = withTooltip<AreaProps, TooltipData>(
                 y={(d) => yValueScale(getStableBorrowRate(d)) ?? 0}
                 curve={curveMonotoneX}
               />
-            )}
+            )} */}
 
             {/* X Axis */}
             <AxisBottom
@@ -279,8 +273,10 @@ export const InterestRateModelGraph = withTooltip<AreaProps, TooltipData>(
                 fill: theme.palette.text.muted,
                 fontSize: 10,
                 textAnchor: 'middle',
+                // color: '#18CC6F',
               })}
               tickFormat={(n) => `${n}%`}
+              
             />
 
             {/* Y Axis */}
@@ -311,16 +307,16 @@ export const InterestRateModelGraph = withTooltip<AreaProps, TooltipData>(
             <Line
               from={{ x: dateScale(ticks[1].value), y: margin.top + 24 }}
               to={{ x: dateScale(ticks[1].value), y: innerHeight }}
-              stroke="#0062D2"
+              stroke="#2D88FF4D"
               strokeWidth={1}
               pointerEvents="none"
-              strokeDasharray="5,2"
+              // strokeDasharray="5,2"
             />
             <Text
               x={dateScale(ticks[1].value)}
               y={margin.top + 16}
               width={360}
-              textAnchor="middle"
+              textAnchor="left"
               verticalAnchor="middle"
               fontSize="10px"
               fill="#62677B"
@@ -332,16 +328,16 @@ export const InterestRateModelGraph = withTooltip<AreaProps, TooltipData>(
             <Line
               from={{ x: dateScale(ticks[0].value), y: margin.top + 8 }}
               to={{ x: dateScale(ticks[0].value), y: innerHeight }}
-              stroke="#0062D2"
+              stroke="#2D88FF4D"
               strokeWidth={1}
               pointerEvents="none"
-              strokeDasharray="5,2"
+              // strokeDasharray="5,2"
             />
             <Text
               x={dateScale(ticks[0].value)}
               y={margin.top}
               width={360}
-              textAnchor="middle"
+              textAnchor="left"
               verticalAnchor="middle"
               fontSize="10px"
               fill="#62677B"

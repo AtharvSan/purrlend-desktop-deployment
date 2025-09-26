@@ -44,10 +44,17 @@ export const BasicModal = ({
           position: 'relative',
           margin: '10px',
           overflowY: 'auto',
-          width: '100%',
-          maxWidth: { xs: '359px', xsm: `${contentMaxWidth}px` },
+          width: '452px',
+          // maxWidth: { xs: '359px', xsm: `${contentMaxWidth}px` },
           maxHeight: 'calc(100vh - 20px)',
-          p: 6,
+          // p: 6,
+          paddingLeft: '24px',
+          paddingRight: '24px',
+          paddingTop: '22px',
+          paddingBottom: '15px',
+          borderRadius: '16px',
+          border: '1px solid',
+          borderColor: 'rgba(242, 242, 242, 1)',
         }}
       >
         {children}

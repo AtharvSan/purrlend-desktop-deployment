@@ -1,7 +1,7 @@
 import { ChainId } from '@aave/contract-helpers';
 import { normalize, UserIncentiveData, valueToBigNumber } from '@aave/math-utils';
 import { Trans } from '@lingui/macro';
-import { Box, Button, useMediaQuery, useTheme } from '@mui/material';
+import { Box, Button, Typography, useMediaQuery, useTheme } from '@mui/material';
 import * as React from 'react';
 import { useState } from 'react';
 import { NetAPYTooltip } from 'src/components/infoTooltips/NetAPYTooltip';
@@ -26,6 +26,7 @@ import { TopInfoPanel } from '../../components/TopInfoPanel/TopInfoPanel';
 import { TopInfoPanelItem } from '../../components/TopInfoPanel/TopInfoPanelItem';
 import { useAppDataContext } from '../../hooks/app-data-provider/useAppDataProvider';
 import { LiquidationRiskParametresInfoModal } from './LiquidationRiskParametresModal/LiquidationRiskParametresModal';
+import { uiConfig } from 'src/uiConfig';
 
 export const DashboardTopPanel = () => {
   const { currentNetworkConfig, currentMarketData } = useProtocolDataContext();
@@ -85,8 +86,175 @@ export const DashboardTopPanel = () => {
   const noDataTypographyVariant = downToSM ? 'secondary16' : 'secondary21';
 
   return (
-    <>
-      <TopInfoPanel
+    <Box sx={{
+      backgroundImage: 'linear-gradient(90deg, #061512 0%, #00380D 100%)',
+      color: '#F1F1F3',
+      // mx: '8.32%',
+      mx: 'auto',
+      width: '1199px',
+      marginTop: '25px',
+      borderRadius: '16px',
+      display: 'flex',
+      justifyContent: 'space-between',
+      pt: '14px',
+      pb: '12px',
+      px: '20px',
+      }}>
+      <Box sx={{ 
+        display: 'flex', 
+        alignItems: 'center', 
+        gap: '16px',
+        }}>
+        <img src={uiConfig.hype} height={38} />
+        <Typography sx={{ 
+          color: '#FFFFFF',
+          fontWeight: 600,
+          fontSize: '32px',
+          lineHeight: '1em',
+          letterSpacing: '-0.02em',
+          }}>HyperEVM Market</Typography></Box>
+
+      <Box sx={{
+        display: 'flex',
+        gap: '50px',
+        }}>
+        <Box sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          gap: '9px',
+          }}>
+          <Typography sx={{
+            fontWeight: 600,
+            fontSize: '10px',
+            lineHeight: '1em',
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            color: '#FFFFFF99',
+            }}> net worth </Typography>
+          {currentAccount ? (
+            <FormattedNumber
+              value={Number(user?.netWorthUSD || 0)}
+              symbol="USD"
+              variant={valueTypographyVariant}
+              visibleDecimals={2}
+              compact
+              symbolsColor="#FFFFFF99"
+              symbolsVariant={noDataTypographyVariant}
+              fontSize={'24px'}
+              fontWeight={'500'}
+              letterSpacing={'-0.02em'}
+            />
+          ) : (
+            <NoData variant={noDataTypographyVariant} sx={{ opacity: '0.7' }} />
+          )}
+        </Box>
+
+        <Box sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          gap: '9px',
+          }}>
+          <Typography sx={{
+            fontWeight: 600,
+            fontSize: '10px',
+            lineHeight: '1em',
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            color: '#FFFFFF99',
+            }}> net apy </Typography>
+          {currentAccount && Number(user?.netWorthUSD) > 0 ? (
+            <FormattedNumber
+              value={user.netAPY}
+              variant={valueTypographyVariant}
+              visibleDecimals={2}
+              percent
+              symbolsColor="#FFFFFF99"
+              symbolsVariant={noDataTypographyVariant}
+              fontSize={'24px'}
+              fontWeight={'500'}
+              letterSpacing={'-0.02em'}
+            />
+          ) : (
+            <NoData variant={noDataTypographyVariant} sx={{ opacity: '0.7' }} />
+          )}
+        </Box>
+
+        <Box sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          gap: '9px',
+          }}>
+          <Typography sx={{
+            fontWeight: 600,
+            fontSize: '10px',
+            lineHeight: '1em',
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            color: '#FFFFFF99',
+            }}> health factor </Typography>
+          <HealthFactorNumber
+            fontSize={'24px'}
+            fontWeight={500}
+            letterSpacing={'-0.02em'}
+            value={user?.healthFactor || '-1'}
+            variant={valueTypographyVariant}
+            onInfoClick={() => setOpen(true)}
+            HALIntegrationComponent={
+              currentMarketData.halIntegration && (
+                <HALLink
+                  healthFactor={user?.healthFactor || '-1'}
+                  marketName={currentMarketData.halIntegration.marketName}
+                  integrationURL={currentMarketData.halIntegration.URL}
+                />
+              )
+            }
+          />
+        </Box>
+
+        {/* {currentAccount && claimableRewardsUsd > 0 && (
+          <TopInfoPanelItem
+            title={<Trans>Available rewards</Trans>}
+            icon={<ClaimGiftIcon />}
+            loading={loading}
+          >
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: { xs: 'flex-start', xsm: 'center' },
+                flexDirection: { xs: 'column', xsm: 'row' },
+              }}
+            >
+              <Box sx={{ display: 'inline-flex', alignItems: 'center' }} data-cy={'Claim_Box'}>
+                <FormattedNumber
+                  value={claimableRewardsUsd}
+                  variant={valueTypographyVariant}
+                  visibleDecimals={2}
+                  compact
+                  symbol="USD"
+                  symbolsColor="#A5A8B6"
+                  symbolsVariant={noDataTypographyVariant}
+                  data-cy={'Claim_Value'}
+                />
+              </Box>
+
+              <Button
+                variant="gradient"
+                size="small"
+                onClick={() => openClaimRewards()}
+                sx={{ minWidth: 'unset', ml: { xs: 0, xsm: 2 } }}
+                data-cy={'Dashboard_Claim_Button'}
+              >
+                <Trans>Claim</Trans>
+              </Button>
+            </Box>
+          </TopInfoPanelItem>
+        )} */}
+        </Box>
+
+      {/* <TopInfoPanel
         pageTitle={<Trans>Dashboard</Trans>}
         withMarketSwitcher
         bridge={currentNetworkConfig.bridge}
@@ -205,7 +373,7 @@ export const DashboardTopPanel = () => {
             </Box>
           </TopInfoPanelItem>
         )}
-      </TopInfoPanel>
+      </TopInfoPanel> */}
 
       <LiquidationRiskParametresInfoModal
         open={open}
@@ -215,6 +383,6 @@ export const DashboardTopPanel = () => {
         currentLoanToValue={user?.currentLoanToValue || '0'}
         currentLiquidationThreshold={user?.currentLiquidationThreshold || '0'}
       />
-    </>
+    </Box>
   );
 };

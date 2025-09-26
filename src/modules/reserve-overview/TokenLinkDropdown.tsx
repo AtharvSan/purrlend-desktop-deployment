@@ -7,6 +7,7 @@ import { CircleIcon } from 'src/components/CircleIcon';
 import { TokenIcon } from 'src/components/primitives/TokenIcon';
 import { ComputedReserveData } from 'src/hooks/app-data-provider/useAppDataProvider';
 import { useProtocolDataContext } from 'src/hooks/useProtocolDataContext';
+import { uiConfig } from 'src/uiConfig';
 
 interface TokenLinkDropdownProps {
   poolReserve: ComputedReserveData;
@@ -27,22 +28,24 @@ export const TokenLinkDropdown = ({ poolReserve, downToSM }: TokenLinkDropdownPr
 
   return (
     <>
-      <Box onClick={handleClick}>
-        <CircleIcon tooltipText={'View token contracts'} downToSM={downToSM}>
+      <Box onClick={handleClick} sx={{mr: '4px'}} >
+
+        <img src={uiConfig.tokenContracts} alt='icon here' />
+        {/* <CircleIcon tooltipText={'View token contracts'} downToSM={downToSM}>
           <Box
-            sx={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              color: '#A5A8B6',
-              '&:hover': { color: '#F1F1F3' },
-              cursor: 'pointer',
+          sx={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            color: '#A5A8B6',
+            '&:hover': { color: '#F1F1F3' },
+            cursor: 'pointer',
             }}
-          >
+            >
             <SvgIcon sx={{ fontSize: '14px' }}>
               <ExternalLinkIcon />
             </SvgIcon>
           </Box>
-        </CircleIcon>
+        </CircleIcon> */}
       </Box>
       <Menu
         anchorEl={anchorEl}

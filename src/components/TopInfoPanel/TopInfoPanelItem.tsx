@@ -33,6 +33,8 @@ export const TopInfoPanelItem = ({
         display: 'flex',
         alignItems: 'center',
         width: { xs: 'calc(50% - 12px)', xsm: 'unset' },
+        // backgroundColor: 'red',
+        mt: '1px',
       }}
     >
       {withLine && (
@@ -47,7 +49,7 @@ export const TopInfoPanelItem = ({
         />
       )}
 
-      {!hideIcon &&
+      {/* {!hideIcon &&
         (withoutIconWrapper ? (
           icon && icon
         ) : (
@@ -67,12 +69,27 @@ export const TopInfoPanelItem = ({
           >
             {icon && icon}
           </Box>
-        ))}
+        ))} */}
 
-      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+      <Box 
+        sx={{ 
+          display: 'flex', 
+          flexDirection: 'column', 
+          gap: '9px',
+          // backgroundColor:'blue' 
+        }}>
         <Box sx={{ display: 'inline-flex', alignItems: 'center' }}>
           <Typography
-            sx={{ color: variant === 'dark' ? '#A5A8B6' : '#62677B' }}
+            sx={{ 
+              color: '#828282',
+              fontWeight: 500,
+              fontSize: '10px',
+              letterSpacing: '0.08em',
+              lineHeight: 1,
+              textTransform: 'uppercase',
+              // backgroundColor:'red' 
+
+            }}
             variant={upToSM ? 'description' : 'caption'}
             component="div"
           >

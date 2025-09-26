@@ -1,7 +1,7 @@
 import { API_ETH_MOCK_ADDRESS, InterestRate } from '@aave/contract-helpers';
 import { USD_DECIMALS, valueToBigNumber } from '@aave/math-utils';
 import { Trans } from '@lingui/macro';
-import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Box, Divider, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { Fragment, useState } from 'react';
 import { StableAPYTooltip } from 'src/components/infoTooltips/StableAPYTooltip';
 import { VariableAPYTooltip } from 'src/components/infoTooltips/VariableAPYTooltip';
@@ -63,16 +63,16 @@ const head = [
     ),
     sortKey: 'variableBorrowAPY',
   },
-  {
-    title: (
-      <StableAPYTooltip
-        text={<Trans>APY, stable</Trans>}
-        key="stableBorrowAPY"
-        variant="subheader2"
-      />
-    ),
-    sortKey: 'stableBorrowAPY',
-  },
+  // {
+  //   title: (
+  //     <StableAPYTooltip
+  //       text={<Trans>APY, stable</Trans>}
+  //       key="stableBorrowAPY"
+  //       variant="subheader2"
+  //     />
+  //   ),
+  //   sortKey: 'stableBorrowAPY',
+  // },
 ];
 
 export const BorrowAssetsList = () => {
@@ -149,26 +149,49 @@ export const BorrowAssetsList = () => {
 
   const RenderHeader: React.FC = () => {
     return (
-      <ListHeaderWrapper>
-        {head.map((col) => (
-          <ListColumn
-            isRow={col.sortKey === 'symbol'}
-            maxWidth={col.sortKey === 'symbol' ? DASHBOARD_LIST_COLUMN_WIDTHS.ASSET : undefined}
-            key={col.sortKey}
-          >
-            <ListHeaderTitle
-              sortName={sortName}
-              sortDesc={sortDesc}
-              setSortName={setSortName}
-              setSortDesc={setSortDesc}
-              sortKey={col.sortKey}
-            >
-              {col.title}
-            </ListHeaderTitle>
-          </ListColumn>
-        ))}
-        <ListButtonsColumn isColumnHeader />
-      </ListHeaderWrapper>
+      <>
+      <Box sx={{
+      display: 'flex',
+      justifyContent: 'space-between',
+      pl: '18px',
+      pr: '120px',
+      mt: '12px',
+      pb: '10px',
+      }}>
+        <Box>
+          <ListHeaderTitle
+          sortName={sortName}
+          sortDesc={sortDesc}
+          setSortName={setSortName}
+          setSortDesc={setSortDesc}
+          sortKey='symbol'
+          ><Trans key="assets"> Assets </Trans></ListHeaderTitle>
+        </Box>
+        <Box>
+          <ListHeaderTitle
+          sortName={sortName}
+          sortDesc={sortDesc}
+          setSortName={setSortName}
+          setSortDesc={setSortDesc}
+          sortKey='availableBorrows'
+          ><Trans key="availableBorrows"> Available </Trans></ListHeaderTitle>
+        </Box>
+        <Box>
+          <ListHeaderTitle
+          sortName={sortName}
+          sortDesc={sortDesc}
+          setSortName={setSortName}
+          setSortDesc={setSortDesc}
+          sortKey='variableBorrowAPY'
+          ><Trans key="variableBorrowAPY"> APY </Trans></ListHeaderTitle>
+        </Box>
+        <Box>
+          <ListHeaderTitle
+          ><Trans>Action</Trans></ListHeaderTitle>
+        </Box>
+      </Box>
+      <Divider sx={{borderColor: '#E8E8E8', mx: '18px', mb: '10px'}}/>
+      </>
     );
   };
 
@@ -184,11 +207,29 @@ export const BorrowAssetsList = () => {
   return (
     <ListWrapper
       titleComponent={
-        <Typography component="div" variant="h3" sx={{ mr: 4 }}>
+        <Typography sx={{
+          fontWeight: 500,
+          fontSize: '20px',
+          lineHeight: '1em',
+          letterSpacing: '-0.02em',
+          color: '#061512',
+          // mt: '3px'
+          // backgroundColor: 'red'
+          }}>
           <Trans>Assets to borrow</Trans>
         </Typography>
       }
       localStorageName="borrowAssetsDashboardTableCollapse"
+      subTitleComponent={
+        <Box sx={{
+          height: '35px',
+        }}>
+
+        </Box>
+        // currentMarketData.v3 ? (
+        //   <DashboardEModeButton userEmodeCategoryId={user.userEmodeCategoryId} />
+        // ) : undefined
+      }
       withTopMargin
       noData={borrowDisabled}
       subChildrenComponent={
@@ -215,9 +256,9 @@ export const BorrowAssetsList = () => {
               {user?.isInIsolationMode && (
                 <Warning severity="warning">
                   <Trans>Borrowing power and assets are limited due to Isolation mode. </Trans>
-                  <Link href="https://docs.aave.com/faq/" target="_blank" rel="noopener">
+                  {/* <Link href="https://docs.aave.com/faq/" target="_blank" rel="noopener">
                     Learn More
-                  </Link>
+                  </Link> */}
                 </Warning>
               )}
               {user?.isInEmode && (

@@ -39,6 +39,10 @@ import { AvailableTooltip } from '../../components/infoTooltips/AvailableTooltip
 import { Link, ROUTES } from '../../components/primitives/Link';
 import { useReserveActionState } from '../../hooks/useReserveActionState';
 
+import { uiConfig } from '/src/uiConfig';
+import { TokenIcon } from 'src/components/primitives/TokenIcon';
+
+
 const amountToUSD = (
   amount: string,
   formattedPriceInMarketReferenceCurrency: string,
@@ -147,8 +151,16 @@ export const ReserveActions = ({ reserve }: ReserveActionsProps) => {
         </Box>
       ) : (
         <>
-          <Divider sx={{ my: 6 }} />
-          <Stack gap={3}>
+          {/* <Divider sx={{ my: 6 }} /> */}
+          <Box 
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              // backgroundColor: 'red',
+              gap: '15px',
+              // mb: '15px',
+            }}>
             <SupplyAction
               value={maxAmountToSupply}
               usdValue={maxAmountToSupplyUSD}
@@ -163,8 +175,12 @@ export const ReserveActions = ({ reserve }: ReserveActionsProps) => {
               disable={disableBorrowButton}
               onActionClicked={() => openBorrow(reserve.underlyingAsset)}
             />
-            {alerts}
-          </Stack>
+          </Box>
+          {disableBorrowButton && (
+            <Box sx={{mt: '15px'}}>
+              {alerts}
+            </Box>
+          )}
         </>
       )}
     </PaperWrapper>
@@ -223,9 +239,53 @@ const ActionsSkeleton = () => {
 
 const PaperWrapper = ({ children }: { children: ReactNode }) => {
   return (
-    <Paper sx={{ pt: 4, pb: { xs: 4, xsm: 6 }, px: { xs: 4, xsm: 6 } }}>
-      <Typography variant="h3" sx={{ mb: 6 }}>
-        <Trans>Your info</Trans>
+    <Paper 
+      sx={{ 
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        // height: '434px',
+        width: '384px',
+        pt: 4, 
+        pb: { xs: 4, xsm: '15px' }, 
+        // px: { xs: 4, xsm: '16px 14px' },
+        paddingLeft: '15px',
+        paddingRight: '15px', 
+        marginTop: '37px',
+        marginLeft: '1px',
+        // mt: '36px',
+        border: '1px solid',
+        borderRadius: '16px',
+        borderColor: 'rgba(234, 234, 234, 1)',
+        backgroundColor: 'rgba(255, 255, 255, 1)',
+        boxShadow: '0px 3px 5px 0px rgba(0, 0, 0, 0.04)',
+        
+      }}>
+      
+      <Typography
+        sx={{
+          position: 'relative',
+          fontWeight: 600,
+          fontSize: '20px',
+          fontStyle: 'semibold',
+          lineHeight: '1em',
+          letterSpacing: '-0.02em',
+          color: 'rgba(6, 21, 18, 1)',
+          '&:before': {
+            content: '""',
+            position: 'absolute',
+            left: -16,                    // into the Paper’s left padding
+            top: '50%',
+            transform: 'translateY(-50%)',
+            width: 2,
+            height: '1.2em',
+            bgcolor: 'rgba(255,126,9,1)',
+          },
+          mb: '27px',
+          ml: '1px',
+        }}
+      >
+        <Trans>Your Wallet</Trans>
       </Typography>
 
       {children}
@@ -264,36 +324,83 @@ interface ActionProps {
 const SupplyAction = ({ value, usdValue, symbol, disable, onActionClicked }: ActionProps) => {
   return (
     <Stack>
-      <AvailableTooltip
-        variant="description"
-        text={<Trans>Available to supply</Trans>}
-        capType={CapType.supplyCap}
-      />
+      <Box
+        sx={{
+          mb:'10px',
+        }}>
+        <AvailableTooltip text={
+            <Typography 
+              sx={{
+                fontSize: '10px',
+                fontWeight: 500,
+                letterSpacing: '0.08em',
+                lineHeight: '1em',
+                textTransform: 'uppercase',
+                color: 'rgba(130, 130, 130, 1)',
+                // backgroundColor: 'red',
+                
+              }}>
+              <Trans>Available to supply</Trans>
+            </Typography>
+          }
+          capType={CapType.supplyCap}
+          
+        />
+      </Box>
       <Stack
-        sx={{ height: '44px' }}
         direction="row"
         justifyContent="space-between"
-        alignItems="center"
+        // alignItems="center"
       >
-        <Box>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            gap: '6px',  
+            mt: '2px',
+          }}>
           <ValueWithSymbol value={value} symbol={symbol} />
           <FormattedNumber
             value={usdValue}
-            variant="subheader2"
-            color="text.muted"
-            symbolsColor="text.muted"
+            // variant="subheader2"
+            color="rgba(130, 130, 130, 1)"
+            symbolsColor="rgba(130, 130, 130, 1)"
             symbol="USD"
+            size={'16px'}
+            sx={{
+              fontWeight: 400,
+              fontSize: '16px',
+              lineHeight: '1em',
+              letterSpacing: '-0.02em',
+            }}
           />
         </Box>
         <Button
-          sx={{ height: '36px', width: '96px' }}
+          sx={{ 
+            height: '30px',
+            width: '69px',
+            border: '1px solid',
+            borderRadius: '70px',
+            borderColor: 'rgba(255, 255, 255, 0.2)',
+            padding: '8px 12px 8px 12px',
+            backgroundColor: 'rgba(6, 21, 18, 1)',
+          }}
           onClick={onActionClicked}
           disabled={disable}
           fullWidth={false}
           variant="contained"
           data-cy="supplyButton"
         >
-          <Trans>Supply</Trans>
+          <Typography sx={{
+              fontWeight: 500,
+              fontSize: '14px',
+              lineHeight: '1em',
+              letterSpacing: '-0.02em',
+              color: '#FFFFFF',
+            }}>
+            <Trans>Supply</Trans>
+          </Typography>
         </Button>
       </Stack>
     </Stack>
@@ -303,36 +410,81 @@ const SupplyAction = ({ value, usdValue, symbol, disable, onActionClicked }: Act
 const BorrowAction = ({ value, usdValue, symbol, disable, onActionClicked }: ActionProps) => {
   return !disable ? (
     <Stack>
-      <AvailableTooltip
-        variant="description"
-        text={<Trans>Available to borrow</Trans>}
-        capType={CapType.borrowCap}
-      />
+      <Box
+        sx={{
+          mb: '9px',
+        }}>
+        <AvailableTooltip
+          variant="description"
+          text={
+            <Typography
+              sx={{
+                fontSize: '10px',
+                fontWeight: 500,
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                color: 'rgba(130, 130, 130, 1)',
+              }}>
+              <Trans>Available to borrow</Trans>
+            </Typography>
+          }
+          capType={CapType.borrowCap}
+        />
+      </Box>
       <Stack
-        sx={{ height: '44px' }}
         direction="row"
         justifyContent="space-between"
-        alignItems="center"
+        // alignItems="center"
       >
-        <Box>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            gap: '6px',  
+            mt: '2px',
+          }}>
           <ValueWithSymbol value={value} symbol={symbol} />
           <FormattedNumber
             value={usdValue}
-            variant="subheader2"
-            color="text.muted"
-            symbolsColor="text.muted"
+            // variant="subheader2"
+            color="rgba(130, 130, 130, 1)"
+            symbolsColor="rgba(130, 130, 130, 1)"
             symbol="USD"
+            size={'16px'}
+            sx={{
+              fontWeight: 400,
+              fontSize: '16px',
+              lineHeight: '1em',
+              letterSpacing: '-0.02em',
+            }}
           />
         </Box>
         <Button
-          sx={{ height: '36px', width: '96px' }}
+          sx={{ 
+            height: '30px', 
+            width: '70px',
+            border: '1px solid',
+            borderRadius: '70px',
+            borderColor: 'rgba(255, 255, 255, 0.2)',
+            padding: '8px 12px 8px 12px',
+            backgroundColor: 'rgba(6, 21, 18, 1)',
+          }}
           onClick={onActionClicked}
           disabled={disable}
           fullWidth={false}
           variant="contained"
           data-cy="borrowButton"
         >
-          <Trans>Borrow</Trans>
+          <Typography sx={{
+              fontWeight: 500,
+              fontSize: '14px',
+              lineHeight: '1em',
+              letterSpacing: '-0.02em',
+              color: '#FFFFFF',
+            }}>
+            <Trans>Borrow</Trans>
+          </Typography>
         </Button>
       </Stack>
     </Stack>
@@ -352,20 +504,20 @@ const WrappedBaseAssetSelector = ({
 }) => {
   return (
     <StyledToggleButtonGroup
-      color="primary"
+      // color="primary"
       value={selectedAsset}
       exclusive
       onChange={(_, value) => setSelectedAsset(value)}
-      sx={{ width: '100%', height: '36px', p: 0.5, mb: 4 }}
+      sx={{ width: '100%', height: '46px', p: '4px', mb: '24px' }}
     >
       <StyledToggleButton value={assetSymbol}>
-        <Typography variant="subheader1" sx={{ mr: 1 }}>
+        <Typography sx={{ mr: 1, fontWeight: 500, fontSize: '14px', letterSpacing: '-0.02em' }}>
           {assetSymbol}
         </Typography>
       </StyledToggleButton>
 
       <StyledToggleButton value={baseAssetSymbol}>
-        <Typography variant="subheader1" sx={{ mr: 1 }}>
+        <Typography sx={{ mr: 1, fontWeight: 500, fontSize: '14px', letterSpacing: '-0.02em' }}>
           {baseAssetSymbol}
         </Typography>
       </StyledToggleButton>
@@ -381,9 +533,23 @@ interface ValueWithSymbolProps {
 
 const ValueWithSymbol = ({ value, symbol, children }: ValueWithSymbolProps) => {
   return (
-    <Stack direction="row" alignItems="center" gap={1}>
-      <FormattedNumber value={value} variant="h4" color="text.primary" />
-      <Typography variant="buttonL" color="text.secondary">
+    <Stack direction="row" alignItems="center" gap={1.4}>
+      <FormattedNumber value={value} 
+        sx={{
+          fontWeight: 500,
+          fontSize: '24px',
+          letterSpacing: '-0.02em',
+          lineHeight: '1em',
+          color: 'rgba(6, 21, 18, 1)',
+        }}/>
+      <Typography
+        sx={{
+          fontWeight: 500,
+          fontSize: '24px',
+          letterSpacing: '-0.02em',
+          lineHeight: '1em',
+          color: 'rgba(130, 130, 130, 1)',
+        }}>
         {symbol}
       </Typography>
       {children}
@@ -400,31 +566,61 @@ const WalletBalance = ({ balance, symbol, marketTitle }: WalletBalanceProps) => 
   const theme = useTheme();
 
   return (
-    <Stack direction="row" gap={3}>
+    <Box 
+      sx={{
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        // alignItems: 'center',
+        backgroundColor: 'rgba(242, 242, 242, 1)',
+        // backgroundColor: 'red',
+        border: '1px solid',
+        borderColor: 'rgba(220, 220, 220, 1)',
+        borderRadius: '8px',
+        padding: '10px 6px 12px 14.5px',
+        mb: '24px',
+      }}>
       <Box
-        sx={(theme) => ({
-          width: '42px',
-          height: '42px',
-          background: theme.palette.background.surface,
-          border: `0.5px solid ${theme.palette.background.disabled}`,
-          borderRadius: '12px',
+        sx={{
           display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        })}
-      >
-        <WalletIcon sx={{ stroke: `${theme.palette.text.secondary}` }} />
-      </Box>
-      <Box>
-        <Typography variant="description" color="text.secondary">
+          flexDirection: 'column',
+          gap: '4px',
+          justifyContent: 'space-around',
+          // justifyContent: 'space-between',
+          // backgroundColor: 'red'
+        }}>
+        <Typography 
+          sx={{
+            fontWeight: 500,
+            fontSize: '10px',
+            lineHeight: '1em',
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            color: 'rgba(130, 130, 130, 1)',
+          }}>
           Wallet balance
         </Typography>
-        <ValueWithSymbol value={balance} symbol={symbol}>
-          <Box sx={{ ml: 2 }}>
-            <BuyWithFiat cryptoSymbol={symbol} networkMarketName={marketTitle} />
-          </Box>
-        </ValueWithSymbol>
+        <Box
+          sx={{
+            display:'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            gap: '8px',
+            // backgroundColor: 'red'
+          }}>
+          <TokenIcon symbol={symbol} fontSize="large" 
+            sx={{
+              height: '24px',
+              width: '24px',
+            }} />
+          <ValueWithSymbol value={balance} symbol={symbol}>
+            <Box sx={{ ml: 2 }}>
+              <BuyWithFiat cryptoSymbol={symbol} networkMarketName={marketTitle} />
+            </Box>
+          </ValueWithSymbol>
+        </Box>
       </Box>
-    </Stack>
+      <img src={uiConfig.actionsWallet} alt="actionsWallet icon" height={56} />
+    </Box>
   );
 };

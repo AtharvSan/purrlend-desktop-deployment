@@ -1,5 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import { ReactNode } from 'react';
+import { uiConfig } from 'src/uiConfig';
 
 interface ListHeaderTitleProps {
   sortName?: string;
@@ -29,49 +30,34 @@ export const ListHeaderTitle = ({
   return (
     <Typography
       component="div"
-      variant="subheader2"
-      color="text.secondary"
       noWrap
       onClick={() => !!sortKey && handleSorting(sortKey)}
       sx={{
         cursor: !!sortKey ? 'pointer' : 'default',
         display: 'inline-flex',
         alignItems: 'center',
+        color: '#828282',
+        fontWeight: 500,
+        fontSize: '10px',
+        letterSpacing: '0.08em',
+        lineHeight: '1em',
+        textTransform: 'uppercase',
       }}
     >
       {children}
 
       {!!sortKey && (
-        <Box sx={{ display: 'inline-flex', flexDirection: 'column', ml: 1 }}>
-          <Box
-            component="span"
-            sx={(theme) => ({
-              width: 0,
-              height: 0,
-              borderStyle: 'solid',
-              borderWidth: '0 4px 4px 4px',
-              borderColor: `transparent transparent ${
-                sortName === sortKey && sortDesc
-                  ? theme.palette.text.secondary
-                  : theme.palette.divider
-              } transparent`,
-              mb: 0.5,
-            })}
-          />
-          <Box
-            component="span"
-            sx={(theme) => ({
-              width: 0,
-              height: 0,
-              borderStyle: 'solid',
-              borderWidth: '4px 4px 0 4px',
-              borderColor: `${
-                sortName === sortKey && !sortDesc
-                  ? theme.palette.text.secondary
-                  : theme.palette.divider
-              } transparent transparent transparent`,
-            })}
-          />
+        <Box sx={{ display: 'flex', flexDirection: 'column',justifyContent: 'center',gap: '2px', ml: 1 }}>
+            {(sortName === sortKey && !sortDesc) ? (
+              <img src={uiConfig.upOrange} />
+            ):(
+              <img src={uiConfig.upDark} />
+            )}
+            {(sortName === sortKey && sortDesc) ? (
+              <img src={uiConfig.downOrange} />
+            ):(
+              <img src={uiConfig.downDark} />
+            )}
         </Box>
       )}
     </Typography>

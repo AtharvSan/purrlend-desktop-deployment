@@ -1,0 +1,158 @@
+/* ---------------------------------------------------------
+   Geist font-face declarations
+   Place this file in the same folder as the .woff2 files,
+   or update the relative paths below if your structure differs.
+   Usage (React):
+     import './geist.css';
+   or in CSS:
+     @import url('./geist.css');
+   Then set: body { font-family: 'Geist', system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji'; }
+   --------------------------------------------------------- */
+
+/* Preferred: VARIABLE fonts (single file covers 100–900) */
+@font-face {
+  font-family: 'Geist';
+  src: url('./Geist[wght].woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('./Geist-Italic[wght].woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ---- Static fallbacks (per-weight) ---- */
+/* Normal */
+@font-face {
+  font-family: 'Geist';
+  src: url('./Geist-Thin.woff2') format('woff2');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url('./Geist-ExtraLight.woff2') format('woff2');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url('./Geist-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url('./Geist-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url('./Geist-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url('./Geist-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url('./Geist-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url('./Geist-ExtraBold.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url('./Geist-Black.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Italic */
+@font-face {
+  font-family: 'Geist';
+  src: url('./Geist-ThinItalic.woff2') format('woff2');
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url('./Geist-ExtraLightItalic.woff2') format('woff2');
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url('./Geist-LightItalic.woff2') format('woff2');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url('./Geist-RegularItalic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url('./Geist-MediumItalic.woff2') format('woff2');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url('./Geist-SemiBoldItalic.woff2') format('woff2');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url('./Geist-BoldItalic.woff2') format('woff2');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url('./Geist-ExtraBoldItalic.woff2') format('woff2');
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url('./Geist-BlackItalic.woff2') format('woff2');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}

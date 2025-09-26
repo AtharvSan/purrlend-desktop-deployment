@@ -42,12 +42,36 @@ export const MarketAssetListTitle = ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
+        mb: '1%',
       }}
     >
       {showMarketTitle && (
-        <Typography component="div" variant="h2" sx={{ mr: 4 }}>
-          {marketTitle} <Trans>assets</Trans>
-        </Typography>
+        <Box sx={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '15px',
+        }}>
+          <Box sx={{
+            width: '3px',
+            height: '23px',
+            position: 'relative',
+            // left: '-10px',
+            // top: '25px',
+            backgroundColor: '#FF7E09',
+
+          }}>
+          </Box>
+          <Typography sx={{
+            fontWeight: 600,
+            fontSize: '20px',
+            lineHeight: '1em',
+            letterSpacing: '-0.02em',
+            
+            }}>
+              {/* {marketTitle}  */}
+              
+              Assets</Typography>
+        </Box>
       )}
       <Box
         sx={{
@@ -67,7 +91,16 @@ export const MarketAssetListTitle = ({
           </IconButton>
         )}
         {(showSearchBar || !sm) && (
-          <Box sx={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>
+          <Box sx={{ 
+            width: '100%', 
+            display: 'flex', 
+            justifyContent: 'space-between', 
+            backgroundColor: '#FFFFFF',
+            border: '1px solid',
+            borderRadius: '38px',
+            borderColor: '#D7D7D7',
+            
+            }}>
             <MarketAssetSearchInput onSearchTermChange={onSearchTermChange} />
             {sm && (
               <Button sx={{ ml: 2 }} onClick={() => handleCancelClick()}>

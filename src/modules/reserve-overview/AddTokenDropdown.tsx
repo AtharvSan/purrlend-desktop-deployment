@@ -7,6 +7,7 @@ import { WalletIcon } from 'src/components/icons/WalletIcon';
 import { Base64Token, TokenIcon } from 'src/components/primitives/TokenIcon';
 import { ComputedReserveData } from 'src/hooks/app-data-provider/useAppDataProvider';
 import { ERC20TokenType } from 'src/libs/web3-data-provider/Web3Provider';
+import { uiConfig } from 'src/uiConfig';
 
 interface AddTokenDropdownProps {
   poolReserve: ComputedReserveData;
@@ -78,7 +79,8 @@ export const AddTokenDropdown = ({
         </>
       )}
       <Box onClick={handleClick}>
-        <CircleIcon tooltipText="Add token to wallet" downToSM={downToSM}>
+        <img src={uiConfig.addToken} alt="" />
+        {/* <CircleIcon tooltipText="Add token to wallet" downToSM={downToSM}>
           <Box
             sx={{
               display: 'inline-flex',
@@ -92,7 +94,7 @@ export const AddTokenDropdown = ({
           >
             <WalletIcon sx={{ width: '14px', height: '14px', '&:hover': { stroke: '#F1F1F3' } }} />
           </Box>
-        </CircleIcon>
+        </CircleIcon> */}
       </Box>
       <Menu
         anchorEl={anchorEl}

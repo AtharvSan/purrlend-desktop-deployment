@@ -1,7 +1,7 @@
 import { API_ETH_MOCK_ADDRESS, InterestRate } from '@aave/contract-helpers';
 import { valueToBigNumber } from '@aave/math-utils';
 import { Trans } from '@lingui/macro';
-import { Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Box, Divider, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { Fragment, useState } from 'react';
 import { ListColumn } from 'src/components/lists/ListColumn';
 import { ListHeaderTitle } from 'src/components/lists/ListHeaderTitle';
@@ -44,9 +44,9 @@ const head = [
     title: <Trans key="APY">APY</Trans>,
     sortKey: 'borrowAPY',
   },
-  {
-    title: <APYTypeTooltip text={<Trans>APY type</Trans>} key="APY type" variant="subheader2" />,
-  },
+  // {
+  //   title: <APYTypeTooltip text={<Trans>APY type</Trans>} key="APY type" variant="subheader2" />,
+  // },
 ];
 
 export const BorrowedPositionsList = () => {
@@ -112,26 +112,50 @@ export const BorrowedPositionsList = () => {
 
   const RenderHeader: React.FC = () => {
     return (
-      <ListHeaderWrapper>
-        {head.map((col) => (
-          <ListColumn
-            isRow={col.sortKey === 'symbol'}
-            maxWidth={col.sortKey === 'symbol' ? DASHBOARD_LIST_COLUMN_WIDTHS.ASSET : undefined}
-            key={col.sortKey}
-          >
-            <ListHeaderTitle
-              sortName={sortName}
-              sortDesc={sortDesc}
-              setSortName={setSortName}
-              setSortDesc={setSortDesc}
-              sortKey={col.sortKey}
-            >
-              {col.title}
-            </ListHeaderTitle>
-          </ListColumn>
-        ))}
-        <ListButtonsColumn isColumnHeader />
-      </ListHeaderWrapper>
+      <>
+      <Box sx={{
+      display: 'flex',
+      justifyContent: 'space-between',
+      pl: '18px',
+      pr: '120px',
+      pt: '12px',
+      pb: '10px',
+      }}>
+        <Box>
+          <ListHeaderTitle
+          sortName={sortName}
+          sortDesc={sortDesc}
+          setSortName={setSortName}
+          setSortDesc={setSortDesc}
+          sortKey='symbol'
+          ><Trans> Assets </Trans></ListHeaderTitle>
+        </Box>
+        <Box>
+          <ListHeaderTitle
+          sortName={sortName}
+          sortDesc={sortDesc}
+          setSortName={setSortName}
+          setSortDesc={setSortDesc}
+          sortKey='variableBorrows'
+          ><Trans key="Debt">Debt</Trans></ListHeaderTitle>
+        </Box>
+        <Box>
+          <ListHeaderTitle
+          sortName={sortName}
+          sortDesc={sortDesc}
+          setSortName={setSortName}
+          setSortDesc={setSortDesc}
+          sortKey='borrowAPY'
+          ><Trans key="APY">APY</Trans></ListHeaderTitle>
+        </Box>
+        <Box>
+          <ListHeaderTitle
+          ><Trans>action</Trans></ListHeaderTitle>
+        </Box>
+
+      </Box>
+      <Divider sx={{borderColor: '#E8E8E8', mx: '18px', mb: '12px'}}/>
+      </>
     );
   };
 
@@ -141,7 +165,13 @@ export const BorrowedPositionsList = () => {
   return (
     <ListWrapper
       titleComponent={
-        <Typography component="div" variant="h3" sx={{ mr: 4 }}>
+        <Typography sx={{
+          fontWeight: 600,
+          fontSize: '20px',
+          lineHeight: '1em',
+          letterSpacing: '-0.02em',
+          color: '#061512',
+          }}>
           <Trans>Your borrows</Trans>
         </Typography>
       }
@@ -157,12 +187,26 @@ export const BorrowedPositionsList = () => {
           {!!sortedReserves.length && (
             <>
               <ListTopInfoItem title={<Trans>Balance</Trans>} value={user?.totalBorrowsUSD || 0} />
+              <Box sx={{
+                width: '3px',
+                height: '40px',
+                position: 'relative',
+                top: '-1px',
+                backgroundColor: '#DCDCDC',
+              }}></Box>
               <ListTopInfoItem
                 title={<Trans>APY</Trans>}
                 value={user?.debtAPY || 0}
                 percent
                 tooltip={<TotalBorrowAPYTooltip />}
               />
+              <Box sx={{
+                width: '3px',
+                height: '40px',
+                position: 'relative',
+                top: '-1px',
+                backgroundColor: '#DCDCDC',
+              }}></Box>
               <ListTopInfoItem
                 title={<Trans>Borrow power used</Trans>}
                 value={collateralUsagePercent || 0}

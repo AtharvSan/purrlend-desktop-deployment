@@ -34,7 +34,7 @@ export const getMarketInfoById = (marketId: CustomMarket) => {
   return { market, network };
 };
 
-const getMarketHelpData = (marketName: string) => {
+export const getMarketHelpData = (marketName: string) => {
   const testChains = ['Görli', 'Ropsten', 'Mumbai', 'Fuji', 'Testnet', 'Kovan', 'Rinkeby'];
   const arrayName = marketName.split(' ');
   const testChainName = arrayName.filter((el) => testChains.indexOf(el) > -1);
@@ -154,7 +154,7 @@ export const MarketSwitcher = () => {
                   {getMarketHelpData(market.marketTitle).name} {market.isFork ? 'Fork' : ''}
                   {upToLG && ' Market'}
                 </Typography>
-                {market.v3 && (
+                {/* {market.v3 && (
                   <Box
                     sx={{
                       color: '#fff',
@@ -165,7 +165,7 @@ export const MarketSwitcher = () => {
                   >
                     <Typography variant="subheader2">Version 3</Typography>
                   </Box>
-                )}
+                )} */}
               </Box>
             </Box>
           );

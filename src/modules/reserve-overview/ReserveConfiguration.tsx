@@ -23,6 +23,7 @@ import { BorrowInfo } from './BorrowInfo';
 import { InterestRateModelGraphContainer } from './graphs/InterestRateModelGraphContainer';
 import { PanelItem, PanelRow, PanelTitle } from './ReservePanels';
 import { SupplyInfo } from './SupplyInfo';
+import { uiConfig } from 'src/uiConfig';
 
 type ReserveConfigurationProps = {
   reserve: ComputedReserveData;
@@ -39,8 +40,18 @@ export const ReserveConfiguration: React.FC<ReserveConfigurationProps> = ({ rese
   const showBorrowCapStatus: boolean = reserve.borrowCap !== '0';
 
   return (
-    <Paper sx={{ py: '16px', px: '24px' }}>
-      <Box
+    <Paper 
+      sx={{ 
+        py: '8px',
+        // px: '16px',
+        borderRadius: '16px',
+        marginTop: '37.5px',
+        ml: '1px',
+        mr: '24px',
+        boxShadow: '0px 3px 5px 0px #0000000A',
+        // backgroundColor: 'red'
+      }}>
+      {/* <Box
         sx={{
           display: 'flex',
           alignItems: 'center',
@@ -52,7 +63,7 @@ export const ReserveConfiguration: React.FC<ReserveConfigurationProps> = ({ rese
         <Typography variant="h3">
           <Trans>Reserve status &#38; configuration</Trans>
         </Typography>
-      </Box>
+      </Box> */}
 
       <Box>
         {reserve.isFrozen ? (
@@ -76,6 +87,7 @@ export const ReserveConfiguration: React.FC<ReserveConfigurationProps> = ({ rese
         )}
       </Box>
 
+      {/* --- supply info --- */}
       <PanelRow>
         <PanelTitle>Supply Info</PanelTitle>
         <SupplyInfo
@@ -88,11 +100,12 @@ export const ReserveConfiguration: React.FC<ReserveConfigurationProps> = ({ rese
         />
       </PanelRow>
 
+      {/* --- borrow info --- */}
       {(reserve.borrowingEnabled || Number(reserve.totalDebt) > 0) && (
         <>
-          <Divider sx={{ my: '40px' }} />
+          <Divider sx={{ mt: '36.5px', mb: '8.5px', width: '100%'}} />
           <PanelRow>
-            <PanelTitle>Borrow info</PanelTitle>
+            <PanelTitle>Borrow Info</PanelTitle>
             <Box sx={{ flexGrow: 1, minWidth: 0, maxWidth: '100%', width: '100%' }}>
               {!reserve.borrowingEnabled && (
                 <Warning sx={{ mb: '40px' }} severity="error">
@@ -114,11 +127,39 @@ export const ReserveConfiguration: React.FC<ReserveConfigurationProps> = ({ rese
 
       {reserve.eModeCategoryId !== 0 && (
         <>
-          <Divider sx={{ my: '40px' }} />
+          <Divider sx={{ mt: '32px', mb: '19px' }} />
           <PanelRow>
-            <PanelTitle>E-Mode info</PanelTitle>
+            <Box sx={{
+              display: 'flex',
+              marginLeft: '16.2px',
+              marginTop: '0.5px',
+              // backgroundColor: 'red'
+              }}>
+              <Box sx={{
+                backgroundColor: 'rgba(255, 126, 9, 1)',
+                width: '2px',
+                height: '24px',
+                position: 'absolute',
+                left: '-0px',
+                // top: '-1px',
+                // mt: '9.5px',
+                }}></Box>
+              <img src={uiConfig.emodeLeaf} alt="emode leaf" height={26} width={26} />
+              <Typography sx={{
+                minWidth: { xs: '170px' }, 
+                mr: 4, 
+                ml: '6px',
+                mt: '3px',
+                mb: { xs: 6, md: '2px' },
+                fontWeight: 600,
+                fontSize: '20px',
+                lineHeight: '1em',
+                letterSpacing: '-0.02em',
+                color: '#061512',
+                }}> Available in E-Mode </Typography>
+            </Box>
             <Box sx={{ flexGrow: 1, minWidth: 0, maxWidth: '100%', width: '100%' }}>
-              <Box sx={{ display: 'inline-flex', alignItems: 'center' }}>
+              {/* <Box sx={{ display: 'inline-flex', alignItems: 'center' }}>
                 <Typography variant="secondary14" color="text.secondary">
                   <Trans>E-Mode Category</Trans>
                 </Typography>
@@ -126,8 +167,156 @@ export const ReserveConfiguration: React.FC<ReserveConfigurationProps> = ({ rese
                   <LightningBoltGradient />
                 </SvgIcon>
                 <Typography variant="subheader1">{getEmodeMessage(reserve.eModeLabel)}</Typography>
-              </Box>
-              <Box
+              </Box> */}
+              <Box sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'start',
+                flexWrap: 'wrap',
+                mt: '42.5px',
+                ml: '25px',
+                gap: '80px',
+                }}>
+                <Box sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'start',
+                  }}>
+                  <Typography sx={{
+                    fontWeight: 500,
+                    fontSize: '10px',
+                    lineHeight: '1em',
+                    letterSpacing: '0.08em',
+                    textTransform: 'uppercase',
+                    color: '#828282',
+                    mb: '12.6px',
+                    }}> max ltv </Typography>
+                  <FormattedNumber value={reserve.formattedEModeLtv} percent size='20px' sx={{ 
+                    fontWeight: 500,
+                    fontSize: '20px',
+                    lineHeight: '1em', 
+                    letterSpacing: '-0.02em',
+                    color: 'rgba(6, 21, 18, 1)',
+                    }}/>
+                  {/* <Box sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'start',
+                    gap: '0.33em',
+                    backgroundColor: 'red'
+                    }}>
+                    <FormattedNumber value={reserve.totalDebtUSD} symbol={'USD'} symbolsColor='#828282' size='16px' sx={{ 
+                      fontWeight: 400,
+                      fontSize: '16px',
+                      lineHeight: '1em', 
+                      letterSpacing: '-0.02em',
+                      color: '#828282',
+                      }}/>
+                    <Typography sx={{ 
+                      fontWeight: 400,
+                      fontSize: '16px',
+                      lineHeight: '1em', 
+                      letterSpacing: '-0.02em',
+                      color: '#828282',
+                      mt: '3px',
+                      }}> of </Typography>
+                    <FormattedNumber value={reserve.borrowCapUSD} symbol={'USD'} symbolsColor='#828282' size='16px' sx={{ 
+                      fontWeight: 400,
+                      fontSize: '16px',
+                      lineHeight: '1em', 
+                      letterSpacing: '-0.02em',
+                      color: '#828282',
+                      }}/></Box> */}
+                </Box>
+                <Box sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'start',
+                  // gap: '7.5px',
+                  }}>
+                  <Typography sx={{
+                    fontWeight: 500,
+                    fontSize: '10px',
+                    lineHeight: '1em',
+                    letterSpacing: '0.08em',
+                    textTransform: 'uppercase',
+                    color: '#828282',
+                    mb: '12.6px',
+                    }}> liquidation threshold </Typography>
+                  <FormattedNumber value={reserve.formattedEModeLiquidationThreshold} percent size='20px' sx={{ 
+                    fontWeight: 500,
+                    fontSize: '20px',
+                    lineHeight: '1em', 
+                    letterSpacing: '-0.02em',
+                    color: 'rgba(6, 21, 18, 1)',
+                    }}/></Box>
+                <Box sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'start',
+                  }}>
+                  <Typography sx={{
+                    fontWeight: 500,
+                    fontSize: '10px',
+                    lineHeight: '1em',
+                    letterSpacing: '0.08em',
+                    textTransform: 'uppercase',
+                    color: '#828282',
+                    mb: '12.6px',
+                    }}> borrow cap </Typography>
+
+                  <Box sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    gap: '0.33em',
+                    mb: '6px',
+                    }}>
+                    <FormattedNumber value={reserve.borrowCap} sx={{ 
+                      fontWeight: 500,
+                      fontSize: '20px',
+                      lineHeight: '1em', 
+                      letterSpacing: '-0.02em',
+                      color: '#061512',
+                      }}/></Box>
+
+                  <Box sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'start',
+                    gap: '0.33em',
+                    }}>
+                    <FormattedNumber value={reserve.borrowCapUSD} symbol={'USD'} symbolsColor='#828282' size='16px' sx={{ 
+                      fontWeight: 400,
+                      fontSize: '16px',
+                      lineHeight: '1em', 
+                      letterSpacing: '-0.02em',
+                      color: '#828282',
+                      }}/></Box></Box></Box>
+              <Typography sx={{
+                marginLeft: '25px',
+                marginRight: '140px',
+                marginTop: '25px',
+                marginBottom: '20px',
+                fontWeight: 400,
+                fontSize: '14px',
+                lineHeight: '1.5em',
+                letterSpacing: '0em',
+                color: '#061512',
+                }}>
+                E-Mode boosts your LTV for assets within the same category, giving you higher borrowing power. 
+                Categories are set by governance. You can enable E-Mode in your{' '}
+                <Link href={ROUTES.dashboard} sx={{ 
+                  textDecoration: 'underline',
+                  fontWeight: 700,
+                  fontSize: '14px',
+                  lineHeight: '1.5em',
+                  letterSpacing: '0em',
+                  textDecorationSkipInk: 'true',
+                  textDecorationStyle: 'solid',
+                  }}
+                  >Dashboard</Link>
+              </Typography>
+              {/* <Box
                 sx={{
                   display: 'flex',
                   flexWrap: 'wrap',
@@ -136,7 +325,15 @@ export const ReserveConfiguration: React.FC<ReserveConfigurationProps> = ({ rese
                 }}
               >
                 <ReserveOverviewBox
-                  title={<MaxLTVTooltip variant="description" text={<Trans>Max LTV</Trans>} />}
+                  title={<MaxLTVTooltip variant="description" text={
+                    <Typography 
+                      sx={{
+                        textTransform: 'uppercase',
+                        // backgroundColor: 'red'
+                      }}>
+                      <Trans>Max LTV</Trans>
+                    </Typography>
+                  } />}
                 >
                   <FormattedNumber
                     value={reserve.formattedEModeLtv}
@@ -175,92 +372,405 @@ export const ReserveConfiguration: React.FC<ReserveConfigurationProps> = ({ rese
                     visibleDecimals={2}
                   />
                 </ReserveOverviewBox>
-              </Box>
-              <Typography variant="caption" color="text.secondary" paddingTop="24px">
-                <Trans>
-                  E-Mode increases your LTV for a selected category of assets, meaning that when
-                  E-mode is enabled, you will have higher borrowing power over assets of the same
-                  E-mode category which are defined by Aave Governance. You can enter E-Mode from
-                  your{' '}
-                  <Link
-                    href={ROUTES.dashboard}
-                    sx={{ textDecoration: 'underline' }}
-                    variant="caption"
-                    color="text.secondary"
-                  >
-                    Dashboard
-                  </Link>
-                  . To learn more about E-Mode and applied restrictions in{' '}
-                  <Link
-                    href="https://docs.aave.com/faq/aave-v3-features#high-efficiency-mode-e-mode"
-                    sx={{ textDecoration: 'underline' }}
-                    variant="caption"
-                    color="text.secondary"
-                  >
-                    FAQ
-                  </Link>{' '}
-                  or{' '}
-                  <Link
-                    href="https://github.com/aave/aave-v3-core/blob/master/techpaper/Aave_V3_Technical_Paper.pdf"
-                    sx={{ textDecoration: 'underline' }}
-                    variant="caption"
-                    color="text.secondary"
-                  >
-                    Aave V3 Technical Paper
-                  </Link>
-                  .
-                </Trans>
-              </Typography>
+              </Box> */}
             </Box>
           </PanelRow>
         </>
       )}
 
+      {/* --- interest rate model --- */}
       {(reserve.borrowingEnabled || Number(reserve.totalDebt) > 0) && (
         <>
-          <Divider sx={{ my: '40px' }} />
-
+          <Divider sx={{ mt: '32px', mb: '10px' }} />
           <PanelRow>
-            <PanelTitle>Interest rate model</PanelTitle>
-            <Box sx={{ flexGrow: 1, minWidth: 0, maxWidth: '100%', width: '100%' }}>
-              <Box
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  flexWrap: 'wrap',
-                  justifyContent: 'space-between',
-                }}
-              >
-                <PanelItem title={<Trans>Utilization Rate</Trans>} className="borderless">
-                  <FormattedNumber
-                    value={reserve.borrowUsageRatio}
-                    percent
-                    variant="main16"
-                    compact
-                  />
-                </PanelItem>
-                <Button
-                  href={currentNetworkConfig.explorerLinkBuilder({
-                    address: reserve.interestRateStrategyAddress,
-                  })}
-                  endIcon={
-                    <SvgIcon sx={{ width: 14, height: 14 }}>
-                      <ExternalLinkIcon />
-                    </SvgIcon>
-                  }
-                  component={Link}
-                  size="small"
-                  variant="outlined"
-                  sx={{ verticalAlign: 'top' }}
-                >
-                  <Trans>Interest rate strategy</Trans>
-                </Button>
-              </Box>
+            <PanelTitle>Interest Rate Model</PanelTitle>
+            <Box sx={{
+              ml: '25px',
+              mt: '14px',
+              }}>
+              <PanelItem title={<Trans>Utilization Rate</Trans>} className="borderless">
+                <FormattedNumber value={reserve.borrowUsageRatio} percent size='24px' symbolsColor='#828282' sx={{
+                  fontWeight: 500,
+                  fontSize: '24px',
+                  lineHeight: '1em',
+                  letterSpacing: '-0.02em',
+                  color:'#061512',
+                  }}/></PanelItem></Box>
+            <Box>
               <InterestRateModelGraphContainer reserve={reserve} />
             </Box>
           </PanelRow>
         </>
       )}
+
+      <Divider sx={{ mt: '15px', mb: '10px' }} />
+      <PanelRow>
+        <PanelTitle>Market Details</PanelTitle>
+      </PanelRow>
+
+      <Box sx={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        mt: '40px',
+        mb: '16px',
+        ml: '25px',
+        mr: '30px',
+        }}>
+        <Typography sx={{
+          fontWeight: 400,
+          fontSize: '16px',
+          letterSpacing: '-0.02em',
+          lineHeight: '1em',
+          color: '#828282',
+          }}>
+          Token Contract
+        </Typography>
+        <Typography sx={{
+          fontWeight: 400,
+          fontSize: '16px',
+          letterSpacing: '-0.02em',
+          lineHeight: '1em',
+          color: '#061512',
+          }}>
+          {reserve.underlyingAsset}
+        </Typography>
+      </Box>
+      <Divider sx={{ml: '24px', mr: '27px'}}/>
+
+      <Box sx={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        mt: '16px',
+        mb: '16px',
+        ml: '25px',
+        mr: '30px',
+        }}>
+        <Typography sx={{
+          fontWeight: 400,
+          fontSize: '16px',
+          letterSpacing: '-0.02em',
+          lineHeight: '1em',
+          color: '#828282',
+          }}>
+          Oracle provider
+        </Typography>
+        <Typography sx={{
+          fontWeight: 400,
+          fontSize: '16px',
+          letterSpacing: '-0.02em',
+          lineHeight: '1em',
+          color: '#061512',
+          }}>
+          Pyth
+        </Typography>
+      </Box>
+      <Divider sx={{ml: '24px', mr: '27px'}}/>
+
+      <Box sx={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        mt: '16px',
+        mb: '16px',
+        ml: '25px',
+        mr: '30px',
+        }}>
+        <Typography sx={{
+          fontWeight: 400,
+          fontSize: '16px',
+          letterSpacing: '-0.02em',
+          lineHeight: '1em',
+          color: '#828282',
+          }}>
+          Oracle contract
+        </Typography>
+        <Typography sx={{
+          fontWeight: 400,
+          fontSize: '16px',
+          letterSpacing: '-0.02em',
+          lineHeight: '1em',
+          color: '#061512',
+          }}>
+          {reserve.priceOracle}
+        </Typography>
+      </Box>
+      <Divider sx={{ml: '24px', mr: '27px'}}/>
+
+      <Box sx={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        mt: '16px',
+        mb: '16px',
+        ml: '25px',
+        mr: '30px',
+        }}>
+        <Typography sx={{
+          fontWeight: 400,
+          fontSize: '16px',
+          letterSpacing: '-0.02em',
+          lineHeight: '1em',
+          color: '#828282',
+          }}>
+          Last oracle update
+        </Typography>
+        <Typography sx={{
+          fontWeight: 400,
+          fontSize: '16px',
+          letterSpacing: '-0.02em',
+          lineHeight: '1em',
+          color: '#061512',
+          }}>
+          about 1 hour ago
+        </Typography>
+      </Box>
+      {/* <Divider sx={{ml: '24px', mr: '27px'}}/> */}
+
+      {/* <Box sx={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        mt: '16px',
+        mb: '16px',
+        ml: '25px',
+        mr: '30px',
+        }}>
+        <Typography sx={{
+          fontWeight: 400,
+          fontSize: '16px',
+          letterSpacing: '-0.02em',
+          lineHeight: '1em',
+          color: '#828282',
+          }}>
+          Supply cap
+        </Typography>
+        
+        <Typography sx={{
+          fontWeight: 400,
+          fontSize: '16px',
+          letterSpacing: '-0.02em',
+          lineHeight: '1em',
+          color: '#061512',
+          }}>
+          <FormattedNumber 
+          value={reserve.supplyCap} 
+          visibleDecimals={0} 
+          sx={{
+            fontWeight: 400,
+            fontSize: '16px',
+            letterSpacing: '-0.02em',
+            lineHeight: '1em',
+            color: '#061512',
+          }}/>{" "}{reserve.symbol}
+        </Typography>
+      </Box>
+      <Divider sx={{ml: '24px', mr: '27px'}}/>
+
+      <Box sx={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        mt: '16px',
+        mb: '16px',
+        ml: '25px',
+        mr: '30px',
+        }}>
+        <Typography sx={{
+          fontWeight: 400,
+          fontSize: '16px',
+          letterSpacing: '-0.02em',
+          lineHeight: '1em',
+          color: '#828282',
+          }}>
+          Supply cap reached
+        </Typography>
+        <Typography sx={{
+          fontWeight: 400,
+          fontSize: '16px',
+          letterSpacing: '-0.02em',
+          lineHeight: '1em',
+          color: '#061512',
+          }}>
+          <FormattedNumber 
+            value={supplyCap.percentUsed} 
+            // percent 
+            visibleDecimals={2} 
+            sx={{
+              fontWeight: 400,
+              fontSize: '16px',
+              letterSpacing: '-0.02em',
+              lineHeight: '1em',
+              color: '#061512',
+            }}/>{' %'}
+        </Typography>
+      </Box>
+      <Divider sx={{ml: '24px', mr: '27px'}}/>
+
+      <Box sx={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        mt: '16px',
+        mb: '16px',
+        ml: '25px',
+        mr: '30px',
+        }}>
+        <Typography sx={{
+          fontWeight: 400,
+          fontSize: '16px',
+          letterSpacing: '-0.02em',
+          lineHeight: '1em',
+          color: '#828282',
+          }}>
+          Borrow cap
+        </Typography>
+        <Typography sx={{
+          fontWeight: 400,
+          fontSize: '16px',
+          letterSpacing: '-0.02em',
+          lineHeight: '1em',
+          color: '#061512',
+          }}>
+          <FormattedNumber 
+          value={reserve.borrowCap} 
+          visibleDecimals={0} 
+          sx={{
+            fontWeight: 400,
+            fontSize: '16px',
+            letterSpacing: '-0.02em',
+            lineHeight: '1em',
+            color: '#061512',
+          }}/>{" "}{reserve.symbol}
+        </Typography>
+      </Box>
+      <Divider sx={{ml: '24px', mr: '27px'}}/>
+
+      <Box sx={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        mt: '16px',
+        mb: '16px',
+        ml: '25px',
+        mr: '30px',
+        }}>
+        <Typography sx={{
+          fontWeight: 400,
+          fontSize: '16px',
+          letterSpacing: '-0.02em',
+          lineHeight: '1em',
+          color: '#828282',
+          }}>
+          Borrow cap reached
+        </Typography>
+        <Typography sx={{
+          fontWeight: 400,
+          fontSize: '16px',
+          letterSpacing: '-0.02em',
+          lineHeight: '1em',
+          color: '#061512',
+          }}>
+          <FormattedNumber 
+            value={borrowCap.percentUsed} 
+            // percent 
+            visibleDecimals={2} 
+            sx={{
+              fontWeight: 400,
+              fontSize: '16px',
+              letterSpacing: '-0.02em',
+              lineHeight: '1em',
+              color: '#061512',
+            }}/>{' %'}
+        </Typography>
+      </Box>
+      <Divider sx={{ml: '24px', mr: '27px'}}/>
+
+      <Box sx={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        mt: '16px',
+        mb: '16px',
+        ml: '25px',
+        mr: '30px',
+        }}>
+        <Typography sx={{
+          fontWeight: 400,
+          fontSize: '16px',
+          letterSpacing: '-0.02em',
+          lineHeight: '1em',
+          color: '#828282',
+          }}>
+          Collateral factor (LTV)
+        </Typography>
+        <FormattedNumber 
+            value={reserve.formattedBaseLTVasCollateral} 
+            percent 
+            visibleDecimals={0} 
+            sx={{
+              fontWeight: 400,
+              fontSize: '16px',
+              letterSpacing: '-0.02em',
+              lineHeight: '1em',
+              color: '#061512',
+            }}/>
+      </Box>
+      <Divider sx={{ml: '24px', mr: '27px'}}/>
+
+      <Box sx={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        mt: '16px',
+        mb: '16px',
+        ml: '25px',
+        mr: '30px',
+        }}>
+        <Typography sx={{
+          fontWeight: 400,
+          fontSize: '16px',
+          letterSpacing: '-0.02em',
+          lineHeight: '1em',
+          color: '#828282',
+          }}>
+          Reserve factor
+        </Typography>
+        <FormattedNumber 
+            value={reserve.reserveFactor} 
+            percent 
+            visibleDecimals={0} 
+            sx={{
+              fontWeight: 400,
+              fontSize: '16px',
+              letterSpacing: '-0.02em',
+              lineHeight: '1em',
+              color: '#061512',
+            }}/>
+      </Box>
+      <Divider sx={{ml: '24px', mr: '27px'}}/>
+
+      <Box sx={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        mt: '16px',
+        mb: '16px',
+        ml: '25px',
+        mr: '30px',
+        }}>
+        <Typography sx={{
+          fontWeight: 400,
+          fontSize: '16px',
+          letterSpacing: '-0.02em',
+          lineHeight: '1em',
+          color: '#828282',
+          }}>
+          Liquidation bonus
+        </Typography>
+        <FormattedNumber 
+            value={reserve.formattedReserveLiquidationBonus} 
+            percent 
+            visibleDecimals={0} 
+            sx={{
+              fontWeight: 400,
+              fontSize: '16px',
+              letterSpacing: '-0.02em',
+              lineHeight: '1em',
+              color: '#061512',
+            }}/>
+      </Box> */}
+
     </Paper>
   );
 };

@@ -7,7 +7,7 @@ export const TypographyGradient = ({ ...rest }: TypographyProps) => {
         color: 'transparent',
         backgroundClip: 'text !important',
         webkitTextFillColor: 'transparent',
-        background: theme.palette.gradients.aaveGradient,
+        background: 'rgba(255, 126, 9, 1)',
       })}
       {...rest}
     >

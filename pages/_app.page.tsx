@@ -1,4 +1,4 @@
-import '/public/fonts/inter/inter.css';
+import '/public/fonts/geist/geist.css';
 
 import { CacheProvider, EmotionCache } from '@emotion/react';
 import { Web3ReactProvider } from '@web3-react/core';

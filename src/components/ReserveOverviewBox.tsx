@@ -13,12 +13,10 @@ export function ReserveOverviewBox({
   fullWidth = false,
 }: ReserveOverviewBoxProps) {
   return (
-    <Box
+    <Box // these are the bordered containers
       sx={(theme) => ({
-        borderRadius: '6px',
-        border: `1px solid ${theme.palette.divider}`,
         flex: fullWidth ? '0 100%' : '0 32%',
-        marginBottom: '2%',
+        // backgroundColor: 'red',
         height: { md: '70px', lg: '60px' },
         maxWidth: fullWidth ? '100%' : '32%',
       })}
@@ -29,7 +27,8 @@ export function ReserveOverviewBox({
           flexDirection: 'column',
           height: '100%',
           justifyContent: 'space-around',
-          padding: '8px',
+          px: '12px',
+          gap: '10px',
         }}
       >
         {title && (

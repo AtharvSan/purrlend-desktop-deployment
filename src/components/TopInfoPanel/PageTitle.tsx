@@ -3,7 +3,8 @@ import { ReactNode } from 'react';
 
 import { NetworkConfig } from '../../ui-config/networksConfig';
 // import { BridgeButton } from '../BridgeButton';
-import { MarketSwitcher } from '../MarketSwitcher';
+import { getMarketHelpData, MarketLogo, MarketSwitcher } from '../MarketSwitcher';
+import React from 'react';
 
 export interface PageTitleProps extends Pick<NetworkConfig, 'bridge'> {
   pageTitle?: ReactNode;
@@ -23,6 +24,7 @@ export const PageTitle = ({ pageTitle, withMarketSwitcher }: PageTitleProps) => 
         alignItems: { xs: 'flex-start', xsm: 'center' },
         mb: pageTitle ? 4 : 0,
         flexDirection: { xs: 'column', xsm: 'row' },
+        marginTop: '5px',
       }}
     >
       {pageTitle && (downToXSM || !withMarketSwitcher) && (
@@ -47,7 +49,16 @@ export const PageTitle = ({ pageTitle, withMarketSwitcher }: PageTitleProps) => 
           mb: !pageTitle ? 4 : 0,
         }}
       >
-        {withMarketSwitcher && <MarketSwitcher />}
+        {/* {withMarketSwitcher && <MarketSwitcher />} */}
+        <Typography sx={{
+          color: 'rgba(255, 255, 255, 1)',
+          fontSize: '32px',
+          fontWeight: 600,
+          fontStyle: 'semiBold',
+          lineHeight: '100%',
+          letterSpacing: '-0.02em',
+          paddingTop: '4px',
+        }}>HyperEVM</Typography>
         {/* <BridgeButton bridge={bridge} variant="surface" withoutIcon={!upToMD} /> */}
         {/* NOTE:// Removing for now  */}
       </Box>

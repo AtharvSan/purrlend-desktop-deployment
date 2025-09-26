@@ -62,10 +62,25 @@ export const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(function Link
     typeof href === 'string' && (href.indexOf('http') === 0 || href.indexOf('mailto:') === 0);
 
   const router = useRouter();
-  const pathname = typeof href === 'string' ? href : href.pathname;
-  const className = clsx(classNameProps, {
-    active: router?.pathname === pathname,
-  });
+  // const pathname = typeof href === 'string' ? href : href.pathname;
+  
+  // const isActive =
+  // Array.isArray((props as any).activePaths)
+  //   ? (props as any).activePaths.some((p: string) => pathname.startsWith(p))
+  //   : pathname === href;
+  
+  //   const className = clsx(classNameProps, {
+  //   active: router?.pathname === pathname,
+  // });
+  const pathname = router.pathname;
+
+  const isActive =
+    Array.isArray((props as any).activePaths)
+      ? (props as any).activePaths.some((p: string) => pathname.startsWith(p))
+      : pathname === href;
+
+  const className = clsx(classNameProps, { active: isActive });
+
   if (isExternal) {
     if (noLinkStyle) {
       return (
@@ -119,6 +134,8 @@ export const ROUTES = {
   staking: '/staking',
   governance: '/governance',
   faucet: '/faucet',
+  docs: '/docs',
+  reservesOverview: '/reserve-overview',
   prerenderedProposal: (proposalId: number) => `/governance/proposal/${proposalId}`,
   dynamicRenderedProposal: (proposalId: number) => `/governance/proposal?proposalId=${proposalId}`,
   reserveOverview: (underlyingAsset: string, marketName: CustomMarket) =>

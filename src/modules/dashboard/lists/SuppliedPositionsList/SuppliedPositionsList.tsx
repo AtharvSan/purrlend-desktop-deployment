@@ -1,6 +1,6 @@
 import { API_ETH_MOCK_ADDRESS } from '@aave/contract-helpers';
 import { Trans } from '@lingui/macro';
-import { Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Box, Divider, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { Fragment, useState } from 'react';
 import { ListColumn } from 'src/components/lists/ListColumn';
 import { ListHeaderTitle } from 'src/components/lists/ListHeaderTitle';
@@ -88,26 +88,74 @@ export const SuppliedPositionsList = () => {
 
   const RenderHeader: React.FC = () => {
     return (
-      <ListHeaderWrapper>
-        {head.map((col) => (
-          <ListColumn
-            isRow={col.sortKey === 'symbol'}
-            maxWidth={col.sortKey === 'symbol' ? DASHBOARD_LIST_COLUMN_WIDTHS.ASSET : undefined}
-            key={col.sortKey}
-          >
-            <ListHeaderTitle
-              sortName={sortName}
-              sortDesc={sortDesc}
-              setSortName={setSortName}
-              setSortDesc={setSortDesc}
-              sortKey={col.sortKey}
-            >
-              {col.title}
-            </ListHeaderTitle>
-          </ListColumn>
-        ))}
-        <ListButtonsColumn isColumnHeader />
-      </ListHeaderWrapper>
+      <>
+      <Box sx={{
+      display: 'flex',
+      justifyContent: 'space-between',
+      pl: '18px',
+      pr: '130px',
+      pt: '12px',
+      pb: '10px',
+      }}>
+        <Box >
+          <ListHeaderTitle
+          sortName={sortName}
+          sortDesc={sortDesc}
+          setSortName={setSortName}
+          setSortDesc={setSortDesc}
+          sortKey='symbol'
+          ><Trans key="assets"> Assets </Trans></ListHeaderTitle>
+        </Box>
+        <Box >
+          <ListHeaderTitle
+          sortName={sortName}
+          sortDesc={sortDesc}
+          setSortName={setSortName}
+          setSortDesc={setSortDesc}
+          sortKey='underlyingBalance'
+          ><Trans key="Balance">Balance</Trans></ListHeaderTitle>
+        </Box>
+        <Box >
+          <ListHeaderTitle
+          sortName={sortName}
+          sortDesc={sortDesc}
+          setSortName={setSortName}
+          setSortDesc={setSortDesc}
+          sortKey='supplyAPY'
+          ><Trans key="APY">APY</Trans></ListHeaderTitle>
+        </Box>
+        <Box >
+          <ListHeaderTitle
+          ><Trans>Collateral</Trans></ListHeaderTitle>
+        </Box>
+        <Box>
+          <ListHeaderTitle
+          ><Trans> Action </Trans></ListHeaderTitle>
+        </Box>
+
+      </Box>
+      <Divider sx={{borderColor: '#E8E8E8', mx: '18px', mb: '14px'}}/>
+      </>
+      // <ListHeaderWrapper>
+      //   {head.map((col) => (
+      //     <ListColumn
+      //       isRow={col.sortKey === 'symbol'}
+      //       maxWidth={col.sortKey === 'symbol' ? DASHBOARD_LIST_COLUMN_WIDTHS.ASSET : undefined}
+      //       key={col.sortKey}
+      //     >
+      //       <ListHeaderTitle
+      //         sortName={sortName}
+      //         sortDesc={sortDesc}
+      //         setSortName={setSortName}
+      //         setSortDesc={setSortDesc}
+      //         sortKey={col.sortKey}
+      //       >
+      //         {col.title}
+      //       </ListHeaderTitle>
+      //     </ListColumn>
+      //   ))}
+      //   <ListButtonsColumn isColumnHeader />
+      // </ListHeaderWrapper>
     );
   };
 
@@ -117,9 +165,13 @@ export const SuppliedPositionsList = () => {
   return (
     <ListWrapper
       titleComponent={
-        <Typography component="div" variant="h3" sx={{ mr: 4 }}>
-          <Trans>Your supplies</Trans>
-        </Typography>
+        <Typography sx={{
+          fontWeight: 600,
+          fontSize: '20px',
+          lineHeight: '1em',
+          letterSpacing: '-0.02em',
+          color: '#061512',
+          }}>Your supplies</Typography>
       }
       localStorageName="suppliedAssetsDashboardTableCollapse"
       noData={!sortedReserves.length}
@@ -131,12 +183,26 @@ export const SuppliedPositionsList = () => {
                 title={<Trans>Balance</Trans>}
                 value={user?.totalLiquidityUSD || 0}
               />
+              <Box sx={{
+                width: '3px',
+                height: '40px',
+                position: 'relative',
+                top: '-1px',
+                backgroundColor: '#DCDCDC',
+              }}></Box>
               <ListTopInfoItem
                 title={<Trans>APY</Trans>}
                 value={user?.earnedAPY || 0}
                 percent
                 tooltip={<TotalSupplyAPYTooltip />}
               />
+              <Box sx={{
+                width: '3px',
+                height: '40px',
+                position: 'relative',
+                top: '-1px',
+                backgroundColor: '#DCDCDC',
+              }}></Box>
               <ListTopInfoItem
                 title={<Trans>Collateral</Trans>}
                 value={user?.totalCollateralUSD || 0}

@@ -23,7 +23,18 @@ export const EmodeSelect = ({
 }: EmodeSelectProps) => {
   return (
     <FormControl sx={{ mb: 1, width: '100%' }}>
-      <FormLabel sx={{ mb: 1, color: 'text.secondary' }}>
+      <FormLabel 
+        sx={{ 
+          mb: 1, 
+          // font-family: 'Geist',
+          fontWeight: 400,
+          fontStyle: 'Regular',
+          fontSize: '14px',
+          lineHeight: '120%',
+          letterSpacing: '0%',
+          color: 'rgba(67, 67, 67, 1)',
+          marginBottom: '8px',
+        }}>
         <Trans>Asset category</Trans>
       </FormLabel>
 
@@ -37,14 +48,20 @@ export const EmodeSelect = ({
         data-cy="EmodeSelect"
         sx={{
           width: '100%',
-          height: '44px',
+          height: '53px',
           borderRadius: '6px',
           borderColor: 'divider',
           outline: 'none !important',
           color: 'text.primary',
           '.MuiOutlinedInput-input': {
-            backgroundColor: 'transparent',
+            backgroundColor: 'transparent !important',
           },
+          // '.MuiOutlinedInput-input': {
+          //   backgroundColor: 'rgba(255, 122, 0, 0.1) !important',
+          // },
+          // '.MuiOutlinedInput-root': {
+          //   backgroundColor: 'transparent !important',
+          // },
           '.MuiOutlinedInput-notchedOutline, .MuiOutlinedInput-notchedOutline': {
             borderColor: 'divider',
             outline: 'none !important',
@@ -54,13 +71,22 @@ export const EmodeSelect = ({
             borderColor: 'divider',
             borderWidth: '1px',
           },
-          '&.EmodeSelect .MuiSelect-icon': { color: 'text.primary' },
+          '.MuiSelect-icon': { color: 'rgba(30, 30, 30, 1)' },
         }}
         native={false}
         renderValue={(emode) => {
           if (emode !== 0) {
             return (
-              <Typography color="text.primary">
+              <Typography 
+                sx={{
+                  // font: 'Geist',
+                  fontWeight: 500,
+                  fontStyle: 'medium',
+                  fontSize: '16px',
+                  lineHeight: '100%',
+                  letterSpacing: '-2%',
+                  color: 'rgba(6, 21, 18, 1)',
+                }}>
                 {getEmodeMessage(emodeCategories[emode].label)}
               </Typography>
             );

@@ -16,6 +16,7 @@ import { MarketDataType, NetworkConfig } from 'src/utils/marketsAndNetworksConfi
 import { ApyGraphContainer } from './graphs/ApyGraphContainer';
 import { ReserveFactorOverview } from './ReserveFactorOverview';
 import { PanelItem } from './ReservePanels';
+import CapsSemiGauge from 'src/components/caps/CapsSemiGauge';
 
 interface BorrowInfoProps {
   reserve: ComputedReserveData;
@@ -35,44 +36,190 @@ export const BorrowInfo = ({
   borrowCap,
 }: BorrowInfoProps) => {
   return (
-    <Box sx={{ flexGrow: 1, minWidth: 0, maxWidth: '100%', width: '100%' }}>
+  <Box sx={{
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginRight: '180px',
+    marginLeft: '16px',
+    }}>
+    <Box sx={{
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'start',
+      flexWrap: 'wrap',
+      mt: '42.5px',
+      ml: '6.5px',
+      gap: '48px',
+      }}>
+      <Box sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'start',
+        }}>
+        <Typography sx={{
+          fontWeight: 500,
+          fontSize: '10px',
+          lineHeight: '1em',
+          letterSpacing: '0.08em',
+          textTransform: 'uppercase',
+          color: '#828282',
+          mb: '12.6px',
+          }}> Total borrowed </Typography>
+
+        <Box sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          gap: '0.33em',
+          mb: '6px',
+          }}>
+          <FormattedNumber value={reserve.totalDebt} sx={{ 
+            fontWeight: 500,
+            fontSize: '20px',
+            lineHeight: '1em', 
+            letterSpacing: '-0.02em',
+            color: '#061512',
+            }}/>
+          <Typography sx={{ 
+            fontWeight: 500,
+            fontSize: '20px',
+            lineHeight: '1em', 
+            letterSpacing: '-0.02em',
+            color: '#828282',
+            }}> of </Typography>
+          <FormattedNumber value={reserve.borrowCap} sx={{ 
+            fontWeight: 500,
+            fontSize: '20px',
+            lineHeight: '1em', 
+            letterSpacing: '-0.02em',
+            color: '#061512',
+            }}/></Box>
+
+        <Box sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'start',
+          gap: '0.33em',
+          }}>
+          <FormattedNumber value={reserve.totalDebtUSD} symbol={'USD'} symbolsColor='#828282' size='16px' sx={{ 
+            fontWeight: 400,
+            fontSize: '16px',
+            lineHeight: '1em', 
+            letterSpacing: '-0.02em',
+            color: '#828282',
+            }}/>
+          <Typography sx={{ 
+            fontWeight: 400,
+            fontSize: '16px',
+            lineHeight: '1em', 
+            letterSpacing: '-0.02em',
+            color: '#828282',
+            mt: '3px',
+            }}> of </Typography>
+          <FormattedNumber value={reserve.borrowCapUSD} symbol={'USD'} symbolsColor='#828282' size='16px' sx={{ 
+            fontWeight: 400,
+            fontSize: '16px',
+            lineHeight: '1em', 
+            letterSpacing: '-0.02em',
+            color: '#828282',
+            }}/></Box></Box>
+      <Box sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'start',
+        gap: '7.5px',
+        }}>
+        <Typography sx={{
+          fontWeight: 500,
+          fontSize: '10px',
+          lineHeight: '1em',
+          letterSpacing: '0.08em',
+          textTransform: 'uppercase',
+          color: '#828282',
+          }}> APY </Typography>
+        <FormattedNumber value={reserve.variableBorrowAPY} percent size='20px' sx={{ 
+          fontWeight: 500,
+          fontSize: '20px',
+          lineHeight: '1em', 
+          letterSpacing: '-0.02em',
+          color: 'rgba(6, 21, 18, 1)',
+          }}/></Box>
+      <Box sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'start',
+        }}>
+        <Typography sx={{
+          fontWeight: 500,
+          fontSize: '10px',
+          lineHeight: '1em',
+          letterSpacing: '0.08em',
+          textTransform: 'uppercase',
+          color: '#828282',
+          mb: '12.6px',
+          }}> borrow cap </Typography>
+
+        <Box sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          gap: '0.33em',
+          mb: '6px',
+          }}>
+          <FormattedNumber value={reserve.borrowCap} sx={{ 
+            fontWeight: 500,
+            fontSize: '20px',
+            lineHeight: '1em', 
+            letterSpacing: '-0.02em',
+            color: '#061512',
+            }}/></Box>
+
+        <Box sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'start',
+          gap: '0.33em',
+          }}>
+          <FormattedNumber value={reserve.borrowCapUSD} symbol={'USD'} symbolsColor='#828282' size='16px' sx={{ 
+            fontWeight: 400,
+            fontSize: '16px',
+            lineHeight: '1em', 
+            letterSpacing: '-0.02em',
+            color: '#828282',
+            }}/></Box></Box></Box>
+    <Box sx={{
+      pt: '35px',
+      }}>
+      <CapsSemiGauge value={borrowCap.percentUsed} // borrowCap.percentUsed
+        label="FILLED"
+        size={300}
+        thickness={31}
+        arcColor="rgba(24,204,111,1)"
+        trackColor="#E8E8E8"
+        borderOpacity={0.08}
+        shadowOpacity={0.18}
+        gap={1.5}            // keeps the green separated from grey
+        centerOffset={10}    // pushes texts down so % doesn't touch the rail
+        valueFontSize={18}   // tune to taste
+        labelFontSize={9}   // smaller “FILLED”
+        /></Box></Box>
+  );
+};
+
+{/* <Box sx={{ 
+      marginLeft: '16px',
+      }}>
       <Box
         sx={{
           display: 'flex',
           alignItems: 'center',
           flexWrap: 'wrap',
+          mt: '35px',
+          // backgroundColor: 'red',
         }}
       >
         {showBorrowCapStatus ? (
           // With a borrow cap
           <>
-            <CapsCircularStatus
-              value={borrowCap.percentUsed}
-              tooltipContent={
-                <>
-                  <Trans>
-                    Maximum amount available to supply is{' '}
-                    <FormattedNumber
-                      value={
-                        valueToBigNumber(reserve.borrowCap).toNumber() -
-                        valueToBigNumber(reserve.totalDebt).toNumber()
-                      }
-                      variant="secondary12"
-                    />{' '}
-                    {reserve.symbol} (
-                    <FormattedNumber
-                      value={
-                        valueToBigNumber(reserve.borrowCapUSD).toNumber() -
-                        valueToBigNumber(reserve.totalDebtUSD).toNumber()
-                      }
-                      variant="secondary12"
-                      symbol="USD"
-                    />
-                    ).
-                  </Trans>
-                </>
-              }
-            />
             <PanelItem
               title={
                 <Box display="flex" alignItems="center">
@@ -173,6 +320,46 @@ export const BorrowInfo = ({
             <ReserveSubheader value={reserve.borrowCapUSD} />
           </PanelItem>
         )}
+        <CapsSemiGauge value={10.51} // borrowCap.percentUsed
+          label="FILLED"
+          size={300}
+          thickness={31}
+          arcColor="rgba(24,204,111,1)"
+          trackColor="#E8E8E8"
+          borderOpacity={0.08}
+          shadowOpacity={0.18}
+          gap={1.5}            // keeps the green separated from grey
+          centerOffset={10}    // pushes texts down so % doesn't touch the rail
+          valueFontSize={18}   // tune to taste
+          labelFontSize={9}   // smaller “FILLED”
+          />
+        <CapsCircularStatus
+          value={borrowCap.percentUsed}
+          tooltipContent={
+            <>
+              <Trans>
+                Maximum amount available to supply is{' '}
+                <FormattedNumber
+                  value={
+                    valueToBigNumber(reserve.borrowCap).toNumber() -
+                    valueToBigNumber(reserve.totalDebt).toNumber()
+                  }
+                  variant="secondary12"
+                />{' '}
+                {reserve.symbol} (
+                <FormattedNumber
+                  value={
+                    valueToBigNumber(reserve.borrowCapUSD).toNumber() -
+                    valueToBigNumber(reserve.totalDebtUSD).toNumber()
+                  }
+                  variant="secondary12"
+                  symbol="USD"
+                />
+                ).
+              </Trans>
+            </>
+          }
+        />
       </Box>
       {renderCharts && (
         <ApyGraphContainer
@@ -196,6 +383,4 @@ export const BorrowInfo = ({
           reserveFactor={reserve.reserveFactor}
         />
       )}
-    </Box>
-  );
-};
+    </Box> */}

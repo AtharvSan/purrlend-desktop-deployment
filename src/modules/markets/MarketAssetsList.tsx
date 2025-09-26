@@ -1,5 +1,5 @@
 import { Trans } from '@lingui/macro';
-import { useMediaQuery } from '@mui/material';
+import { Box, useMediaQuery } from '@mui/material';
 import { useState } from 'react';
 import { StableAPYTooltip } from 'src/components/infoTooltips/StableAPYTooltip';
 import { VariableAPYTooltip } from 'src/components/infoTooltips/VariableAPYTooltip';
@@ -36,25 +36,25 @@ const listHeaders = [
     sortKey: 'totalDebtUSD',
   },
   {
-    title: (
-      <VariableAPYTooltip
-        text={<Trans>Borrow APY, variable</Trans>}
-        key="APY_list_variable_type"
-        variant="subheader2"
-      />
-    ),
+    title: <Trans>Borrow APY</Trans>,
     sortKey: 'variableBorrowAPY',
   },
   {
-    title: (
-      <StableAPYTooltip
-        text={<Trans>Borrow APY, stable</Trans>}
-        key="APY_list_stable_type"
-        variant="subheader2"
-      />
-    ),
-    sortKey: 'stableBorrowAPY',
+    title: <Trans>Oracle</Trans>,
   },
+  {
+    title: <Trans>Action</Trans>,
+  },
+  // {
+  //   title: (
+  //     <StableAPYTooltip
+  //       text={<Trans>Borrow APY, stable</Trans>}
+  //       key="APY_list_stable_type"
+  //       variant="subheader2"
+  //     />
+  //   ),
+  //   sortKey: 'stableBorrowAPY',
+  // },
 ];
 
 export default function MarketAssetsList({ reserves, loading }: MarketAssetsListProps) {
@@ -104,34 +104,93 @@ export default function MarketAssetsList({ reserves, loading }: MarketAssetsList
   return (
     <>
       {!isTableChangedToCards && (
-        <ListHeaderWrapper px={6}>
-          {listHeaders.map((col) => (
-            <ListColumn
-              isRow={col.sortKey === 'symbol'}
-              maxWidth={col.sortKey === 'symbol' ? 280 : undefined}
-              key={col.sortKey}
-            >
-              <ListHeaderTitle
-                sortName={sortName}
-                sortDesc={sortDesc}
-                setSortName={setSortName}
-                setSortDesc={setSortDesc}
-                sortKey={col.sortKey}
-              >
-                {col.title}
-              </ListHeaderTitle>
-            </ListColumn>
-          ))}
-          <ListColumn maxWidth={95} minWidth={95} />
-        </ListHeaderWrapper>
+        <Box sx={{
+        display: 'flex',
+        pl: '18px',
+        pt: '10px',
+        pb: '16px',
+        }}>
+          <Box sx={{
+            width: '255px'
+          }}>
+            <ListHeaderTitle
+            sortName={sortName}
+            sortDesc={sortDesc}
+            setSortName={setSortName}
+            setSortDesc={setSortDesc}
+            sortKey='symbol'
+            ><Trans> Asset </Trans></ListHeaderTitle>
+          </Box>
+          <Box sx={{
+            width: '190px'
+          }}>
+            <ListHeaderTitle
+            sortName={sortName}
+            sortDesc={sortDesc}
+            setSortName={setSortName}
+            setSortDesc={setSortDesc}
+            sortKey='totalLiquidityUSD'
+            ><Trans> total supplied </Trans></ListHeaderTitle>
+          </Box>
+          <Box sx={{
+            width: '150px'
+          }}>
+            <ListHeaderTitle
+            sortName={sortName}
+            sortDesc={sortDesc}
+            setSortName={setSortName}
+            setSortDesc={setSortDesc}
+            sortKey='supplyAPY'
+            ><Trans> supply apy </Trans></ListHeaderTitle>
+          </Box>
+          <Box sx={{
+            width: '170px'
+          }}>
+            <ListHeaderTitle
+            sortName={sortName}
+            sortDesc={sortDesc}
+            setSortName={setSortName}
+            setSortDesc={setSortDesc}
+            sortKey='totalDebtUSD'
+            ><Trans> Total borrowed </Trans></ListHeaderTitle>
+          </Box>
+          <Box
+          sx={{
+            width: '150px'
+          }}>
+            <ListHeaderTitle
+            sortName={sortName}
+            sortDesc={sortDesc}
+            setSortName={setSortName}
+            setSortDesc={setSortDesc}
+            sortKey='variableBorrowAPY'
+            ><Trans> Borrow APY </Trans></ListHeaderTitle>
+          </Box>
+          <Box sx={{
+            width: '165px'
+          }}>
+            <ListHeaderTitle
+            ><Trans> oracle </Trans></ListHeaderTitle>
+          </Box>
+          <Box>
+            <ListHeaderTitle
+            ><Trans> action </Trans></ListHeaderTitle>
+          </Box>
+        </Box>
       )}
-      {reserves.map((reserve) =>
-        isTableChangedToCards ? (
-          <MarketAssetsListMobileItem {...reserve} key={reserve.id} />
-        ) : (
-          <MarketAssetsListItem {...reserve} key={reserve.id} />
-        )
-      )}
+      <Box sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '8px',
+        }}>
+        {reserves.map((reserve) =>
+          isTableChangedToCards ? (
+            <MarketAssetsListMobileItem {...reserve} key={reserve.id} />
+          ) : (
+            <MarketAssetsListItem {...reserve} key={reserve.id} />
+          )
+        )}
+      </Box>
     </>
   );
 }

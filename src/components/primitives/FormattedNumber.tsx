@@ -1,4 +1,5 @@
 import { normalizeBN, valueToBigNumber } from '@aave/math-utils';
+import { Trans } from '@lingui/react';
 import { Typography } from '@mui/material';
 import { Variant } from '@mui/material/styles/createTypography';
 import { TypographyProps } from '@mui/material/Typography';
@@ -48,6 +49,7 @@ export interface FormattedNumberProps extends TypographyProps {
   compact?: boolean;
   percent?: boolean;
   symbolsColor?: string;
+  size?: string;
   symbolsVariant?: OverridableStringUnion<Variant | 'inherit', TypographyPropsVariantOverrides>;
   roundDown?: boolean;
 }
@@ -60,6 +62,7 @@ export function FormattedNumber({
   percent,
   symbolsVariant,
   symbolsColor,
+  size,
   roundDown,
   ...rest
 }: FormattedNumberProps) {
@@ -94,6 +97,12 @@ export function FormattedNumber({
         flexDirection: 'row',
         alignItems: 'center',
         position: 'relative',
+        // fontWeight: 600,
+        // fontStyle: 'semibold',
+        // fontSize: '24px',
+        // lineHeight: '100%',
+        // letterSpacing: '-2%',
+        // color: 'rgba(6, 21, 18, 1)',
         ...rest.sx,
       }}
       noWrap
@@ -101,7 +110,7 @@ export function FormattedNumber({
       {isSmallerThanMin && (
         <Typography
           component="span"
-          sx={{ mr: 0.5 }}
+          sx={{ mr: '0.2em' }}
           variant={symbolsVariant || rest.variant}
           color={symbolsColor || 'text.secondary'}
         >
@@ -111,9 +120,10 @@ export function FormattedNumber({
       {symbol?.toLowerCase() === 'usd' && !percent && (
         <Typography
           component="span"
-          sx={{ mr: 0.5 }}
+          sx={{ mr: '0.2em' }}
           variant={symbolsVariant || rest.variant}
           color={symbolsColor || 'text.secondary'}
+          fontSize={size}
         >
           $
         </Typography>
@@ -131,9 +141,10 @@ export function FormattedNumber({
       {percent && (
         <Typography
           component="span"
-          sx={{ ml: 0.5 }}
+          sx={{ ml: '0.22em' }}
           variant={symbolsVariant || rest.variant}
           color={symbolsColor || 'text.secondary'}
+          fontSize={size}
         >
           %
         </Typography>

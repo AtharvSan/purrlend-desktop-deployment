@@ -21,27 +21,44 @@ const Content = ({
   capsComponent,
 }: ListValueColumnProps) => {
   return (
-    <>
-      <Box sx={{ display: 'flex', alignItems: 'center' }}>
-        <FormattedNumber
-          value={value}
-          variant="secondary14"
-          sx={{ mb: !withTooltip && !!subValue ? '2px' : 0 }}
-          color={disabled ? 'text.disabled' : 'text.main'}
-          data-cy={`nativeAmount`}
-        />
-        {capsComponent}
-      </Box>
-
+    <Box sx={{ 
+      display: 'flex',
+      flexDirection: 'column', 
+      alignItems: 'start', 
+      justifyContent:'start',
+      // pt: '20px',
+      gap: '4px', 
+      }}>
+      <FormattedNumber
+        value={value}
+        variant="secondary14"
+        visibleDecimals={2}
+        sx={{ 
+        fontWeight: 400,
+        fontSize: '14px',
+        lineHeight: '1em',
+        letterSpacing: '-0.02em',
+        color: '#061512',
+        }}
+        // color={disabled ? 'text.disabled' : 'text.main'}
+        data-cy={`nativeAmount`}
+      />
+      {capsComponent}
       {!withTooltip && !!subValue && !disabled && (
         <FormattedNumber
           value={subValue}
           symbol="USD"
-          variant="secondary12"
-          color="text.secondary"
+          // variant="secondary12"
+          sx={{
+            color: '#828282',
+            fontWeight: 400,
+            fontSize: '14px',
+            lineHeight: '1em',
+            letterSpacing: '-0.02em',
+          }}
         />
       )}
-    </>
+    </Box>
   );
 };
 
@@ -54,58 +71,8 @@ export const ListValueColumn = ({
   disabled,
 }: ListValueColumnProps) => {
   return (
-    <ListColumn>
-      {withTooltip ? (
-        <Tooltip
-          title={
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <FormattedNumber
-                value={subValue || 0}
-                symbol="USD"
-                variant="secondary14"
-                sx={{ mb: '2px' }}
-                symbolsColor="common.white"
-                compact={false}
-              />
-              <FormattedNumber
-                value={value}
-                variant="secondary12"
-                symbol={symbol}
-                symbolsColor="common.white"
-                compact={false}
-              />
-            </Box>
-          }
-          arrow
-          placement="top"
-        >
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <Content
-              symbol={symbol}
-              value={value}
-              subValue={subValue}
-              capsComponent={capsComponent}
-              disabled={disabled}
-              withTooltip={withTooltip}
-            />
-          </Box>
-        </Tooltip>
-      ) : (
-        <Content
+    <ListColumn basis={140} align="start" >
+      <Content
           symbol={symbol}
           value={value}
           subValue={subValue}
@@ -113,7 +80,6 @@ export const ListValueColumn = ({
           disabled={disabled}
           withTooltip={withTooltip}
         />
-      )}
     </ListColumn>
   );
 };

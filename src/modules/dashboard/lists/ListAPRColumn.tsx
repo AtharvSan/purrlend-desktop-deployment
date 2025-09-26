@@ -2,6 +2,7 @@ import { ReserveIncentiveResponse } from '@aave/math-utils/dist/esm/formatters/i
 
 import { IncentivesCard } from '../../../components/incentives/IncentivesCard';
 import { ListColumn } from '../../../components/lists/ListColumn';
+import { BackupOutlined } from '@mui/icons-material';
 
 interface ListAPRColumnProps {
   value: number;
@@ -11,7 +12,7 @@ interface ListAPRColumnProps {
 
 export const ListAPRColumn = ({ value, incentives, symbol }: ListAPRColumnProps) => {
   return (
-    <ListColumn>
+    <ListColumn basis={10} align="start" >
       <IncentivesCard value={value} incentives={incentives} symbol={symbol} data-cy={`apyType`} />
     </ListColumn>
   );

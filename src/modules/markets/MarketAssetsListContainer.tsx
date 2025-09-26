@@ -47,14 +47,19 @@ export const MarketAssetsListContainer = () => {
   const frozenReserves = filteredData.filter((r) => r.isFrozen);
 
   return (
-    <ListWrapper
-      titleComponent={
-        <MarketAssetListTitle
-          onSearchTermChange={setSearchTerm}
-          marketTitle={currentMarketData.marketTitle}
-        />
-      }
-    >
+    <Box sx={{
+      display: 'flex',
+      flexDirection: 'column',
+      // mx: '2.05%',
+      mx: 'auto',
+      width: '1199px',
+      my: '2.7%',
+      }}>
+      <MarketAssetListTitle
+        onSearchTermChange={setSearchTerm}
+        marketTitle={currentMarketData.marketTitle}
+      />
+
       {showFrozenMarketWarning && (
         <Box mx={6}>
           <MarketWarning marketName={currentNetworkConfig.name} forum />
@@ -127,6 +132,8 @@ export const MarketAssetsListContainer = () => {
           </Typography>
         </Box>
       )}
-    </ListWrapper>
+    </Box>    
   );
 };
+
+

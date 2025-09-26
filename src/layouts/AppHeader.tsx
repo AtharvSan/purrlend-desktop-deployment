@@ -89,37 +89,47 @@ export function AppHeader() {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         sx={(theme) => ({
-          height: headerHeight,
+          height: 54,
           position: 'sticky',
-          top: 0,
+          top: 8,
           transition: theme.transitions.create('top'),
           zIndex: theme.zIndex.appBar,
-          bgcolor: theme.palette.background.header,
           padding: {
             xs: mobileMenuOpen || walletWidgetOpen ? '8px 20px' : '8px 8px 8px 20px',
             xsm: '8px 20px',
+            lg: '8px 0px 8px 0px'
           },
+          // mx: '8.333%',
+          width: '1199px',
+          mx: 'auto',
           display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
           alignItems: 'center',
-          flexDirection: 'space-between',
-          boxShadow: 'inset 0px -1px 0px rgba(242, 243, 247, 0.16)',
+
         })}
       >
-        <Box
+        <Box sx={{ 
+        height: '54px',
+        width: '54px',
+        backgroundColor: '#FFFFFF',
+        p: '12px',
+        borderRadius: '16px',
+        boxShadow: '0px 3px 5px 0px #0000000A',
+        }}>
+          <Box
           component={Link}
           href="/"
           aria-label="Go to homepage"
-          sx={{
-            lineHeight: 0,
-            mr: 3,
-            transition: '0.3s ease all',
-            '&:hover': { opacity: 0.7 },
-          }}
           onClick={() => setMobileMenuOpen(false)}
-        >
-          <img src={uiConfig.appLogo} alt="An SVG of an eye" height={20} />
+          sx={{
+          '&:hover': { opacity: 0.7 },
+          }}>
+            <img src={uiConfig.appLogo} alt="An SVG of an eye" />
+          </Box>
         </Box>
-        <Box sx={{ mr: sm ? 1 : 3 }}>
+
+        {/* <Box sx={{ mr: sm ? 1 : 3 }}>
           {ENABLE_TESTNET && (
             <ContentWithTooltip tooltipContent={testnetTooltip} offset={[0, -4]} withoutHover>
               <Button
@@ -138,35 +148,50 @@ export function AppHeader() {
               </Button>
             </ContentWithTooltip>
           )}
-        </Box>
+        </Box> */}
+        
+        <Box sx={{ 
+          height: '54px',
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          backgroundColor: '#FFFFFF',
+          borderRadius: '16px',
+          p: '8px 8px 8px 12px',
+          boxShadow: '0px 3px 5px 0px #0000000A',
+        }}>
+          <Box sx={{ 
+            display: { xs: 'none', md: 'block' },
 
-        <Box sx={{ display: { xs: 'none', md: 'block' } }}>
-          <NavItems />
-        </Box>
+            ml: '24.5px',
+            }}>
+            <NavItems />
+          </Box>
 
-        <Box sx={{ flexGrow: 1 }} />
-
-        {!mobileMenuOpen && (
-          <WalletWidget
-            open={walletWidgetOpen}
-            setOpen={setWalletWidgetOpen}
-            headerHeight={headerHeight}
-          />
-        )}
-
-        <Box sx={{ display: { xs: 'none', md: 'block' } }}>
-          <SettingsMenu />
-        </Box>
-
-        {!walletWidgetOpen && (
-          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-            <MobileMenu
-              open={mobileMenuOpen}
-              setOpen={setMobileMenuOpen}
+          {!mobileMenuOpen && (
+            <WalletWidget
+              open={walletWidgetOpen}
+              setOpen={setWalletWidgetOpen}
               headerHeight={headerHeight}
             />
-          </Box>
-        )}
+          )}
+
+          {/* <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+            <SettingsMenu />
+          </Box> */}
+
+          {!walletWidgetOpen && (
+            <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+              <MobileMenu
+                open={mobileMenuOpen}
+                setOpen={setMobileMenuOpen}
+                headerHeight={headerHeight}
+              />
+            </Box>
+          )}
+        </Box>
       </Box>
     </HideOnScroll>
   );

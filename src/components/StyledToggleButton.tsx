@@ -4,12 +4,12 @@ import React from 'react';
 const CustomToggleButton = styled(ToggleButton)<ToggleButtonProps>(({ theme }) => ({
   border: '0px',
   flex: 1,
-  backgroundColor: '#383D51',
-  borderRadius: '4px',
-
+  backgroundColor: '#E8E8E8',
+  borderRadius: '70px',
+  // margin: '10px',
   '&.Mui-selected, &.Mui-selected:hover': {
     backgroundColor: '#FFFFFF',
-    borderRadius: '4px !important',
+    borderRadius: '70px !important',
   },
 
   '&.Mui-selected, &.Mui-disabled': {
@@ -19,12 +19,12 @@ const CustomToggleButton = styled(ToggleButton)<ToggleButtonProps>(({ theme }) =
     justifyContent: 'center',
 
     '.MuiTypography-subheader1': {
-      background: theme.palette.gradients.aaveGradient,
+      background: '#061512',
       backgroundClip: 'text',
       textFillColor: 'transparent',
     },
     '.MuiTypography-secondary14': {
-      background: theme.palette.gradients.aaveGradient,
+      background: '#061512',
       backgroundClip: 'text',
       textFillColor: 'transparent',
     },

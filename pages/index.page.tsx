@@ -28,10 +28,10 @@ export default function Home() {
 
   return (
     <>
-      <DashboardTopPanel />
+      {currentAccount && !isPermissionsLoading &&(<DashboardTopPanel />)}
 
       <ContentContainer>
-        {currentAccount && !isPermissionsLoading && (
+        {/* {currentAccount && !isPermissionsLoading && (
           <Box
             sx={{
               display: { xs: 'flex', lg: 'none' },
@@ -58,12 +58,19 @@ export default function Home() {
               </StyledToggleButton>
             </StyledToggleButtonGroup>
           </Box>
-        )}
+        )} */}
 
         {currentAccount && !isPermissionsLoading ? (
           <DashboardContentWrapper isBorrow={mode === 'borrow'} />
         ) : (
-          <ConnectWalletPaper loading={web3Loading} />
+          <Box sx={{
+            mx: '27%',
+            mt: '100px',
+            // display: 'flex',
+            // justifyContent: 'center',
+            }}>
+            <ConnectWalletPaper loading={web3Loading} />
+          </Box>
         )}
       </ContentContainer>
     </>

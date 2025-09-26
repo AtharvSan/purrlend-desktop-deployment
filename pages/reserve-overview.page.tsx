@@ -68,13 +68,23 @@ export default function ReserveOverview() {
           </StyledToggleButtonGroup>
         </Box>
 
-        <Box sx={{ display: 'flex' }}>
+        <Box 
+          sx={{ 
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            // gap: '25px', 
+            // backgroundColor: 'red',
+            // pr: '25px'
+            mx: '1.904%'
+          }}>
           {/** Main status and configuration panel*/}
           <Box
             sx={{
               display: { xs: !isOverview ? 'none' : 'block', lg: 'block' },
-              width: { xs: '100%', lg: 'calc(100% - 432px)' },
-              mr: { xs: 0, lg: 4 },
+              width: { xs: '100%', lg: 'calc(100% - 355px)' },
+              // mr: { xs: 0, lg: 4 },
+              // mr: '25px',
             }}
           >
             {reserve && <ReserveConfiguration reserve={reserve} />}
@@ -84,7 +94,9 @@ export default function ReserveOverview() {
           <Box
             sx={{
               display: { xs: isOverview ? 'none' : 'block', lg: 'block' },
-              width: { xs: '100%', lg: '416px' },
+              // width: { xs: '100%' },
+              // backgroundColor: 'red'
+              // ml: '25px',
             }}
           >
             <ReserveActions reserve={reserve} />

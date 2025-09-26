@@ -9,6 +9,7 @@ import { TxAction } from 'src/ui-config/errorMapping';
 
 import { ApprovalTooltip } from '../infoTooltips/ApprovalTooltip';
 import { RightHelperText } from './FlowCommons/RightHelperText';
+import { uiConfig } from 'src/uiConfig';
 
 interface TxActionsWrapperProps extends BoxProps {
   actionInProgressText: ReactNode;
@@ -153,11 +154,33 @@ export const TxActionsWrapper = ({
         disabled={disabled || blocked || readOnlyModeAddress !== undefined}
         onClick={handleClick}
         size="large"
-        sx={{ minHeight: '44px', ...(approvalParams ? { mt: 2 } : {}) }}
+        sx={{ 
+          minHeight: '44px', 
+          marginBottom: '8px',
+          backgroundColor: 'rgba(255, 126, 9, 1)',
+          border: '1px solid',
+          borderRadius: '12px',
+          borderColor: 'rgba(255, 255, 255, 0.2)',
+          boxShadow: '0px 4px 10px 0 rgba(255, 126, 9, 0.39)',
+          '&:hover, &.Mui-focusVisible': {
+            backgroundColor: '#FF7A00',
+            boxShadow: '0px 4px 10px 0 rgba(255, 126, 9, 0.39)',
+          },
+          ...(approvalParams ? { mt: 2 } : {}) 
+        }}
         data-cy="actionButton"
       >
         {loading && <CircularProgress color="inherit" size="16px" sx={{ mr: 2 }} />}
-        {content}
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: '10px',
+          }}>
+          <img src={uiConfig.starWhite} alt="E-Mode" />
+          {content}
+        </Box>
       </Button>
       {readOnlyModeAddress && (
         <Typography variant="helperText" color="warning.main" sx={{ textAlign: 'center', mt: 2 }}>

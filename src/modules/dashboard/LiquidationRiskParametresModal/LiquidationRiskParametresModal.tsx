@@ -54,14 +54,14 @@ export const LiquidationRiskParametresInfoModal = ({
           Your health factor and loan to value determine the assurance of your collateral. To avoid
           liquidations you can supply more collateral or repay borrow positions.
         </Trans>{' '}
-        <Link
+        {/* <Link
           href="https://docs.aave.com/faq/"
           sx={{ textDecoration: 'underline' }}
           color="text.primary"
           variant="description"
         >
           <Trans>Learn more</Trans>
-        </Link>
+        </Link> */}
       </Typography>
 
       <InfoWrapper
@@ -75,8 +75,8 @@ export const LiquidationRiskParametresInfoModal = ({
         topValue={
           <HealthFactorNumber
             value={healthFactor}
-            variant="main12"
-            sx={{ color: 'common.white' }}
+            // variant="main12"
+            sx={{ color: '#FF7E09' }}
           />
         }
         bottomText={
@@ -100,8 +100,8 @@ export const LiquidationRiskParametresInfoModal = ({
             value={loanToValue}
             percent
             variant="main12"
-            color="common.white"
-            symbolsColor="common.white"
+            color="#FF7E09"
+            symbolsColor="#FF7E09"
           />
         }
         bottomText={

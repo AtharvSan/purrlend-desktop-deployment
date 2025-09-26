@@ -14,10 +14,10 @@ export const ListItemIsolationBadge = ({ children }: ListItemIsolationBadgeProps
         display: 'flex',
         alignItems: { xs: 'flex-end', xsm: 'center' },
         justifyContent: 'center',
-        flexDirection: 'column',
+        flexDirection: 'row',
       }}
     >
-      {children}
+      {/* {children} */}
       <IsolatedBadge />
     </Box>
   );

@@ -6,6 +6,7 @@ import { Link } from '../../components/primitives/Link';
 import { useProtocolDataContext } from '../../hooks/useProtocolDataContext';
 import { navigation } from '../../ui-config/menu-items';
 import { MoreMenu } from '../MoreMenu';
+import { blue, blueGrey, orange } from '@mui/material/colors';
 
 interface NavItemsProps {
   setOpen?: (value: boolean) => void;
@@ -22,8 +23,11 @@ export const NavItems = ({ setOpen }: NavItemsProps) => {
     <List
       sx={{
         display: 'flex',
+
         alignItems: { xs: 'flex-start', md: 'center' },
         flexDirection: { xs: 'column', md: 'row' },
+        gap: '33px',
+        // backgroundColor: 'red',
       }}
       disablePadding
     >
@@ -32,10 +36,12 @@ export const NavItems = ({ setOpen }: NavItemsProps) => {
         .map((item, index) => (
           <ListItem
             sx={{
-              width: { xs: '100%', md: 'unset' },
-              mr: { xs: 0, md: 2 },
+              // backgroundColor: 'red',
+              display: 'flex',
+              justifyContent: 'start',
+              // width: { xs: '100%', md: 'unset' },
             }}
-            data-cy={item.dataCy}
+            // data-cy={item.dataCy}
             disablePadding
             key={index}
           >
@@ -43,48 +49,63 @@ export const NavItems = ({ setOpen }: NavItemsProps) => {
               <Typography
                 component={Link}
                 href={item.link}
+                activePaths={item.activePaths}
                 variant="h2"
                 color="#F1F1F3"
                 sx={{ width: '100%', p: 4 }}
                 onClick={() => (setOpen ? setOpen(false) : undefined)}
               >
-                {i18n._(item.title)}
+                {typeof item.title === 'string' ? i18n._(item.title) : item.title}
               </Typography>
             ) : (
               <Button
                 component={Link}
                 href={item.link}
+                activePaths={item.activePaths}  
                 sx={(theme) => ({
-                  color: '#F1F1F3',
+                  fontSize: '14px',
+                  // backgroundColor: 'red',
+                  fontWeight: 500,
+                  lineHeight: '1em',
+                  letterSpacing: '-0.02em',
+                  color: '#061512',
                   p: '6px 8px',
+                  minWidth: 'unset',
                   position: 'relative',
-                  '.active&:after, &:hover&:after': {
+                  '&.active:after, &:hover:after': {
                     transform: 'scaleX(1)',
                     transformOrigin: 'bottom left',
                   },
+                  '&:hover, &.active': {
+                    color: 'rgba(255, 126, 9, 1)',
+                    textShadow: '0px 2px 2px rgba(255, 126, 9, 0.2)',
+                  },
                   '&:after': {
+                    color: '#FF7A00',
                     content: "''",
                     position: 'absolute',
-                    width: '100%',
+                    width: '70px',
+                    height: '4px',
                     transform: 'scaleX(0)',
-                    height: '2px',
-                    bottom: '-6px',
-                    left: '0',
-                    background: theme.palette.gradients.aaveGradient,
+                    borderTopLeftRadius: '12px',
+                    borderTopRightRadius: '12px',
+                    boxShadow: '0px 4px 10px 0px #FF7E0963',
+                    bottom: '-14px',
+                    background: theme.palette.purr.main,
                     transformOrigin: 'bottom right',
                     transition: 'transform 0.25s ease-out',
                   },
                 })}
               >
-                {i18n._(item.title)}
+                {typeof item.title === 'string' ? i18n._(item.title) : item.title}
               </Button>
             )}
           </ListItem>
         ))}
 
-      <ListItem sx={{ display: { xs: 'none', md: 'flex' }, width: 'unset' }} disablePadding>
+      {/* <ListItem sx={{ display: { xs: 'none', md: 'flex' }, width: 'unset' }} disablePadding>
         <MoreMenu />
-      </ListItem>
+      </ListItem> */}
     </List>
   );
 };

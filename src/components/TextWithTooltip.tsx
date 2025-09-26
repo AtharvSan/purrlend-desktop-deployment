@@ -1,4 +1,5 @@
 import { InformationCircleIcon } from '@heroicons/react/outline';
+// import { Tooltip } from '/Tooltip.svg';
 import { Box, IconButton, SvgIcon, Typography } from '@mui/material';
 import { TypographyProps } from '@mui/material/Typography';
 import { JSXElementConstructor, ReactElement, ReactNode, useState } from 'react';
@@ -53,6 +54,7 @@ export const TextWithTooltip = ({
             }}
           >
             {icon || <InformationCircleIcon />}
+            {/* {icon || <Tooltip />} */}
           </SvgIcon>
         </IconButton>
       </ContentWithTooltip>

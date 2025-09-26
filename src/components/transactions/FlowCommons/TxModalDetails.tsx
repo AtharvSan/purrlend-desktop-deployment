@@ -2,7 +2,7 @@ import { ReserveIncentiveResponse } from '@aave/math-utils/dist/esm/formatters/i
 import { CheckIcon, ExclamationIcon } from '@heroicons/react/outline';
 import { ArrowNarrowRightIcon } from '@heroicons/react/solid';
 import { Trans } from '@lingui/macro';
-import { Box, FormControlLabel, Skeleton, SvgIcon, Switch, Typography } from '@mui/material';
+import { Box, Divider, FormControlLabel, Skeleton, SvgIcon, Switch, Typography } from '@mui/material';
 import { parseUnits } from 'ethers/lib/utils';
 import React, { ReactNode } from 'react';
 import { CollateralType } from 'src/helpers/types';
@@ -32,14 +32,54 @@ export const TxModalDetails: React.FC<TxModalDetailsProps> = ({
 }) => {
   return (
     <Box sx={{ pt: 5 }}>
-      <Typography sx={{ mb: 1 }} color="text.secondary">
+      <Box 
+        sx={{
+          display: 'flex', 
+          flexDirection: 'row',
+          // gap: '10px',
+          justifyContent: 'space-between', 
+          alignItems: 'center',
+          width: '100%',
+          marginTop: '2px',
+          marginBottom: '20px',
+        }}>
+        <Box sx={{
+          width: '6px', 
+          height: '6px', 
+          backgroundColor: 'rgba(255, 126, 9, 1)', 
+          boxShadow: '2px 0px 12px rgba(255, 126, 9, 0.5)',
+        }}>
+        </Box>
+        <Typography 
+          variant="h4" 
+          sx={{ 
+            fontWeight: 700,
+            fontStyle: 'Bold',
+            fontSize: '10px',
+            leadingTrim: "NONE",
+            lineHeight: '100%',
+            letterSpacing: '8%',
+            textTransform: 'uppercase',
+            color: 'rgba(255, 126, 9, 1)',
+          }}
+          >Transaction overview</Typography>
+        
+        <Divider 
+          sx={{ 
+            // my: 3, 
+            width: '58.5%',
+            borderColor: 'rgba(210, 210, 210, 1)',
+            opacity: 0.8,
+          }}/>
+
+      </Box>
+      {/* <Typography sx={{ mb: 1 }} color="text.secondary">
         <Trans>Transaction overview</Trans>
-      </Typography>
+      </Typography> */}
 
       <Box
         sx={(theme) => ({
-          p: 3,
-          border: `1px solid ${theme.palette.divider}`,
+          // p: 3,
           borderRadius: '4px',
           '.MuiBox-root:last-of-type': {
             mb: 0,
@@ -48,10 +88,10 @@ export const TxModalDetails: React.FC<TxModalDetailsProps> = ({
       >
         {children}
       </Box>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+      {/* <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <GasStation gasLimit={parseUnits(gasLimit || '0', 'wei')} />
         {slippageSelector}
-      </Box>
+      </Box> */}
     </Box>
   );
 };

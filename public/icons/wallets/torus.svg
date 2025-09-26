@@ -1,1 +1,12 @@
-<svg width="23" height="24" viewBox="0 0 23 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path fill="url(#a)" d="M0 0h22.5v24H0z"/><defs><pattern id="a" patternContentUnits="objectBoundingBox" width="1" height="1"><use xlink:href="#b" transform="scale(.03333 .03125)"/></pattern><image id="b" width="30" height="32" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAgCAYAAAAFQMh/AAABAElEQVRYCe2TsQ3CMBBFPQIjMAId544RMgKjsAE0vpTQUMMGZAUmIGIBkChB+ugSJbIix05Q6C6SFcs+3bPP94xlIDpcYp8BYrxN56Mcc8s4EeNmHR7EuFhG1oZFoXXS+MHqmE+b0BgjAIGFcpPDvooNbfprlKpIB7zYYtYH9fJmcrrojcaCyWEzIGcxPZhxSIGlIpODrcNuALicHEwO6wHg8+Rg6VhiFH1wYjxFtb+ApbODcIeScqwqnYhxjI1lj4/+jYjx8j1u5uJz1eUOO3kCOVCzl/wT4+pDQnNi3JOJxgYoWEstFdDmGmtOMF51Up1Up6AavyyqTqqT6jTUnC9VCjlE4GPMDwAAAABJRU5ErkJggg=="/></defs></svg>
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_999_666)">
+<path d="M16 32C24.8366 32 32 24.8366 32 16C32 7.16344 24.8366 0 16 0C7.16344 0 0 7.16344 0 16C0 24.8366 7.16344 32 16 32Z" fill="#0364FF"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M10.7184 9.4939C9.95365 9.4939 9.33374 10.1138 9.33374 10.8785V12.4915C9.33374 13.2562 9.95365 13.8761 10.7184 13.8761H13.1681V22.8993C13.1681 23.664 13.7881 24.2839 14.5528 24.2839H16.1657C16.9304 24.2839 17.5504 23.664 17.5504 22.8993V12.5032C17.5504 12.4993 17.5504 12.4954 17.5504 12.4915V10.8785C17.5504 10.1138 16.9305 9.4939 16.1658 9.4939H14.5528H10.7184Z" fill="white"/>
+<path d="M20.8378 13.8761C22.0479 13.8761 23.029 12.8951 23.029 11.685C23.029 10.4749 22.0479 9.4939 20.8378 9.4939C19.6277 9.4939 18.6467 10.4749 18.6467 11.685C18.6467 12.8951 19.6277 13.8761 20.8378 13.8761Z" fill="white"/>
+</g>
+<defs>
+<clipPath id="clip0_999_666">
+<rect width="32" height="32" fill="white"/>
+</clipPath>
+</defs>
+</svg>

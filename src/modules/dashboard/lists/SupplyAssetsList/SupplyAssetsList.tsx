@@ -1,7 +1,7 @@
 import { API_ETH_MOCK_ADDRESS } from '@aave/contract-helpers';
 import { USD_DECIMALS, valueToBigNumber } from '@aave/math-utils';
 import { Trans } from '@lingui/macro';
-import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Box, Divider, Typography, useMediaQuery, useTheme } from '@mui/material';
 import BigNumber from 'bignumber.js';
 import { Fragment, useState } from 'react';
 import { ListColumn } from 'src/components/lists/ListColumn';
@@ -181,27 +181,54 @@ export const SupplyAssetsList = () => {
 
   const RenderHeader: React.FC = () => {
     return (
-      <ListHeaderWrapper>
-        {head.map((col) => (
-          <ListColumn
-            isRow={col.sortKey === 'symbol'}
-            maxWidth={col.sortKey === 'symbol' ? DASHBOARD_LIST_COLUMN_WIDTHS.ASSET : undefined}
-            key={col.sortKey}
-            overFlow={'visible'}
-          >
-            <ListHeaderTitle
-              sortName={sortName}
-              sortDesc={sortDesc}
-              setSortName={setSortName}
-              setSortDesc={setSortDesc}
-              sortKey={col.sortKey}
-            >
-              {col.title}
-            </ListHeaderTitle>
-          </ListColumn>
-        ))}
-        <ListButtonsColumn isColumnHeader />
-      </ListHeaderWrapper>
+      <>
+      <Box sx={{
+      display: 'flex',
+      justifyContent: 'space-between',
+      pl: '18px',
+      pr: '155px',
+      mt: '16px',
+      pb: '10px',
+      }}>
+        <Box>
+          <ListHeaderTitle
+          sortName={sortName}
+          sortDesc={sortDesc}
+          setSortName={setSortName}
+          setSortDesc={setSortDesc}
+          sortKey='symbol'
+          ><Trans key="assets"> Assets </Trans></ListHeaderTitle>
+        </Box>
+        <Box>
+          <ListHeaderTitle
+          sortName={sortName}
+          sortDesc={sortDesc}
+          setSortName={setSortName}
+          setSortDesc={setSortDesc}
+          sortKey='walletBalance'
+          ><Trans key="Wallet balance"> balance </Trans></ListHeaderTitle>
+        </Box>
+        <Box>
+          <ListHeaderTitle
+          sortName={sortName}
+          sortDesc={sortDesc}
+          setSortName={setSortName}
+          setSortDesc={setSortDesc}
+          sortKey='supplyAPY'
+          ><Trans key="APY">APY</Trans></ListHeaderTitle>
+        </Box>
+        <Box>
+          <ListHeaderTitle
+          // sortName={sortName}
+          // sortDesc={sortDesc}
+          // setSortName={setSortName}
+          // setSortDesc={setSortDesc}
+          // sortKey='usageAsCollateralEnabledOnUser'
+          ><Trans key="Can be collateral">Can be collateral</Trans></ListHeaderTitle>
+        </Box>
+      </Box>
+      <Divider sx={{borderColor: '#E8E8E8', mx: '18px', mb: '10px'}}/>
+      </>
     );
   };
 
@@ -219,16 +246,20 @@ export const SupplyAssetsList = () => {
   return (
     <ListWrapper
       titleComponent={
-        <Typography component="div" variant="h3" sx={{ mr: 4 }}>
-          <Trans>Assets to supply</Trans>
-        </Typography>
+        <Typography sx={{
+          fontWeight: 500,
+          fontSize: '20px',
+          lineHeight: '1em',
+          letterSpacing: '-0.02em',
+          color: '#061512',
+          }}>Assets to supply</Typography>
       }
       localStorageName="supplyAssetsDashboardTableCollapse"
       withTopMargin
       noData={supplyDisabled}
       subChildrenComponent={
         <>
-          <Box sx={{ px: 6 }}>
+          {/* <Box sx={{ px: 6 }}>
             {supplyDisabled && currentNetworkConfig.name === 'Harmony' ? (
               <MarketWarning marketName="Harmony" />
             ) : supplyDisabled && currentNetworkConfig.name === 'Fantom' ? (
@@ -255,7 +286,7 @@ export const SupplyAssetsList = () => {
                 <WalletEmptyInfo name={networkName} bridge={bridge} chainId={currentChainId} />
               ))
             )}
-          </Box>
+          </Box> */}
 
           {filteredSupplyReserves.length >= 1 && (
             <DashboardListTopPanel

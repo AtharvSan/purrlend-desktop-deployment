@@ -25,7 +25,19 @@ export const ListItemUsedAsCollateral = ({
           disableRipple
           checked={isEnabled}
           disabled={!canBeEnabledAsCollateral}
+          data-enabled={isEnabled ? 'true' : 'false'}    // stable attribute for root-targeting
+          sx={(theme) => ({
+            // root 
+            borderColor: isEnabled ? 'rgba(24, 204, 111, 0.5)' : 'rgba(160,160,160,0.85)',
+            backgroundColor: isEnabled ? 'rgba(24, 204, 111, 0.18)' : 'rgba(160,160,160,0.18)',
+
+            //thumb
+            '& .MuiSwitch-thumb': {
+              backgroundColor: isEnabled ? 'rgba(24,204,111,1)' : 'rgba(160,160,160,0.85)',
+            },
+          })}
         />
+
       ) : (
         <ListItemIsolationBadge>
           <Switch

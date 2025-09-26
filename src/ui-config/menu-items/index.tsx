@@ -6,12 +6,17 @@ import { ENABLE_TESTNET } from 'src/utils/marketsAndNetworksConfig';
 
 import DiscordIcon from '/public/icons/discord.svg';
 import GithubIcon from '/public/icons/github.svg';
+import OracleArrow from '/public/oracleArrow.svg';
 
 import { MarketDataType } from '../marketsConfig';
+import { uiConfig } from 'src/uiConfig';
+import Box from '@mui/material/Box';
+import { Typography } from '@mui/material';
 
 interface Navigation {
   link: string;
-  title: string;
+  title: string | ReactNode;
+  activePaths?: string[];
   isVisible?: (data: MarketDataType) => boolean | undefined;
   dataCy?: string;
 }
@@ -26,16 +31,34 @@ export const navigation: Navigation[] = [
     link: ROUTES.markets,
     title: t`Markets`,
     dataCy: 'menuMarkets',
+    activePaths: [ROUTES.markets, ROUTES.reservesOverview]
   },
   {
     link: ROUTES.staking,
     title: t`Stake`,
     dataCy: 'menuStake',
-    isVisible: () =>
-      process.env.NEXT_PUBLIC_ENABLE_STAKING === 'true' &&
-      process.env.NEXT_PUBLIC_ENV === 'prod' &&
-      !ENABLE_TESTNET,
+    // isVisible: () =>
+    //   process.env.NEXT_PUBLIC_ENABLE_STAKING === 'true' &&
+    //   process.env.NEXT_PUBLIC_ENV === 'prod' &&
+    //   !ENABLE_TESTNET,
   },
+{
+  link: ROUTES.docs,
+  // title: t`Doc`,
+  title: (
+    <Box sx={{
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      // p: '10px',
+      gap: '4.5px',
+      }}>
+      {t`Doc`}
+      <img src={uiConfig.docArrow} />
+    </Box>
+  ),
+  dataCy: 'menuDocs',
+},
   {
     link: ROUTES.governance,
     title: t`Governance`,

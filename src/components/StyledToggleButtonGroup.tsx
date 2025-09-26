@@ -1,8 +1,9 @@
 import { styled, ToggleButtonGroup, ToggleButtonGroupProps } from '@mui/material';
 
 const CustomToggleGroup = styled(ToggleButtonGroup)<ToggleButtonGroupProps>({
-  backgroundColor: '#383D51',
-  border: '1px solid rgba(235, 235, 237, 0.12)',
+  backgroundColor: '#E8E8E8',
+  border: '1px solid #D7D7D7',
+  borderRadius: '58px',
   padding: '4px',
 }) as typeof ToggleButtonGroup;
 

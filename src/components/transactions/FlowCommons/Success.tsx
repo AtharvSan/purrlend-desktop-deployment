@@ -11,6 +11,7 @@ import { useModalContext } from 'src/hooks/useModal';
 import { useProtocolDataContext } from 'src/hooks/useProtocolDataContext';
 import { useWeb3Context } from 'src/libs/hooks/useWeb3Context';
 import { ERC20TokenType } from 'src/libs/web3-data-provider/Web3Provider';
+import { uiConfig } from 'src/uiConfig';
 
 export type SuccessTxViewProps = {
   action?: ReactNode;
@@ -49,27 +50,18 @@ export const TxSuccessView = ({
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
+          pt: '35px',
         }}
       >
-        <Box
-          sx={{
-            width: '48px',
-            height: '48px',
-            bgcolor: 'success.200',
-            borderRadius: '50%',
-            mt: 14,
-            mx: 'auto',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <SvgIcon sx={{ color: 'success.main', fontSize: '32px' }}>
-            <CheckIcon />
-          </SvgIcon>
-        </Box>
+        <img src={uiConfig.allDone} />
+        
 
-        <Typography sx={{ mt: 4 }} variant="h2">
+        <Typography sx={{
+          fontWeight: 600,
+          fontSize: '32px',
+          lineHeight: '1em',
+          letterSpacing: '-0.02em',
+        }}>
           <Trans>All done!</Trans>
         </Typography>
 
@@ -94,11 +86,11 @@ export const TxSuccessView = ({
 
           {!action && !amount && symbol && (
             <Typography>
-              Your {symbol} {collateral ? 'now' : 'is not'} used as collateral
+              Your {symbol} {!collateral ? 'now' : 'is not'} used as collateral
             </Typography>
           )}
 
-          {rate && (
+          {/* {rate && (
             <Typography>
               <Trans>
                 You switched to {rate === InterestRate.Variable ? 'variable' : 'stable'} rate
@@ -157,37 +149,60 @@ export const TxSuccessView = ({
                 </Typography>
               </Button>
             </Box>
-          )}
+          )} */}
         </Box>
       </Box>
 
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+        <Button
+          onClick={close}
+          // variant="contained"
+          size="large"
+          sx={{ minHeight: '44px' }}
+          data-cy="closeButton"
+          style={{
+            backgroundColor: '#FF7E09',
+            borderRadius: '12px',
+            border: '1px solid #FFFFFF33',
+            marginTop: 35,
+            boxShadow: '0px 4px 10px 0px #FF7E0963'
+          }}
+        >
+          <Typography sx={{
+            color: '#FFFFFF',
+            fontWeight: 600,
+            fontSize: '16px',
+            lineHeight: '1em',
+            letterSpacing: '-0.02em',
+          }}>
+            <Trans>Okay</Trans>
+          </Typography>
+        </Button>
         <Link
           variant="helperText"
           href={currentNetworkConfig.explorerLinkBuilder({ tx: mainTxState.txHash })}
           sx={{
             display: 'inline-flex',
             alignItems: 'center',
-            justifyContent: 'right',
-            mt: 6,
+            justifyContent: 'center',
+            mt: 4,
             mb: 3,
           }}
           underline="hover"
           target="_blank"
           rel="noreferrer noopener"
         >
-          <Trans>Review tx details</Trans>
-          <ExtLinkIcon />
+          <Typography sx={{
+            color: '#FF7E09',
+            fontWeight: 400,
+            fontSize: '14px',
+            lineHeight: '1em',
+            letterSpacing: '-0.02em',
+          }}>
+            <Trans>Check transaction details</Trans>
+          </Typography>
+          <img src={uiConfig.txArrow} />
         </Link>
-        <Button
-          onClick={close}
-          variant="contained"
-          size="large"
-          sx={{ minHeight: '44px' }}
-          data-cy="closeButton"
-        >
-          <Trans>Ok, Close</Trans>
-        </Button>
       </Box>
     </>
   );

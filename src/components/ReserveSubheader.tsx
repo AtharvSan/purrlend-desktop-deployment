@@ -26,13 +26,20 @@ export function ReserveSubheader({ value, rightAlign }: ReserveSubheaderProps) {
         </Typography>
       ) : (
         <FormattedNumber
-          compact
           value={value}
           variant="secondary12"
           color="text.secondary"
-          symbolsVariant="secondary12"
-          symbolsColor="text.secondary"
+          symbolsVariant="secondary14"
+          symbolsColor="rgba(130, 130, 130, 1)"
           symbol="USD"
+          sx={{
+            fontSize: '16px',
+            fontWeight: 400,
+            fontStyle: 'regular',
+            letterSpacing: '-2%',
+            lineHeight: '100%',
+            color: 'rgba(130, 130, 130, 1)',
+          }}
         />
       )}
     </Box>

@@ -1,4 +1,4 @@
-import { Box, Container } from '@mui/material';
+import { Box, Container, Divider } from '@mui/material';
 import { ReactNode } from 'react';
 
 import { PageTitle, PageTitleProps } from './PageTitle';
@@ -16,39 +16,47 @@ export const TopInfoPanel = ({
   children,
 }: TopInfoPanelProps) => {
   return (
-    <Box
-      sx={{
-        bgcolor: 'background.header',
-        pt: { xs: 10, md: 12 },
-        pb: { xs: 18, md: 20, lg: '94px', xl: '92px', xxl: '96px' },
-        color: '#F1F1F3',
-      }}
-    >
-      <Container sx={{ pb: 0 }}>
-        <Box sx={{ px: { xs: 4, xsm: 6 } }}>
-          {!titleComponent && (
-            <PageTitle
-              pageTitle={pageTitle}
-              withMarketSwitcher={withMarketSwitcher}
-              bridge={bridge}
-            />
-          )}
+    <Box>
+      <Box 
+        sx={{ 
+          // px: { xs: 4, xsm: 0 }, 
+          display: 'flex', 
+          flexDirection: 'column', 
+          // justifyContent: 'space-between',
+          // alignItems: 'flex-start',
+          marginTop: '34px',
+          // backgroundColor: 'red',
+          mx: '8.333%',
+        }}>
+        {!titleComponent && (
+          <PageTitle
+            pageTitle={pageTitle}
+            withMarketSwitcher={withMarketSwitcher}
+            bridge={bridge}
+          />)
+        }
 
-          {titleComponent && titleComponent}
+        {titleComponent}
+        <Divider 
+          sx={{
+            borderColor: '#D7D7D7',
+          }}/>
 
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'flex-start',
-              gap: { xs: 3, xsm: 8 },
-              flexWrap: 'wrap',
-              width: '100%',
-            }}
-          >
-            {children}
-          </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'flex-start',
+            gap: '46px',
+            mt: '26.2px',
+            // backgroundColor: 'red',
+            // flexWrap: 'wrap',
+            // height: '10px',
+          }}
+        >
+          {children}
         </Box>
-      </Container>
+      </Box>
     </Box>
   );
 };

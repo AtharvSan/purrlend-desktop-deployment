@@ -3,6 +3,7 @@ import { Trans } from '@lingui/macro';
 import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
 import { AlertTitle, Box, Typography } from '@mui/material';
 import { CapsCircularStatus } from 'src/components/caps/CapsCircularStatus';
+import CapsSemiGauge from 'src/components/caps/CapsSemiGauge';
 import { DebtCeilingStatus } from 'src/components/caps/DebtCeilingStatus';
 import { IncentivesButton } from 'src/components/incentives/IncentivesButton';
 import { LiquidationPenaltyTooltip } from 'src/components/infoTooltips/LiquidationPenaltyTooltip';
@@ -20,6 +21,8 @@ import { MarketDataType } from 'src/utils/marketsAndNetworksConfig';
 
 import { ApyGraphContainer } from './graphs/ApyGraphContainer';
 import { PanelItem } from './ReservePanels';
+import { upperCase } from 'lodash';
+import { uiConfig } from 'src/uiConfig';
 
 interface SupplyInfoProps {
   reserve: ComputedReserveData;
@@ -39,126 +42,212 @@ export const SupplyInfo = ({
   debtCeiling,
 }: SupplyInfoProps) => {
   return (
-    <Box sx={{ flexGrow: 1, minWidth: 0, maxWidth: '100%', width: '100%' }}>
-      <Box
-        sx={{
+    <Box sx={{ 
+      marginLeft: '16px',
+      marginRight: '16px',
+      }}>
+      <Box sx={{
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent:'space-between',
+        marginRight: '170px',
+        }}>
+      <Box sx={{
+        flexDirection: 'row',
+        display: 'flex',
+        alignItems: 'start',
+        flexWrap: 'wrap',
+        mt: '42.5px',
+        ml: '6.5px',
+        gap: '48px',
+        }}>
+        <Box sx={{
           display: 'flex',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-        }}
-      >
-        {showSupplyCapStatus ? (
-          // With supply cap
-          <>
-            <CapsCircularStatus
-              value={supplyCap.percentUsed}
-              tooltipContent={
-                <>
-                  <Trans>
-                    Maximum amount available to supply is{' '}
-                    <FormattedNumber
-                      value={
-                        valueToBigNumber(reserve.supplyCap).toNumber() -
-                        valueToBigNumber(reserve.totalLiquidity).toNumber()
-                      }
-                      variant="secondary12"
-                    />{' '}
-                    {reserve.symbol} (
-                    <FormattedNumber
-                      value={
-                        valueToBigNumber(reserve.supplyCapUSD).toNumber() -
-                        valueToBigNumber(reserve.totalLiquidityUSD).toNumber()
-                      }
-                      variant="secondary12"
-                      symbol="USD"
-                    />
-                    ).
-                  </Trans>
-                </>
-              }
-            />
-            <PanelItem
-              title={
-                <Box display="flex" alignItems="center">
-                  <Trans>Total supplied</Trans>
-                  <TextWithTooltip>
-                    <>
-                      <Trans>
-                        Asset supply is limited to a certain amount to reduce protocol exposure to
-                        the asset and to help manage risks involved.
-                      </Trans>{' '}
-                      <Link
-                        href="https://docs.aave.com/developers/whats-new/supply-borrow-caps"
-                        underline="always"
-                      >
-                        <Trans>Learn more</Trans>
-                      </Link>
-                    </>
-                  </TextWithTooltip>
-                </Box>
-              }
-            >
-              <Box>
-                <FormattedNumber value={reserve.totalLiquidity} variant="main16" compact />
-                <Typography
-                  component="span"
-                  color="text.primary"
-                  variant="secondary16"
-                  sx={{ display: 'inline-block', mx: 1 }}
-                >
-                  <Trans>of</Trans>
-                </Typography>
-                <FormattedNumber value={reserve.supplyCap} variant="main16" />
-              </Box>
-              <Box>
-                <ReserveSubheader value={reserve.totalLiquidityUSD} />
-                <Typography
-                  component="span"
-                  color="text.secondary"
+          flexDirection: 'column',
+          justifyContent: 'start',
+          // gap: '10px',
+          }}>
+          <Typography sx={{
+            fontWeight: 500,
+            fontSize: '10px',
+            lineHeight: '1em',
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            color: '#828282',
+            mb: '12.6px',
+            }}> Total supplied </Typography>
+
+          <Box sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            gap: '0.33em',
+            mb: '6px',
+            }}>
+            <FormattedNumber value={reserve.totalLiquidity} sx={{ 
+              fontWeight: 500,
+              fontSize: '20px',
+              lineHeight: '1em', 
+              letterSpacing: '-0.02em',
+              color: '#061512',
+              }}/>
+            <Typography sx={{ 
+              fontWeight: 500,
+              fontSize: '20px',
+              lineHeight: '1em', 
+              letterSpacing: '-0.02em',
+              color: '#828282',
+              }}> of </Typography>
+            <FormattedNumber value={reserve.supplyCap} sx={{ 
+              fontWeight: 500,
+              fontSize: '20px',
+              lineHeight: '1em', 
+              letterSpacing: '-0.02em',
+              color: '#061512',
+              }}/></Box>
+
+          <Box sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'start',
+            gap: '0.33em',
+            }}>
+            <FormattedNumber value={reserve.totalLiquidityUSD} symbol={'USD'} symbolsColor='#828282' size='16px' sx={{ 
+              fontWeight: 400,
+              fontSize: '16px',
+              lineHeight: '1em', 
+              letterSpacing: '-0.02em',
+              color: '#828282',
+              }}/>
+            <Typography sx={{ 
+              fontWeight: 400,
+              fontSize: '16px',
+              lineHeight: '1em', 
+              letterSpacing: '-0.02em',
+              color: '#828282',
+              mt: '3px',
+              }}> of </Typography>
+            <FormattedNumber value={reserve.supplyCapUSD} symbol={'USD'} symbolsColor='#828282' size='16px' sx={{ 
+              fontWeight: 400,
+              fontSize: '16px',
+              lineHeight: '1em', 
+              letterSpacing: '-0.02em',
+              color: '#828282',
+              }}/></Box></Box>
+        <Box sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'start',
+          gap: '7.5px',
+          }}>
+          <Typography sx={{
+            fontWeight: 500,
+            fontSize: '10px',
+            lineHeight: '1em',
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            color: '#828282',
+            }}> APY </Typography>
+          <FormattedNumber value={reserve.supplyAPY} percent size='20px' sx={{ 
+            fontWeight: 500,
+            fontSize: '20px',
+            lineHeight: '1em', 
+            letterSpacing: '-0.02em',
+            color: 'rgba(6, 21, 18, 1)',
+            }}/></Box>
+        <Box sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'start',
+          // gap: '10px',
+          }}>
+          <Typography sx={{
+            fontWeight: 500,
+            fontSize: '10px',
+            lineHeight: '1em',
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            color: '#828282',
+            mb: '12.6px',
+            }}> supply cap </Typography>
+
+          <Box sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            gap: '0.33em',
+            mb: '6px',
+            }}>
+            <FormattedNumber value={reserve.supplyCap} sx={{ 
+              fontWeight: 500,
+              fontSize: '20px',
+              lineHeight: '1em', 
+              letterSpacing: '-0.02em',
+              color: '#061512',
+              }}/></Box>
+
+          <Box sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'start',
+            gap: '0.33em',
+            }}>
+            <FormattedNumber value={reserve.supplyCapUSD} symbol={'USD'} symbolsColor='#828282' size='16px' sx={{ 
+              fontWeight: 400,
+              fontSize: '16px',
+              lineHeight: '1em', 
+              letterSpacing: '-0.02em',
+              color: '#828282',
+              }}/></Box></Box></Box>
+      <Box sx={{
+        pt: '35px',
+        }}>
+        <CapsSemiGauge value={supplyCap.percentUsed} // supplyCap.percentUsed
+          label="FILLED"
+          size={300}
+          thickness={31}
+          arcColor="rgba(24,204,111,1)"
+          trackColor="#E8E8E8"
+          borderOpacity={0.08}
+          shadowOpacity={0.18}
+          gap={1.5}            // keeps the green separated from grey
+          centerOffset={10}    // pushes texts down so % doesn't touch the rail
+          valueFontSize={18}   // tune to taste
+          labelFontSize={9}   // smaller “FILLED”
+          /></Box></Box>
+        {/* <CapsCircularStatus
+          value={supplyCap.percentUsed}
+          tooltipContent={
+            <>
+              <Trans>
+                Maximum amount available to supply is{' '}
+                <FormattedNumber
+                  value={
+                    valueToBigNumber(reserve.supplyCap).toNumber() -
+                    valueToBigNumber(reserve.totalLiquidity).toNumber()
+                  }
                   variant="secondary12"
-                  sx={{ display: 'inline-block', mx: 1 }}
-                >
-                  <Trans>of</Trans>
-                </Typography>
-                <ReserveSubheader value={reserve.supplyCapUSD} />
-              </Box>
-            </PanelItem>
-          </>
-        ) : (
-          // Without supply cap
-          <PanelItem
-            title={
-              <Box display="flex" alignItems="center">
-                <Trans>Total supplied</Trans>
-              </Box>
-            }
-          >
-            <FormattedNumber value={reserve.totalLiquidity} variant="main16" compact />
-            <ReserveSubheader value={reserve.totalLiquidityUSD} />
-          </PanelItem>
-        )}
-        <PanelItem title={<Trans>APY</Trans>}>
-          <FormattedNumber value={reserve.supplyAPY} percent variant="main16" />
-          <IncentivesButton
-            symbol={reserve.symbol}
-            incentives={reserve.aIncentivesData}
-            displayBlank={true}
-          />
-        </PanelItem>
+                />{' '}
+                {reserve.symbol} (
+                <FormattedNumber
+                  value={
+                    valueToBigNumber(reserve.supplyCapUSD).toNumber() -
+                    valueToBigNumber(reserve.totalLiquidityUSD).toNumber()
+                  }
+                  variant="secondary12"
+                  symbol="USD"
+                />
+                ).
+              </Trans>
+            </>
+          }
+        /> */}
+
         {reserve.unbacked && reserve.unbacked !== '0' && (
           <PanelItem title={<Trans>Unbacked</Trans>}>
             <FormattedNumber value={reserve.unbacked} variant="main16" symbol={reserve.name} />
             <ReserveSubheader value={reserve.unbackedUSD} />
           </PanelItem>
         )}
-      </Box>
-      {renderCharts && (reserve.borrowingEnabled || Number(reserve.totalDebt) > 0) && (
-        <ApyGraphContainer
-          graphKey="supply"
-          reserve={reserve}
-          currentMarketData={currentMarketData}
-        />
-      )}
+
       <div>
         {reserve.isIsolated ? (
           <Box sx={{ pt: '42px', pb: '12px' }}>
@@ -173,7 +262,13 @@ export const SupplyInfo = ({
                 In Isolation mode you cannot supply other assets as collateral for borrowing. Assets
                 used as collateral in Isolation mode can only be borrowed to a specific debt
                 ceiling.{' '}
-                <Link href="https://docs.aave.com/faq/aave-v3-features#isolation-mode">
+                <Link 
+                  href="https://docs.purrlend.com/faq/purrlend-features#isolation-mode"
+                  sx={{
+                    fontWeight: 600,
+                    fontSize: '14px',
+                    color: 'rgba(47, 117, 248, 1)',
+                  }}>
                   Learn more
                 </Link>
               </Typography>
@@ -181,78 +276,222 @@ export const SupplyInfo = ({
           </Box>
         ) : reserve.usageAsCollateralEnabled ? (
           <Box
-            sx={{ display: 'inline-flex', alignItems: 'center', pt: '42px', pb: '12px' }}
-            paddingTop={'42px'}
+            sx={{ 
+              display: 'inline-flex', 
+              alignItems: 'center', 
+              mt: '30px', 
+              mb: '12px', 
+              ml: '7.4px',
+              gap: '6px',
+            }}
           >
-            <Typography variant="subheader1" color="text.main">
-              <Trans>Collateral usage</Trans>
-            </Typography>
-            <CheckRoundedIcon fontSize="small" color="success" sx={{ ml: 2 }} />
-            <Typography variant="subheader1" sx={{ color: '#46BC4B' }}>
-              <Trans>Can be collateral</Trans>
-            </Typography>
+            <Typography sx={{
+              fontWeight: 600,
+              fontSize: '16px',
+              lineHeight: '1em',
+              letterSpacing: '-0.02em',
+              color: '#061512',
+              }}>Collateral Usage</Typography>
+            <Box
+              sx={{
+                border: '1px solid',
+                borderRadius: '32px',
+                borderColor: '#18CC6F80',
+                backgroundColor: '#18CC6F1A',
+                display: 'flex',
+                alignItems: 'center',
+                px: '5px',
+                height: '22px',
+                ml: '4px',
+              }}>
+              <img src={uiConfig.check} alt='check' />
+              <Typography 
+                variant="subheader1" 
+                sx={{ 
+                  fontWeight: 500,
+                  fontSize: '10px',
+                  lineHeight: '1em',
+                  letterSpacing: '0.08em',
+                  textTransform: 'uppercase',
+                  color: 'rgba(24, 204, 111, 1)',
+                  ml: '4px',
+                  mr: '1.5px',
+                }}>
+                <Trans>Can be collateral</Trans>
+              </Typography>
+            </Box>
           </Box>
         ) : (
-          <Box sx={{ pt: '42px', pb: '12px' }}>
-            <Typography variant="subheader1" color="text.main">
-              <Trans>Collateral usage</Trans>
-            </Typography>
-            <Warning sx={{ my: '12px' }} severity="warning">
-              <Trans>Asset cannot be used as collateral.</Trans>
-            </Warning>
+          <Box
+            sx={{ 
+              display: 'inline-flex', 
+              alignItems: 'center', 
+              mt: '30px', 
+              mb: '12px', 
+              ml: '7.4px',
+              gap: '6px',
+            }}
+          >
+            <Typography sx={{
+              fontWeight: 600,
+              fontSize: '16px',
+              lineHeight: '1em',
+              letterSpacing: '-0.02em',
+              color: '#061512',
+              }}>Collateral Usage</Typography>
+            <Box
+              sx={{
+                border: '1px solid',
+                borderRadius: '32px',
+                borderColor: 'rgba(204, 87, 24, 0.5)',
+                backgroundColor: 'rgba(204, 87, 24, 0.1)',
+                display: 'flex',
+                alignItems: 'center',
+                px: '5px',
+                height: '22px',
+                ml: '4px',
+              }}>
+              {/* <img src={uiConfig.check} alt='check' /> */}
+              <Typography 
+                variant="subheader1" 
+                sx={{ 
+                  fontWeight: 500,
+                  fontSize: '10px',
+                  lineHeight: '1em',
+                  letterSpacing: '0.08em',
+                  textTransform: 'uppercase',
+                  color: 'rgba(204, 87, 24, 1)',
+                }}>
+                Asset cannot be used as collateral
+              </Typography>
+            </Box>
           </Box>
         )}
       </div>
+
       {reserve.usageAsCollateralEnabled && (
-        <Box
-          sx={{
+        <Box sx={{
             display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'space-between',
-          }}
-        >
-          <ReserveOverviewBox
-            title={<MaxLTVTooltip variant="description" text={<Trans>Max LTV</Trans>} />}
-          >
-            <FormattedNumber
-              value={reserve.formattedBaseLTVasCollateral}
-              percent
-              variant="secondary14"
-              visibleDecimals={2}
-            />
-          </ReserveOverviewBox>
+            flexDirection: 'row',
+            border: '1px solid',
+            borderRadius: '8px',
+            borderColor: 'rgba(220, 220, 220, 1)',
+            backgroundColor: 'rgba(242, 242, 242, 1)',
+            // backgroundColor: 'red',
+            marginTop: '3.7px',
+            marginLeft: '7.2px',
+            paddingTop: '11px',
+            marginRight: '15px',
+            paddingLeft: '15px',
+          }}>
+          <Box sx={{
+            display:'flex',
+            flexDirection: 'column',
+            justifyContent: 'start',
+            gap: '6px',
+            marginRight: '141px',
+            }}>
+            <Typography sx={{
+                fontSize: '10px',
+                fontWeight: 500,
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                color: 'rgba(130, 130, 130, 1)',
+              }}> max ltv </Typography>
+            <FormattedNumber 
+              value={reserve.formattedBaseLTVasCollateral} 
+              percent 
+              visibleDecimals={2} 
+              size='24px'
+              sx={{
+                color: '#061512',
+                fontSize: '24px',
+                fontWeight: 500,
+                lineHeight: '1em',
+                letterSpacing: '-0.02em',
+                marginBottom: '9px',
+              }}/></Box>
+          
+          <Box
+            sx={{
+              width: '1px',
+              height: '54px',
+              backgroundColor: 'rgba(220, 220, 220, 1)',
+              // mt: '1px',
+            }}>
+          </Box>
 
-          <ReserveOverviewBox
-            title={
-              <LiquidationThresholdTooltip
-                variant="description"
-                text={<Trans>Liquidation threshold</Trans>}
-              />
-            }
-          >
-            <FormattedNumber
-              value={reserve.formattedReserveLiquidationThreshold}
-              percent
-              variant="secondary14"
-              visibleDecimals={2}
-            />
-          </ReserveOverviewBox>
+          <Box sx={{
+            display:'flex',
+            flexDirection: 'column',
+            justifyContent: 'start',
+            gap: '3px',
+            marginRight: '89px',
+            marginLeft: '16px',
+            }}>
+            <Typography 
+              sx={{
+                fontSize: '10px',
+                fontWeight: 500,
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                color: 'rgba(130, 130, 130, 1)',
+                marginTop: '1px',
+              }}>
+              <Trans>Liquidation threshold</Trans>
+            </Typography>
+            <FormattedNumber 
+              value={reserve.formattedReserveLiquidationThreshold} 
+              percent 
+              visibleDecimals={2} 
+              size='24px'
+              sx={{
+                color: '#061512',
+                fontSize: '24px',
+                fontWeight: 500,
+                lineHeight: '1em',
+                letterSpacing: '-0.02em',
+                marginBottom: '9px',
 
-          <ReserveOverviewBox
-            title={
-              <LiquidationPenaltyTooltip
-                variant="description"
-                text={<Trans>Liquidation penalty</Trans>}
-              />
-            }
-          >
-            <FormattedNumber
-              value={reserve.formattedReserveLiquidationBonus}
-              percent
-              variant="secondary14"
-              visibleDecimals={2}
-            />
-          </ReserveOverviewBox>
+              }}/>
+          </Box>
+
+          <Box
+            sx={{
+              width: '1px',
+              height: '54px',
+              backgroundColor: 'rgba(220, 220, 220, 1)',
+            }}>
+          </Box>
+
+          <Box sx={{
+            display:'flex',
+            flexDirection: 'column',
+            justifyContent: 'start',
+            gap: '3px',
+            marginLeft: '16px',
+            }}>
+            <Typography sx={{
+              fontSize: '10px',
+              fontWeight: 500,
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+              color: 'rgba(130, 130, 130, 1)',
+              marginTop: '1px',
+              }}>Liquidation penalty</Typography>
+            <FormattedNumber 
+              value={reserve.formattedReserveLiquidationBonus} 
+              percent 
+              visibleDecimals={2} 
+              size='24px'
+              sx={{
+                color: '#061512',
+                fontSize: '24px',
+                fontWeight: 500,
+                lineHeight: '1em',
+                letterSpacing: '-0.02em',
+              }}/>
+          </Box>
 
           {reserve.isIsolated && (
             <ReserveOverviewBox fullWidth>
@@ -265,6 +504,8 @@ export const SupplyInfo = ({
           )}
         </Box>
       )}
+
+      {/* later sort this out for stHYPE */}
       {reserve.symbol == 'stETH' && (
         <Box>
           <Warning severity="info">

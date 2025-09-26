@@ -1,7 +1,7 @@
 import { formatUserSummary } from '@aave/math-utils';
 import { ArrowNarrowRightIcon } from '@heroicons/react/solid';
 import { Trans } from '@lingui/macro';
-import { Box, Link, SvgIcon, Typography } from '@mui/material';
+import { Box, Link, Modal, SvgIcon, Typography } from '@mui/material';
 import { useState } from 'react';
 import { FormattedNumber } from 'src/components/primitives/FormattedNumber';
 import { Row } from 'src/components/primitives/Row';
@@ -184,16 +184,38 @@ export const EmodeModalContent = ({ mode }: EmodeModalContentProps) => {
 
       {user.userEmodeCategoryId === 0 && (
         <Warning severity="warning">
-          <Typography variant="caption">
+          <Typography variant="caption" sx={{
+            // font-family: 'Geist',
+            fontWeight: '400',
+            fontStyle: 'Regular',
+            fontSize: '14px',
+            // lineHeight:'100%',
+            letterSpacing: '-2%',
+            color: 'rgba(47, 117, 248, 1)',
+          }}>
             <Trans>
               Enabling E-Mode only allows you to borrow assets belonging to the selected category.
-              Please visit our{' '}
+              <br></br>Please visit our{' '}
               <Link
-                href="https://docs.aave.com/faq/aave-v3-features#high-efficiency-mode-e-mode"
+                href="https://docs.purrlend.com/faq/purrlend-features#high-efficiency-mode-e-mode"
                 target="_blank"
                 rel="noopener"
               >
-                FAQ guide
+                <Typography
+                  sx={{
+                  // fontFamily: 'Geist',
+                  fontWeight: 700,
+                  fontStyle: 'Bold',
+                  fontSize: '14px',
+                  // line-height: 100%;
+                  letterSpacing: '-2%',
+                  textDecoration: 'underline',
+                  textDecorationStyle: 'solid',
+                  color: 'rgba(47, 117, 248, 1)',
+                  display: 'inline-block',
+                }}>
+                  FAQ guide
+                </Typography>
               </Link>{' '}
               to learn more about how it works and the applied restrictions.
             </Trans>
@@ -274,7 +296,10 @@ export const EmodeModalContent = ({ mode }: EmodeModalContentProps) => {
           caption={<Trans>Available assets</Trans>}
           captionVariant="description"
           mb={4}
-          sx={{ alignContent: 'flex-end' }}
+          sx={{ 
+            alignContent: 'flex-end',
+            color: 'rgba(130, 130, 130, 1)',
+          }}
         >
           <Box sx={{ display: 'flex', justifyContent: 'right', alignItems: 'center' }}>
             {eModes[user.userEmodeCategoryId] && (
@@ -290,7 +315,14 @@ export const EmodeModalContent = ({ mode }: EmodeModalContentProps) => {
                     {eModes[user.userEmodeCategoryId].assets.join(', ')}
                   </Typography>
                 ) : (
-                  <Typography>
+                  <Typography sx={{
+                    fontWeight: 400,
+                    fontStyle: 'Regular',
+                    fontSize: '14px',
+                    lineHeight: '100%',
+                    letterSpacing: '-2%', 
+                    color: 'rgba(6, 21, 18, 1)',
+                  }}>
                     <Trans>All Assets</Trans>
                   </Typography>
                 )}
@@ -307,7 +339,16 @@ export const EmodeModalContent = ({ mode }: EmodeModalContentProps) => {
                   }}
                 >
                   {selectedEmode?.id !== 0 ? (
-                    <Typography sx={{ textAlign: 'end' }}>
+                    <Typography 
+                      sx={{ 
+                        textAlign: 'end',
+                        fontWeight: 400,
+                        fontStyle: 'Regular',
+                        fontSize: '14px',
+                        lineHeight: '100%',
+                        letterSpacing: '-2%', 
+                        color: 'rgba(6, 21, 18, 1)',
+                      }}>
                       {selectedEmode.assets.join(', ')}
                     </Typography>
                   ) : (
@@ -320,11 +361,11 @@ export const EmodeModalContent = ({ mode }: EmodeModalContentProps) => {
             )}
           </Box>
         </Row>
-        <DetailsHFLine
+        {/* <DetailsHFLine
           visibleHfChange={!!selectedEmode}
           healthFactor={user.healthFactor}
           futureHealthFactor={newSummary.healthFactor}
-        />
+        /> */}
 
         {showMaxLTVRow && (
           <Row

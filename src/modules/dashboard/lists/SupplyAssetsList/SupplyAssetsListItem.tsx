@@ -1,5 +1,5 @@
 import { Trans } from '@lingui/macro';
-import { Button } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import { NoData } from 'src/components/primitives/NoData';
 import { useAssetCaps } from 'src/hooks/useAssetCaps';
 import { useModalContext } from 'src/hooks/useModal';
@@ -15,6 +15,9 @@ import { ListButtonsColumn } from '../ListButtonsColumn';
 import { ListItemCanBeCollateral } from '../ListItemCanBeCollateral';
 import { ListItemWrapper } from '../ListItemWrapper';
 import { ListValueColumn } from '../ListValueColumn';
+import { uiConfig } from 'src/uiConfig';
+import { TokenIcon } from 'src/components/primitives/TokenIcon';
+import { FormattedNumber } from 'src/components/primitives/FormattedNumber';
 
 export const SupplyAssetsListItem = ({
   symbol,
@@ -41,60 +44,116 @@ export const SupplyAssetsListItem = ({
   if (supplyCapUsage.isMaxed) return null;
 
   return (
-    <ListItemWrapper
-      symbol={symbol}
-      iconSymbol={iconSymbol}
-      name={name}
-      detailsAddress={detailsAddress}
-      data-cy={`dashboardSupplyListItem_${symbol.toUpperCase()}`}
-      currentMarket={currentMarket}
-      showDebtCeilingTooltips
-    >
-      <ListValueColumn
-        symbol={symbol}
-        value={Number(walletBalance)}
-        subValue={walletBalanceUSD}
-        withTooltip
-        disabled={Number(walletBalance) === 0}
-        capsComponent={
-          <CapsHint
-            capType={CapType.supplyCap}
-            capAmount={supplyCap}
-            totalAmount={totalLiquidity}
-            withoutText
-          />
-        }
-      />
+    <Box sx={{
+    display: 'flex',
+    alignItems: 'center',
+    pl: '17px',
+    my: '15px',
+    }}>
+      <TokenIcon symbol={iconSymbol} sx={{ height: '19px',width: '19px', mr: '6px'}} />
+      <Box sx={{
+      display: 'flex',
+      justifyContent: 'start',
+      width: '93px',
+      }}>
+        <Typography sx={{
+        fontWeight: 400,
+        fontSize: '14px',
+        lineHeight: '1em',
+        letterSpacing: '-0.02em',
+        }}>{symbol}</Typography>
+      </Box>
+      <Box sx={{
+      display: 'flex',
+      justifyContent: 'start',
+      width: '102px',
+      }}>
+        <ListValueColumn
+          symbol={symbol}
+          value={Number(walletBalance)}
+          subValue={walletBalanceUSD}
+          withTooltip
+          disabled={Number(walletBalance) === 0}
+          capsComponent={
+            <CapsHint
+              capType={CapType.supplyCap}
+              capAmount={supplyCap}
+              totalAmount={totalLiquidity}
+              withoutText
+            />
+          }
+        />
+      </Box>
+      
+      <Box sx={{
+      display: 'flex',
+      justifyContent: 'start',
+      width: '70px',
+      }}>
+        <FormattedNumber 
+        value={Number(supplyAPY)} 
+        color={'#061512'} 
+        fontWeight={400} 
+        fontSize={'14px'} 
+        size={'14px'}
+        lineHeight={'1em'} 
+        letterSpacing={'-0.02em'} 
+        percent 
+        symbolsColor='#828282' 
+        />
+      </Box>
 
-      <ListAPRColumn value={Number(supplyAPY)} incentives={aIncentivesData} symbol={symbol} />
-
-      <ListColumn>
-        {debtCeiling.isMaxed ? (
-          <NoData variant="main14" color="text.secondary" />
-        ) : (
-          <ListItemCanBeCollateral
-            isIsolated={isIsolated}
-            usageAsCollateralEnabled={usageAsCollateralEnabledOnUser}
-          />
-        )}
-      </ListColumn>
-
+      <Box sx={{
+      display: 'flex',
+      justifyContent: 'start',
+      width: '132px',
+      }}>
+        <ListColumn basis={72} align="start" shrink={0} sx={{ml: '18px'}} >
+          {debtCeiling.isMaxed ? (
+            <NoData variant="main14" color="text.secondary" />
+          ) : (
+            <ListItemCanBeCollateral
+              isIsolated={isIsolated}
+              usageAsCollateralEnabled={usageAsCollateralEnabledOnUser}
+            />
+          )}
+        </ListColumn>
+      </Box>
+      
       <ListButtonsColumn>
         <Button
           disabled={!isActive || isFreezed || Number(walletBalance) <= 0}
           variant="contained"
           onClick={() => openSupply(underlyingAsset)}
-        >
-          <Trans>Supply</Trans>
-        </Button>
+          sx={{
+            backgroundColor: 'rgba(6, 21, 18, 1)',
+            color: '#FFFFFF',
+            border: '1px solid',
+            borderColor: 'rgba(255, 255, 255, 0.2)',
+            borderRadius: '70px',
+            py: '7px',
+            px: '12px',
+            fontSize: '14px',
+            lineHeight: '1em',
+            letterSpacing: '-0.02em',
+            mr:'5px',
+          }}>Supply</Button>
         <Button
-          variant="outlined"
           component={Link}
           href={ROUTES.reserveOverview(detailsAddress, currentMarket)}
+          sx={{
+            backgroundColor: 'rgba(255, 255, 255, 1)',
+            border: '1px solid',
+            borderColor: 'rgba(220, 220, 220, 1)',
+            color: 'rgba(6, 21, 18, 1)',
+            borderRadius: '70px',
+            px: '12px',
+            minWidth: 'unset',
+          }}
         >
-          <Trans>Details</Trans>
+          <img src={uiConfig.more} alt="more" />
         </Button>
       </ListButtonsColumn>
-    </ListItemWrapper>
+    </Box>
   );
 };

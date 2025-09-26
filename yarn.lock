@@ -1294,6 +1294,11 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
+"@babel/runtime@^7.20.13":
+  version "7.28.4"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.28.4.tgz#a70226016fabe25c5783b2f22d3e1c9bc5ca3326"
+  integrity sha512-Q/N6JNWvIvPnLDvjlE1OUBLPQHH6l3CltCEsHIujp45zQUSSh8K+gHnaEX45yAT1nyngnINhvWtzN+Nb9D8RAQ==
+
 "@babel/template@^7.16.7":
   version "7.16.7"
   resolved "https://registry.npmjs.org/@babel/template/-/template-7.16.7.tgz"
@@ -2747,6 +2752,14 @@
     jest-validate "^26.5.2"
     lodash.get "^4.4.2"
 
+"@lingui/core@5.5.0":
+  version "5.5.0"
+  resolved "https://registry.yarnpkg.com/@lingui/core/-/core-5.5.0.tgz#d1da45cad9211d911aea06a5de98702ab6109c9a"
+  integrity sha512-xQ8gtz7MAl+90VgQEvcBYgpzQXCxTGTSW5WFpPv1jpzGbhfIA6zarZ+DZmQEStpZrKjTLbuxeP9beJ+ThSMQHg==
+  dependencies:
+    "@babel/runtime" "^7.20.13"
+    "@lingui/message-utils" "5.5.0"
+
 "@lingui/core@^3.14.0":
   version "3.14.0"
   resolved "https://registry.yarnpkg.com/@lingui/core/-/core-3.14.0.tgz#62e6b5e3d17b3f2ecd84b3f821d591763055aa89"
@@ -2756,14 +2769,29 @@
     make-plural "^6.2.2"
     messageformat-parser "^4.1.3"
 
-"@lingui/macro@^3.14.0":
-  version "3.14.0"
-  resolved "https://registry.yarnpkg.com/@lingui/macro/-/macro-3.14.0.tgz#4d97cd548967c2b4b2b2f92715eec4d69e84545c"
-  integrity sha512-NxTRrhrZ/cUO9PX/4vWys90Ku58+ExxHuE30IuDnnDldWhWlOdycmjDt9tB+yIiUdFym/veSxBs+h114FzG5mA==
+"@lingui/macro@^5.5.0":
+  version "5.5.0"
+  resolved "https://registry.yarnpkg.com/@lingui/macro/-/macro-5.5.0.tgz#522941e8d7805ca1d55e277cf86dbe4321c68dfd"
+  integrity sha512-Ixiqc4t6gIc4W0dCgk+9AWs4oQar1Ye6WOIvJIaX6X0n9dME1Chex0T7kQEuA8tExkpf2ygQVIggmgFT0M9ciA==
   dependencies:
-    "@babel/runtime" "^7.11.2"
-    "@lingui/conf" "^3.14.0"
-    ramda "^0.27.1"
+    "@lingui/core" "5.5.0"
+    "@lingui/react" "5.5.0"
+
+"@lingui/message-utils@5.5.0":
+  version "5.5.0"
+  resolved "https://registry.yarnpkg.com/@lingui/message-utils/-/message-utils-5.5.0.tgz#abedc8d085cf267213e210def53e27a74fa69425"
+  integrity sha512-LY7AclexJm5sJnbcqeYjgRg/tL1/HDceH9/tR+GiD/Ei1ZNubzqHOvoI0JRZNmxG4x0qKzz9fxLl1ympM3a0VA==
+  dependencies:
+    "@messageformat/parser" "^5.0.0"
+    js-sha256 "^0.10.1"
+
+"@lingui/react@5.5.0":
+  version "5.5.0"
+  resolved "https://registry.yarnpkg.com/@lingui/react/-/react-5.5.0.tgz#1c31392e0d5167d8cee9fb88adc003c7674f596b"
+  integrity sha512-S8o26kB2vo4wTA2lpooAzXem5C5r7KJIi6tXs69y1E97qC6YtCLvhLXpC3WNt/txF2ETWISfgRvioKQHvYr1rA==
+  dependencies:
+    "@babel/runtime" "^7.20.13"
+    "@lingui/core" "5.5.0"
 
 "@lingui/react@^3.14.0":
   version "3.14.0"
@@ -2772,6 +2800,13 @@
   dependencies:
     "@babel/runtime" "^7.11.2"
     "@lingui/core" "^3.14.0"
+
+"@messageformat/parser@^5.0.0":
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/@messageformat/parser/-/parser-5.1.1.tgz#ca7d6c18e9f3f6b6bc984a465dac16da00106055"
+  integrity sha512-3p0YRGCcTUCYvBKLIxtDDyrJ0YijGIwrTRu1DT8gIviIDZru8H23+FkY6MJBzM1n9n20CiM4VeDYuBsrrwnLjg==
+  dependencies:
+    moo "^0.5.1"
 
 "@metamask/obs-store@^7.0.0":
   version "7.0.0"
@@ -8416,6 +8451,11 @@ js-sha256@0.9.0:
   resolved "https://registry.npmjs.org/js-sha256/-/js-sha256-0.9.0.tgz"
   integrity sha512-sga3MHh9sgQN2+pJ9VYZ+1LPwXOxuBJBA5nrR5/ofPfuiJBE2hnjsaN8se8JznOmGLN2p49Pe5U/ttafcs/apA==
 
+js-sha256@^0.10.1:
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/js-sha256/-/js-sha256-0.10.1.tgz#b40104ba1368e823fdd5f41b66b104b15a0da60d"
+  integrity sha512-5obBtsz9301ULlsgggLg542s/jqtddfOpV5KJc4hajc9JV8GeY2gZHSVpYBn4nWqAUTJ9v+xwtbJ1mIBgIH5Vw==
+
 js-sha3@0.8.0, js-sha3@^0.8.0:
   version "0.8.0"
   resolved "https://registry.npmjs.org/js-sha3/-/js-sha3-0.8.0.tgz"
@@ -9427,6 +9467,11 @@ mkdirp@^1.0.4:
   version "1.0.4"
   resolved "https://registry.npmjs.org/mkdirp/-/mkdirp-1.0.4.tgz"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
+
+moo@^0.5.1:
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/moo/-/moo-0.5.2.tgz#f9fe82473bc7c184b0d32e2215d3f6e67278733c"
+  integrity sha512-iSAJLHYKnX41mKcJKjqvnAN9sf0LMDTXDEvFv+ffuRR9a1MIuXLjMNL6EsnDHSkKLTWNqQQ5uo61P4EbU4NU+Q==
 
 mri@^1.1.0:
   version "1.2.0"

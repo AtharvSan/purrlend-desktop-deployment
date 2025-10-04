@@ -29,24 +29,9 @@ export const TokenLinkDropdown = ({ poolReserve, downToSM }: TokenLinkDropdownPr
   return (
     <>
       <Box onClick={handleClick} sx={{mr: '4px'}} >
-
         <img src={uiConfig.tokenContracts} alt='icon here' />
-        {/* <CircleIcon tooltipText={'View token contracts'} downToSM={downToSM}>
-          <Box
-          sx={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            color: '#A5A8B6',
-            '&:hover': { color: '#F1F1F3' },
-            cursor: 'pointer',
-            }}
-            >
-            <SvgIcon sx={{ fontSize: '14px' }}>
-              <ExternalLinkIcon />
-            </SvgIcon>
-          </Box>
-        </CircleIcon> */}
       </Box>
+
       <Menu
         anchorEl={anchorEl}
         open={open}
@@ -56,13 +41,45 @@ export const TokenLinkDropdown = ({ poolReserve, downToSM }: TokenLinkDropdownPr
         }}
         keepMounted={true}
         data-cy="addToWaletSelector"
+        PaperProps={{
+          sx: {
+            borderRadius: '16px',
+            border: '1px solid #F2F2F2',
+            boxShadow: '0px 14px 24px 0px #0000004D',
+            pt: '16px',
+            pb: '8px',
+          }
+        }}
       >
-        <Box sx={{ px: '16px', py: '12px', width: '240px' }}>
-          <Typography variant="secondary12" color="text.secondary">
-            <Trans>Select token to view in block explorer</Trans>
+        <Box sx={{ px: '16px',pb: '16px', width: '240px', display: 'flex' }}>
+          <Box sx={{
+            height: '24px',
+            width: '2px',
+            backgroundColor: '#FF7E09',
+            position: 'relative',
+            left: '-16px',
+            top: '-2px'
+          }}/>
+          <Typography sx={{
+            fontWeight: 600,
+            fontSize: '20px',
+            lineHeight: '1em',
+            letterSpacing: '-0.02em',
+            color: '#061512',
+          }}>
+            <Trans>Token Contract</Trans>
           </Typography>
         </Box>
 
+        <Typography sx={{
+          fontWeight: 500,
+          fontSize: '10px',
+          lineHeight: '1em',
+          letterSpacing: '0.08em',
+          textTransform: 'uppercase',
+          color: '#828282',
+          pl: '16px',
+        }}>underlying token</Typography>
         <MenuItem
           component="a"
           href={currentNetworkConfig.explorerLinkBuilder({
@@ -76,6 +93,16 @@ export const TokenLinkDropdown = ({ poolReserve, downToSM }: TokenLinkDropdownPr
           </Typography>
         </MenuItem>
 
+        <Typography sx={{
+          fontWeight: 500,
+          fontSize: '10px',
+          lineHeight: '1em',
+          letterSpacing: '0.08em',
+          textTransform: 'uppercase',
+          color: '#828282',
+          pl: '16px',
+          pt: '8px',
+        }}>LND Token</Typography>
         <MenuItem
           component="a"
           href={currentNetworkConfig.explorerLinkBuilder({
@@ -89,6 +116,17 @@ export const TokenLinkDropdown = ({ poolReserve, downToSM }: TokenLinkDropdownPr
           </Typography>
         </MenuItem>
         {poolReserve.borrowingEnabled && (
+          <>
+          <Typography sx={{
+            fontWeight: 500,
+            fontSize: '10px',
+            lineHeight: '1em',
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            color: '#828282',
+            pl: '16px',
+            pt: '8px',
+          }}>LND debt Token</Typography>
           <MenuItem
             component="a"
             href={currentNetworkConfig.explorerLinkBuilder({
@@ -101,6 +139,7 @@ export const TokenLinkDropdown = ({ poolReserve, downToSM }: TokenLinkDropdownPr
               {'Variable debt ' + poolReserve.symbol}
             </Typography>
           </MenuItem>
+          </>
         )}
         {poolReserve.stableBorrowRateEnabled && (
           <MenuItem

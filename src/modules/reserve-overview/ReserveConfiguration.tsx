@@ -263,7 +263,7 @@ export const ReserveConfiguration: React.FC<ReserveConfigurationProps> = ({ rese
                     textTransform: 'uppercase',
                     color: '#828282',
                     mb: '12.6px',
-                    }}> borrow cap </Typography>
+                    }}> liquidation penalty </Typography>
 
                   <Box sx={{
                     display: 'flex',
@@ -271,26 +271,12 @@ export const ReserveConfiguration: React.FC<ReserveConfigurationProps> = ({ rese
                     gap: '0.33em',
                     mb: '6px',
                     }}>
-                    <FormattedNumber value={reserve.borrowCap} sx={{ 
+                    <FormattedNumber percent value={reserve.formattedEModeLiquidationBonus} sx={{ 
                       fontWeight: 500,
                       fontSize: '20px',
                       lineHeight: '1em', 
                       letterSpacing: '-0.02em',
                       color: '#061512',
-                      }}/></Box>
-
-                  <Box sx={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'start',
-                    gap: '0.33em',
-                    }}>
-                    <FormattedNumber value={reserve.borrowCapUSD} symbol={'USD'} symbolsColor='#828282' size='16px' sx={{ 
-                      fontWeight: 400,
-                      fontSize: '16px',
-                      lineHeight: '1em', 
-                      letterSpacing: '-0.02em',
-                      color: '#828282',
                       }}/></Box></Box></Box>
               <Typography sx={{
                 marginLeft: '25px',

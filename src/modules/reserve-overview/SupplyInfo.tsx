@@ -50,7 +50,8 @@ export const SupplyInfo = ({
         display: 'flex',
         flexDirection: 'row',
         justifyContent:'space-between',
-        marginRight: '170px',
+        marginRight: '120px',
+        // backgroundColor: 'red',
         }}>
       <Box sx={{
         flexDirection: 'row',
@@ -83,7 +84,7 @@ export const SupplyInfo = ({
             gap: '0.33em',
             mb: '6px',
             }}>
-            <FormattedNumber value={reserve.totalLiquidity} sx={{ 
+            <FormattedNumber visibleDecimals={2} value={reserve.totalLiquidity} sx={{ //reserve.totalLiquidity
               fontWeight: 500,
               fontSize: '20px',
               lineHeight: '1em', 
@@ -97,7 +98,7 @@ export const SupplyInfo = ({
               letterSpacing: '-0.02em',
               color: '#828282',
               }}> of </Typography>
-            <FormattedNumber value={reserve.supplyCap} sx={{ 
+            <FormattedNumber visibleDecimals={0} value={reserve.supplyCap} sx={{ 
               fontWeight: 500,
               fontSize: '20px',
               lineHeight: '1em', 
@@ -111,7 +112,7 @@ export const SupplyInfo = ({
             alignItems: 'start',
             gap: '0.33em',
             }}>
-            <FormattedNumber value={reserve.totalLiquidityUSD} symbol={'USD'} symbolsColor='#828282' size='16px' sx={{ 
+            <FormattedNumber visibleDecimals={2} value={reserve.totalLiquidityUSD} symbol={'USD'} symbolsColor='#828282' size='16px' sx={{ 
               fontWeight: 400,
               fontSize: '16px',
               lineHeight: '1em', 
@@ -126,7 +127,7 @@ export const SupplyInfo = ({
               color: '#828282',
               mt: '3px',
               }}> of </Typography>
-            <FormattedNumber value={reserve.supplyCapUSD} symbol={'USD'} symbolsColor='#828282' size='16px' sx={{ 
+            <FormattedNumber visibleDecimals={0} value={reserve.supplyCapUSD} symbol={'USD'} symbolsColor='#828282' size='16px' sx={{ 
               fontWeight: 400,
               fontSize: '16px',
               lineHeight: '1em', 
@@ -176,7 +177,7 @@ export const SupplyInfo = ({
             gap: '0.33em',
             mb: '6px',
             }}>
-            <FormattedNumber value={reserve.supplyCap} sx={{ 
+            <FormattedNumber visibleDecimals={0} value={reserve.supplyCap} sx={{ 
               fontWeight: 500,
               fontSize: '20px',
               lineHeight: '1em', 
@@ -190,7 +191,7 @@ export const SupplyInfo = ({
             alignItems: 'start',
             gap: '0.33em',
             }}>
-            <FormattedNumber value={reserve.supplyCapUSD} symbol={'USD'} symbolsColor='#828282' size='16px' sx={{ 
+            <FormattedNumber visibleDecimals={0} value={reserve.supplyCapUSD} symbol={'USD'} symbolsColor='#828282' size='16px' sx={{ 
               fontWeight: 400,
               fontSize: '16px',
               lineHeight: '1em', 
@@ -371,19 +372,18 @@ export const SupplyInfo = ({
 
       {reserve.usageAsCollateralEnabled && (
         <Box sx={{
-            display: 'flex',
-            flexDirection: 'row',
-            border: '1px solid',
-            borderRadius: '8px',
-            borderColor: 'rgba(220, 220, 220, 1)',
-            backgroundColor: 'rgba(242, 242, 242, 1)',
-            // backgroundColor: 'red',
-            marginTop: '3.7px',
-            marginLeft: '7.2px',
-            paddingTop: '11px',
-            marginRight: '15px',
-            paddingLeft: '15px',
-          }}>
+        display: 'flex',
+        flexDirection: 'row',
+        border: '1px solid',
+        borderRadius: '8px',
+        borderColor: 'rgba(220, 220, 220, 1)',
+        backgroundColor: 'rgba(242, 242, 242, 1)',
+        marginTop: '3.7px',
+        marginLeft: '7.2px',
+        paddingTop: '11px',
+        marginRight: '15px',
+        paddingLeft: '15px',
+        }}>
           <Box sx={{
             display:'flex',
             flexDirection: 'column',
@@ -397,7 +397,8 @@ export const SupplyInfo = ({
                 letterSpacing: '0.08em',
                 textTransform: 'uppercase',
                 color: 'rgba(130, 130, 130, 1)',
-              }}> max ltv </Typography>
+              }}> max ltv 
+            </Typography>
             <FormattedNumber 
               value={reserve.formattedBaseLTVasCollateral} 
               percent 
@@ -410,14 +411,14 @@ export const SupplyInfo = ({
                 lineHeight: '1em',
                 letterSpacing: '-0.02em',
                 marginBottom: '9px',
-              }}/></Box>
+              }}/>
+          </Box>
           
           <Box
             sx={{
               width: '1px',
               height: '54px',
               backgroundColor: 'rgba(220, 220, 220, 1)',
-              // mt: '1px',
             }}>
           </Box>
 
@@ -452,16 +453,14 @@ export const SupplyInfo = ({
                 lineHeight: '1em',
                 letterSpacing: '-0.02em',
                 marginBottom: '9px',
-
               }}/>
           </Box>
 
-          <Box
-            sx={{
-              width: '1px',
-              height: '54px',
-              backgroundColor: 'rgba(220, 220, 220, 1)',
-            }}>
+          <Box sx={{
+          width: '1px',
+          height: '54px',
+          backgroundColor: 'rgba(220, 220, 220, 1)',
+          }}>
           </Box>
 
           <Box sx={{
@@ -472,25 +471,26 @@ export const SupplyInfo = ({
             marginLeft: '16px',
             }}>
             <Typography sx={{
-              fontSize: '10px',
+            fontSize: '10px',
+            fontWeight: 500,
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            color: 'rgba(130, 130, 130, 1)',
+            marginTop: '1px',
+            }}>
+              Liquidation penalty
+            </Typography>
+            <FormattedNumber value={reserve.formattedReserveLiquidationBonus} 
+            percent 
+            visibleDecimals={2} 
+            size='24px'
+            sx={{
+              color: '#061512',
+              fontSize: '24px',
               fontWeight: 500,
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase',
-              color: 'rgba(130, 130, 130, 1)',
-              marginTop: '1px',
-              }}>Liquidation penalty</Typography>
-            <FormattedNumber 
-              value={reserve.formattedReserveLiquidationBonus} 
-              percent 
-              visibleDecimals={2} 
-              size='24px'
-              sx={{
-                color: '#061512',
-                fontSize: '24px',
-                fontWeight: 500,
-                lineHeight: '1em',
-                letterSpacing: '-0.02em',
-              }}/>
+              lineHeight: '1em',
+              letterSpacing: '-0.02em',
+            }}/>
           </Box>
 
           {reserve.isIsolated && (

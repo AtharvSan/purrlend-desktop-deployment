@@ -40,7 +40,7 @@ export const BorrowInfo = ({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginRight: '180px',
+    marginRight: '134px',
     marginLeft: '16px',
     }}>
     <Box sx={{
@@ -73,7 +73,7 @@ export const BorrowInfo = ({
           gap: '0.33em',
           mb: '6px',
           }}>
-          <FormattedNumber value={reserve.totalDebt} sx={{ 
+          <FormattedNumber visibleDecimals={2} value={reserve.totalDebt} sx={{
             fontWeight: 500,
             fontSize: '20px',
             lineHeight: '1em', 
@@ -87,7 +87,7 @@ export const BorrowInfo = ({
             letterSpacing: '-0.02em',
             color: '#828282',
             }}> of </Typography>
-          <FormattedNumber value={reserve.borrowCap} sx={{ 
+          <FormattedNumber  visibleDecimals={0} value={reserve.borrowCap} sx={{
             fontWeight: 500,
             fontSize: '20px',
             lineHeight: '1em', 
@@ -101,7 +101,7 @@ export const BorrowInfo = ({
           alignItems: 'start',
           gap: '0.33em',
           }}>
-          <FormattedNumber value={reserve.totalDebtUSD} symbol={'USD'} symbolsColor='#828282' size='16px' sx={{ 
+          <FormattedNumber visibleDecimals={2} value={reserve.totalDebtUSD} symbol={'USD'} symbolsColor='#828282' size='16px' sx={{ 
             fontWeight: 400,
             fontSize: '16px',
             lineHeight: '1em', 
@@ -116,7 +116,7 @@ export const BorrowInfo = ({
             color: '#828282',
             mt: '3px',
             }}> of </Typography>
-          <FormattedNumber value={reserve.borrowCapUSD} symbol={'USD'} symbolsColor='#828282' size='16px' sx={{ 
+          <FormattedNumber visibleDecimals={0} value={reserve.borrowCapUSD} symbol={'USD'} symbolsColor='#828282' size='16px' sx={{ 
             fontWeight: 400,
             fontSize: '16px',
             lineHeight: '1em', 
@@ -137,7 +137,7 @@ export const BorrowInfo = ({
           textTransform: 'uppercase',
           color: '#828282',
           }}> APY </Typography>
-        <FormattedNumber value={reserve.variableBorrowAPY} percent size='20px' sx={{ 
+        <FormattedNumber visibleDecimals={2} value={reserve.variableBorrowAPY} percent size='20px' sx={{ 
           fontWeight: 500,
           fontSize: '20px',
           lineHeight: '1em', 
@@ -165,7 +165,7 @@ export const BorrowInfo = ({
           gap: '0.33em',
           mb: '6px',
           }}>
-          <FormattedNumber value={reserve.borrowCap} sx={{ 
+          <FormattedNumber visibleDecimals={0} value={reserve.borrowCap} sx={{ 
             fontWeight: 500,
             fontSize: '20px',
             lineHeight: '1em', 
@@ -179,7 +179,7 @@ export const BorrowInfo = ({
           alignItems: 'start',
           gap: '0.33em',
           }}>
-          <FormattedNumber value={reserve.borrowCapUSD} symbol={'USD'} symbolsColor='#828282' size='16px' sx={{ 
+          <FormattedNumber visibleDecimals={0} value={reserve.borrowCapUSD} symbol={'USD'} symbolsColor='#828282' size='16px' sx={{ 
             fontWeight: 400,
             fontSize: '16px',
             lineHeight: '1em', 

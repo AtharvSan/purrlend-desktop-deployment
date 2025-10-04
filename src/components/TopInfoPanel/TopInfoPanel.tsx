@@ -26,7 +26,8 @@ export const TopInfoPanel = ({
           // alignItems: 'flex-start',
           marginTop: '34px',
           // backgroundColor: 'red',
-          mx: '8.333%',
+          width: '1199px',
+          mx: 'auto',
         }}>
         {!titleComponent && (
           <PageTitle

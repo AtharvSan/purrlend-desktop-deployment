@@ -16,6 +16,7 @@ import { TokenIcon } from '../../components/primitives/TokenIcon';
 import { ComputedReserveData } from '../../hooks/app-data-provider/useAppDataProvider';
 import { uiConfig } from 'src/uiConfig';
 import { useModalContext } from 'src/hooks/useModal';
+import { link } from 'fs';
 
 export const MarketAssetsListItem = ({ ...reserve }: ComputedReserveData) => {
   const router = useRouter();
@@ -24,7 +25,9 @@ export const MarketAssetsListItem = ({ ...reserve }: ComputedReserveData) => {
 
   return (
     <>
-    <Box sx={{
+    <Box 
+    onClick={() => router.push(ROUTES.reserveOverview(reserve.underlyingAsset, currentMarket))}
+    sx={{
     display: 'flex',
     alignItems: 'center',
     pt: '16px',
@@ -35,6 +38,8 @@ export const MarketAssetsListItem = ({ ...reserve }: ComputedReserveData) => {
     backgroundColor: '#FFFFFF',
     borderColor: '#EAEAEA',
     boxShadow: '0px 3px 5px 0px #0000000A',
+    cursor: 'pointer',
+    '&:hover': { bgcolor: '#f8f8f8ff' }
     }}>
       <Box sx={{
         width: '285px',
@@ -151,12 +156,16 @@ export const MarketAssetsListItem = ({ ...reserve }: ComputedReserveData) => {
       
       <Box sx={{
         pb: '10px',
+        zIndex: 1
       }}>
         <ListColumn align="right">
           <Button
             // disabled={!isActive || isFreezed || Number(walletBalance) <= 0}
             variant="contained"
-            onClick={() => openSupply(reserve.underlyingAsset)}
+            onClick={(e) => {
+              e.stopPropagation();
+              openSupply(reserve.underlyingAsset);
+            }}
             sx={{
               backgroundColor: 'rgba(6, 21, 18, 1)',
               color: '#FFFFFF',

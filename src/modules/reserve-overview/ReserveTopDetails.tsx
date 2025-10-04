@@ -398,7 +398,7 @@ export const ReserveTopDetails = ({ underlyingAsset }: ReserveTopDetailsProps) =
       </TopInfoPanelItem>
 
       <TopInfoPanelItem title={<Trans>Oracle price</Trans>} loading={loading} hideIcon>
-        <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+        <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: '2px' }}>
           <FormattedNumber
             value={poolReserve?.priceInUSD}
             symbol="USD"
@@ -417,19 +417,16 @@ export const ReserveTopDetails = ({ underlyingAsset }: ReserveTopDetailsProps) =
           {loading ? (
             <Skeleton width={16} height={16} sx={{ ml: 1, background: '#383D51' }} />
           ) : (
-            <img src={uiConfig.oracleArrow} />
-            // <CircleIcon tooltipText="View oracle contract" downToSM={downToSM}>
-            //   <Link
-            //     href={currentNetworkConfig.explorerLinkBuilder({
-            //       address: poolReserve?.priceOracle,
-            //     })}
-            //     sx={iconStyling}
-            //   >
-            //     <SvgIcon sx={{ fontSize: downToSM ? '12px' : '14px' }}>
-            //       <ExternalLinkIcon />
-            //     </SvgIcon>
-            //   </Link>
-            // </CircleIcon>
+            <CircleIcon tooltipText="View oracle contract" downToSM={downToSM}>
+              <Link
+                href={currentNetworkConfig.explorerLinkBuilder({
+                  address: poolReserve?.priceOracle,
+                })}
+                sx={iconStyling}
+              >
+                <img src={uiConfig.oracleArrow}/>
+              </Link>
+            </CircleIcon>
           )}
         </Box>
       </TopInfoPanelItem>

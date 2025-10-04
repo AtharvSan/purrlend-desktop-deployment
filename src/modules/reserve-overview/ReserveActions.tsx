@@ -363,6 +363,7 @@ const SupplyAction = ({ value, usdValue, symbol, disable, onActionClicked }: Act
           <ValueWithSymbol value={value} symbol={symbol} />
           <FormattedNumber
             value={usdValue}
+            visibleDecimals={2}
             // variant="subheader2"
             color="rgba(130, 130, 130, 1)"
             symbolsColor="rgba(130, 130, 130, 1)"
@@ -447,6 +448,7 @@ const BorrowAction = ({ value, usdValue, symbol, disable, onActionClicked }: Act
           <ValueWithSymbol value={value} symbol={symbol} />
           <FormattedNumber
             value={usdValue}
+            visibleDecimals={2}
             // variant="subheader2"
             color="rgba(130, 130, 130, 1)"
             symbolsColor="rgba(130, 130, 130, 1)"
@@ -534,7 +536,7 @@ interface ValueWithSymbolProps {
 const ValueWithSymbol = ({ value, symbol, children }: ValueWithSymbolProps) => {
   return (
     <Stack direction="row" alignItems="center" gap={1.4}>
-      <FormattedNumber value={value} 
+      <FormattedNumber value={value} visibleDecimals={2}
         sx={{
           fontWeight: 500,
           fontSize: '24px',

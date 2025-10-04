@@ -43,7 +43,7 @@ export const navigation: Navigation[] = [
     //   !ENABLE_TESTNET,
   },
 {
-  link: ROUTES.docs,
+  link: ROUTES.info,
   // title: t`Doc`,
   title: (
     <Box sx={{
@@ -53,7 +53,7 @@ export const navigation: Navigation[] = [
       // p: '10px',
       gap: '4.5px',
       }}>
-      {t`Doc`}
+      {t`Info`}
       <img src={uiConfig.docArrow} />
     </Box>
   ),

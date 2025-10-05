@@ -213,8 +213,6 @@ export const BorrowAssetsList = () => {
           lineHeight: '1em',
           letterSpacing: '-0.02em',
           color: '#061512',
-          // mt: '3px'
-          // backgroundColor: 'red'
           }}>
           <Trans>Assets to borrow</Trans>
         </Typography>
@@ -233,15 +231,7 @@ export const BorrowAssetsList = () => {
       withTopMargin
       noData={borrowDisabled}
       subChildrenComponent={
-        <Box sx={{ px: 6, mb: 4 }}>
-          {borrowDisabled && currentNetworkConfig.name === 'Harmony' && (
-            <MarketWarning marketName="Harmony" />
-          )}
-
-          {borrowDisabled && currentNetworkConfig.name === 'Fantom' && (
-            <MarketWarning marketName="Fantom" />
-          )}
-
+        <Box sx={{ px: '16px', mb: 4 }}>
           {+collateralUsagePercent >= 0.98 && (
             <Warning severity="error">
               <Trans>

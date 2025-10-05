@@ -132,8 +132,8 @@ export const ATokenIcon = forwardRef<SVGSVGElement, ATokenIconProps>(({ symbol }
           y2=".886"
           gradientUnits="objectBoundingBox"
         >
-          <stop offset="0" stopColor="#7B8CD7" id="stop2" />
-          <stop offset="1" stopColor="#A866E4" id="stop4" />
+          <stop offset="0" stopColor="#FF7E09" id="stop2" />
+          <stop offset="1" stopColor="#FF7E09" id="stop4" />
         </linearGradient>
         <linearGradient id="linear-gradient-2" x1=".907" x2=".163" y1=".227" y2=".853" />
       </defs>

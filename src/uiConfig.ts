@@ -28,6 +28,7 @@ export const uiConfig = {
   copy: '/copy.svg',
   tick: '/tick.svg',
   triangleExclamation: '/triangleExclamation.svg',
+  info: '/info.svg',
   allDone: '/allDone.svg',
   txArrow: '/txArrow.svg',
 };

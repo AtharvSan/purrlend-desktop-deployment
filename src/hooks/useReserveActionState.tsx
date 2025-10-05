@@ -102,7 +102,7 @@ export const useReserveActionState = ({
         )}
 
         {eModeBorrowDisabled && !isolationModeBorrowDisabled && (
-          <Warning sx={{ mb: 0 }} severity="info" icon={false}>
+          <Warning sx={{ mb: 0 }} severity="info">
             <Trans>
               Borrowing is unavailable because you’ve enabled Efficiency Mode (E-Mode) for{' '}
               {getEmodeMessage(eModes[user.userEmodeCategoryId].label)} category. To manage E-Mode

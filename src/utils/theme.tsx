@@ -5,7 +5,7 @@ import {
   ExclamationIcon,
   InformationCircleIcon,
 } from '@heroicons/react/outline';
-import { FormatUnderlined } from '@mui/icons-material';
+import { Dangerous, FormatUnderlined, Warning } from '@mui/icons-material';
 import { SvgIcon, Theme, ThemeOptions } from '@mui/material';
 import { createTheme } from '@mui/material/styles';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -732,7 +732,7 @@ export function getThemedComponents(theme: Theme) {
               padding: 0,
               opacity: 1,
               '.MuiSvgIcon-root': {
-                color: 'rgba(47, 117, 248, 1)',
+                color: '#ef5e5eff',//rgba(47, 117, 248, 1)
                 fontSize: pxToRem(20),
               },
             },
@@ -761,15 +761,15 @@ export function getThemedComponents(theme: Theme) {
         defaultProps: {
           iconMapping: {
             error: (
-              <img src={uiConfig.triangleExclamation} alt="error Icon" />
-              // <SvgIcon color="error">
-              //   <ExclamationIcon />
-              // </SvgIcon>
+              <SvgIcon color="error">
+                <Dangerous />
+              </SvgIcon>
             ),
             info: (
-              <SvgIcon color="info">
-                <InformationCircleIcon />
-              </SvgIcon>
+              <img src={uiConfig.info} alt="info icon" />
+              // <SvgIcon color="info">
+              //   <InformationCircleIcon />
+              // </SvgIcon>
             ),
             success: (
               <SvgIcon color="success">
@@ -777,9 +777,10 @@ export function getThemedComponents(theme: Theme) {
               </SvgIcon>
             ),
             warning: (
-              <SvgIcon color="warning">
-                <ExclamationCircleIcon />
-              </SvgIcon>
+              <img src={uiConfig.triangleExclamation} alt="error Icon" />
+              // <SvgIcon color="warning">
+              //   <ExclamationCircleIcon />
+              // </SvgIcon>
             ),
           },
         },
@@ -787,10 +788,10 @@ export function getThemedComponents(theme: Theme) {
           {
             props: { severity: 'error' },
             style: {
-              // color: theme.palette.error['100'],
-              color: '#FF7E09',
-              // background: theme.palette.error['200'],
-              background: '#FF7E091A',
+              color: '#f05555ff',
+              border: '1px solid #F2474740',
+              borderRadius: '8px',
+              background: '#F247471A',
               a: {
                 color: theme.palette.error['100'],
               },
@@ -802,13 +803,15 @@ export function getThemedComponents(theme: Theme) {
           {
             props: { severity: 'info' },
             style: {
-              color: theme.palette.info['100'],
-              background: theme.palette.info['200'],
+              color: '#2F75F8',
+              border: '1px solid #315EFF40',
+              borderRadius: '8px',
+              background: '#315EFF1A',
               a: {
-                color: theme.palette.info['100'],
+                color: '#2F75F8',
               },
               '.MuiButton-text': {
-                color: theme.palette.info['100'],
+                color: '#2F75F8',
               },
             },
           },
@@ -828,9 +831,10 @@ export function getThemedComponents(theme: Theme) {
           {
             props: { severity: 'warning' },
             style: {
-              color: 'rgba(59, 144, 255, 1)',
-              background: 'rgba(49, 94, 255, 0.1)',
+              color: '#FF7E09',
+              background: '#FF7E091A',
               borderRadius: '8px',
+              border: '1px solid #FF7E0940',
               a: {
                 color: theme.palette.warning['100'],
               },

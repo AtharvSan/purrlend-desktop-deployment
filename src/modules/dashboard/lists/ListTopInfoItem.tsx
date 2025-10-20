@@ -24,7 +24,7 @@ export const ListTopInfoItem = ({ title, value, percent, tooltip }: ListTopInfoI
         height: '85%',
         width: '100%',
         pt: '2px',
-        pl: '15px',
+        pl: {xs: '12px', md: '15px'},
         // borderRight: '1px solid',
         // borderRadius: '0px',
         // borderColor: '#DCDCDC',

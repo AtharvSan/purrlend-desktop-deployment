@@ -1,6 +1,6 @@
 import { valueToBigNumber } from '@aave/math-utils';
 import { Trans } from '@lingui/macro';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { CapsCircularStatus } from 'src/components/caps/CapsCircularStatus';
 import { IncentivesButton } from 'src/components/incentives/IncentivesButton';
 import { StableAPYTooltip } from 'src/components/infoTooltips/StableAPYTooltip';
@@ -35,12 +35,17 @@ export const BorrowInfo = ({
   showBorrowCapStatus,
   borrowCap,
 }: BorrowInfoProps) => {
+  const theme = useTheme();
+  const downToSM = useMediaQuery(theme.breakpoints.down('sm'));
+  const _size = downToSM ? 250 : 300;
+  const _thickness = downToSM ? 26 : 31;
+
   return (
   <Box sx={{
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginRight: '134px',
+    mr: {xs: '35px', md: '134px'},
     marginLeft: '16px',
     }}>
     <Box sx={{
@@ -48,9 +53,9 @@ export const BorrowInfo = ({
       flexDirection: 'row',
       alignItems: 'start',
       flexWrap: 'wrap',
-      mt: '42.5px',
+      mt: {xs: '35px', md: '42.5px'},
       ml: '6.5px',
-      gap: '48px',
+      gap: {xs: '22px', md: '48px'},
       }}>
       <Box sx={{
         display: 'flex',
@@ -191,8 +196,8 @@ export const BorrowInfo = ({
       }}>
       <CapsSemiGauge value={borrowCap.percentUsed} // borrowCap.percentUsed
         label="FILLED"
-        size={300}
-        thickness={31}
+        size={_size}
+        thickness={_thickness}
         arcColor="rgba(24,204,111,1)"
         trackColor="#E8E8E8"
         borderOpacity={0.08}

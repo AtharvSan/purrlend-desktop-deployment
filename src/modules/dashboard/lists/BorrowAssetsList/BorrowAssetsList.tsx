@@ -183,7 +183,7 @@ export const BorrowAssetsList = () => {
           setSortName={setSortName}
           setSortDesc={setSortDesc}
           sortKey='variableBorrowAPY'
-          ><Trans key="variableBorrowAPY"> APY </Trans></ListHeaderTitle>
+          ><Trans key="variableBorrowAPY">APY </Trans></ListHeaderTitle>
         </Box>
         <Box>
           <ListHeaderTitle
@@ -218,16 +218,6 @@ export const BorrowAssetsList = () => {
         </Typography>
       }
       localStorageName="borrowAssetsDashboardTableCollapse"
-      subTitleComponent={
-        <Box sx={{
-          height: '35px',
-        }}>
-
-        </Box>
-        // currentMarketData.v3 ? (
-        //   <DashboardEModeButton userEmodeCategoryId={user.userEmodeCategoryId} />
-        // ) : undefined
-      }
       withTopMargin
       noData={borrowDisabled}
       subChildrenComponent={
@@ -271,11 +261,16 @@ export const BorrowAssetsList = () => {
     >
       <>
         {!downToXSM && !!sortedReserves.length && <RenderHeader />}
-        {sortedReserves?.map((item) => (
+        {sortedReserves?.map((item,index) => (
           <Fragment key={item.underlyingAsset}>
             <AssetCapsProvider asset={item.reserve}>
               {downToXSM ? (
+                <>
                 <BorrowAssetsListMobileItem {...item} />
+                {index !== sortedReserves.length - 1 && ( // show divider only if not last item
+                  <Divider sx={{ mb: 1, borderColor: '#E8E8E8' }} />
+                )}
+                </>
               ) : (
                 <BorrowAssetsListItem {...item} />
               )}

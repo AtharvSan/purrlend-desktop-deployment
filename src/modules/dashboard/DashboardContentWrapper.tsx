@@ -13,6 +13,7 @@ export const DashboardContentWrapper = ({ isBorrow }: DashboardContentWrapperPro
   const { breakpoints } = useTheme();
   const isDesktop = useMediaQuery(breakpoints.up('lg'));
   const paperWidth = isDesktop ? 'calc(50% - 8px)' : '100%';
+  // const downToXSM = useMediaQuery(theme.breakpoints.down('xsm'));
 
   return (
     // <Box //main container for all dashboards
@@ -39,89 +40,94 @@ export const DashboardContentWrapper = ({ isBorrow }: DashboardContentWrapperPro
       flexDirection: 'column',
       justifyContent: 'space-between',
       alignItems: 'center',
-      // mx: '1.97%',
       mx: 'auto',
-      width: '1199px',
+      width: {xs:'99%', md: '1199px'},
       }}>
-
-      <Box sx={{
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between', 
-        alignItems: 'center',
-        width: '100%',
-        marginTop: '25px',
-        marginBottom: '6px',
-        }}>
+      {isDesktop && (
         <Box sx={{
-          width: '6px', 
-          height: '6px', 
-          backgroundColor: '#FF7E09', 
-          boxShadow: '2px 0px 12px rgba(255, 126, 9, 0.5)',
-        }}></Box>
-        <Typography 
-          sx={{ 
-          fontWeight: 700,
-          fontStyle: 'Bold',
-          fontSize: '10px',
-          leadingTrim: "NONE",
-          lineHeight: '1em',
-          letterSpacing: '0.08em',
-          textTransform: 'uppercase',
-          color: 'rgba(255, 126, 9, 1)',
-          }}>supplies</Typography>
-        <Divider sx={{ 
-          width: '93.7%',
-          borderColor: 'rgba(210, 210, 210, 1)',
-          opacity: 0.8,
-          }}/></Box>
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-between', 
+          alignItems: 'center',
+          width: '100%',
+          marginTop: '25px',
+          marginBottom: '15px',
+          }}>
+          <Box sx={{
+            width: '6px', 
+            height: '6px', 
+            backgroundColor: '#FF7E09', 
+            boxShadow: '2px 0px 12px rgba(255, 126, 9, 0.5)',
+          }}></Box>
+          <Typography 
+            sx={{ 
+            fontWeight: 700,
+            fontStyle: 'Bold',
+            fontSize: '10px',
+            leadingTrim: "NONE",
+            lineHeight: '1em',
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            color: 'rgba(255, 126, 9, 1)',
+            }}>supplies</Typography>
+          <Divider sx={{ 
+            width: '93.7%',
+            borderColor: 'rgba(210, 210, 210, 1)',
+            opacity: 0.8,
+            }}/></Box>
+      )}
       
       <Box sx={{ 
-        display: { xs: isBorrow ? 'none' : 'flex', lg: 'flex' }, 
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignContent: 'flex-start',
-        width: '100%',
-        gap: '19px',
-        }}>
-        <SuppliedPositionsList /><SupplyAssetsList /></Box>
+      display: { xs: isBorrow ? 'none' : 'flex', lg: 'flex' }, 
+      flexDirection: {xs: 'column', md: 'row'},
+      justifyContent: 'space-between',
+      alignContent: 'flex-start',
+      width: '100%',
+      // backgroundColor: 'red',
+      gap: {xs: '12px',md: '19px'},
+      }}>
+        <SuppliedPositionsList />
+        <SupplyAssetsList />
+      </Box>
 
-      <Box sx={{
-        display: 'flex', 
-        flexDirection: 'row',
-        justifyContent: 'space-between', 
-        alignItems: 'center',
-        width: '100%',
-        marginTop: '25px',
-        marginBottom: '6px',
-        }}>
+      {isDesktop && (
         <Box sx={{
-          width: '6px', 
-          height: '6px', 
-          backgroundColor: 'rgba(255, 126, 9, 1)', 
-          boxShadow: '2px 0px 12px rgba(255, 126, 9, 0.5)',
-          }}></Box>
-        <Typography 
-          variant="h4" 
-          sx={{ 
-          fontWeight: 700,
-          fontStyle: 'Bold',
-          fontSize: '10px',
-          leadingTrim: "NONE",
-          lineHeight: '1em',
-          letterSpacing: '0.08em',
-          textTransform: 'uppercase',
-          color: 'rgba(255, 126, 9, 1)',
-          }}>borrow</Typography>
-        <Divider sx={{ 
-          width: '93.7%',
-          borderColor: 'rgba(210, 210, 210, 1)',
-          opacity: 0.8,
-          }}/></Box>
+          display: 'flex', 
+          flexDirection: 'row',
+          justifyContent: 'space-between', 
+          alignItems: 'center',
+          width: '100%',
+          marginTop: '25px',
+          marginBottom: '15px',
+          }}>
+          <Box sx={{
+            width: '6px', 
+            height: '6px', 
+            backgroundColor: 'rgba(255, 126, 9, 1)', 
+            boxShadow: '2px 0px 12px rgba(255, 126, 9, 0.5)',
+            }}></Box>
+          <Typography 
+            variant="h4" 
+            sx={{ 
+            fontWeight: 700,
+            fontStyle: 'Bold',
+            fontSize: '10px',
+            leadingTrim: "NONE",
+            lineHeight: '1em',
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            color: 'rgba(255, 126, 9, 1)',
+            }}>borrow</Typography>
+          <Divider sx={{ 
+            width: '93.7%',
+            borderColor: 'rgba(210, 210, 210, 1)',
+            opacity: 0.8,
+            }}/></Box>
+      )}
 
       <Box sx={{ 
-        display: { xs: isBorrow ? 'none' : 'flex', lg: 'flex' }, 
-        flexDirection: 'row',
+        display: { xs: !isBorrow ? 'none' : 'flex', lg: 'flex' }, 
+        flexDirection: {xs: 'column', md: 'row'},
         justifyContent: 'space-between',
         alignContent: 'flex-start',
         width: '100%',

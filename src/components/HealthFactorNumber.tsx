@@ -35,7 +35,9 @@ export const HealthFactorNumber = ({
       sx={{
         display: 'inline-flex',
         alignItems: { xs: 'flex-start', xsm: 'center' },
-        flexDirection: { xs: 'column', xsm: 'row' },
+        // flexDirection: { xs: 'column', xsm: 'row' },
+        flexDirection: 'row',
+        // gap: '4px'
       }}
       data-cy={'HealthFactorTopPannel'}
     >
@@ -60,15 +62,24 @@ export const HealthFactorNumber = ({
           size="small"
           sx={{ 
             minWidth: 'unset', 
-            ml: { xs: 0, xsm: 2 },
+            ml: { xs: 2, xsm: 2 },
             borderRadius: '32px',
-            // border: '1px solid',
+            border: '1px solid #06151226',
             // borderColor: 'rgba(6, 21, 18, 0.15)',
-            // backgroundColor: 'rgba(255, 255, 255, 1)',
-            color: 'rgba(6, 21, 18, 1)',
+            textTransform: 'none',
           }}
         >
-          <Trans>Risk details</Trans>
+          <Typography sx={{
+            fontWeight: 500,
+            fontSize: '12px',
+            lineHeight: '1em',
+            letterSpacing: '-0.02em',
+            color: '#061512',
+            py: '6px',
+            px: '4px',
+          }}>
+            <Trans>Risk details</Trans>
+          </Typography>
         </Button>
       )}
 

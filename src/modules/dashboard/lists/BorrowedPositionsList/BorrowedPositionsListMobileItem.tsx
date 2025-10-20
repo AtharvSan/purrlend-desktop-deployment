@@ -1,6 +1,6 @@
 import { InterestRate } from '@aave/contract-helpers';
 import { Trans } from '@lingui/macro';
-import { Box, Button } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import { useProtocolDataContext } from 'src/hooks/useProtocolDataContext';
 import { DashboardReserve } from 'src/utils/dashboardSortUtils';
 
@@ -47,13 +47,33 @@ export const BorrowedPositionsListMobileItem = ({
       showBorrowCapTooltips
     >
       <ListValueRow
-        title={<Trans>Debt</Trans>}
+        title={
+          <Typography sx={{
+            fontWeight: 400,
+            fontSize: '16px',
+            lineHeight: '1em',
+            letterSpacing: '-0.02em',
+            color: '#828282',
+          }}>
+            <Trans>Debt</Trans>
+          </Typography>
+        }
         value={Number(totalBorrows)}
         subValue={Number(totalBorrowsUSD)}
         disabled={Number(totalBorrows) === 0}
       />
 
-      <Row caption={<Trans>APY</Trans>} align="flex-start" captionVariant="description" mb={2}>
+      <Row caption={
+      <Typography sx={{
+        fontWeight: 400,
+        fontSize: '16px',
+        lineHeight: '1em',
+        letterSpacing: '-0.02em',
+        color: '#828282',
+      }}>
+        <Trans>APY</Trans>
+      </Typography>
+      } align="flex-start" captionVariant="description" mb={2}>
         <IncentivesCard
           value={Number(
             borrowRateMode === InterestRate.Variable ? variableBorrowAPY : stableBorrowAPY
@@ -64,7 +84,7 @@ export const BorrowedPositionsListMobileItem = ({
         />
       </Row>
 
-      <Row
+      {/* <Row
         caption={
           <APYTypeTooltip text={<Trans>APY type</Trans>} key="APY type" variant="description" />
         }
@@ -81,25 +101,52 @@ export const BorrowedPositionsListMobileItem = ({
           underlyingAsset={underlyingAsset}
           currentMarket={currentMarket}
         />
-      </Row>
+      </Row> */}
 
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mt: 5 }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '3%', mt: 5 }}>
         <Button
           disabled={!isActive}
           variant="contained"
           onClick={() => openRepay(underlyingAsset, borrowRateMode, isFrozen)}
-          sx={{ mr: 1.5 }}
           fullWidth
+          sx={{
+            border: '1px solid #FFFFFF33',
+            borderRadius: '70px',
+            backgroundColor: '#061512',
+            color: '#FFFFFF',
+            height: '38px',
+          }}
         >
-          <Trans>Repay</Trans>
+          <Typography sx={{
+            fontWeight: 500,
+            fontSize: '14px',
+            lineHeight: '1em',
+            letterSpacing: '-0.02em',
+          }}>
+            <Trans>Repay</Trans>
+          </Typography>
         </Button>
         <Button
           disabled={!isActive || !borrowingEnabled || isFrozen}
           variant="outlined"
           onClick={() => openBorrow(underlyingAsset)}
           fullWidth
+          sx={{ 
+            border: '1px solid #DCDCDC',
+            borderRadius: '70px',
+            backgroundColor: '#FFFFFF',
+            color: '#061512',
+            height: '38px',
+          }}
         >
-          <Trans>Borrow</Trans>
+          <Typography sx={{
+            fontWeight: 500,
+            fontSize: '14px',
+            lineHeight: '1em',
+            letterSpacing: '-0.02em',
+          }}>
+            <Trans>Borrow</Trans>
+          </Typography>
         </Button>
       </Box>
     </ListMobileItemWrapper>

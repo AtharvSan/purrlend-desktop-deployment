@@ -15,20 +15,19 @@ export const DrawerWrapper = ({ open, setOpen, children, headerHeight }: DrawerW
       anchor="top"
       open={open}
       onClose={() => setOpen(false)}
-      hideBackdrop
-      sx={{ top: `${headerHeight}px` }}
+      // hideBackdrop
       PaperProps={{
         sx: {
-          background: 'white',
-          // background: 'rgba(27, 32, 48, 0.98)',
-          backdropFilter: 'blur(20px)',
-          boxShadow: 'none',
-          borderRadius: 'unset',
-          width: '100%',
-          top: `${headerHeight}px`,
+          width: '95%',
+          borderBottomLeftRadius: '16px',
+          borderBottomRightRadius: '16px',
+          borderTopRightRadius: '0px',
+          borderTopLeftRadius: '0px',
+          mx: 'auto',
+          // top: `${headerHeight}px`,
+          top: '61.2px',
           pt: 6,
-          pb: 15,
-          minHeight: '100vh',
+          pb: 4,
         },
       }}
     >

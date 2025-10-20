@@ -1,5 +1,5 @@
 import { Trans } from '@lingui/macro';
-import { Box, Collapse, Paper, Typography } from '@mui/material';
+import { Box, Collapse, Paper, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { ReactNode, useState } from 'react';
 import { TransitionGroup } from 'react-transition-group';
 
@@ -31,6 +31,8 @@ export const ListWrapper = ({
   );
 
   const collapsed = isCollapse && !noData;
+  const { breakpoints } = useTheme();
+  const isDesktop = useMediaQuery(breakpoints.up('lg'));
 
   return (
     <Paper
@@ -39,9 +41,11 @@ export const ListWrapper = ({
         // border: `1px solid ${theme.palette.divider}`,
         // borderColor: 'rgba(234, 234, 234, 1)',
         borderRadius: '16px',
-        width: '100%',
+        width: '96.5%',
+        mx: 'auto',
         height: '100%',
-        marginTop: '10px',
+        // mt: '5px',
+        // mb: '5px',
         // backgroundColor: 'red',
         boxShadow: '0px 3px 5px 0px #0000000A',
       })}
@@ -49,24 +53,24 @@ export const ListWrapper = ({
       <Box
         sx={{
           // px: { xs: 4, xsm: 4 },
-          px: '14px',
+          pl: '14px',
+          pr: '15px',
           // my: { xs: 3.5, xsm: 3},
           mt: '15px',
           mb: '12px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          // backgroundColor: 'red',
+          // backgroundColor: 'blue',
         }}
       >
         <Box
           sx={{
             width: '100%',
             display: 'flex',
-            alignItems: { xs: 'flex-start', xsm: 'center' },
+            alignItems: 'center',
             py: '3.6px',
-            flexDirection: { xs: 'column', xsm: 'row' },
-            // backgroundColor: 'red',
+            // backgroundColor: 'blue',
           }}
         >
           <Box sx={{
@@ -79,7 +83,7 @@ export const ListWrapper = ({
             }}>
           </Box>
           {titleComponent}
-          {subTitleComponent}
+          {isDesktop && subTitleComponent}
         </Box>
 
         {!!localStorageName && !noData && (
@@ -147,8 +151,9 @@ export const ListWrapper = ({
             </Box>
           </Box>
         )}
+        
       </Box>
-
+      {!isDesktop && subTitleComponent}
       {topInfo && (
         <Box
           sx={{
@@ -160,12 +165,13 @@ export const ListWrapper = ({
             border: '1px solid',
             borderRadius: '8px',
             height: '63px',
-            width: '94.6%',
             margin: 'auto',
-            mt: '25px',
+            mt: {xs: '18px', md: '25px'},
             mb: '18px',
+            mx: '16px',
             pt: '8px',
             pb: '5px',
+            pr: '4px',
             backgroundColor: 'rgba(242, 242, 242, 1)',
             // backgroundColor: 'red',
             borderColor: 'rgba(220, 220, 220, 1)',
@@ -176,7 +182,11 @@ export const ListWrapper = ({
         </Box>
       )}
       {subChildrenComponent && !collapsed && (
-        <Box sx={{ marginBottom: { xs: 2, xsm: 0 } }}>{subChildrenComponent}</Box>
+        <Box sx={{ 
+          marginBottom: { xs: 2, xsm: 0 },
+          width: '97%',
+          mx: 'auto',
+        }}>{subChildrenComponent}</Box>
       )}
       {/* <Box sx={{ display: collapsed ? 'none' : 'block' }}>
         <Collapse

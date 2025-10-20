@@ -24,6 +24,7 @@ export const ReserveFactorOverview = ({
         display: 'flex',
         flexWrap: 'wrap',
         justifyContent: 'space-between',
+        backgroundColor: 'red',
       }}
     >
       <ReserveOverviewBox

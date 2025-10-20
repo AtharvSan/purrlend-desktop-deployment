@@ -1,5 +1,7 @@
+import { Trans } from '@lingui/react/cjs/Trans';
 import { AlertColor, Box, Typography } from '@mui/material';
 import { ReactNode } from 'react';
+import { Warning } from 'src/components/primitives/Warning';
 
 interface InfoWrapperProps {
   topValue: ReactNode;
@@ -22,7 +24,7 @@ export const InfoWrapper = ({
     <Box
       sx={(theme) => ({
         border: `1px solid ${theme.palette.divider}`,
-        mb: 6,
+        mt: 6,
         borderRadius: '6px',
         px: 4,
         pt: 4,
@@ -58,9 +60,11 @@ export const InfoWrapper = ({
 
       <Box>{children}</Box>
 
-      <Typography variant="secondary12" color="text.secondary" textAlign="left">
-        {bottomText}
-      </Typography>
+      <Warning severity='info'>
+        <Typography variant="secondary12" color="#2F75F8" textAlign="left">
+          {bottomText}
+        </Typography>
+      </Warning>
     </Box>
   );
 };

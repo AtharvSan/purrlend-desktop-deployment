@@ -42,7 +42,7 @@ export const MarketAssetListTitle = ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        mb: '1%',
+        my: 4,
       }}
     >
       {showMarketTitle && (
@@ -68,8 +68,6 @@ export const MarketAssetListTitle = ({
             letterSpacing: '-0.02em',
             
             }}>
-              {/* {marketTitle}  */}
-              
               Assets</Typography>
         </Box>
       )}
@@ -84,11 +82,12 @@ export const MarketAssetListTitle = ({
         }}
       >
         {showSearchIcon && (
-          <IconButton onClick={() => setShowSearchBar(true)}>
-            <SvgIcon>
-              <SearchIcon />
-            </SvgIcon>
-          </IconButton>
+          <MarketAssetSearchInput onSearchTermChange={onSearchTermChange} />
+          // <IconButton onClick={() => setShowSearchBar(true)}>
+          //   <SvgIcon>
+          //     <SearchIcon />
+          //   </SvgIcon>
+          // </IconButton>
         )}
         {(showSearchBar || !sm) && (
           <Box sx={{ 

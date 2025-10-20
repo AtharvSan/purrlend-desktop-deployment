@@ -89,12 +89,13 @@ export const DashboardTopPanel = () => {
     <Box sx={{
       backgroundImage: 'linear-gradient(90deg, #061512 0%, #00380D 100%)',
       color: '#F1F1F3',
-      // mx: '8.32%',
       mx: 'auto',
-      width: '1199px',
+      width: {xs: '95%', md: '1199px'},
+      height: {xs: '128px', md: '77px'},
       marginTop: '25px',
       borderRadius: '16px',
       display: 'flex',
+      flexDirection: {xs: 'column', md: 'row'},
       justifyContent: 'space-between',
       pt: '14px',
       pb: '12px',
@@ -112,11 +113,16 @@ export const DashboardTopPanel = () => {
           fontSize: '32px',
           lineHeight: '1em',
           letterSpacing: '-0.02em',
-          }}> {currentNetworkConfig.name} Market</Typography></Box>
+          }}> 
+          {currentNetworkConfig.name} 
+          {!downToSM && (' Market')}
+        </Typography>
+      </Box>
 
       <Box sx={{
         display: 'flex',
-        gap: '50px',
+        justifyContent: 'space-between',
+        gap: {xs: 'auto', md: '50px'},
         }}>
         <Box sx={{
           display: 'flex',
@@ -141,6 +147,7 @@ export const DashboardTopPanel = () => {
               compact
               symbolsColor="#FFFFFF99"
               symbolsVariant={noDataTypographyVariant}
+              size={'24px'}
               fontSize={'24px'}
               fontWeight={'500'}
               letterSpacing={'-0.02em'}
@@ -172,6 +179,7 @@ export const DashboardTopPanel = () => {
               percent
               symbolsColor="#FFFFFF99"
               symbolsVariant={noDataTypographyVariant}
+              size={'24px'}
               fontSize={'24px'}
               fontWeight={'500'}
               letterSpacing={'-0.02em'}
@@ -213,167 +221,7 @@ export const DashboardTopPanel = () => {
             }
           />
         </Box>
-
-        {/* {currentAccount && claimableRewardsUsd > 0 && (
-          <TopInfoPanelItem
-            title={<Trans>Available rewards</Trans>}
-            icon={<ClaimGiftIcon />}
-            loading={loading}
-          >
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: { xs: 'flex-start', xsm: 'center' },
-                flexDirection: { xs: 'column', xsm: 'row' },
-              }}
-            >
-              <Box sx={{ display: 'inline-flex', alignItems: 'center' }} data-cy={'Claim_Box'}>
-                <FormattedNumber
-                  value={claimableRewardsUsd}
-                  variant={valueTypographyVariant}
-                  visibleDecimals={2}
-                  compact
-                  symbol="USD"
-                  symbolsColor="#A5A8B6"
-                  symbolsVariant={noDataTypographyVariant}
-                  data-cy={'Claim_Value'}
-                />
-              </Box>
-
-              <Button
-                variant="gradient"
-                size="small"
-                onClick={() => openClaimRewards()}
-                sx={{ minWidth: 'unset', ml: { xs: 0, xsm: 2 } }}
-                data-cy={'Dashboard_Claim_Button'}
-              >
-                <Trans>Claim</Trans>
-              </Button>
-            </Box>
-          </TopInfoPanelItem>
-        )} */}
-        </Box>
-
-      {/* <TopInfoPanel
-        pageTitle={<Trans>Dashboard</Trans>}
-        withMarketSwitcher
-        bridge={currentNetworkConfig.bridge}
-      >
-        <TopInfoPanelItem icon={<WalletIcon />} title={<Trans>Net worth</Trans>} loading={loading}>
-          {currentAccount ? (
-            <FormattedNumber
-              value={Number(user?.netWorthUSD || 0)}
-              symbol="USD"
-              variant={valueTypographyVariant}
-              visibleDecimals={2}
-              compact
-              symbolsColor="#A5A8B6"
-              symbolsVariant={noDataTypographyVariant}
-            />
-          ) : (
-            <NoData variant={noDataTypographyVariant} sx={{ opacity: '0.7' }} />
-          )}
-        </TopInfoPanelItem>
-
-        <TopInfoPanelItem
-          icon={<NetAPYIcon />}
-          title={
-            <div style={{ display: 'flex' }}>
-              <Trans>Net APY</Trans>
-              <NetAPYTooltip />
-            </div>
-          }
-          loading={loading}
-        >
-          {currentAccount && Number(user?.netWorthUSD) > 0 ? (
-            <FormattedNumber
-              value={user.netAPY}
-              variant={valueTypographyVariant}
-              visibleDecimals={2}
-              percent
-              symbolsColor="#A5A8B6"
-              symbolsVariant={noDataTypographyVariant}
-            />
-          ) : (
-            <NoData variant={noDataTypographyVariant} sx={{ opacity: '0.7' }} />
-          )}
-        </TopInfoPanelItem>
-
-        {currentAccount && user?.healthFactor !== '-1' && (
-          <TopInfoPanelItem
-            icon={<EmptyHeartIcon />}
-            title={
-              <Box sx={{ display: 'inline-flex', alignItems: 'center' }}>
-                <Trans>Health factor</Trans>
-              </Box>
-            }
-            // TODO: need change icon
-            // icon={
-            //   <SvgIcon sx={{ fontSize: '24px' }}>
-            //     {+user.healthFactor >= 10 && <HfFull />}
-            //     {+user.healthFactor < 10 && +user.healthFactor >= 3 && <HfMiddle />}
-            //     {+user.healthFactor < 3 && +user.healthFactor >= 1 && <HfLow />}
-            //     {+user.healthFactor < 1 && <HfEmpty />}
-            //   </SvgIcon>
-            // }
-            loading={loading}
-          >
-            <HealthFactorNumber
-              value={user?.healthFactor || '-1'}
-              variant={valueTypographyVariant}
-              onInfoClick={() => setOpen(true)}
-              HALIntegrationComponent={
-                currentMarketData.halIntegration && (
-                  <HALLink
-                    healthFactor={user?.healthFactor || '-1'}
-                    marketName={currentMarketData.halIntegration.marketName}
-                    integrationURL={currentMarketData.halIntegration.URL}
-                  />
-                )
-              }
-            />
-          </TopInfoPanelItem>
-        )}
-
-        {currentAccount && claimableRewardsUsd > 0 && (
-          <TopInfoPanelItem
-            title={<Trans>Available rewards</Trans>}
-            icon={<ClaimGiftIcon />}
-            loading={loading}
-          >
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: { xs: 'flex-start', xsm: 'center' },
-                flexDirection: { xs: 'column', xsm: 'row' },
-              }}
-            >
-              <Box sx={{ display: 'inline-flex', alignItems: 'center' }} data-cy={'Claim_Box'}>
-                <FormattedNumber
-                  value={claimableRewardsUsd}
-                  variant={valueTypographyVariant}
-                  visibleDecimals={2}
-                  compact
-                  symbol="USD"
-                  symbolsColor="#A5A8B6"
-                  symbolsVariant={noDataTypographyVariant}
-                  data-cy={'Claim_Value'}
-                />
-              </Box>
-
-              <Button
-                variant="gradient"
-                size="small"
-                onClick={() => openClaimRewards()}
-                sx={{ minWidth: 'unset', ml: { xs: 0, xsm: 2 } }}
-                data-cy={'Dashboard_Claim_Button'}
-              >
-                <Trans>Claim</Trans>
-              </Button>
-            </Box>
-          </TopInfoPanelItem>
-        )}
-      </TopInfoPanel> */}
+      </Box>
 
       <LiquidationRiskParametresInfoModal
         open={open}

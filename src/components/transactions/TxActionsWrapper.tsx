@@ -126,7 +126,7 @@ export const TxActionsWrapper = ({
   const { content, disabled, loading, handleClick } = getMainParams();
   const approvalParams = getApprovalParams();
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', mt: 12, ...sx }} {...rest}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', mt: 8, ...sx }} {...rest}>
       {requiresApproval && !readOnlyModeAddress && (
         <Box sx={{ display: 'flex', justifyContent: 'end', alignItems: 'center' }}>
           <RightHelperText approvalHash={approvalTxState?.txHash} tryPermit={tryPermit} />
@@ -139,7 +139,19 @@ export const TxActionsWrapper = ({
           disabled={approvalParams.disabled || blocked}
           onClick={() => approvalParams.handleClick && approvalParams.handleClick()}
           size="large"
-          sx={{ minHeight: '44px' }}
+          sx={{ 
+            minHeight: '44px',
+            marginBottom: '8px',
+            backgroundColor: 'rgba(255, 126, 9, 1)',
+            border: '1px solid',
+            borderRadius: '12px',
+            borderColor: 'rgba(255, 255, 255, 0.2)',
+            boxShadow: '0px 4px 10px 0 rgba(255, 126, 9, 0.39)',
+            '&:hover, &.Mui-focusVisible': {
+              backgroundColor: '#FF7A00',
+              boxShadow: '0px 4px 10px 0 rgba(255, 126, 9, 0.39)',
+            },
+          }}
           data-cy="approvalButton"
         >
           {approvalParams.loading && (

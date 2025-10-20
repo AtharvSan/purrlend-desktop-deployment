@@ -31,12 +31,13 @@ export default function Home() {
       {currentAccount && !isPermissionsLoading &&(<DashboardTopPanel />)}
 
       <ContentContainer>
-        {/* {currentAccount && !isPermissionsLoading && (
+        {currentAccount && !isPermissionsLoading && (
           <Box
             sx={{
               display: { xs: 'flex', lg: 'none' },
-              justifyContent: { xs: 'center', xsm: 'flex-start' },
-              mb: { xs: 3, xsm: 4 },
+              justifyContent: { xs: 'center', xsm: 'center' },
+              mb: { xs: 4, xsm: 4 },
+              mt: 6,
             }}
           >
             <StyledToggleButtonGroup
@@ -44,27 +45,38 @@ export default function Home() {
               value={mode}
               exclusive
               onChange={(_, value) => setMode(value)}
-              sx={{ width: { xs: '100%', xsm: '359px' }, height: '44px' }}
+              sx={{ width: {xs: '96.5%', xsm: '359px' }, height: '44px' }}
             >
               <StyledToggleButton value="supply" disabled={mode === 'supply'}>
-                <Typography variant="subheader1">
-                  <Trans>Supply</Trans>
+                <Typography sx={{
+                  fontWeight: 500,
+                  fontSize: '14px',
+                  lineHeight: '1em',
+                  letterSpacing: '-0.02em',
+                  py: 1
+                }}>
+                  <Trans>Supplies</Trans>
                 </Typography>
               </StyledToggleButton>
               <StyledToggleButton value="borrow" disabled={mode === 'borrow'}>
-                <Typography variant="subheader1">
+                <Typography sx={{
+                  fontWeight: 500,
+                  fontSize: '14px',
+                  lineHeight: '1em',
+                  letterSpacing: '-0.02em',
+                }}>
                   <Trans>Borrow</Trans>
                 </Typography>
               </StyledToggleButton>
             </StyledToggleButtonGroup>
           </Box>
-        )} */}
+        )}
 
         {currentAccount && !isPermissionsLoading ? (
           <DashboardContentWrapper isBorrow={mode === 'borrow'} />
         ) : (
           <Box sx={{
-            mx: '27%',
+            mx: 'auto',
             mt: '100px',
             // display: 'flex',
             // justifyContent: 'center',

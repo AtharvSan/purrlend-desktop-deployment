@@ -23,6 +23,7 @@ import { LanguageListItem, LanguagesList } from './components/LanguageSwitcher';
 import { MobileCloseButton } from './components/MobileCloseButton';
 import { NavItems } from './components/NavItems';
 import { TestNetModeSwitcher } from './components/TestNetModeSwitcher';
+import WalletWidget from './WalletWidget';
 
 interface MobileMenuProps {
   open: boolean;
@@ -31,16 +32,15 @@ interface MobileMenuProps {
 }
 
 const MenuItemsWrapper = ({ children, title }: { children: ReactNode; title: ReactNode }) => (
-  <Box sx={{ mb: 6, '&:last-of-type': { mb: 0, '.MuiDivider-root': { display: 'none' } } }}>
-    <Box sx={{ px: 2 }}>
-      <Typography variant="subheader2" sx={{ color: '#A5A8B6', px: 4, py: 2 }}>
-        {title}
-      </Typography>
-
+  <Box sx={{
+    px: 2, 
+    mb: 6, 
+    '&:last-of-type': { 
+      mb: 0, 
+      '.MuiDivider-root': { display: 'none' } 
+    } 
+  }}>
       {children}
-    </Box>
-
-    <Divider sx={{ borderColor: '#F2F3F729', mt: 6 }} />
   </Box>
 );
 
@@ -48,17 +48,36 @@ export const MobileMenu = ({ open, setOpen, headerHeight }: MobileMenuProps) => 
   const { i18n } = useLingui();
   const [isLanguagesListOpen, setIsLanguagesListOpen] = useState(false);
 
+  const [walletWidgetOpen, setWalletWidgetOpen] = useState(false);
   useEffect(() => setIsLanguagesListOpen(false), [open]);
 
   return (
     <>
       {open ? (
-        <MobileCloseButton setOpen={setOpen} />
+        <Box sx={{
+          display: 'flex',
+          gap: '10px',
+        }}>
+          <WalletWidget
+            open={walletWidgetOpen}
+            setOpen={setWalletWidgetOpen}
+            headerHeight={headerHeight}
+          />
+          {!walletWidgetOpen &&(<MobileCloseButton setOpen={setOpen} />)}
+        </Box>
       ) : (
         <Button
           id="settings-button-mobile"
           variant="surface"
-          sx={{ p: '7px 8px', minWidth: 'unset', ml: 2 }}
+          sx={{ 
+            p: '7px 8px', 
+            minWidth: '44px',
+            ml: '10px',
+            // mr: '10px',
+            border: '1px solid #FFFFFF33',
+            borderRadius: '12px',
+            // backgroundColor: 'red'
+          }}
           onClick={() => setOpen(true)}
         >
           <SvgIcon sx={{ color: '#F1F1F3' }} fontSize="small">
@@ -69,31 +88,9 @@ export const MobileMenu = ({ open, setOpen, headerHeight }: MobileMenuProps) => 
 
       <DrawerWrapper open={open} setOpen={setOpen} headerHeight={headerHeight}>
         {!isLanguagesListOpen ? (
-          <>
-            <MenuItemsWrapper title={<Trans>Menu</Trans>}>
-              <NavItems setOpen={setOpen} />
-            </MenuItemsWrapper>
-            <MenuItemsWrapper title={<Trans>Global settings</Trans>}>
-              <List>
-                <DarkModeSwitcher />
-                {PROD_ENV && <TestNetModeSwitcher />}
-                <LanguageListItem onClick={() => setIsLanguagesListOpen(true)} />
-              </List>
-            </MenuItemsWrapper>
-            <MenuItemsWrapper title={<Trans>Links</Trans>}>
-              <List>
-                {moreNavigation.map((item, index) => (
-                  <ListItem component={Link} href={item.link} sx={{ color: '#F1F1F3' }} key={index}>
-                    <ListItemIcon sx={{ minWidth: 'unset', mr: 3 }}>
-                      <SvgIcon sx={{ fontSize: '20px', color: '#F1F1F3' }}>{item.icon}</SvgIcon>
-                    </ListItemIcon>
-
-                    <ListItemText>{i18n._(item.title)}</ListItemText>
-                  </ListItem>
-                ))}
-              </List>
-            </MenuItemsWrapper>
-          </>
+          <MenuItemsWrapper title={<Trans>Menu</Trans>}>
+            <NavItems setOpen={setOpen} />
+          </MenuItemsWrapper>
         ) : (
           <List sx={{ px: 2 }}>
             <LanguagesList onClick={() => setIsLanguagesListOpen(false)} />

@@ -1,6 +1,6 @@
 import { normalizeBN, RAY, rayDiv, rayMul } from '@aave/math-utils';
 import { Trans } from '@lingui/macro';
-import { Box, Typography, useTheme } from '@mui/material';
+import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { AxisBottom, AxisLeft } from '@visx/axis';
 import { curveMonotoneX } from '@visx/curve';
 import { localPoint } from '@visx/event';
@@ -142,6 +142,7 @@ export const InterestRateModelGraph = withTooltip<AreaProps, TooltipData>(
   }: AreaProps & WithTooltipProvidedProps<TooltipData>) => {
     if (width < 10) return null;
     const theme = useTheme();
+    const downToSM = useMediaQuery(theme.breakpoints.down('sm'));
 
     // Formatting
     const formattedCurrentUtilizationRate = (parseFloat(reserve.utilizationRate) * 100).toFixed(2);
@@ -323,7 +324,8 @@ export const InterestRateModelGraph = withTooltip<AreaProps, TooltipData>(
 
             {/* Current Utilization Line */}
             <Line
-              from={{ x: xPosCurrent, y: margin.top + 8 }}
+              // from={{ x: xPosCurrent, y: margin.top + 8 }}
+              from={{ x: xPosCurrent, y: downToSM? margin.top + 40 : margin.top + 30 }}
               to={{ x: xPosCurrent, y: innerHeight }}
               stroke="#2D88FF4D"
               strokeWidth={1}
@@ -331,7 +333,8 @@ export const InterestRateModelGraph = withTooltip<AreaProps, TooltipData>(
             />
             <Text
               x={xPosCurrent}
-              y={margin.top }
+              // y={margin.top }
+              y={downToSM? margin.top + 32 : margin.top + 25}
               width={360}
               textAnchor="start"
               verticalAnchor="middle"
@@ -344,8 +347,10 @@ export const InterestRateModelGraph = withTooltip<AreaProps, TooltipData>(
               {`CURRENT `}
             </Text>
             <Text
-              x={xPosCurrent + 60}
-              y={margin.top }
+              // x={xPosCurrent + 60}
+              // y={margin.top }
+              x={downToSM? xPosCurrent +15 : xPosCurrent + 14 }
+              y={downToSM? margin.top + 44 : margin.top + 38}
               width={360}
               textAnchor="start"
               verticalAnchor="middle"
@@ -361,7 +366,9 @@ export const InterestRateModelGraph = withTooltip<AreaProps, TooltipData>(
 
             {/* Optimal Utilization Line */}
             <Line
+              // from={{ x: xPosOptimal, y: downToSM? margin.top + 22 : margin.top + 30 }}
               from={{ x: xPosOptimal, y: margin.top + 8 }}
+
               to={{ x: xPosOptimal, y: innerHeight }}
               stroke="#2D88FF4D"
               strokeWidth={1}
@@ -369,7 +376,8 @@ export const InterestRateModelGraph = withTooltip<AreaProps, TooltipData>(
             />
             <Text
               x={xPosOptimal}
-              y={margin.top}
+              // y={downToSM? margin.top + 10 : margin.top + 25}
+              y={margin.top }
               width={360}
               textAnchor="middle"
               verticalAnchor="middle"
@@ -382,8 +390,9 @@ export const InterestRateModelGraph = withTooltip<AreaProps, TooltipData>(
               {`OPTIMAL `}
             </Text>
             <Text
-              x={xPosOptimal + 45}
-              y={margin.top}
+              // x={xPosOptimal + 15}
+              x={downToSM? xPosOptimal + 15 : xPosOptimal + 45 }
+              y={downToSM? margin.top + 10 : margin.top}
               width={360}
               textAnchor="middle"
               verticalAnchor="middle"

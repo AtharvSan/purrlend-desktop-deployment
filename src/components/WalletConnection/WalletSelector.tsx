@@ -175,9 +175,14 @@ export const WalletSelector = () => {
   };
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column'}}>
-    <TxModalTitle title="Connect Wallet"/>
+    <Box sx={{ display: 'flex', flexDirection: 'column', 
+      // backgroundColor: 'red'
+    }}>
+      
+      <TxModalTitle title="Connect Wallet"/>
+      
       {error && <Warning severity="error">{handleBlocking()}</Warning>}
+      
       <WalletRow
         key="browser_wallet"
         walletName="Browser wallet"
@@ -188,12 +193,16 @@ export const WalletSelector = () => {
         walletName="WalletConnect"
         walletType={WalletType.WALLET_CONNECT}
       />
-      <WalletRow
+      {/* <WalletRow
         key="walletlink_wallet"
         walletName="Coinbase Wallet"
         walletType={WalletType.WALLET_LINK}
       />
-      <WalletRow key="torus_wallet" walletName="Torus" walletType={WalletType.TORUS} />
+      <WalletRow 
+        key="torus_wallet" 
+        walletName="Torus" 
+        walletType={WalletType.TORUS}
+      /> */}
       {/* <WalletRow key="frame_wallet" walletName="Frame" walletType={WalletType.FRAME} /> */}
       {/* <Box sx={{ display: 'flex', alignItems: 'center', mb: 1, padding: '10px 0' }}>
         <Typography variant="subheader1" color="text.secondary">

@@ -21,6 +21,9 @@ interface ListMobileItemWrapperProps {
   showSupplyCapTooltips?: boolean;
   showBorrowCapTooltips?: boolean;
   showDebtCeilingTooltips?: boolean;
+  showSupply?: boolean;
+  showBorders?: boolean;
+  ptCustom?: string;
 }
 
 export const ListMobileItemWrapper = ({
@@ -36,6 +39,9 @@ export const ListMobileItemWrapper = ({
   showSupplyCapTooltips = false,
   showBorrowCapTooltips = false,
   showDebtCeilingTooltips = false,
+  showSupply,
+  showBorders,
+  ptCustom,
 }: ListMobileItemWrapperProps) => {
   const WarningComponent: React.FC = () => {
     const showFrozenTooltip = frozen && symbol !== 'renFIL';
@@ -66,6 +72,9 @@ export const ListMobileItemWrapper = ({
       showSupplyCapTooltips={showSupplyCapTooltips}
       showBorrowCapTooltips={showBorrowCapTooltips}
       showDebtCeilingTooltips={showDebtCeilingTooltips}
+      showSupplyButton={showSupply}
+      showBorder={showBorders}
+      ptCustom={ptCustom}
     >
       {children}
     </ListMobileItem>

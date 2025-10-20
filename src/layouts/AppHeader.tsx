@@ -93,20 +93,26 @@ export function AppHeader() {
           position: 'sticky',
           top: 8,
           transition: theme.transitions.create('top'),
-          zIndex: theme.zIndex.appBar,
+          zIndex: (theme) => theme.zIndex.modal ,
           padding: {
-            xs: mobileMenuOpen || walletWidgetOpen ? '8px 20px' : '8px 8px 8px 20px',
+            xs: '1px 0px 0px 0px',
             xsm: '8px 20px',
             lg: '8px 0px 8px 0px'
           },
-          // mx: '8.333%',
-          width: '1199px',
-          mx: 'auto',
+          width: {
+            xs: '95%',
+            md: '1199px',
+          },
+          mx: {
+            xs: 'auto',
+            md: 'auto',
+          },
           display: 'flex',
           flexDirection: 'row',
           justifyContent: 'space-between',
           alignItems: 'center',
-
+          backgroundColor: 'white',
+          borderRadius: '16px',
         })}
       >
         <Box sx={{ 
@@ -114,8 +120,12 @@ export function AppHeader() {
         width: '54px',
         backgroundColor: '#FFFFFF',
         p: '12px',
-        borderRadius: '16px',
-        boxShadow: '0px 3px 5px 0px #0000000A',
+        borderTopLeftRadius: '16px',
+        borderBottomLeftRadius: mobileMenuOpen || walletWidgetOpen ? '0px' : '16px',
+        borderTopRightRadius: {xs: 'none', md: '16px'},
+        borderBottomRightRadius: {xs: 'none', md: '16px'},
+        boxShadow: mobileMenuOpen || walletWidgetOpen ? 'unset' : '0px 3px 5px 0px #0000000A',
+        // backgroundColor: 'red',
         }}>
           <Box
           component={Link}
@@ -129,27 +139,6 @@ export function AppHeader() {
           </Box>
         </Box>
 
-        {/* <Box sx={{ mr: sm ? 1 : 3 }}>
-          {ENABLE_TESTNET && (
-            <ContentWithTooltip tooltipContent={testnetTooltip} offset={[0, -4]} withoutHover>
-              <Button
-                variant="surface"
-                size="small"
-                color="primary"
-                sx={{
-                  backgroundColor: '#B6509E',
-                  '&:hover, &.Mui-focusVisible': { backgroundColor: 'rgba(182, 80, 158, 0.7)' },
-                }}
-              >
-                TESTNET
-                <SvgIcon sx={{ marginLeft: '2px', fontSize: '16px' }}>
-                  <InformationCircleIcon />
-                </SvgIcon>
-              </Button>
-            </ContentWithTooltip>
-          )}
-        </Box> */}
-        
         <Box sx={{ 
           height: '54px',
           width: '100%',
@@ -158,39 +147,51 @@ export function AppHeader() {
           justifyContent: 'space-between',
           alignItems: 'center',
           backgroundColor: '#FFFFFF',
-          borderRadius: '16px',
+          borderTopRightRadius: '16px',
+          borderBottomRightRadius: mobileMenuOpen || walletWidgetOpen ? '0px': '16px',
+          borderTopLeftRadius: {xs: 'none', md: '16px'},
+          borderBottomLeftRadius: {xs: 'none', md: '16px'},
           p: '8px 8px 8px 12px',
-          boxShadow: '0px 3px 5px 0px #0000000A',
+          boxShadow: mobileMenuOpen || walletWidgetOpen ? 'unset' : '0px 3px 0px 0px #0000000A',
         }}>
+          <Box sx={{
+            display: {xs: 'block',md: 'none'}
+          }}>
+
+          </Box>
           <Box sx={{ 
             display: { xs: 'none', md: 'block' },
-
             ml: '24.5px',
             }}>
             <NavItems />
           </Box>
 
-          {!mobileMenuOpen && (
-            <WalletWidget
-              open={walletWidgetOpen}
-              setOpen={setWalletWidgetOpen}
-              headerHeight={headerHeight}
-            />
-          )}
-
-          {/* <Box sx={{ display: { xs: 'none', md: 'block' } }}>
-            <SettingsMenu />
-          </Box> */}
-
-          {!walletWidgetOpen && (
-            <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-              <MobileMenu
-                open={mobileMenuOpen}
-                setOpen={setMobileMenuOpen}
+          <Box sx={{
+            display: 'flex',
+          }}>
+            {!mobileMenuOpen && (
+              <WalletWidget
+                open={walletWidgetOpen}
+                setOpen={setWalletWidgetOpen}
                 headerHeight={headerHeight}
               />
-            </Box>
-          )}
+            )}
+
+            {/* <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+              <SettingsMenu />
+            </Box> */}
+
+            {!walletWidgetOpen && (
+              <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+                <MobileMenu
+                  open={mobileMenuOpen}
+                  setOpen={setMobileMenuOpen}
+                  headerHeight={headerHeight}
+                />
+              </Box>
+            )}
+          </Box>
+
         </Box>
       </Box>
     </HideOnScroll>

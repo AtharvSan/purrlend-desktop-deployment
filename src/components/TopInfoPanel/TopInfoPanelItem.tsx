@@ -32,7 +32,7 @@ export const TopInfoPanelItem = ({
       sx={{
         display: 'flex',
         alignItems: 'center',
-        width: { xs: 'calc(50% - 12px)', xsm: 'unset' },
+        width: { xs: 'calc(50)', xsm: 'unset' },
         // backgroundColor: 'red',
         mt: '1px',
       }}
@@ -91,7 +91,7 @@ export const TopInfoPanelItem = ({
 
             }}
             variant={upToSM ? 'description' : 'caption'}
-            component="div"
+            // component="div"
           >
             {title}
           </Typography>

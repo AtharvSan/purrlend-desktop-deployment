@@ -47,9 +47,10 @@ export const DashboardEModeButton = ({ userEmodeCategoryId }: DashboardEModeButt
   return (
     <Box
       sx={{ 
-        display: 'inline-flex', 
+        display: 'flex', 
         alignItems: 'center',
-        ml: '20px',
+        mx: '14px',
+        // backgroundColor: 'blue',
        }}
       onClick={(e) => {
         e.stopPropagation();
@@ -58,10 +59,13 @@ export const DashboardEModeButton = ({ userEmodeCategoryId }: DashboardEModeButt
       {isEModeDisabled ?(
       <Box
         sx={{ 
-          display: 'inline-flex',
+          display: 'flex',
+          width: {xs: '100%', md: 'none'},
           justifyContent: 'space-between',
           alignItems: 'center', 
+          // backgroundColor: 'red',
           gap: '8px',
+          // mt: '100px',
           py: '5px',
           paddingRight:'5px',
           paddingLeft:'8px',
@@ -72,23 +76,29 @@ export const DashboardEModeButton = ({ userEmodeCategoryId }: DashboardEModeButt
         <Box sx={{
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center',
-          marginLeft: '1px',
+          gap: '6px',
         }}>
-            <img src={uiConfig.emodeLeaf} alt="E-Mode" />
-        </Box>
-        <Typography mr={1} variant="description" color="text.secondary" 
-          sx={{
-            fontWeight: 500,
-            fontStyle: 'medium',
-            fontSize: '14px',
-            lineHeight: '100%',
-            letterSpacing: '-2%',
-            horizontalAlign: 'center',
-            color: 'rgba(6, 21, 18, 1)',
+          <Box sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginLeft: '1px',
           }}>
-          <Trans>E-Mode</Trans>
-        </Typography>
+              <img src={uiConfig.emodeLeaf} alt="E-Mode" />
+          </Box>
+          <Typography mr={1} variant="description" color="text.secondary" 
+            sx={{
+              fontWeight: 500,
+              fontStyle: 'medium',
+              fontSize: '14px',
+              lineHeight: '100%',
+              letterSpacing: '-2%',
+              horizontalAlign: 'center',
+              color: 'rgba(6, 21, 18, 1)',
+            }}>
+            <Trans>E-Mode</Trans>
+          </Typography>
+        </Box>
 
         <Button
           onClick={(e) => {
@@ -115,12 +125,21 @@ export const DashboardEModeButton = ({ userEmodeCategoryId }: DashboardEModeButt
         >
           <Box>
             {isEModeDisabled ? (
-              <Typography variant="buttonS" color="rgba(130, 130, 130, 1)">
+              // <Typography variant="buttonS" color="rgba(130, 130, 130, 1)">
+              <Typography sx={{
+                fontWeight: 500,
+                fontSize: '10px',
+                lineHeight: '1em',
+                letterSpacing: '0.08em',
+                color: '#828282',
+                py: '6px',
+              }}>
                 <EModeLabelMessage />
               </Typography>
             ) : (
               <TypographyGradient variant="buttonS">
                 <EModeLabelMessage />
+                {/* <Typography>hi</Typography> */}
               </TypographyGradient>
             )}
           </Box>
@@ -132,7 +151,9 @@ export const DashboardEModeButton = ({ userEmodeCategoryId }: DashboardEModeButt
           display: 'inline-flex',
           justifyContent: 'space-between',
           alignItems: 'center', 
+          width: '100%',
           gap: '8px',
+          mt: {xs: '7px', md: '0px' } ,
           py: '5px',
           paddingRight:'5px',
           paddingLeft:'8px',
@@ -140,25 +161,32 @@ export const DashboardEModeButton = ({ userEmodeCategoryId }: DashboardEModeButt
           borderColor: '#FF7E091A',
           borderRadius: '32px',
           backgroundColor: '#FFF2E6',
+          // backgroundColor: 'red',
         }}>
         <Box sx={{
           display: 'flex',
+          gap: '8px',
           alignItems: 'center',
-          justifyContent: 'center',
-          marginLeft: '1px',
-          // backgroundColor: 'red'
         }}>
-            <img src={uiConfig.emodeLeafOn} alt="E-Mode" />
+          <Box sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginLeft: '1px',
+          }}>
+              <img src={uiConfig.emodeLeafOn} alt="E-Mode" />
+          </Box>
+          <Typography mr={1} variant="description" color="text.secondary" sx={{
+          fontWeight: 500,
+          fontStyle: 'medium',
+          fontSize: '14px',
+          lineHeight: '100%',
+          letterSpacing: '-2%',
+          horizontalAlign: 'center',
+          color: 'rgba(6, 21, 18, 1)'}}>
+            <Trans>E-Mode</Trans>
+          </Typography>
         </Box>
-        <Typography mr={1} variant="description" color="text.secondary" sx={{
-        fontWeight: 500,
-        fontStyle: 'medium',
-        fontSize: '14px',
-        lineHeight: '100%',
-        letterSpacing: '-2%',
-        horizontalAlign: 'center',
-        color: 'rgba(6, 21, 18, 1)'}}>
-          <Trans>E-Mode</Trans></Typography>
 
         <Button
           onClick={(e) => {

@@ -221,11 +221,16 @@ export const BorrowedPositionsList = () => {
       {sortedReserves.length ? (
         <>
           {!downToXSM && <RenderHeader />}
-          {sortedReserves.map((item) => (
+          {sortedReserves.map((item,index) => (
             <Fragment key={item.underlyingAsset + item.borrowRateMode}>
               <AssetCapsProvider asset={item.reserve}>
                 {downToXSM ? (
+                  <>
                   <BorrowedPositionsListMobileItem {...item} />
+                  {index !== sortedReserves.length - 1 && ( // show divider only if not last item
+                    <Divider sx={{ mb: 1, borderColor: '#E8E8E8' }} />
+                  )}
+                  </>
                 ) : (
                   <BorrowedPositionsListItem
                     {...item}

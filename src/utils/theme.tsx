@@ -761,8 +761,10 @@ export function getThemedComponents(theme: Theme) {
         defaultProps: {
           iconMapping: {
             error: (
+              // <img src={uiConfig.triangleExclamation} alt="warning Icon" color='#f05555ff'/>
               <SvgIcon color="error">
-                <Dangerous />
+                {/* <Dangerous /> */}
+                <ExclamationCircleIcon />
               </SvgIcon>
             ),
             info: (
@@ -777,7 +779,7 @@ export function getThemedComponents(theme: Theme) {
               </SvgIcon>
             ),
             warning: (
-              <img src={uiConfig.triangleExclamation} alt="error Icon" />
+              <img src={uiConfig.triangleExclamation} alt="warning Icon" />
               // <SvgIcon color="warning">
               //   <ExclamationCircleIcon />
               // </SvgIcon>

@@ -1,5 +1,5 @@
 import { Trans } from '@lingui/macro';
-import { Box, Button } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import { useAssetCaps } from 'src/hooks/useAssetCaps';
 import { useProtocolDataContext } from 'src/hooks/useProtocolDataContext';
 import { DashboardReserve } from 'src/utils/dashboardSortUtils';
@@ -48,7 +48,17 @@ export const SupplyAssetsListMobileItem = ({
       showDebtCeilingTooltips
     >
       <ListValueRow
-        title={<Trans>Supply balance</Trans>}
+        title={
+          <Typography sx={{
+            fontWeight: 400,
+            fontSize: '16px',
+            lineHeight: '1em',
+            letterSpacing: '-0.02em',
+            color: '#828282',
+          }}>
+            <Trans>Supply balance</Trans>
+          </Typography>
+        }
         value={Number(walletBalance)}
         subValue={walletBalanceUSD}
         disabled={Number(walletBalance) === 0}
@@ -63,7 +73,17 @@ export const SupplyAssetsListMobileItem = ({
       />
 
       <Row
-        caption={<Trans>Supply APY</Trans>}
+        caption={
+          <Typography sx={{
+            fontWeight: 400,
+            fontSize: '16px',
+            lineHeight: '1em',
+            letterSpacing: '-0.02em',
+            color: '#828282',
+          }}>
+            <Trans>Supply APY</Trans>
+          </Typography>
+        }
         align="flex-start"
         captionVariant="description"
         mb={2}
@@ -77,10 +97,21 @@ export const SupplyAssetsListMobileItem = ({
       </Row>
 
       <Row
-        caption={<Trans>Can be collateral</Trans>}
+        caption={
+          <Typography sx={{
+            fontWeight: 400,
+            fontSize: '16px',
+            lineHeight: '1em',
+            letterSpacing: '-0.02em',
+            color: '#828282',
+          }}>
+            <Trans>Can be collateral</Trans>
+          </Typography>
+        }
         align="flex-start"
         captionVariant="description"
         mb={2}
+        mt={3.5}
       >
         <ListItemCanBeCollateral
           isIsolated={isIsolated}
@@ -88,23 +119,50 @@ export const SupplyAssetsListMobileItem = ({
         />
       </Row>
 
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mt: 5 }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between',gap: '2%', mt: 5 }}>
         <Button
           disabled={!isActive || isFreezed || Number(walletBalance) <= 0}
           variant="contained"
           onClick={() => openSupply(underlyingAsset)}
-          sx={{ mr: 1.5 }}
           fullWidth
+          sx={{
+            border: '1px solid #FFFFFF33',
+            borderRadius: '70px',
+            backgroundColor: '#061512',
+            color: '#FFFFFF',
+            height: '38px',
+          }}
         >
-          <Trans>Supply</Trans>
+          <Typography sx={{
+            fontWeight: 500,
+            fontSize: '14px',
+            lineHeight: '1em',
+            letterSpacing: '-0.02em',
+          }}>
+            <Trans>Supply</Trans>
+          </Typography>
         </Button>
         <Button
           variant="outlined"
           component={Link}
           href={ROUTES.reserveOverview(detailsAddress, currentMarket)}
           fullWidth
+          sx={{ 
+            border: '1px solid #DCDCDC',
+            borderRadius: '70px',
+            backgroundColor: '#FFFFFF',
+            color: '#061512',
+            height: '38px',
+          }}
         >
-          <Trans>Details</Trans>
+          <Typography sx={{
+            fontWeight: 500,
+            fontSize: '14px',
+            lineHeight: '1em',
+            letterSpacing: '-0.02em',
+          }}>
+            <Trans>Details</Trans>
+          </Typography>
         </Button>
       </Box>
     </ListMobileItemWrapper>

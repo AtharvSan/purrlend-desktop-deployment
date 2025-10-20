@@ -15,7 +15,7 @@ export const PanelRow: React.FC<BoxProps> = (props) => (
   />
 );
 export const PanelTitle: React.FC<TypographyProps> = (props) => (
-  <Box sx={{mt: '9.5px',}}>
+  <Box sx={{mt: '10px',}}>
       <Box 
         sx={{
           backgroundColor: 'rgba(255, 126, 9, 1)',
@@ -23,7 +23,7 @@ export const PanelTitle: React.FC<TypographyProps> = (props) => (
           height: '24px',
           position: 'absolute',
           top: '-1px',
-          mt: '9.5px',
+          mt: {xs: 'unset', md: '9.5px'},
         }}>
       </Box>
       <Typography
@@ -31,13 +31,12 @@ export const PanelTitle: React.FC<TypographyProps> = (props) => (
         sx={{ 
           minWidth: { xs: '170px' }, 
           mr: 4, 
-          mb: { xs: 6, md: '2px' },
+          mb: { xs: 0, md: '2px' },
           ml: '16.2px',
           fontWeight: 600,
           fontSize: '20px',
           lineHeight: '1em',
           letterSpacing: '-0.02em',
-          mt: '0.5px',
 
           color: '#061512',
           ...props.sx 

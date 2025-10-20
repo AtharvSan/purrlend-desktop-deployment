@@ -26,8 +26,7 @@ export const NavItems = ({ setOpen }: NavItemsProps) => {
 
         alignItems: { xs: 'flex-start', md: 'center' },
         flexDirection: { xs: 'column', md: 'row' },
-        gap: '33px',
-        // backgroundColor: 'red',
+        gap: {xs: '10px', md: '33px'},
       }}
       disablePadding
     >
@@ -39,7 +38,10 @@ export const NavItems = ({ setOpen }: NavItemsProps) => {
               // backgroundColor: 'red',
               display: 'flex',
               justifyContent: 'start',
-              // width: { xs: '100%', md: 'unset' },
+              border: {xs: '1px solid #D7D7D7', md: 'none'},
+              borderRadius: '16px',
+              width: { xs: '96%', md: 'unset' },
+              mx: 'auto',
             }}
             // data-cy={item.dataCy}
             disablePadding
@@ -50,9 +52,17 @@ export const NavItems = ({ setOpen }: NavItemsProps) => {
                 component={Link}
                 href={item.link}
                 activePaths={item.activePaths}
-                variant="h2"
-                color="#F1F1F3"
-                sx={{ width: '100%', p: 4 }}
+                color="#061512"
+                sx={{ 
+                  width: '100%', 
+                  py: '21px',
+                  px: 4,
+                  fontWeight: 500,
+                  fontSize: '20px',
+                  lineHeight: '1em',
+                  letterSpacing: '-0.02em',
+                  // backgroundColor: 'red',
+                }}
                 onClick={() => (setOpen ? setOpen(false) : undefined)}
               >
                 {typeof item.title === 'string' ? i18n._(item.title) : item.title}
@@ -64,7 +74,6 @@ export const NavItems = ({ setOpen }: NavItemsProps) => {
                 activePaths={item.activePaths}  
                 sx={(theme) => ({
                   fontSize: '14px',
-                  // backgroundColor: 'red',
                   fontWeight: 500,
                   lineHeight: '1em',
                   letterSpacing: '-0.02em',
@@ -102,10 +111,6 @@ export const NavItems = ({ setOpen }: NavItemsProps) => {
             )}
           </ListItem>
         ))}
-
-      {/* <ListItem sx={{ display: { xs: 'none', md: 'flex' }, width: 'unset' }} disablePadding>
-        <MoreMenu />
-      </ListItem> */}
     </List>
   );
 };

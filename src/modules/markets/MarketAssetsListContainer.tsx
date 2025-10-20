@@ -52,7 +52,7 @@ export const MarketAssetsListContainer = () => {
       flexDirection: 'column',
       // mx: '2.05%',
       mx: 'auto',
-      width: '1199px',
+      width:{xs: '97%', md: '1199px'},
       my: '2.7%',
       }}>
       <MarketAssetListTitle

@@ -1,5 +1,5 @@
 import { Trans } from '@lingui/macro';
-import { Box, Button, Divider } from '@mui/material';
+import { Box, Button, Divider, Typography } from '@mui/material';
 import { StableAPYTooltip } from 'src/components/infoTooltips/StableAPYTooltip';
 import { VariableAPYTooltip } from 'src/components/infoTooltips/VariableAPYTooltip';
 import { NoData } from 'src/components/primitives/NoData';
@@ -12,9 +12,13 @@ import { Link, ROUTES } from '../../components/primitives/Link';
 import { Row } from '../../components/primitives/Row';
 import { ComputedReserveData } from '../../hooks/app-data-provider/useAppDataProvider';
 import { ListMobileItemWrapper } from '../dashboard/lists/ListMobileItemWrapper';
+import { useModalContext } from 'src/hooks/useModal';
+import { uiConfig } from 'src/uiConfig';
 
 export const MarketAssetsListMobileItem = ({ ...reserve }: ComputedReserveData) => {
   const { currentMarket } = useProtocolDataContext();
+  const { openSupply } = useModalContext();
+
   return (
     <ListMobileItemWrapper
       symbol={reserve.symbol}
@@ -22,8 +26,22 @@ export const MarketAssetsListMobileItem = ({ ...reserve }: ComputedReserveData) 
       name={reserve.name}
       underlyingAsset={reserve.underlyingAsset}
       currentMarket={currentMarket}
+      showSupply={true}
+      showBorders={true}
+      ptCustom={'16px'}
     >
-      <Row caption={<Trans>Total supplied</Trans>} captionVariant="description" mb={3}>
+      <Divider sx={{ mb: 3 }} />
+      <Row caption={
+        <Typography sx={{
+          fontWeight: 400,
+          fontSize: '16px',
+          lineHeight: '1em',
+          letterSpacing: '-0.02em',
+          color: '#828282',
+        }}>
+          <Trans>Total supplied</Trans>
+        </Typography>
+        } captionVariant="description" mb={3}>
         <Box
           sx={{
             display: 'flex',
@@ -33,12 +51,22 @@ export const MarketAssetsListMobileItem = ({ ...reserve }: ComputedReserveData) 
             textAlign: 'center',
           }}
         >
-          <FormattedNumber compact value={reserve.totalLiquidity} variant="secondary14" />
-          <ReserveSubheader value={reserve.totalLiquidityUSD} rightAlign={true} />
+          <FormattedNumber compact value={reserve.totalLiquidity} visibleDecimals={2} fontSize={16} fontWeight={400} lineHeight={'1em'} letterSpacing={'-0.02em'} color={'#252525'} />
+          <ReserveSubheader fs={'14px'} value={reserve.totalLiquidityUSD} rightAlign={true} />
         </Box>
       </Row>
       <Row
-        caption={<Trans>Supply APY</Trans>}
+        caption={
+          <Typography sx={{
+          fontWeight: 400,
+          fontSize: '16px',
+          lineHeight: '1em',
+          letterSpacing: '-0.02em',
+          color: '#828282',
+          }}>
+            <Trans>Supply APY</Trans>
+          </Typography>
+        }
         captionVariant="description"
         mb={3}
         align="flex-start"
@@ -52,9 +80,18 @@ export const MarketAssetsListMobileItem = ({ ...reserve }: ComputedReserveData) 
         />
       </Row>
 
-      <Divider sx={{ mb: 3 }} />
-
-      <Row caption={<Trans>Total borrowed</Trans>} captionVariant="description" mb={3}>
+      <Row 
+        caption={
+          <Typography sx={{
+          fontWeight: 400,
+          fontSize: '16px',
+          lineHeight: '1em',
+          letterSpacing: '-0.02em',
+          color: '#828282',
+          }}>
+            <Trans>Total borrowed</Trans>
+          </Typography>
+        } captionVariant="description" mb={3}>
         <Box
           sx={{
             display: 'flex',
@@ -66,8 +103,8 @@ export const MarketAssetsListMobileItem = ({ ...reserve }: ComputedReserveData) 
         >
           {Number(reserve.totalDebt) > 0 ? (
             <>
-              <FormattedNumber compact value={reserve.totalDebt} variant="secondary14" />
-              <ReserveSubheader value={reserve.totalDebtUSD} rightAlign={true} />
+              <FormattedNumber compact value={reserve.totalDebt} visibleDecimals={2} fontSize={16} fontWeight={400} lineHeight={'1em'} letterSpacing={'-0.02em'} color={'#252525'} />
+              <ReserveSubheader fs={'14px'} value={reserve.totalDebtUSD} rightAlign={true} />
             </>
           ) : (
             <NoData variant={'secondary14'} color="text.secondary" />
@@ -76,11 +113,15 @@ export const MarketAssetsListMobileItem = ({ ...reserve }: ComputedReserveData) 
       </Row>
       <Row
         caption={
-          <VariableAPYTooltip
-            text={<Trans>Borrow APY, variable</Trans>}
-            key="APY_list_mob_variable_type"
-            variant="description"
-          />
+          <Typography sx={{
+          fontWeight: 400,
+          fontSize: '16px',
+          lineHeight: '1em',
+          letterSpacing: '-0.02em',
+          color: '#828282',
+          }}>
+            <Trans>Borrow APY</Trans>
+          </Typography>
         }
         captionVariant="description"
         mb={3}
@@ -99,40 +140,37 @@ export const MarketAssetsListMobileItem = ({ ...reserve }: ComputedReserveData) 
             !reserve.isFrozen && <ReserveSubheader value={'Disabled'} />}
         </Box>
       </Row>
-      <Row
-        caption={
-          <StableAPYTooltip
-            text={<Trans>Borrow APY, stable</Trans>}
-            key="APY_list_mob_stable_type"
-            variant="description"
-          />
-        }
-        captionVariant="description"
-        mb={4}
-        align="flex-start"
-      >
-        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-          <IncentivesCard
-            align="flex-end"
-            value={Number(reserve.totalStableDebtUSD) > 0 ? reserve.stableBorrowAPY : '-1'}
-            incentives={reserve.sIncentivesData || []}
-            symbol={reserve.symbol}
-            variant="secondary14"
-          />
-          {!reserve.borrowingEnabled &&
-            Number(reserve.totalStableDebt) > 0 &&
-            !reserve.isFrozen && <ReserveSubheader value={'Disabled'} />}
-        </Box>
-      </Row>
+      
+      <Box sx={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+      }}>
+        <Typography sx={{
+          fontWeight: 400,
+          fontSize: '16px',
+          lineHeight: '1em',
+          letterSpacing: '-0.02em',
+          color: '#828282',
+        }}>
+          Oracle
+        </Typography>
 
-      <Button
-        variant="outlined"
-        component={Link}
-        href={ROUTES.reserveOverview(reserve.underlyingAsset, currentMarket)}
-        fullWidth
-      >
-        <Trans>View details</Trans>
-      </Button>
+        <Box sx={{display: 'flex', alignItems: 'center' }}>
+          <img src={uiConfig.pyth} alt="oracle icon" width={20} />
+          <Typography sx={{
+            ml: 2,
+            fontWeight: 400,
+            fontSize: '16px',
+            lineHeight: '1em',
+            letterSpacing: '-0.02em',
+            color: '#252525',
+          }}>
+            Pyth
+          </Typography>
+        </Box>
+      </Box>
+
     </ListMobileItemWrapper>
   );
 };

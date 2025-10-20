@@ -36,24 +36,26 @@ export const MarketAssetSearchInput = ({ onSearchTermChange }: MarketAssetSearch
           alignItems: 'center',
           flexGrow: 1,
           gap: 2,
-          border: `1px solid ${theme.palette.divider}`,
-          borderRadius: '6px',
+          border: `1px solid #D7D7D7`,
+          backgroundColor: '#FFFFFF',
+          borderRadius: '38px',
           height: '36px',
         })}
       >
-        <Box sx={{ ml: 2, mt: 1 }}>
-          <SearchIcon height={16} />
+        <Box sx={{ ml: 3, mt: 1 }}>
+          <img src={uiConfig.search} alt="search icon" />
         </Box>
-        <InputBase
-          autoFocus
+        <InputBase autoFocus
           inputRef={inputEl}
-          sx={{ flexGrow: 1, fontSize: 16 }}
+          sx={{ flexGrow: 1, fontSize: 16 ,
+            width: '164px',
+          }}
           placeholder="Search asset"
-          value={searchTerm}
           onChange={(e) => {
             setSearchTerm(e.target.value);
             debounchedChangeHandler(e.target.value);
           }}
+          value={searchTerm}
         />
         <IconButton
           sx={{ p: 0, mr: 2, visibility: searchTerm ? 'visible' : 'hidden' }}

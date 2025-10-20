@@ -26,14 +26,11 @@ export const ConnectWalletPaper = ({
         alignItems: 'center',
         justifyContent: 'center',
         textAlign: 'center',
-        // p: 4,
-        // backgroundColor:'red',
         flex: 1,
-        width: '579px',
+        width: {xs:'90%' , md:'579px' },
         height: '494px',
-        top: 203,
-        paddingTop: 9,
-        paddingBottom: 10,
+        margin: 'auto',
+        paddingBottom: 2,
         borderRadius: 3,
         borderWidth: 1,
         ...sx,
@@ -47,6 +44,7 @@ export const ConnectWalletPaper = ({
           <>
             <Typography variant="h2" sx={{ 
                 mb: 2,
+                mx: {xs: '22%'},
                 fontSize: '24px',
                 fontWeight: 500,
                 letterSpacing: '-0.02em',
@@ -55,11 +53,10 @@ export const ConnectWalletPaper = ({
               <Trans>Connect wallet to get started!</Trans>
             </Typography>
             <Typography sx={{ 
-              mb: 6,
-              width: '427px',
+              width: {xs: '85%', md: '75%'},
               fontWeight: 400,
               fontSize: '16px',
-              mb: '35px',
+              mb: 8,
               lineHeight: '1.35em',
               letterSpacing: '-0.02em',
               color: '#828282',

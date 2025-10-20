@@ -31,4 +31,5 @@ export const uiConfig = {
   info: '/info.svg',
   allDone: '/allDone.svg',
   txArrow: '/txArrow.svg',
+  xicon: '/xicon.svg',
 };

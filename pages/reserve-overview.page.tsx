@@ -45,7 +45,7 @@ export default function ReserveOverview() {
           sx={{
             display: { xs: 'flex', lg: 'none' },
             justifyContent: { xs: 'center', xsm: 'flex-start' },
-            mb: { xs: 3, xsm: 4 },
+            mb: { xs: 2, xsm: 4 },
           }}
         >
           <StyledToggleButtonGroup
@@ -53,31 +53,44 @@ export default function ReserveOverview() {
             value={mode}
             exclusive
             onChange={(_, value) => setMode(value)}
-            sx={{ width: { xs: '100%', xsm: '359px' }, height: '44px' }}
+            sx={{
+              width: { xs: '96%', xsm: '359px' }, 
+              height: '44px',
+
+            }}
           >
             <StyledToggleButton value="overview" disabled={mode === 'overview'}>
-              <Typography variant="subheader1">
-                <Trans>Overview</Trans>
+              <Typography variant="subheader1" sx={{
+                fontWeight: 500,
+                fontSize: '14px',
+                lineHeight: '1em',
+                letterSpacing: '-0.02em',
+              }}>
+                <Trans>Supply Info</Trans>
               </Typography>
             </StyledToggleButton>
             <StyledToggleButton value="actions" disabled={mode === 'actions'}>
-              <Typography variant="subheader1">
-                <Trans>Your info</Trans>
+              <Typography variant="subheader1" sx={{
+                fontWeight: 500,
+                fontSize: '14px',
+                lineHeight: '1em',
+                letterSpacing: '-0.02em',
+              }}>
+                <Trans>Your Wallet</Trans>
               </Typography>
             </StyledToggleButton>
           </StyledToggleButtonGroup>
         </Box>
 
-        <Box 
+        {/* <Box 
           sx={{ 
             display: 'flex',
             flexDirection: 'row',
-            justifyContent: 'space-between',
+            justifyContent: {xs: 'center', md: 'space-between'},
             // backgroundColor: 'red',
-            width: '1199px',
-            mx: 'auto',
+            width: {xs: '100%', md: '1199px'},
+            // mx: 'auto',
           }}>
-          {/** Main status and configuration panel*/}
           <Box
             sx={{
               display: { xs: !isOverview ? 'none' : 'block', lg: 'block' },
@@ -89,16 +102,52 @@ export default function ReserveOverview() {
             {reserve && <ReserveConfiguration reserve={reserve} />}
           </Box>
 
-          {/** Right panel with actions*/}
           <Box
             sx={{
               display: { xs: isOverview ? 'none' : 'block', lg: 'block' },
-              // backgroundColor: 'red'
+              // backgroundColor: 'blue',
+              width: '90%',
+              // justifyContent: 'center',
+            }}
+          >
+            <ReserveActions reserve={reserve} />
+          </Box>
+        </Box> */}
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: { xs: 'column', lg: 'row' },
+            alignItems: 'flex-start',
+            justifyContent: { xs: 'center', lg: 'space-between' },
+            width: '100%',
+            maxWidth: '1199px',
+            mx: 'auto',
+          }}
+        >
+          <Box
+            sx={{
+              display: { xs: !isOverview ? 'none' : 'block', lg: 'block' },
+              flex: { lg: '1 1 70%' },
+              width: '96%',
+              // backgroundColor: 'red',
+              mx: 'auto',
+            }}
+          >
+            {reserve && <ReserveConfiguration reserve={reserve} />}
+          </Box>
+
+          <Box
+            sx={{
+              display: { xs: isOverview ? 'none' : 'block', lg: 'block' },
+              flex: { lg: '1 1 30%' },
+              width: '100%',
+              mt: { xs: 3, lg: 0 },
             }}
           >
             <ReserveActions reserve={reserve} />
           </Box>
         </Box>
+
       </ContentContainer>
     </AssetCapsProvider>
   );

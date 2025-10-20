@@ -216,11 +216,16 @@ export const SuppliedPositionsList = () => {
       {sortedReserves.length ? (
         <>
           {!downToXSM && <RenderHeader />}
-          {sortedReserves.map((item) => (
+          {sortedReserves.map((item,index) => (
             <Fragment key={item.underlyingAsset}>
               <AssetCapsProvider asset={item.reserve}>
                 {downToXSM ? (
+                  <>
                   <SuppliedPositionsListMobileItem {...item} />
+                  {index !== sortedReserves.length - 1 && ( // show divider only if not last item
+                    <Divider sx={{ mb: 1, borderColor: '#E8E8E8' }} />
+                  )}
+                  </>
                 ) : (
                   <SuppliedPositionsListItem {...item} />
                 )}

@@ -177,8 +177,9 @@ export const MarketAssetsListItem = ({ ...reserve }: ComputedReserveData) => {
               fontSize: '14px',
               lineHeight: '1em',
               letterSpacing: '-0.02em',
-
-            }}>Supply</Button>
+            }}>
+              Supply
+          </Button>
         </ListColumn>
       </Box>
     </Box>

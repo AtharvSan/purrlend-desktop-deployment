@@ -1,5 +1,5 @@
 import { Trans } from '@lingui/macro';
-import { AlertColor, Typography } from '@mui/material';
+import { AlertColor, Box, Typography } from '@mui/material';
 
 import { HealthFactorNumber } from '../../../components/HealthFactorNumber';
 import { BasicModal } from '../../../components/primitives/BasicModal';
@@ -8,6 +8,7 @@ import { Link } from '../../../components/primitives/Link';
 import { HFContent } from './components/HFContent';
 import { InfoWrapper } from './components/InfoWrapper';
 import { LTVContent } from './components/LTVContent';
+import { Warning } from 'src/components/primitives/Warning';
 
 interface LiquidationRiskParametresInfoModalProps {
   open: boolean;
@@ -46,10 +47,33 @@ export const LiquidationRiskParametresInfoModal = ({
 
   return (
     <BasicModal open={open} setOpen={setOpen}>
-      <Typography variant="h2" mb={6}>
-        <Trans>Liquidation risk parameters</Trans>
-      </Typography>
-      <Typography mb={6}>
+      <Box sx={{
+        display: 'flex',
+      }}>
+        <Box sx={{
+          height: '31px',
+          width: '2px',
+          position: 'relative',
+          left: '-24px',
+          top: '-3.5px',
+          backgroundColor: '#FF7E09',
+          boxShadow: '2px 0px 12px 0px #FFFFFF80',
+        }}>
+
+        </Box>
+        <Typography sx={{
+          fontWeight: 600,
+          fontSize: '24px',
+          lineHeight:'1em',
+          letterSpacing: '-0.02em',
+          color: '#061512',
+          position: 'relative',
+          left: '-2px',
+        }}>
+          <Trans>Liquidity risk</Trans>
+        </Typography>
+      </Box>
+      <Typography mb={6} mt={4}>
         <Trans>
           Your health factor and loan to value determine the assurance of your collateral. To avoid
           liquidations you can supply more collateral or repay borrow positions.
@@ -90,7 +114,7 @@ export const LiquidationRiskParametresInfoModal = ({
         <HFContent healthFactor={healthFactor} />
       </InfoWrapper>
 
-      <InfoWrapper
+      <InfoWrapper 
         topTitle={<Trans>Current LTV</Trans>}
         topDescription={
           <Trans>Your current loan to value based on your collateral supplied.</Trans>
@@ -111,6 +135,7 @@ export const LiquidationRiskParametresInfoModal = ({
           </Trans>
         }
         color={ltvColor}
+        
       >
         <LTVContent
           loanToValue={loanToValue}

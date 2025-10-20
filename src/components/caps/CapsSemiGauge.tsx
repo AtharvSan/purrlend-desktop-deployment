@@ -74,7 +74,7 @@ const dashOffsetArc = halfArc * (1 - pct);
 
   const svg = (
     <svg
-      width={size}
+      width={size / 2}
       height={size / 2}
       viewBox={`0 0 ${size} ${size}`}
       style={{ overflow: 'visible' }}
@@ -147,11 +147,23 @@ const dashOffsetArc = halfArc * (1 - pct);
   const valueSize = valueFontSize ?? Math.max(18, Math.round(size * 0.19));
   const labelSize = labelFontSize ?? Math.max(10, Math.round(size * 0.09));
 
+  const determineValueDisplay = (): string => {
+    if (value >= 99.99) {
+      return '100%';
+    } else if (value === 0) {
+      return 'N/A';
+    } else if (value < 0.01) {
+      return '<0.01%';
+    } else {
+      return `${value.toFixed(2)}%`;
+    }
+  };
+
   return (
     <Box sx={{
-      ml:'40px',
-      height: 100, 
-      width: 120,  
+      ml:{xs: '20px', md: '40px'},
+      height: '100px',
+      width: '120px', 
       display: 'flex', 
       flexDirection: 'column', 
       alignItems: 'center' 
@@ -161,7 +173,8 @@ const dashOffsetArc = halfArc * (1 - pct);
       {/* Text block positioned inside the arc */}
       <Box sx={{ position: 'relative', top: offset, textAlign: 'center', pointerEvents: 'none' }}>
         <Typography sx={{ lineHeight: 1, fontWeight: 500, letterSpacing: '-0.02em', fontSize: '18px', }}>
-          {(pct * 100).toFixed(2)}%
+          {/* {(pct * 100).toFixed(2)}% */}
+          {determineValueDisplay()}
         </Typography>
         <Typography sx={{ mt: 1, opacity: 0.6, letterSpacing: 1.2, fontSize: labelSize }}>
           {label}

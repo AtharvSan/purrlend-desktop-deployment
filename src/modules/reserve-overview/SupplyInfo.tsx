@@ -1,7 +1,7 @@
 import { valueToBigNumber } from '@aave/math-utils';
 import { Trans } from '@lingui/macro';
 import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
-import { AlertTitle, Box, Typography } from '@mui/material';
+import { AlertTitle, Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { CapsCircularStatus } from 'src/components/caps/CapsCircularStatus';
 import CapsSemiGauge from 'src/components/caps/CapsSemiGauge';
 import { DebtCeilingStatus } from 'src/components/caps/DebtCeilingStatus';
@@ -41,206 +41,189 @@ export const SupplyInfo = ({
   supplyCap,
   debtCeiling,
 }: SupplyInfoProps) => {
+  const theme = useTheme();
+  const downToSM = useMediaQuery(theme.breakpoints.down('sm'));
+  const _size = downToSM ? 250 : 300;
+  const _thickness = downToSM ? 26 : 31;
+
   return (
     <Box sx={{ 
-      marginLeft: '16px',
-      marginRight: '16px',
+      ml: '16px',
+      mr: '16px',
       }}>
       <Box sx={{
         display: 'flex',
         flexDirection: 'row',
         justifyContent:'space-between',
-        marginRight: '120px',
+        mr: {xs: '25px', md: '120px'},
         // backgroundColor: 'red',
         }}>
-      <Box sx={{
-        flexDirection: 'row',
-        display: 'flex',
-        alignItems: 'start',
-        flexWrap: 'wrap',
-        mt: '42.5px',
-        ml: '6.5px',
-        gap: '48px',
-        }}>
         <Box sx={{
           display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'start',
-          // gap: '10px',
+          flexDirection: 'row',
+          alignItems: 'start',
+          flexWrap: 'wrap',
+          mt: {xs: '35px', md: '42.5px'},
+          ml: '6.5px',
+          gap: {xs: '22px', md: '48px'},
           }}>
-          <Typography sx={{
-            fontWeight: 500,
-            fontSize: '10px',
-            lineHeight: '1em',
-            letterSpacing: '0.08em',
-            textTransform: 'uppercase',
-            color: '#828282',
-            mb: '12.6px',
-            }}> Total supplied </Typography>
-
           <Box sx={{
             display: 'flex',
-            flexDirection: 'row',
-            gap: '0.33em',
-            mb: '6px',
+            flexDirection: 'column',
+            justifyContent: 'start',
+            // gap: '10px',
             }}>
-            <FormattedNumber visibleDecimals={2} value={reserve.totalLiquidity} sx={{ //reserve.totalLiquidity
+            <Typography sx={{
               fontWeight: 500,
-              fontSize: '20px',
-              lineHeight: '1em', 
-              letterSpacing: '-0.02em',
-              color: '#061512',
-              }}/>
-            <Typography sx={{ 
-              fontWeight: 500,
-              fontSize: '20px',
-              lineHeight: '1em', 
-              letterSpacing: '-0.02em',
+              fontSize: '10px',
+              lineHeight: '1em',
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
               color: '#828282',
-              }}> of </Typography>
-            <FormattedNumber visibleDecimals={0} value={reserve.supplyCap} sx={{ 
+              mb: '12.6px',
+              }}> Total supplied </Typography>
+
+            <Box sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              gap: '0.33em',
+              mb: '6px',
+              }}>
+              <FormattedNumber visibleDecimals={2} value={reserve.totalLiquidity} sx={{ //reserve.totalLiquidity
+                fontWeight: 500,
+                fontSize: '20px',
+                lineHeight: '1em', 
+                letterSpacing: '-0.02em',
+                color: '#061512',
+                }}/>
+              <Typography sx={{ 
+                fontWeight: 500,
+                fontSize: '20px',
+                lineHeight: '1em', 
+                letterSpacing: '-0.02em',
+                color: '#828282',
+                }}> of </Typography>
+              <FormattedNumber visibleDecimals={0} value={reserve.supplyCap} sx={{ 
+                fontWeight: 500,
+                fontSize: '20px',
+                lineHeight: '1em', 
+                letterSpacing: '-0.02em',
+                color: '#061512',
+                }}/></Box>
+
+            <Box sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'start',
+              gap: '0.33em',
+              }}>
+              <FormattedNumber visibleDecimals={2} value={reserve.totalLiquidityUSD} symbol={'USD'} symbolsColor='#828282' size='16px' sx={{ 
+                fontWeight: 400,
+                fontSize: '16px',
+                lineHeight: '1em', 
+                letterSpacing: '-0.02em',
+                color: '#828282',
+                }}/>
+              <Typography sx={{ 
+                fontWeight: 400,
+                fontSize: '16px',
+                lineHeight: '1em', 
+                letterSpacing: '-0.02em',
+                color: '#828282',
+                mt: '3px',
+                }}> of </Typography>
+              <FormattedNumber visibleDecimals={0} value={reserve.supplyCapUSD} symbol={'USD'} symbolsColor='#828282' size='16px' sx={{ 
+                fontWeight: 400,
+                fontSize: '16px',
+                lineHeight: '1em', 
+                letterSpacing: '-0.02em',
+                color: '#828282',
+                }}/></Box></Box>
+          <Box sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'start',
+            gap: '7.5px',
+            }}>
+            <Typography sx={{
+              fontWeight: 500,
+              fontSize: '10px',
+              lineHeight: '1em',
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+              color: '#828282',
+              }}> APY </Typography>
+            <FormattedNumber value={reserve.supplyAPY} percent size='20px' sx={{ 
               fontWeight: 500,
               fontSize: '20px',
               lineHeight: '1em', 
               letterSpacing: '-0.02em',
-              color: '#061512',
+              color: 'rgba(6, 21, 18, 1)',
               }}/></Box>
-
           <Box sx={{
             display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'start',
-            gap: '0.33em',
+            flexDirection: 'column',
+            justifyContent: 'start',
+            // gap: '10px',
             }}>
-            <FormattedNumber visibleDecimals={2} value={reserve.totalLiquidityUSD} symbol={'USD'} symbolsColor='#828282' size='16px' sx={{ 
-              fontWeight: 400,
-              fontSize: '16px',
-              lineHeight: '1em', 
-              letterSpacing: '-0.02em',
-              color: '#828282',
-              }}/>
-            <Typography sx={{ 
-              fontWeight: 400,
-              fontSize: '16px',
-              lineHeight: '1em', 
-              letterSpacing: '-0.02em',
-              color: '#828282',
-              mt: '3px',
-              }}> of </Typography>
-            <FormattedNumber visibleDecimals={0} value={reserve.supplyCapUSD} symbol={'USD'} symbolsColor='#828282' size='16px' sx={{ 
-              fontWeight: 400,
-              fontSize: '16px',
-              lineHeight: '1em', 
-              letterSpacing: '-0.02em',
-              color: '#828282',
-              }}/></Box></Box>
-        <Box sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'start',
-          gap: '7.5px',
-          }}>
-          <Typography sx={{
-            fontWeight: 500,
-            fontSize: '10px',
-            lineHeight: '1em',
-            letterSpacing: '0.08em',
-            textTransform: 'uppercase',
-            color: '#828282',
-            }}> APY </Typography>
-          <FormattedNumber value={reserve.supplyAPY} percent size='20px' sx={{ 
-            fontWeight: 500,
-            fontSize: '20px',
-            lineHeight: '1em', 
-            letterSpacing: '-0.02em',
-            color: 'rgba(6, 21, 18, 1)',
-            }}/></Box>
-        <Box sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'start',
-          // gap: '10px',
-          }}>
-          <Typography sx={{
-            fontWeight: 500,
-            fontSize: '10px',
-            lineHeight: '1em',
-            letterSpacing: '0.08em',
-            textTransform: 'uppercase',
-            color: '#828282',
-            mb: '12.6px',
-            }}> supply cap </Typography>
-
-          <Box sx={{
-            display: 'flex',
-            flexDirection: 'row',
-            gap: '0.33em',
-            mb: '6px',
-            }}>
-            <FormattedNumber visibleDecimals={0} value={reserve.supplyCap} sx={{ 
+            <Typography sx={{
               fontWeight: 500,
-              fontSize: '20px',
-              lineHeight: '1em', 
-              letterSpacing: '-0.02em',
-              color: '#061512',
-              }}/></Box>
-
-          <Box sx={{
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'start',
-            gap: '0.33em',
-            }}>
-            <FormattedNumber visibleDecimals={0} value={reserve.supplyCapUSD} symbol={'USD'} symbolsColor='#828282' size='16px' sx={{ 
-              fontWeight: 400,
-              fontSize: '16px',
-              lineHeight: '1em', 
-              letterSpacing: '-0.02em',
+              fontSize: '10px',
+              lineHeight: '1em',
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
               color: '#828282',
-              }}/></Box></Box></Box>
-      <Box sx={{
-        pt: '35px',
-        }}>
-        <CapsSemiGauge value={supplyCap.percentUsed} // supplyCap.percentUsed
-          label="FILLED"
-          size={300}
-          thickness={31}
-          arcColor="rgba(24,204,111,1)"
-          trackColor="#E8E8E8"
-          borderOpacity={0.08}
-          shadowOpacity={0.18}
-          gap={1.5}            // keeps the green separated from grey
-          centerOffset={10}    // pushes texts down so % doesn't touch the rail
-          valueFontSize={18}   // tune to taste
-          labelFontSize={9}   // smaller “FILLED”
-          /></Box></Box>
-        {/* <CapsCircularStatus
-          value={supplyCap.percentUsed}
-          tooltipContent={
-            <>
-              <Trans>
-                Maximum amount available to supply is{' '}
-                <FormattedNumber
-                  value={
-                    valueToBigNumber(reserve.supplyCap).toNumber() -
-                    valueToBigNumber(reserve.totalLiquidity).toNumber()
-                  }
-                  variant="secondary12"
-                />{' '}
-                {reserve.symbol} (
-                <FormattedNumber
-                  value={
-                    valueToBigNumber(reserve.supplyCapUSD).toNumber() -
-                    valueToBigNumber(reserve.totalLiquidityUSD).toNumber()
-                  }
-                  variant="secondary12"
-                  symbol="USD"
-                />
-                ).
-              </Trans>
-            </>
-          }
-        /> */}
+              mb: '12.6px',
+              }}> supply cap </Typography>
+
+            <Box sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              gap: '0.33em',
+              mb: '6px',
+              }}>
+              <FormattedNumber visibleDecimals={0} value={reserve.supplyCap} sx={{ 
+                fontWeight: 500,
+                fontSize: '20px',
+                lineHeight: '1em', 
+                letterSpacing: '-0.02em',
+                color: '#061512',
+                }}/></Box>
+
+            <Box sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'start',
+              gap: '0.33em',
+              }}>
+              <FormattedNumber visibleDecimals={0} value={reserve.supplyCapUSD} symbol={'USD'} symbolsColor='#828282' size='16px' sx={{ 
+                fontWeight: 400,
+                fontSize: '16px',
+                lineHeight: '1em', 
+                letterSpacing: '-0.02em',
+                color: '#828282',
+                }}/></Box></Box>
+        </Box>
+        
+        <Box sx={{
+          mt: '35px',
+          ml: {xs: 'unset', md: '50px'},
+          }}>
+          <CapsSemiGauge value={supplyCap.percentUsed} // supplyCap.percentUsed
+            label="FILLED"
+            size={_size}
+            thickness={_thickness}
+            arcColor="rgba(24,204,111,1)"
+            trackColor="#E8E8E8"
+            borderOpacity={0.08}
+            shadowOpacity={0.18}
+            gap={1.5}            // keeps the green separated from grey
+            centerOffset={10}    // pushes texts down so % doesn't touch the rail
+            valueFontSize={18}   // tune to taste
+            labelFontSize={9}   // smaller “FILLED”
+            />
+        </Box>
+      </Box>
 
         {reserve.unbacked && reserve.unbacked !== '0' && (
           <PanelItem title={<Trans>Unbacked</Trans>}>
@@ -284,6 +267,7 @@ export const SupplyInfo = ({
               mb: '12px', 
               ml: '7.4px',
               gap: '6px',
+              // backgroundColor: 'red'
             }}
           >
             <Typography sx={{
@@ -378,18 +362,20 @@ export const SupplyInfo = ({
         borderRadius: '8px',
         borderColor: 'rgba(220, 220, 220, 1)',
         backgroundColor: 'rgba(242, 242, 242, 1)',
+        // backgroundColor: 'red',
         marginTop: '3.7px',
         marginLeft: '7.2px',
         paddingTop: '11px',
-        marginRight: '15px',
-        paddingLeft: '15px',
+        mr: {xs: 'unset', md: '15px'},
+        paddingLeft: {xs: '8px', md: '15px'},
         }}>
           <Box sx={{
             display:'flex',
             flexDirection: 'column',
             justifyContent: 'start',
-            gap: '6px',
-            marginRight: '141px',
+            gap: {xs: '18px', md: '6px'},
+            marginRight: {xs: '10px', md: '141px'},
+            // backgroundColor: 'red',
             }}>
             <Typography sx={{
                 fontSize: '10px',
@@ -417,7 +403,7 @@ export const SupplyInfo = ({
           <Box
             sx={{
               width: '1px',
-              height: '54px',
+              height: {xs: '64px', md: '54px'},
               backgroundColor: 'rgba(220, 220, 220, 1)',
             }}>
           </Box>
@@ -427,8 +413,8 @@ export const SupplyInfo = ({
             flexDirection: 'column',
             justifyContent: 'start',
             gap: '3px',
-            marginRight: '89px',
-            marginLeft: '16px',
+            mr: {xs: '10px', md: '89px'},
+            ml: {xs: '12px', md: '16px'},
             }}>
             <Typography 
               sx={{
@@ -458,7 +444,7 @@ export const SupplyInfo = ({
 
           <Box sx={{
           width: '1px',
-          height: '54px',
+          height: {xs: '64px', md: '54px'},
           backgroundColor: 'rgba(220, 220, 220, 1)',
           }}>
           </Box>
@@ -468,7 +454,7 @@ export const SupplyInfo = ({
             flexDirection: 'column',
             justifyContent: 'start',
             gap: '3px',
-            marginLeft: '16px',
+            ml: {xs: '12px', md: '16px'},
             }}>
             <Typography sx={{
             fontSize: '10px',

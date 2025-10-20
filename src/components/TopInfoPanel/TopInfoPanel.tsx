@@ -19,15 +19,13 @@ export const TopInfoPanel = ({
     <Box>
       <Box 
         sx={{ 
-          // px: { xs: 4, xsm: 0 }, 
           display: 'flex', 
           flexDirection: 'column', 
-          // justifyContent: 'space-between',
-          // alignItems: 'flex-start',
           marginTop: '34px',
-          // backgroundColor: 'red',
-          width: '1199px',
+          width: {xs: '91%', md: '1199px'},
           mx: 'auto',
+          mb: {xs: '36px', md: '0px'} ,
+          // backgroundColor: 'red',
         }}>
         {!titleComponent && (
           <PageTitle
@@ -46,13 +44,11 @@ export const TopInfoPanel = ({
         <Box
           sx={{
             display: 'flex',
-            flexDirection: 'row',
+            flexDirection: {xs: 'column', md: 'row'},
             alignItems: 'flex-start',
-            gap: '46px',
-            mt: '26.2px',
+            gap:{xs: '25px', md: '46px'},
+            mt: {xs: '18px', md: '26.2px'},
             // backgroundColor: 'red',
-            // flexWrap: 'wrap',
-            // height: '10px',
           }}
         >
           {children}

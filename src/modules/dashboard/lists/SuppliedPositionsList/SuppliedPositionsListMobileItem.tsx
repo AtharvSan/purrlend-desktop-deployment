@@ -1,5 +1,5 @@
 import { Trans } from '@lingui/macro';
-import { Box, Button } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import { useAppDataContext } from 'src/hooks/app-data-provider/useAppDataProvider';
 import { useAssetCaps } from 'src/hooks/useAssetCaps';
 import { DashboardReserve } from 'src/utils/dashboardSortUtils';
@@ -47,17 +47,37 @@ export const SuppliedPositionsListMobileItem = ({
       showDebtCeilingTooltips
     >
       <ListValueRow
-        title={<Trans>Supply balance</Trans>}
+        title={
+          <Typography sx={{
+            fontWeight: 400,
+            fontSize: '16px',
+            lineHeight: '1em',
+            letterSpacing: '-0.02em',
+            color: '#828282',
+          }}>
+            <Trans>balance</Trans>
+          </Typography>
+        }
         value={Number(underlyingBalance)}
         subValue={Number(underlyingBalanceUSD)}
         disabled={Number(underlyingBalance) === 0}
       />
 
       <Row
-        caption={<Trans>Supply APY</Trans>}
+        caption={
+          <Typography sx={{
+            fontWeight: 400,
+            fontSize: '16px',
+            lineHeight: '1em',
+            letterSpacing: '-0.02em',
+            color: '#828282',
+          }}>
+            <Trans>APY</Trans>
+          </Typography>
+        }
         align="flex-start"
         captionVariant="description"
-        mb={2}
+        mb={3}
       >
         <IncentivesCard
           value={Number(supplyAPY)}
@@ -68,7 +88,17 @@ export const SuppliedPositionsListMobileItem = ({
       </Row>
 
       <Row
-        caption={<Trans>Used as collateral</Trans>}
+        caption={
+          <Typography sx={{
+            fontWeight: 400,
+            fontSize: '16px',
+            lineHeight: '1em',
+            letterSpacing: '-0.02em',
+            color: '#828282',
+          }}>
+            <Trans>Used as collateral</Trans>
+          </Typography>
+        }
         align={isIsolated ? 'flex-start' : 'center'}
         captionVariant="description"
         mb={2}
@@ -81,18 +111,53 @@ export const SuppliedPositionsListMobileItem = ({
         />
       </Row>
 
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mt: 5 }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '2%', mt: 5 }}>
+        <Button
+          disabled={!isActive || isFrozen}
+          variant="outlined"
+          onClick={() => openSupply(underlyingAsset)}
+          fullWidth
+          sx={{
+            border: '1px solid #FFFFFF33',
+            borderRadius: '70px',
+            backgroundColor: '#061512',
+            color: '#FFFFFF',
+            height: '38px',
+          }}
+        >
+          <Typography sx={{
+            fontWeight: 500,
+            fontSize: '14px',
+            lineHeight: '1em',
+            letterSpacing: '-0.02em',
+          }}>
+            <Trans>Supply</Trans>
+          </Typography>
+        </Button>
         <Button
           disabled={!isActive}
           variant="contained"
           onClick={() => openWithdraw(underlyingAsset)}
-          sx={{ mr: 1.5 }}
           fullWidth
+          sx={{ 
+            border: '1px solid #DCDCDC',
+            borderRadius: '70px',
+            backgroundColor: '#FFFFFF',
+            color: '#061512',
+            height: '38px',
+          }}
         >
-          <Trans>Withdraw</Trans>
+          <Typography sx={{
+            fontWeight: 500,
+            fontSize: '14px',
+            lineHeight: '1em',
+            letterSpacing: '-0.02em',
+          }}>
+            <Trans>Withdraw</Trans>
+          </Typography>
         </Button>
 
-        {isSwapButton ? (
+        {/* {isSwapButton ? (
           <Button
             disabled={!isActive || isFrozen}
             variant="outlined"
@@ -110,7 +175,7 @@ export const SuppliedPositionsListMobileItem = ({
           >
             <Trans>Supply</Trans>
           </Button>
-        )}
+        )} */}
       </Box>
     </ListMobileItemWrapper>
   );

@@ -301,11 +301,16 @@ export const SupplyAssetsList = () => {
     >
       <>
         {!downToXSM && !!sortedReserves && !supplyDisabled && <RenderHeader />}
-        {sortedReserves.map((item) => (
+        {sortedReserves.map((item,index) => (
           <Fragment key={item.underlyingAsset}>
             <AssetCapsProvider asset={item.reserve}>
               {downToXSM ? (
+                <>
                 <SupplyAssetsListMobileItem {...item} key={item.id} />
+                {index !== sortedReserves.length - 1 && ( // show divider only if not last item
+                  <Divider sx={{ mb: 1, borderColor: '#E8E8E8' }} />
+                )}
+                </>
               ) : (
                 <SupplyAssetsListItem {...item} key={item.id} />
               )}

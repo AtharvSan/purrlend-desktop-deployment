@@ -1,5 +1,5 @@
 import { Trans } from '@lingui/macro';
-import { Box, Button } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import { StableAPYTooltip } from 'src/components/infoTooltips/StableAPYTooltip';
 import { VariableAPYTooltip } from 'src/components/infoTooltips/VariableAPYTooltip';
 import { useAssetCaps } from 'src/hooks/useAssetCaps';
@@ -47,7 +47,17 @@ export const BorrowAssetsListMobileItem = ({
       currentMarket={currentMarket}
     >
       <ListValueRow
-        title={<Trans>Available to borrow</Trans>}
+        title={
+          <Typography sx={{
+            fontWeight: 400,
+            fontSize: '16px',
+            lineHeight: '1em',
+            letterSpacing: '-0.02em',
+            color: '#828282',
+          }}>
+            <Trans>Available to borrow</Trans>
+          </Typography>
+      }
         value={Number(availableBorrows)}
         subValue={Number(availableBorrowsInUSD)}
         disabled={Number(availableBorrows) === 0}
@@ -64,7 +74,17 @@ export const BorrowAssetsListMobileItem = ({
       <Row
         caption={
           <VariableAPYTooltip
-            text={<Trans>APY, variable</Trans>}
+            text={
+              <Typography sx={{
+                fontWeight: 400,
+                fontSize: '16px',
+                lineHeight: '1em',
+                letterSpacing: '-0.02em',
+                color: '#828282',
+              }}>
+                <Trans>APY, variable</Trans>
+              </Typography>
+            }
             key="APY_dash_mob_variable_ type"
             variant="description"
           />
@@ -81,43 +101,50 @@ export const BorrowAssetsListMobileItem = ({
         />
       </Row>
 
-      <Row
-        caption={
-          <StableAPYTooltip
-            text={<Trans>APY, stable</Trans>}
-            key="APY_dash_mob_stable_ type"
-            variant="description"
-          />
-        }
-        align="flex-start"
-        captionVariant="description"
-        mb={2}
-      >
-        <IncentivesCard
-          value={Number(stableBorrowRate)}
-          incentives={sIncentivesData}
-          symbol={symbol}
-          variant="secondary14"
-        />
-      </Row>
-
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mt: 5 }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '3%', mt: 5 }}>
         <Button
           disabled={borrowButtonDisable}
           variant="contained"
           onClick={() => openBorrow(underlyingAsset)}
-          sx={{ mr: 1.5 }}
           fullWidth
+          sx={{
+            border: '1px solid #FFFFFF33',
+            borderRadius: '70px',
+            backgroundColor: '#061512',
+            color: '#FFFFFF',
+            height: '38px',
+          }}
         >
-          <Trans>Borrow</Trans>
+          <Typography sx={{
+            fontWeight: 500,
+            fontSize: '14px',
+            lineHeight: '1em',
+            letterSpacing: '-0.02em',
+          }}>
+            <Trans>Borrow</Trans>
+          </Typography>
         </Button>
         <Button
           variant="outlined"
           component={Link}
           href={ROUTES.reserveOverview(underlyingAsset, currentMarket)}
           fullWidth
+          sx={{ 
+            border: '1px solid #DCDCDC',
+            borderRadius: '70px',
+            backgroundColor: '#FFFFFF',
+            color: '#061512',
+            height: '38px',
+          }}
         >
-          <Trans>Details</Trans>
+          <Typography sx={{
+            fontWeight: 500,
+            fontSize: '14px',
+            lineHeight: '1em',
+            letterSpacing: '-0.02em',
+          }}>
+            <Trans>Details</Trans>
+          </Typography>
         </Button>
       </Box>
     </ListMobileItemWrapper>

@@ -51,7 +51,6 @@ export const TxModalDetails: React.FC<TxModalDetailsProps> = ({
         }}>
         </Box>
         <Typography 
-          variant="h4" 
           sx={{ 
             fontWeight: 700,
             fontStyle: 'Bold',
@@ -67,7 +66,7 @@ export const TxModalDetails: React.FC<TxModalDetailsProps> = ({
         <Divider 
           sx={{ 
             // my: 3, 
-            width: '58.5%',
+            width: {xs: '52%', md: '58.5%'},
             borderColor: 'rgba(210, 210, 210, 1)',
             opacity: 0.8,
           }}/>

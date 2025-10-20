@@ -40,12 +40,13 @@ export const MarketsTopPanel = () => {
     <Box sx={{
       backgroundImage: 'linear-gradient(90deg, #061512 0%, #00380D 100%)',
       color: '#F1F1F3',
-      // mx: '8.32%',
       mx: 'auto',
-      width: '1199px',
+      width: {xs: '95%', md: '1199px'},
+      height: {xs: '128px', md: '77px'},
       mt: '25px',
       borderRadius: '16px',
       display: 'flex',
+      flexDirection: {xs: 'column', md: 'row'},
       justifyContent: 'space-between',
       pt: '14px',
       pb: '12px',
@@ -63,11 +64,16 @@ export const MarketsTopPanel = () => {
           fontSize: '32px',
           lineHeight: '1em',
           letterSpacing: '-0.02em',
-          }}>HyperEVM Market</Typography></Box>
+          }}>
+            HyperEVM 
+            {!downToSM && (' Market')}
+        </Typography>
+      </Box>
 
       <Box sx={{
         display: 'flex',
-        gap: '50px',
+        justifyContent: 'space-between',
+        gap: {xs: 'auto', md: '50px'},
         }}>
         <Box sx={{
           display: 'flex',

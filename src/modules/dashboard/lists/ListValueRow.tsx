@@ -26,7 +26,13 @@ export const ListValueRow = ({
           <FormattedNumber
             value={value}
             variant="secondary14"
-            color={disabled ? 'text.disabled' : 'text.primary'}
+            symbolsColor='#828282'
+            fontWeight={400}
+            fontSize={'16px'}
+            lineHeight={'1em'}
+            letterSpacing={'-0.02em'}
+            visibleDecimals={2}
+            color={disabled ? 'text.disabled' : '#252525'}
           />
           {capsComponent}
         </Box>
@@ -35,9 +41,16 @@ export const ListValueRow = ({
           <FormattedNumber
             value={subValue}
             variant="secondary12"
-            color="text.secondary"
+            color="#828282"
+            symbolsColor='#828282'
             symbol="USD"
             mb={0.5}
+            visibleDecimals={2}
+            fontWeight={400}
+            fontSize={'14px'}
+            size='14px'
+            lineHeight={'1em'}
+            letterSpacing={'-0.02em'}
           />
         )}
       </Box>

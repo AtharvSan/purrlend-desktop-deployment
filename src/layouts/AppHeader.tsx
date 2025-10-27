@@ -111,7 +111,7 @@ export function AppHeader() {
           flexDirection: 'row',
           justifyContent: 'space-between',
           alignItems: 'center',
-          backgroundColor: 'white',
+          backgroundColor: {xs: 'white', md: 'unset'},
           borderRadius: '16px',
         })}
       >

@@ -114,3 +114,4 @@ export const NavItems = ({ setOpen }: NavItemsProps) => {
     </List>
   );
 };
+

@@ -312,8 +312,7 @@ export const BorrowModalContent = ({
       <Warning severity="info" sx={{ my: 6 }}>
         <Trans>
           <b>Attention:</b> Parameter changes via governance can alter your account health factor
-          and risk of liquidation. Follow the{' '}
-          <a href="https://governance.aave.com/">Aave governance forum</a> for updates.
+          and risk of liquidation.
         </Trans>
       </Warning>
 

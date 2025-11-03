@@ -77,13 +77,9 @@ export const MarketAssetsListContainer = () => {
           </Typography>
           <Warning severity="info">
             <Trans>
-              These assets are temporarily frozen by Aave community decisions, meaning that further
+              These assets are temporarily frozen by community decisions, meaning that further
               supply / borrow, or rate swap of these assets are unavailable. Withdrawals and debt
-              repayments are allowed. Follow the{' '}
-              <Link href="https://governance.aave.com" underline="always">
-                Aave governance forum
-              </Link>{' '}
-              for further updates.
+              repayments are allowed.
             </Trans>
           </Warning>
         </Box>

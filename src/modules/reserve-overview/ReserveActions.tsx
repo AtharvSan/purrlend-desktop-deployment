@@ -331,24 +331,17 @@ const SupplyAction = ({ value, usdValue, symbol, disable, onActionClicked }: Act
         sx={{
           mb:'10px',
         }}>
-        <AvailableTooltip text={
-            <Typography 
-              sx={{
-                fontSize: '10px',
-                fontWeight: 500,
-                letterSpacing: '0.08em',
-                lineHeight: '1em',
-                textTransform: 'uppercase',
-                color: 'rgba(130, 130, 130, 1)',
-                // backgroundColor: 'red',
-                
-              }}>
-              <Trans>Available to supply</Trans>
-            </Typography>
-          }
-          capType={CapType.supplyCap}
-          
-        />
+        <Typography 
+          sx={{
+            fontSize: '10px',
+            fontWeight: 500,
+            letterSpacing: '0.08em',
+            lineHeight: '1em',
+            textTransform: 'uppercase',
+            color: 'rgba(130, 130, 130, 1)',
+          }}>
+          <Trans>Available to supply</Trans>
+        </Typography>
       </Box>
       <Stack
         direction="row"
@@ -418,22 +411,16 @@ const BorrowAction = ({ value, usdValue, symbol, disable, onActionClicked }: Act
         sx={{
           mb: '9px',
         }}>
-        <AvailableTooltip
-          variant="description"
-          text={
-            <Typography
-              sx={{
-                fontSize: '10px',
-                fontWeight: 500,
-                letterSpacing: '0.08em',
-                textTransform: 'uppercase',
-                color: 'rgba(130, 130, 130, 1)',
-              }}>
-              <Trans>Available to borrow</Trans>
-            </Typography>
-          }
-          capType={CapType.borrowCap}
-        />
+        <Typography
+          sx={{
+            fontSize: '10px',
+            fontWeight: 500,
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            color: 'rgba(130, 130, 130, 1)',
+          }}>
+          <Trans>Available to borrow</Trans>
+        </Typography>
       </Box>
       <Stack
         direction="row"

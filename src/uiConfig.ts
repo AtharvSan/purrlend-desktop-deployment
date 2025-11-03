@@ -32,4 +32,5 @@ export const uiConfig = {
   allDone: '/allDone.svg',
   txArrow: '/txArrow.svg',
   xicon: '/xicon.svg',
+  telegram: '/telegram.svg',
 };

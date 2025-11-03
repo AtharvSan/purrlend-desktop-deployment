@@ -112,7 +112,6 @@ export const AssetInput = <T extends Asset = Asset>({
         <Typography color="text.secondary">
           {inputTitle ? inputTitle : <Trans>Amount</Trans>}
         </Typography>
-        {capType && <AvailableTooltip capType={capType} />}
       </Box>
 
       <Box

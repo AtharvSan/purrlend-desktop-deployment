@@ -111,13 +111,13 @@ export const TxActionsWrapper = ({
 
     return {
       content: (
-        <ApprovalTooltip
-          variant="buttonL"
-          iconSize={20}
-          iconMargin={2}
-          color="white"
-          text={<Trans>Approve {symbol} to continue</Trans>}
-        />
+        <Typography sx={{
+          fontWeight: 600,
+          fontSize: '16px',
+          lineHeight: '1em',
+          letterSpacing: '-0.02em',
+          color: '#FFFFFF',
+        }}><Trans>Approve {symbol} to continue</Trans></Typography>
       ),
       handleClick: handleApproval,
     };

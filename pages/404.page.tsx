@@ -82,7 +82,7 @@ export default function Aave404Page() {
               lineHeight: '1em',
               letterSpacing: '-0.02em',
               color: '#828282',
-            }}>Stay tuned for our stake features.</Typography></Box>
+            }}>Stay tuned for our vault features.</Typography></Box>
         </Box>
 
       </ContentContainer>

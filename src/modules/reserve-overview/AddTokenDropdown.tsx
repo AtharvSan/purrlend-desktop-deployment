@@ -179,7 +179,7 @@ export const AddTokenDropdown = ({
           color: '#828282',
           pl: '16px',
           pt: '8px',
-        }}>LND Token</Typography>
+        }}>Purr pToken</Typography>
         <MenuItem
           key="atoken"
           value="atoken"

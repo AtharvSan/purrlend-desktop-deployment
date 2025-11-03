@@ -102,7 +102,7 @@ export const TokenLinkDropdown = ({ poolReserve, downToSM }: TokenLinkDropdownPr
           color: '#828282',
           pl: '16px',
           pt: '8px',
-        }}>LND Token</Typography>
+        }}>Purr pToken</Typography>
         <MenuItem
           component="a"
           href={currentNetworkConfig.explorerLinkBuilder({
@@ -126,7 +126,7 @@ export const TokenLinkDropdown = ({ poolReserve, downToSM }: TokenLinkDropdownPr
             color: '#828282',
             pl: '16px',
             pt: '8px',
-          }}>LND debt Token</Typography>
+          }}>Purr debt Token</Typography>
           <MenuItem
             component="a"
             href={currentNetworkConfig.explorerLinkBuilder({

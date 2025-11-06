@@ -12,7 +12,7 @@ import { ReserveOverviewBox } from 'src/components/ReserveOverviewBox';
 import { getEmodeMessage } from 'src/components/transactions/Emode/EmodeNaming';
 import { AMPLWarning } from 'src/components/Warnings/AMPLWarning';
 import { BorrowDisabledWarning } from 'src/components/Warnings/BorrowDisabledWarning';
-import { ComputedReserveData } from 'src/hooks/app-data-provider/useAppDataProvider';
+import { ComputedReserveData, AppDataProvider, useAppDataContext } from 'src/hooks/app-data-provider/useAppDataProvider';
 import { useAssetCaps } from 'src/hooks/useAssetCaps';
 import { useProtocolDataContext } from 'src/hooks/useProtocolDataContext';
 import { BROKEN_ASSETS } from 'src/hooks/useReservesHistory';
@@ -24,6 +24,7 @@ import { InterestRateModelGraphContainer } from './graphs/InterestRateModelGraph
 import { PanelItem, PanelRow, PanelTitle } from './ReservePanels';
 import { SupplyInfo } from './SupplyInfo';
 import { uiConfig } from 'src/uiConfig';
+import { DashboardEModeButton } from '../dashboard/DashboardEModeButton';
 
 type ReserveConfigurationProps = {
   reserve: ComputedReserveData;
@@ -31,6 +32,7 @@ type ReserveConfigurationProps = {
 
 export const ReserveConfiguration: React.FC<ReserveConfigurationProps> = ({ reserve }) => {
   const { currentNetworkConfig, currentMarketData, currentMarket } = useProtocolDataContext();
+  const { user, loading } = useAppDataContext();
   const reserveId =
     reserve.underlyingAsset + currentMarketData.addresses.LENDING_POOL_ADDRESS_PROVIDER;
   const renderCharts =
@@ -113,10 +115,11 @@ export const ReserveConfiguration: React.FC<ReserveConfigurationProps> = ({ rese
 
       {reserve.eModeCategoryId !== 0 && (
         <>
-          <Divider sx={{ mt: '32px', mb: {xs: '14px', md: '19px'} }} />
+          <Divider sx={{ mt: '32px', mb: {xs: '14px', md: '12px'} }} />
           <PanelRow>
             <Box sx={{
               display: 'flex',
+              alignItems: 'center',
               marginLeft: '16.2px',
               marginTop: '0.5px',
               // backgroundColor: 'red'
@@ -127,23 +130,25 @@ export const ReserveConfiguration: React.FC<ReserveConfigurationProps> = ({ rese
                 height: '24px',
                 position: 'absolute',
                 left: '-0px',
-                // top: '-1px',
-                // mt: '9.5px',
                 }}></Box>
               <img src={uiConfig.emodeLeaf} alt="emode leaf" height={26} width={26} />
               <Typography sx={{
                 minWidth: { xs: '170px' }, 
-                mr: 4, 
                 ml: '6px',
                 mt: '3px',
-                mb: { xs: 6, md: '2px' },
+                mb: { xs: '2px', md: '2px' },
                 fontWeight: 600,
                 fontSize: '20px',
                 lineHeight: '1em',
                 letterSpacing: '-0.02em',
                 color: '#061512',
-                }}> Available in E-Mode </Typography>
+                }}> Available in E-Mode </Typography> 
+              {!downToSM && <DashboardEModeButton userEmodeCategoryId={user.userEmodeCategoryId}/> }
             </Box>
+            {downToSM && <Box sx={{
+                mt: {xs: '8px', md: 'unset'},
+                mb: {xs: '25px', md: 'unset'},
+              }}> <DashboardEModeButton userEmodeCategoryId={user.userEmodeCategoryId} /> </Box>}
             <Box sx={{ flexGrow: 1, minWidth: 0, maxWidth: '100%', width: '100%' }}>
               {/* <Box sx={{ display: 'inline-flex', alignItems: 'center' }}>
                 <Typography variant="secondary14" color="text.secondary">
@@ -338,7 +343,7 @@ export const ReserveConfiguration: React.FC<ReserveConfigurationProps> = ({ rese
             lineHeight: '1em',
             color: '#828282',
             }}>
-            Oracle provider
+            Oracle contract
           </Typography>
           <Typography sx={{
             fontWeight: 400,
@@ -347,11 +352,10 @@ export const ReserveConfiguration: React.FC<ReserveConfigurationProps> = ({ rese
             lineHeight: '1em',
             color: '#061512',
             }}>
-            Pyth
+            {reserve.priceOracle}
           </Typography>
         </Box>
         <Divider sx={{ml: '24px', mr: '27px'}}/>
-
         <Box sx={{
           display: 'flex',
           justifyContent: 'space-between',
@@ -367,7 +371,7 @@ export const ReserveConfiguration: React.FC<ReserveConfigurationProps> = ({ rese
             lineHeight: '1em',
             color: '#828282',
             }}>
-            Oracle contract
+            Oracle provider
           </Typography>
           <Typography sx={{
             fontWeight: 400,
@@ -376,10 +380,11 @@ export const ReserveConfiguration: React.FC<ReserveConfigurationProps> = ({ rese
             lineHeight: '1em',
             color: '#061512',
             }}>
-            {reserve.priceOracle}
+            Pyth
           </Typography>
         </Box>
-        <Divider sx={{ml: '24px', mr: '27px'}}/>
+        
+        {/* <Divider sx={{ml: '24px', mr: '27px'}}/>
 
         <Box sx={{
           display: 'flex',
@@ -407,7 +412,7 @@ export const ReserveConfiguration: React.FC<ReserveConfigurationProps> = ({ rese
             }}>
             about 1 hour ago
           </Typography>
-        </Box>
+        </Box> */}
       </Box>
 
     </Paper>

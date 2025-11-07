@@ -28,6 +28,7 @@ import { ChangeNetworkWarning } from '../Warnings/ChangeNetworkWarning';
 import { EmodeActions } from './EmodeActions';
 import { getEmodeMessage } from './EmodeNaming';
 import { EmodeSelect } from './EmodeSelect';
+import { uiConfig } from 'src/uiConfig';
 
 export enum ErrorType {
   EMODE_DISABLED_LIQUIDATION,
@@ -254,9 +255,10 @@ export const EmodeModalContent = ({ mode }: EmodeModalContentProps) => {
               <Box sx={{ display: 'inline-flex', alignItems: 'center', mx: 1 }}>
                 {user.userEmodeCategoryId !== 0 ? (
                   <>
-                    <SvgIcon sx={{ fontSize: '12px' }}>
+                    {/* <SvgIcon sx={{ fontSize: '12px' }}>
                       <LightningBoltGradient />
-                    </SvgIcon>
+                    </SvgIcon> */}
+                    <img src={uiConfig.emodeLeaf} style={{marginRight: '4px'}} />
                     <Typography variant="subheader1">
                       {getEmodeMessage(eModes[user.userEmodeCategoryId].label)}
                     </Typography>
@@ -273,9 +275,10 @@ export const EmodeModalContent = ({ mode }: EmodeModalContentProps) => {
                   <Box sx={{ display: 'inline-flex', alignItems: 'center' }}>
                     {selectedEmode.id !== 0 ? (
                       <>
-                        <SvgIcon sx={{ fontSize: '12px', mr: 0.5 }}>
+                        {/* <SvgIcon sx={{ fontSize: '12px', mr: 0.5 }}>
                           <LightningBoltGradient />
-                        </SvgIcon>
+                        </SvgIcon> */}
+                        <img src={uiConfig.emodeLeaf} style={{marginRight: '4px'}} />
                         <Typography variant="subheader1">
                           {getEmodeMessage(eModes[selectedEmode.id].label)}
                         </Typography>

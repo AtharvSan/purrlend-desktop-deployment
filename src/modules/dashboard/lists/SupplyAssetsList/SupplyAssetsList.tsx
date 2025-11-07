@@ -186,7 +186,7 @@ export const SupplyAssetsList = () => {
       display: 'flex',
       justifyContent: 'space-between',
       pl: '18px',
-      pr: '155px',
+      pr: '117px',
       mt: '16px',
       pb: '10px',
       }}>
@@ -225,6 +225,10 @@ export const SupplyAssetsList = () => {
           // setSortDesc={setSortDesc}
           // sortKey='usageAsCollateralEnabledOnUser'
           ><Trans key="Can be collateral">Can be collateral</Trans></ListHeaderTitle>
+        </Box>
+        <Box>
+          <ListHeaderTitle
+          ><Trans>Action</Trans></ListHeaderTitle>
         </Box>
       </Box>
       <Divider sx={{borderColor: '#E8E8E8', mx: '18px', mb: '10px'}}/>

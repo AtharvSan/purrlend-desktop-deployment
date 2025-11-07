@@ -95,8 +95,7 @@ export const useReserveActionState = ({
           <Warning sx={{ mb: 0 }} severity="info" icon={false}>
             <Trans>
               Borrowing is unavailable because you’ve enabled Efficiency Mode (E-Mode) and Isolation
-              mode. To manage E-Mode and Isolation mode visit your{' '}
-              <Link href={ROUTES.dashboard}>Dashboard</Link>.
+              mode. 
             </Trans>
           </Warning>
         )}
@@ -105,8 +104,7 @@ export const useReserveActionState = ({
           <Warning sx={{ mb: 0 }} severity="info">
             <Trans>
               Borrowing is unavailable because you’ve enabled Efficiency Mode (E-Mode) for{' '}
-              {getEmodeMessage(eModes[user.userEmodeCategoryId].label)} category. To manage E-Mode
-              categories visit your <Link href={ROUTES.dashboard}>Dashboard</Link>.
+              {getEmodeMessage(eModes[user.userEmodeCategoryId].label)} category.
             </Trans>
           </Warning>
         )}

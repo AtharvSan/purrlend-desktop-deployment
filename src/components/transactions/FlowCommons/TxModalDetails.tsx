@@ -371,24 +371,54 @@ export const DetailsUnwrapSwitch = ({
   unwrapped,
   setUnWrapped,
   symbol,
-  unwrappedSymbol,
 }: DetailsUnwrapSwitchProps) => {
   return (
-    <Row captionVariant="description" mb={4}>
-      <FormControlLabel
-        value="darkmode"
-        control={
-          <Switch
-            disableRipple
-            checked={unwrapped}
-            onClick={() => setUnWrapped(!unwrapped)}
-            data-cy={'wrappedSwitcher'}
-          />
-        }
-        labelPlacement="end"
-        label={''}
+    // <Row captionVariant="description" mb={4}>
+    //   <FormControlLabel
+    //     value="darkmode"
+    //     control={
+    //       <Switch
+    //         disableRipple
+    //         checked={unwrapped}
+    //         onClick={() => setUnWrapped(!unwrapped)}
+    //         data-cy={'wrappedSwitcher'}
+    //       />
+    //     }
+    //     labelPlacement="end"
+    //     label={''}
+    //   />
+    //   <Typography>{`Unwrap ${symbol}`}</Typography>
+    // </Row>
+    <Row
+      captionVariant="description"
+      mb={4}
+      sx={{
+        alignItems: 'center',
+        display: 'flex',
+        gap: '8px',
+      }}
+    >
+      <Switch
+        disableRipple
+        checked={unwrapped}
+        onClick={() => setUnWrapped(!unwrapped)}
+        data-cy={'wrappedSwitcher'}
+        // sx={{ m: 0 }}
+        sx={(theme) => ({
+          // root 
+          borderColor: unwrapped ? 'rgba(24, 204, 111, 0.5)' : 'rgba(160,160,160,0.85)',
+          backgroundColor: unwrapped ? 'rgba(24, 204, 111, 0.18)' : 'rgba(160,160,160,0.18)',
+
+          //thumb
+          '& .MuiSwitch-thumb': {
+            backgroundColor: unwrapped ? 'rgba(24,204,111,1)' : 'rgba(160,160,160,0.85)',
+          },
+        })}
       />
-      <Typography>{`Unwrap ${symbol} (to withdraw ${unwrappedSymbol})`}</Typography>
+      <Typography sx={{ fontSize: '14px', lineHeight: 1 }}>
+        {`Unwrap ${symbol}`}
+      </Typography>
     </Row>
+
   );
 };

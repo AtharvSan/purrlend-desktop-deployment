@@ -13,6 +13,8 @@ import { ListItemWrapper } from '../ListItemWrapper';
 import { ListValueColumn } from '../ListValueColumn';
 import { TokenIcon } from 'src/components/primitives/TokenIcon';
 import { FormattedNumber } from 'src/components/primitives/FormattedNumber';
+import router from 'next/router';
+import { ROUTES } from 'src/components/primitives/Link';
 
 export const BorrowedPositionsListItem = ({
   reserve,
@@ -43,8 +45,14 @@ export const BorrowedPositionsListItem = ({
     pl: '17px',
     my: '12px',
     }}>
-      <TokenIcon symbol={reserve.iconSymbol} sx={{ height: '19px',width: '19px', mr: '6px', mt:'4px'}} />
-      <Box>
+      <Box sx={{
+        display: 'flex',
+        alignItems: 'center',
+        cursor: 'pointer',
+      }}
+      onClick={() => reserve.underlyingAsset!=='0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee' ? router.push(ROUTES.reserveOverview(reserve.underlyingAsset, currentMarket)):router.push(ROUTES.reserveOverview('0x5555555555555555555555555555555555555555', currentMarket))}
+      >
+        <TokenIcon symbol={reserve.iconSymbol} sx={{ height: '19px',width: '19px', mr: '6px', mt:'4px'}} />
         <Box sx={{
         display: 'flex',
         alignItems: 'center',
@@ -56,7 +64,9 @@ export const BorrowedPositionsListItem = ({
           fontSize: '14px',
           lineHeight: '1em',
           letterSpacing: '-0.02em',
-          }}>{reserve.symbol}</Typography>
+          }}>
+            {reserve.symbol}
+          </Typography>
         </Box>
       </Box>
       <Box sx={{

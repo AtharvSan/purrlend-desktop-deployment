@@ -18,6 +18,7 @@ import { ListValueColumn } from '../ListValueColumn';
 import { uiConfig } from 'src/uiConfig';
 import { TokenIcon } from 'src/components/primitives/TokenIcon';
 import { FormattedNumber } from 'src/components/primitives/FormattedNumber';
+import router from 'next/router';
 
 export const SupplyAssetsListItem = ({
   symbol,
@@ -50,45 +51,56 @@ export const SupplyAssetsListItem = ({
     pl: '17px',
     my: '15px',
     }}>
-      <TokenIcon symbol={iconSymbol} sx={{ height: '19px',width: '19px', mr: '6px'}} />
       <Box sx={{
-      display: 'flex',
-      justifyContent: 'start',
-      width: '93px',
-      }}>
-        <Typography sx={{
-        fontWeight: 400,
-        fontSize: '14px',
-        lineHeight: '1em',
-        letterSpacing: '-0.02em',
-        }}>{symbol}</Typography>
+        display: 'flex',
+        alignItems: 'center',
+        cursor: 'pointer',
+      }}
+      onClick={() => router.push(ROUTES.reserveOverview(detailsAddress, currentMarket))}
+      >
+        <TokenIcon symbol={iconSymbol} sx={{ height: '19px',width: '19px', mr: '6px'}} />
+        <Box sx={{
+          display: 'flex',
+          justifyContent: 'start',
+          width: '80px',
+          }}>
+            <Typography sx={{
+            fontWeight: 400,
+            fontSize: '14px',
+            lineHeight: '1em',
+            letterSpacing: '-0.02em',
+            }}>
+              {symbol}
+            </Typography>
+        </Box>
       </Box>
       <Box sx={{
-      display: 'flex',
-      justifyContent: 'start',
-      width: '102px',
-      }}>
-        <ListValueColumn
-          symbol={symbol}
-          value={Number(walletBalance)}
-          subValue={walletBalanceUSD}
-          withTooltip
-          disabled={Number(walletBalance) === 0}
-          capsComponent={
-            <CapsHint
-              capType={CapType.supplyCap}
-              capAmount={supplyCap}
-              totalAmount={totalLiquidity}
-              withoutText
-            />
-          }
-        />
+        display: 'flex',
+        justifyContent: 'start',
+        width: '87px',
+        // backgroundColor: 'red'
+        }}>
+          <ListValueColumn
+            symbol={symbol}
+            value={Number(walletBalance)}
+            subValue={walletBalanceUSD}
+            withTooltip
+            disabled={Number(walletBalance) === 0}
+            capsComponent={
+              <CapsHint
+                capType={CapType.supplyCap}
+                capAmount={supplyCap}
+                totalAmount={totalLiquidity}
+                withoutText
+              />
+            }
+          />
       </Box>
       
       <Box sx={{
       display: 'flex',
       justifyContent: 'start',
-      width: '70px',
+      width: '93px',
       }}>
         <FormattedNumber 
         value={Number(supplyAPY)} 
@@ -106,7 +118,7 @@ export const SupplyAssetsListItem = ({
       <Box sx={{
       display: 'flex',
       justifyContent: 'start',
-      width: '132px',
+      width: '111px',
       }}>
         <ListColumn basis={72} align="start" shrink={0} sx={{ml: '18px'}} >
           {debtCeiling.isMaxed ? (
@@ -138,7 +150,7 @@ export const SupplyAssetsListItem = ({
             letterSpacing: '-0.02em',
             mr:'5px',
           }}>Supply</Button>
-        <Button
+        {/* <Button
           component={Link}
           href={ROUTES.reserveOverview(detailsAddress, currentMarket)}
           sx={{
@@ -148,10 +160,32 @@ export const SupplyAssetsListItem = ({
             color: 'rgba(6, 21, 18, 1)',
             borderRadius: '70px',
             px: '12px',
+            py: '7px',
             minWidth: 'unset',
           }}
         >
           <img src={uiConfig.more} alt="more" />
+          <Typography>Details</Typography>
+        </Button> */}
+        <Button
+          // variant="outlined"
+          component={Link}
+          href={ROUTES.reserveOverview(detailsAddress, currentMarket)}
+          sx={{
+          py: '7px',
+          px: '12px',
+          fontSize: '14px',
+          lineHeight: '1em',
+          letterSpacing: '-0.02em',
+          backgroundColor: 'rgba(255, 255, 255, 1)',
+          border: '1px solid',
+          borderColor: 'rgba(220, 220, 220, 1)',
+          color: 'rgba(6, 21, 18, 1)',
+          borderRadius: '70px',
+          minWidth: 'unset',
+          }}
+        >
+          <Trans>Details</Trans>
         </Button>
       </ListButtonsColumn>
     </Box>

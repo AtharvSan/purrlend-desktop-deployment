@@ -241,7 +241,7 @@ export const ReserveConfiguration: React.FC<ReserveConfigurationProps> = ({ rese
                       }}/></Box></Box></Box>
               <Typography sx={{
                 ml: '25px',
-                mr: {xs: '25px', md: '140px'},
+                mr: {xs: '25px', md: '110px'},
                 mt: {xs: '15px', md: '25px'},
                 mb: '20px',
                 fontWeight: 400,
@@ -261,7 +261,7 @@ export const ReserveConfiguration: React.FC<ReserveConfigurationProps> = ({ rese
                   textDecorationSkipInk: 'true',
                   textDecorationStyle: 'solid',
                   }}
-                  >Dashboard</Link>
+                  >Dashboard</Link> or use the button above.
               </Typography>
             </Box>
           </PanelRow>

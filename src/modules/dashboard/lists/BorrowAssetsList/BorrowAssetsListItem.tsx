@@ -14,6 +14,7 @@ import { ListItemWrapper } from '../ListItemWrapper';
 import { ListValueColumn } from '../ListValueColumn';
 import { TokenIcon } from 'src/components/primitives/TokenIcon';
 import { FormattedNumber } from 'src/components/primitives/FormattedNumber';
+import router from 'next/router';
 
 export const BorrowAssetsListItem = ({
   symbol,
@@ -46,20 +47,29 @@ export const BorrowAssetsListItem = ({
       pl: '17px',
       my: '16px',
     }}>
-      <TokenIcon symbol={iconSymbol} sx={{ height: '19px',width: '19px', mr: '6px'}} />
       <Box sx={{
-      display: 'flex',
-      alignItems: 'center',
-      width: '115px',  
-      }}>
-        <Typography sx={{
-        fontWeight: 400,
-        fontSize: '14px',
-        lineHeight: '1em',
-        letterSpacing: '-0.02em',
-        }}>{symbol}</Typography>
+        display: 'flex',
+        alignItems: 'center',
+        cursor: 'pointer',
+      }}
+      onClick={() => underlyingAsset!=='0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee' ? router.push(ROUTES.reserveOverview(underlyingAsset, currentMarket)):router.push(ROUTES.reserveOverview('0x5555555555555555555555555555555555555555', currentMarket))}
+      >      
+        <TokenIcon symbol={iconSymbol} sx={{ height: '19px',width: '19px', mr: '6px'}} />
+        <Box sx={{
+        display: 'flex',
+        alignItems: 'center',
+        width: '115px',  
+        }}>
+          <Typography sx={{
+          fontWeight: 400,
+          fontSize: '14px',
+          lineHeight: '1em',
+          letterSpacing: '-0.02em',
+          }}>
+            {symbol}
+          </Typography>
+        </Box>
       </Box>
-
       <Box sx={{
       display: 'flex',
       alignItems: 'center',

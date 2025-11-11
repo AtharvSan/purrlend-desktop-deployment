@@ -444,7 +444,6 @@ export const DashboardEModeButton = ({ userEmodeCategoryId }: DashboardEModeButt
               fontStyle: 'Regular',
               fontSize: '16px',
               lineHeight: '21px',
-              letterSpacing: '-2%',
               color: 'rgba(67, 67, 67, 1)',
               marginLeft: '1px',
               marginBottom: '17px',

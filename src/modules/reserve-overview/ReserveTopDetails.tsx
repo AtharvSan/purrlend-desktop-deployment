@@ -203,11 +203,12 @@ export const ReserveTopDetails = ({ underlyingAsset }: ReserveTopDetailsProps) =
                 <Skeleton width={16} height={16} sx={{ ml: 1, background: '#383D51' }} />
               ) : (
                 <Box sx={{ 
-                  // backgroundColor: 'red',
                   display: 'flex',
                   flexDirection: 'row', 
                   pt: '5px',
-                  pl: '8px', }}>
+                  pl: '8px', 
+                  cursor: 'pointer',
+                  }}>
                   <TokenLinkDropdown poolReserve={poolReserve} downToSM={downToSM} />
                   {connected && (
                     <AddTokenDropdown

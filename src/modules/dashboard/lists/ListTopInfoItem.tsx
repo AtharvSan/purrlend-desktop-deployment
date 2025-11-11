@@ -2,15 +2,17 @@ import { Paper, Typography, Box } from '@mui/material';
 import { ReactNode } from 'react';
 
 import { FormattedNumber } from '../../../components/primitives/FormattedNumber';
+import BorrowIndicator from 'src/components/caps/BorrowIndicator';
 
 interface ListTopInfoItemProps {
   title: ReactNode;
   value: number | string;
   percent?: boolean;
   tooltip?: ReactNode;
+  power?: boolean;
 }
 
-export const ListTopInfoItem = ({ title, value, percent, tooltip }: ListTopInfoItemProps) => {
+export const ListTopInfoItem = ({ title, value, percent, tooltip, power }: ListTopInfoItemProps) => {
   return (
     <Paper
       // variant="outlined"
@@ -47,7 +49,7 @@ export const ListTopInfoItem = ({ title, value, percent, tooltip }: ListTopInfoI
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        // gap: '9px',
+        gap: '9px',
       }}>
         <FormattedNumber value={value} percent={percent} symbolsColor='#828282' fontWeight={600} size='18px' symbol="USD" sx={{
           fontWeight: 600,
@@ -58,7 +60,8 @@ export const ListTopInfoItem = ({ title, value, percent, tooltip }: ListTopInfoI
         }}/>
 
         {/* {tooltip} */}
-      </Box>
+        { power && <BorrowIndicator percentage={value*100} /> }
+      </Box>  
     </Paper>
   );
 };

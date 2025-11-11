@@ -34,6 +34,7 @@ export const EmodeSelect = ({
           letterSpacing: '0%',
           color: 'rgba(67, 67, 67, 1)',
           marginBottom: '8px',
+          mt: '24px',
         }}>
         <Trans>Asset category</Trans>
       </FormLabel>

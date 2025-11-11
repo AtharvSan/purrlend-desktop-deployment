@@ -102,7 +102,8 @@ export const BorrowedPositionsListItem = ({
           <Button
             disabled={!isActive}
             variant="contained"
-            onClick={() => openRepay(reserve.underlyingAsset, borrowRateMode, isFrozen)}
+            // onClick={() => openRepay(reserve.underlyingAsset, borrowRateMode, isFrozen)}
+            onClick={() => openBorrow(reserve.underlyingAsset)}
             sx={{
               backgroundColor: 'rgba(6, 21, 18, 1)',
               color: '#FFFFFF',
@@ -117,12 +118,14 @@ export const BorrowedPositionsListItem = ({
               mr: '8px',
             }}
           >
-            <Trans>Repay</Trans>
+            {/* <Trans>Repay</Trans> */}
+            <Trans>Borrow</Trans>
           </Button>
           <Button
             disabled={!isActive || !borrowingEnabled || isFrozen}
             // variant="outlined"
-            onClick={() => openBorrow(reserve.underlyingAsset)}
+            // onClick={() => openBorrow(reserve.underlyingAsset)}
+            onClick={() => openRepay(reserve.underlyingAsset, borrowRateMode, isFrozen)}
             sx={{
             py: '7px',
             px: '12px',
@@ -137,7 +140,8 @@ export const BorrowedPositionsListItem = ({
             minWidth: 'unset',
             }}
           >
-            <Trans>Borrow</Trans>
+            {/* <Trans>Borrow</Trans> */}
+            <Trans>Repay</Trans>
           </Button>
         </ListButtonsColumn>
       </Box>

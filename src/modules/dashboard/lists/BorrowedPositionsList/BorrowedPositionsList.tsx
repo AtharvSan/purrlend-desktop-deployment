@@ -30,6 +30,8 @@ import { ListLoader } from '../ListLoader';
 import { ListTopInfoItem } from '../ListTopInfoItem';
 import { BorrowedPositionsListItem } from './BorrowedPositionsListItem';
 import { BorrowedPositionsListMobileItem } from './BorrowedPositionsListMobileItem';
+import BorrowIndicator from 'src/components/caps/BorrowIndicator';
+import { FormattedNumber } from 'src/components/primitives/FormattedNumber';
 
 const head = [
   {
@@ -212,7 +214,9 @@ export const BorrowedPositionsList = () => {
                 value={collateralUsagePercent || 0}
                 percent
                 tooltip={<BorrowPowerTooltip />}
+                power={true}
               />
+              
             </>
           )}
         </>

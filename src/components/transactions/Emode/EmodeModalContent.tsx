@@ -186,39 +186,13 @@ export const EmodeModalContent = ({ mode }: EmodeModalContentProps) => {
       {user.userEmodeCategoryId === 0 && (
         <Warning severity="warning">
           <Typography variant="caption" sx={{
-            // font-family: 'Geist',
             fontWeight: '400',
             fontStyle: 'Regular',
             fontSize: '14px',
-            // lineHeight:'100%',
-            letterSpacing: '-2%',
-            color: 'rgba(47, 117, 248, 1)',
+            letterSpacing: '-0.02em',
           }}>
             <Trans>
               Enabling E-Mode only allows you to borrow assets belonging to the selected category.
-              <br></br>Please visit our{' '}
-              <Link
-                href="https://docs.purrlend.com/faq/purrlend-features#high-efficiency-mode-e-mode"
-                target="_blank"
-                rel="noopener"
-              >
-                <Typography
-                  sx={{
-                  // fontFamily: 'Geist',
-                  fontWeight: 700,
-                  fontStyle: 'Bold',
-                  fontSize: '14px',
-                  // line-height: 100%;
-                  letterSpacing: '-2%',
-                  textDecoration: 'underline',
-                  textDecorationStyle: 'solid',
-                  color: 'rgba(47, 117, 248, 1)',
-                  display: 'inline-block',
-                }}>
-                  FAQ guide
-                </Typography>
-              </Link>{' '}
-              to learn more about how it works and the applied restrictions.
             </Trans>
           </Typography>
         </Warning>
@@ -250,21 +224,25 @@ export const EmodeModalContent = ({ mode }: EmodeModalContentProps) => {
 
       <TxModalDetails gasLimit={gasLimit}>
         {!showModal && (
-          <Row caption={<Trans>E-Mode category</Trans>} captionVariant="description" mb={4}>
+          <Row caption={<Trans>E-Mode category</Trans>} captionVariant="description" mb={4} sx={{
+            color: 'rgba(130, 130, 130, 1)',
+          }}>
             <Box sx={{ display: 'flex', justifyContent: 'right', alignItems: 'center' }}>
-              <Box sx={{ display: 'inline-flex', alignItems: 'center', mx: 1 }}>
+              <Box sx={{ display: 'inline-flex', alignItems: 'center', mx: 1, color: '#061512', }}>
                 {user.userEmodeCategoryId !== 0 ? (
                   <>
                     {/* <SvgIcon sx={{ fontSize: '12px' }}>
                       <LightningBoltGradient />
                     </SvgIcon> */}
                     <img src={uiConfig.emodeLeaf} style={{marginRight: '4px'}} />
-                    <Typography variant="subheader1">
+                    <Typography sx={{
+                      fontWeight: 450,
+                    }}>
                       {getEmodeMessage(eModes[user.userEmodeCategoryId].label)}
                     </Typography>
                   </>
                 ) : (
-                  <Typography variant="subheader1">
+                  <Typography sx={{fontWeight: 450, color: '#061512'}}>
                     <Trans>None</Trans>
                   </Typography>
                 )}
@@ -279,12 +257,12 @@ export const EmodeModalContent = ({ mode }: EmodeModalContentProps) => {
                           <LightningBoltGradient />
                         </SvgIcon> */}
                         <img src={uiConfig.emodeLeaf} style={{marginRight: '4px'}} />
-                        <Typography variant="subheader1">
+                        <Typography sx={{fontWeight: 450, color: '#061512'}}>
                           {getEmodeMessage(eModes[selectedEmode.id].label)}
                         </Typography>
                       </>
                     ) : (
-                      <Typography variant="subheader1">
+                      <Typography sx={{fontWeight: 450, color: '#061512'}}>
                         <Trans>None</Trans>
                       </Typography>
                     )}
@@ -302,6 +280,7 @@ export const EmodeModalContent = ({ mode }: EmodeModalContentProps) => {
           sx={{ 
             alignContent: 'flex-end',
             color: 'rgba(130, 130, 130, 1)',
+            // color: 'red',
           }}
         >
           <Box sx={{ display: 'flex', justifyContent: 'right', alignItems: 'center' }}>
@@ -314,17 +293,17 @@ export const EmodeModalContent = ({ mode }: EmodeModalContentProps) => {
                 }}
               >
                 {user.userEmodeCategoryId !== 0 ? (
-                  <Typography sx={{ textAlign: 'end' }}>
+                  <Typography sx={{ textAlign: 'end', fontWeight: 450, color: '#061512' }}>
                     {eModes[user.userEmodeCategoryId].assets.join(', ')}
                   </Typography>
                 ) : (
                   <Typography sx={{
-                    fontWeight: 400,
+                    fontWeight: 450,
                     fontStyle: 'Regular',
                     fontSize: '14px',
                     lineHeight: '100%',
                     letterSpacing: '-2%', 
-                    color: 'rgba(6, 21, 18, 1)',
+                    color: '#061512',
                   }}>
                     <Trans>All Assets</Trans>
                   </Typography>
@@ -345,17 +324,17 @@ export const EmodeModalContent = ({ mode }: EmodeModalContentProps) => {
                     <Typography 
                       sx={{ 
                         textAlign: 'end',
-                        fontWeight: 400,
+                        fontWeight: 450,
                         fontStyle: 'Regular',
                         fontSize: '14px',
                         lineHeight: '100%',
                         letterSpacing: '-2%', 
-                        color: 'rgba(6, 21, 18, 1)',
+                        color: '#061512',
                       }}>
                       {selectedEmode.assets.join(', ')}
                     </Typography>
                   ) : (
-                    <Typography>
+                    <Typography sx={{fontWeight: 450, color: '#061512'}}>
                       <Trans>All Assets</Trans>
                     </Typography>
                   )}
@@ -376,6 +355,7 @@ export const EmodeModalContent = ({ mode }: EmodeModalContentProps) => {
             captionVariant="description"
             mb={4}
             align="flex-start"
+            sx={{ color: 'rgba(130, 130, 130, 1)' }}
           >
             <Box sx={{ textAlign: 'right' }}>
               <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>

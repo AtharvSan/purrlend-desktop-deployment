@@ -63,16 +63,6 @@ const head = [
     ),
     sortKey: 'variableBorrowAPY',
   },
-  // {
-  //   title: (
-  //     <StableAPYTooltip
-  //       text={<Trans>APY, stable</Trans>}
-  //       key="stableBorrowAPY"
-  //       variant="subheader2"
-  //     />
-  //   ),
-  //   sortKey: 'stableBorrowAPY',
-  // },
 ];
 
 export const BorrowAssetsList = () => {
@@ -221,7 +211,7 @@ export const BorrowAssetsList = () => {
       withTopMargin
       noData={borrowDisabled}
       subChildrenComponent={
-        <Box sx={{ px: '16px', mb: 4 }}>
+        <Box sx={{ px: {xs: '10px', md: '7px'}, mb: 4 }}>
           {+collateralUsagePercent >= 0.98 && (
             <Warning severity="error">
               <Trans>
@@ -236,9 +226,6 @@ export const BorrowAssetsList = () => {
               {user?.isInIsolationMode && (
                 <Warning severity="warning">
                   <Trans>Borrowing power and assets are limited due to Isolation mode. </Trans>
-                  {/* <Link href="https://docs.aave.com/faq/" target="_blank" rel="noopener">
-                    Learn More
-                  </Link> */}
                 </Warning>
               )}
               {user?.isInEmode && (

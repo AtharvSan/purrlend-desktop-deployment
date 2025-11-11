@@ -38,30 +38,22 @@ export const ListWrapper = ({
     <Paper
       sx={(theme) => ({
         mt: withTopMargin ? 0 : 0,
-        // border: `1px solid ${theme.palette.divider}`,
-        // borderColor: 'rgba(234, 234, 234, 1)',
         borderRadius: '16px',
         width: '96.5%',
         mx: 'auto',
         height: '100%',
-        // mt: '5px',
-        // mb: '5px',
-        // backgroundColor: 'red',
         boxShadow: '0px 3px 5px 0px #0000000A',
       })}
     >
       <Box
         sx={{
-          // px: { xs: 4, xsm: 4 },
           pl: '14px',
           pr: '15px',
-          // my: { xs: 3.5, xsm: 3},
           mt: '15px',
           mb: '12px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          // backgroundColor: 'blue',
         }}
       >
         <Box
@@ -70,7 +62,6 @@ export const ListWrapper = ({
             display: 'flex',
             alignItems: 'center',
             py: '3.6px',
-            // backgroundColor: 'blue',
           }}
         >
           <Box sx={{
@@ -159,8 +150,6 @@ export const ListWrapper = ({
           sx={{
             display: 'flex',
             alignItems: 'center',
-            // px: { xs: 4, xsm: 6 },
-            // pb: { xs: collapsed && !noData ? 6 : 2, xsm: collapsed && !noData ? 6 : 0 },
             overflowX: 'auto',
             border: '1px solid',
             borderRadius: '8px',
@@ -173,9 +162,7 @@ export const ListWrapper = ({
             pb: '5px',
             pr: '4px',
             backgroundColor: 'rgba(242, 242, 242, 1)',
-            // backgroundColor: 'red',
             borderColor: 'rgba(220, 220, 220, 1)',
-            // marginBottom: '18px',
           }}
         >
           {topInfo}

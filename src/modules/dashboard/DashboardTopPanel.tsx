@@ -114,8 +114,9 @@ export const DashboardTopPanel = () => {
           lineHeight: '1em',
           letterSpacing: '-0.02em',
           }}> 
-          {currentNetworkConfig.name} 
-          {!downToSM && (' Market')}
+          {/* {currentNetworkConfig.name}  */}
+          {/* {!downToSM && (' Market')} */}
+          Your Position
         </Typography>
       </Box>
 

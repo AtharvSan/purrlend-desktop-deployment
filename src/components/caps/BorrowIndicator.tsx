@@ -7,7 +7,7 @@ import Tooltip from '@mui/material/Tooltip';
 export default function BorrowIndicator({
   percentage = 0,
   label = 'Borrow power used',
-  width = '1.8cm',      // visual bar width
+  width = {xs: '1.39cm' , md: '1.8cm'},      // visual bar width
   height = 8,         // bar height in px
   gradient = 'linear-gradient(90deg,#ff8a00dd,#ff5f6dee)', // default accent (change as needed)
 }) {

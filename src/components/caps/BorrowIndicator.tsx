@@ -9,7 +9,7 @@ export default function BorrowIndicator({
   label = 'Borrow power used',
   width = '1.8cm',      // visual bar width
   height = 8,         // bar height in px
-  gradient = 'linear-gradient(90deg,#ff8a00,#ff5f6d)', // default accent (change as needed)
+  gradient = 'linear-gradient(90deg,#ff8a00dd,#ff5f6dee)', // default accent (change as needed)
 }) {
   const pct = Math.max(0, Math.min(100, Number(percentage || 0)));
   const pctRounded = Math.round(pct * 100) / 100;
@@ -36,7 +36,7 @@ export default function BorrowIndicator({
             width,
             height: `${height}px`,
             // border: '0.5px solid #888888',
-            border: '0.5px solid #ff8a00cc',
+            border: '0.5px solid #ff8a00ff',
             borderRadius: `${height / 2}px`,
             position: 'relative',
             backgroundColor: 'white',

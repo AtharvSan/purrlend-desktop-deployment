@@ -6,7 +6,7 @@ import { providers } from 'ethers';
 import { NextPage } from 'next';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
-import AaveMetaImage from 'public/aaveMetaLogo-min.jpg';
+import PurrlendMetaImage from 'public/purrlendMetaLogo-min.jpg';
 import * as React from 'react';
 import { AddressBlocked } from 'src/components/AddressBlocked';
 import { Meta } from 'src/components/Meta';
@@ -60,9 +60,9 @@ export default function MyApp(props: MyAppProps) {
       <Meta
         title={'Open Source Liquidity Protocol'}
         description={
-          'Aave is an Open Source Protocol to create Non-Custodial Liquidity Markets to earn interest on supplying and borrowing assets with a variable or stable interest rate. The protocol is designed for easy integration into your products and services.'
+          'Purrlend is an open source Liquidity Market to earn interest on supplying and borrowing assets with a variable interest rate.'
         }
-        imageUrl={AaveMetaImage.src}
+        imageUrl={PurrlendMetaImage.src}
       />
       <LanguageProvider>
         <Web3ReactProvider getLibrary={getWeb3Library}>

@@ -38,7 +38,13 @@ export default function Footer() {
       >
         {/* Left side - Text */}
         <Typography variant="body2" align="center">
-          © {new Date().getFullYear()} Purrlend
+          © {new Date().getFullYear()} Purrlend |<Box component="span" mx={1} sx={{
+            target: "_blank",
+            cursor: "pointer",
+            // textDecoration: "underline",
+          }}
+          onClick={() => window.open("https://github.com/Purrlend/Terms/blob/main/Purrlend%20Terms%20of%20Use.pdf", "_blank")}
+           >Terms</Box> 
         </Typography>
 
         {/* Right side - Icons */}

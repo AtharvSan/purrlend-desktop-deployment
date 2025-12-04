@@ -4,10 +4,10 @@ import { Box, Container, Typography, IconButton } from "@mui/material";
 export default function Footer() {
   const socials = [
     // { name: "Telegram", href: "", icon: "/telegram.svg" },
-    { name: "X", href: "", icon: "/x.svg" },
+    { name: "X", href: "https://x.com/purrlend?s=21", icon: "/x.svg" },
     { name: "Discord", href: "", icon: "/discord.svg" },
-    { name: "GitHub", href: "", icon: "/github.svg" },
-    { name: "Gitbook", href: "", icon: "/gitbook.svg" },
+    { name: "GitHub", href: "https://github.com/orgs/Purrlend/repositories", icon: "/github.svg" },
+    { name: "Gitbook", href: "https://purrlends.gitbook.io/purrlend/", icon: "/gitbook.svg" },
     // { name: "Medium", href: "", icon: "/medium.svg" },
   ];
 

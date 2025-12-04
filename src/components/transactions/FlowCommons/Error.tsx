@@ -39,14 +39,14 @@ export const TxErrorView = ({ txError }: { txError: TxErrorType }) => {
           <Trans>Transaction failed</Trans>
         </Typography>
 
-        <Typography>
+        {/* <Typography>
           <Trans>
             You can report incident to our <Link href="https://discord.gg/7kHKnkDEUf">Discord</Link>{' '}
             or <Link href="https://github.com/aave/interface">Github</Link>.
           </Trans>
-        </Typography>
+        </Typography> */}
 
-        <Button
+        {/* <Button
           variant="outlined"
           onClick={() => navigator.clipboard.writeText(txError.rawError.message.toString())}
           size="small"
@@ -57,7 +57,7 @@ export const TxErrorView = ({ txError }: { txError: TxErrorType }) => {
           <SvgIcon sx={{ ml: 0.5, fontSize: '12px' }}>
             <DuplicateIcon />
           </SvgIcon>
-        </Button>
+        </Button> */}
       </Box>
       <Box sx={{ display: 'flex', flexDirection: 'column', mt: 12 }}>
         <Button onClick={close} variant="contained" size="large" sx={{ minHeight: '44px' }}>

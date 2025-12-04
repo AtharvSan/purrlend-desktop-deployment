@@ -455,7 +455,7 @@ export default function WalletWidget({ open, setOpen, headerHeight }: WalletWidg
             letterSpacing: '-0.02em',
             border: '1px solid',
             borderColor: 'rgba(255, 255, 255, 0.2)',
-            boxShadow: {xs: '0px 4px 10px 0px #FF7E0963', md: 'none'},
+            boxShadow: connected || readOnlyModeAddress ? {xs: '0px 4px 10px 0px #FF7E0963', md: 'none'} : '0px 4px 10px 0px #FF7E0963' ,
             // backgroundColor: 'red',
           }}
           startIcon={(connected || readOnlyModeAddress) && !hideWalletAccountText && accountAvatar}

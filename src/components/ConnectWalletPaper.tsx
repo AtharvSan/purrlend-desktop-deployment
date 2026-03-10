@@ -27,7 +27,7 @@ export const ConnectWalletPaper = ({
         justifyContent: 'center',
         textAlign: 'center',
         flex: 1,
-        width: {xs:'90%' , md:'579px' },
+        width: { xs: '90%', md: '579px' },
         height: '494px',
         margin: 'auto',
         paddingBottom: 2,
@@ -36,31 +36,36 @@ export const ConnectWalletPaper = ({
         ...sx,
       }}
     >
-      <PurrWallet style={{ marginBottom: '16px'}} /> 
+      <PurrWallet style={{ marginBottom: '16px' }} />
       <>
         {loading ? (
           <CircularProgress />
         ) : (
           <>
-            <Typography variant="h2" sx={{ 
+            <Typography
+              variant="h2"
+              sx={{
                 mb: 2,
-                mx: {xs: '22%'},
+                mx: { xs: '22%' },
                 fontSize: '24px',
                 fontWeight: 500,
                 letterSpacing: '-0.02em',
                 fontStyle: 'medium',
-              }}>
+              }}
+            >
               <Trans>Connect wallet to get started!</Trans>
             </Typography>
-            <Typography sx={{ 
-              width: {xs: '85%', md: '75%'},
-              fontWeight: 400,
-              fontSize: '16px',
-              mb: 8,
-              lineHeight: '1.35em',
-              letterSpacing: '-0.02em',
-              color: '#828282',
-             }}>
+            <Typography
+              sx={{
+                width: { xs: '85%', md: '75%' },
+                fontWeight: 400,
+                fontSize: '16px',
+                mb: 8,
+                lineHeight: '1.35em',
+                letterSpacing: '-0.02em',
+                color: '#828282',
+              }}
+            >
               {description || (
                 <Trans>
                   Please connect your wallet to see your supplies, borrowings, and open positions.

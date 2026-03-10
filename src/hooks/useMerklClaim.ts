@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import { ethers } from 'ethers';
+import { useState } from 'react';
 import { getMerklClaimTxs } from 'src/services/merklClaimService';
 
 /**
@@ -35,9 +35,7 @@ export const useMerklClaim = (chainId?: number, wallet?: string) => {
         return;
       }
 
-      const provider = new ethers.providers.Web3Provider(
-        (window as any).ethereum
-      );
+      const provider = new ethers.providers.Web3Provider((window as any).ethereum);
       const signer = provider.getSigner();
 
       // Send each pre-built claim transaction

@@ -13,13 +13,9 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { ethers } from 'ethers';
-import { POINTS_CONFIG, ASSET_NAMES, getCurrentSeason } from './config';
-import {
-  upsertWalletPoints,
-  logSnapshot,
-  getLastSnapshotTime,
-  AssetBreakdown,
-} from './db';
+
+import { ASSET_NAMES, getCurrentSeason, POINTS_CONFIG } from './config';
+import { AssetBreakdown, getLastSnapshotTime, logSnapshot, upsertWalletPoints } from './db';
 
 // ── ABIs (minimal, only what we need) ────────────────────────────────────────
 
@@ -109,7 +105,11 @@ export async function runSnapshot(): Promise<SnapshotResult> {
   const timeSince = Date.now() - lastRun;
   const minInterval = POINTS_CONFIG.SNAPSHOT_INTERVAL_SECONDS * 1000;
   if (timeSince < minInterval * 0.95) {
-    throw new Error(`Too soon. Last snapshot was ${Math.round(timeSince / 1000)}s ago. Wait ${Math.round((minInterval - timeSince) / 1000)}s`);
+    throw new Error(
+      `Too soon. Last snapshot was ${Math.round(timeSince / 1000)}s ago. Wait ${Math.round(
+        (minInterval - timeSince) / 1000
+      )}s`
+    );
   }
 
   console.log(`[Snapshot] Starting Season ${season}...`);
@@ -151,11 +151,7 @@ export async function runSnapshot(): Promise<SnapshotResult> {
 
   // ── Step 2: Get all unique wallets from events ───────────────────────────
   console.log('[Snapshot] Fetching active wallets...');
-  const poolContract = new ethers.Contract(
-    POINTS_CONFIG.LENDING_POOL,
-    LENDING_POOL_ABI,
-    provider
-  );
+  const poolContract = new ethers.Contract(POINTS_CONFIG.LENDING_POOL, LENDING_POOL_ABI, provider);
 
   const currentBlock = await provider.getBlockNumber();
   const fromBlock = Math.max(0, currentBlock - 100000); // ~100k blocks back
@@ -183,67 +179,68 @@ export async function runSnapshot(): Promise<SnapshotResult> {
   for (let i = 0; i < wallets.length; i += BATCH_SIZE) {
     const batch = wallets.slice(i, i + BATCH_SIZE);
 
-    await Promise.all(batch.map(async (wallet) => {
-      try {
-        const [userReserves] = await uiContract.getUserReservesData(
-          POINTS_CONFIG.POOL_ADDRESS_PROVIDER,
-          wallet
-        );
+    await Promise.all(
+      batch.map(async (wallet) => {
+        try {
+          const [userReserves] = await uiContract.getUserReservesData(
+            POINTS_CONFIG.POOL_ADDRESS_PROVIDER,
+            wallet
+          );
 
-        let supplyPts = 0;
-        let borrowPts = 0;
-        const breakdown: AssetBreakdown[] = [];
+          let supplyPts = 0;
+          let borrowPts = 0;
+          const breakdown: AssetBreakdown[] = [];
 
-        for (const r of userReserves) {
-          const asset = r.underlyingAsset.toLowerCase();
-          const price = priceMap[asset] ?? 0;
-          const idx = indexMap[asset];
-          const multiplier = POINTS_CONFIG.ASSET_MULTIPLIERS[asset] ?? 0;
+          for (const r of userReserves) {
+            const asset = r.underlyingAsset.toLowerCase();
+            const price = priceMap[asset] ?? 0;
+            const idx = indexMap[asset];
+            const multiplier = POINTS_CONFIG.ASSET_MULTIPLIERS[asset] ?? 0;
 
-          if (!idx || multiplier === 0) continue; // asset not whitelisted
+            if (!idx || multiplier === 0) continue; // asset not whitelisted
 
-          const symbol = ASSET_NAMES[asset] ?? asset.slice(0, 6);
+            const symbol = ASSET_NAMES[asset] ?? asset.slice(0, 6);
 
-          // Convert scaled balances to actual balances
-          const supplyBalance =
-            (Number(r.scaledATokenBalance) * idx.liquidity) / 10 ** idx.decimals;
-          const borrowBalance =
-            (Number(r.scaledVariableDebt) * idx.borrow) / 10 ** idx.decimals;
+            // Convert scaled balances to actual balances
+            const supplyBalance =
+              (Number(r.scaledATokenBalance) * idx.liquidity) / 10 ** idx.decimals;
+            const borrowBalance = (Number(r.scaledVariableDebt) * idx.borrow) / 10 ** idx.decimals;
 
-          const supplyUsd = supplyBalance * price;
-          const borrowUsd = borrowBalance * price;
+            const supplyUsd = supplyBalance * price;
+            const borrowUsd = borrowBalance * price;
 
-          // Points = USD × rate × multiplier × 1 hour
-          const assetSupplyPts =
-            supplyUsd * POINTS_CONFIG.SUPPLY_POINTS_PER_DOLLAR_PER_HOUR * multiplier;
-          const assetBorrowPts =
-            borrowUsd * POINTS_CONFIG.BORROW_POINTS_PER_DOLLAR_PER_HOUR * multiplier;
+            // Points = USD × rate × multiplier × 1 hour
+            const assetSupplyPts =
+              supplyUsd * POINTS_CONFIG.SUPPLY_POINTS_PER_DOLLAR_PER_HOUR * multiplier;
+            const assetBorrowPts =
+              borrowUsd * POINTS_CONFIG.BORROW_POINTS_PER_DOLLAR_PER_HOUR * multiplier;
 
-          if (supplyUsd > 0 || borrowUsd > 0) {
-            breakdown.push({
-              asset,
-              symbol,
-              supplyPoints: assetSupplyPts,
-              borrowPoints: assetBorrowPts,
-              supplyUsd,
-              borrowUsd,
-            });
-            supplyPts += assetSupplyPts;
-            borrowPts += assetBorrowPts;
-            totalSupplyUsd += supplyUsd;
-            totalBorrowUsd += borrowUsd;
+            if (supplyUsd > 0 || borrowUsd > 0) {
+              breakdown.push({
+                asset,
+                symbol,
+                supplyPoints: assetSupplyPts,
+                borrowPoints: assetBorrowPts,
+                supplyUsd,
+                borrowUsd,
+              });
+              supplyPts += assetSupplyPts;
+              borrowPts += assetBorrowPts;
+              totalSupplyUsd += supplyUsd;
+              totalBorrowUsd += borrowUsd;
+            }
           }
-        }
 
-        const earnedThisHour = supplyPts + borrowPts;
-        if (earnedThisHour > 0) {
-          upsertWalletPoints(wallet, season, supplyPts, borrowPts, breakdown);
-          totalPointsAwarded += earnedThisHour;
+          const earnedThisHour = supplyPts + borrowPts;
+          if (earnedThisHour > 0) {
+            upsertWalletPoints(wallet, season, supplyPts, borrowPts, breakdown);
+            totalPointsAwarded += earnedThisHour;
+          }
+        } catch (e) {
+          console.error(`[Snapshot] Failed for ${wallet}:`, e);
         }
-      } catch (e) {
-        console.error(`[Snapshot] Failed for ${wallet}:`, e);
-      }
-    }));
+      })
+    );
 
     // Log progress every 50 wallets
     if ((i + BATCH_SIZE) % 50 === 0) {

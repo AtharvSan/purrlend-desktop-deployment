@@ -1,3 +1,6 @@
+import '/public/emodeLeaf.svg';
+import '/public/starWhite.svg';
+
 import { CogIcon, LightningBoltIcon } from '@heroicons/react/solid';
 import { Trans } from '@lingui/macro';
 import { Box, Button, SvgIcon, Typography } from '@mui/material';
@@ -7,11 +10,8 @@ import { EmodeModalType } from 'src/components/transactions/Emode/EmodeModalCont
 import { useAppDataContext } from 'src/hooks/app-data-provider/useAppDataProvider';
 import { useModalContext } from 'src/hooks/useModal';
 
-
 import LightningBoltGradient from '/public/lightningBoltGradient.svg';
 import { uiConfig } from '/src/uiConfig';
-import '/public/emodeLeaf.svg';
-import '/public/starWhite.svg';
 
 import { Link } from '../../components/primitives/Link';
 import { Row } from '../../components/primitives/Row';
@@ -46,182 +46,205 @@ export const DashboardEModeButton = ({ userEmodeCategoryId }: DashboardEModeButt
 
   return (
     <Box
-      sx={{ 
-        display: 'flex', 
+      sx={{
+        display: 'flex',
         alignItems: 'center',
         mx: '14px',
         // backgroundColor: 'blue',
-       }}
+      }}
       onClick={(e) => {
         e.stopPropagation();
       }}
     >
-      {isEModeDisabled ?(
-      <Box
-        sx={{ 
-          display: 'flex',
-          width: {xs: '100%', md: 'none'},
-          justifyContent: 'space-between',
-          alignItems: 'center', 
-          // backgroundColor: 'red',
-          gap: '8px',
-          // mt: '100px',
-          py: '5px',
-          paddingRight:'5px',
-          paddingLeft:'8px',
-          border: '1px solid',
-          borderColor: 'rgba(220, 220, 220, 1)',
-          borderRadius: '32px',
-        }}>
-        <Box sx={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '6px',
-        }}>
-          <Box sx={{
+      {isEModeDisabled ? (
+        <Box
+          sx={{
             display: 'flex',
+            width: { xs: '100%', md: 'none' },
+            justifyContent: 'space-between',
             alignItems: 'center',
-            justifyContent: 'center',
-            marginLeft: '1px',
-          }}>
-              <img src={uiConfig.emodeLeaf} alt="E-Mode" />
-          </Box>
-          <Typography mr={1} variant="description" color="text.secondary" 
-            sx={{
-              fontWeight: 500,
-              fontStyle: 'medium',
-              fontSize: '14px',
-              lineHeight: '100%',
-              letterSpacing: '-2%',
-              horizontalAlign: 'center',
-              color: 'rgba(6, 21, 18, 1)',
-            }}>
-            <Trans>E-Mode</Trans>
-          </Typography>
-        </Box>
-
-        <Button
-          onClick={(e) => {
-            e.stopPropagation();
-            handleClick(e);
-          }}
-          data-cy={`emode-open`}
-          size="small"
-          variant="outlined"
-          sx={(theme) => ({
+            // backgroundColor: 'red',
+            gap: '8px',
+            // mt: '100px',
+            py: '5px',
+            paddingRight: '5px',
+            paddingLeft: '8px',
             border: '1px solid',
             borderColor: 'rgba(220, 220, 220, 1)',
             borderRadius: '32px',
-            backgroundColor: 'rgba(255, 255, 255, 1)',
-            fontWeight: 100,
-            fontStyle: 'medium',
-            fontSize: '10px',
-            lineHeight: '100%',
-            letterSpacing: '0.2em',
-            paddingRight: '8px',
-            paddingLeft: '8px',
-            boxShadow: '0px 2px 6px 0px rgba(0, 0, 0, 0.1)',
-          })}
-        >
-          <Box>
-            {isEModeDisabled ? (
-              // <Typography variant="buttonS" color="rgba(130, 130, 130, 1)">
-              <Typography sx={{
-                fontWeight: 500,
-                fontSize: '10px',
-                lineHeight: '1em',
-                letterSpacing: '0.08em',
-                color: '#828282',
-                py: '6px',
-              }}>
-                <EModeLabelMessage />
-              </Typography>
-            ) : (
-              <TypographyGradient variant="buttonS">
-                <EModeLabelMessage />
-                {/* <Typography>hi</Typography> */}
-              </TypographyGradient>
-            )}
-          </Box>
-        </Button>
-      </Box>  
-      ):(
-      <Box
-        sx={{ 
-          display: 'inline-flex',
-          justifyContent: 'space-between',
-          alignItems: 'center', 
-          width: '100%',
-          gap: '8px',
-          mt: {xs: '7px', md: '0px' } ,
-          py: '5px',
-          paddingRight:'5px',
-          paddingLeft:'8px',
-          border: '1px solid',
-          borderColor: '#FF7E091A',
-          borderRadius: '32px',
-          backgroundColor: '#FFF2E6',
-          // backgroundColor: 'red',
-        }}>
-        <Box sx={{
-          display: 'flex',
-          gap: '8px',
-          alignItems: 'center',
-        }}>
-          <Box sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginLeft: '1px',
-          }}>
-              <img src={uiConfig.emodeLeafOn} alt="E-Mode" />
-          </Box>
-          <Typography mr={1} variant="description" color="text.secondary" sx={{
-          fontWeight: 500,
-          fontStyle: 'medium',
-          fontSize: '14px',
-          lineHeight: '100%',
-          letterSpacing: '-2%',
-          horizontalAlign: 'center',
-          color: 'rgba(6, 21, 18, 1)'}}>
-            <Trans>E-Mode</Trans>
-          </Typography>
-        </Box>
-
-        <Button
-          onClick={(e) => {
-            e.stopPropagation();
-            handleClick(e);
           }}
-          data-cy={`emode-open`}
-          size="small"
-          variant="contained"
-          sx={(theme) => ({
-            // ml: 1,
+        >
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+            }}
+          >
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginLeft: '1px',
+              }}
+            >
+              <img src={uiConfig.emodeLeaf} alt="E-Mode" />
+            </Box>
+            <Typography
+              mr={1}
+              variant="description"
+              color="text.secondary"
+              sx={{
+                fontWeight: 500,
+                fontStyle: 'medium',
+                fontSize: '14px',
+                lineHeight: '100%',
+                letterSpacing: '-2%',
+                horizontalAlign: 'center',
+                color: 'rgba(6, 21, 18, 1)',
+              }}
+            >
+              <Trans>E-Mode</Trans>
+            </Typography>
+          </Box>
+
+          <Button
+            onClick={(e) => {
+              e.stopPropagation();
+              handleClick(e);
+            }}
+            data-cy={`emode-open`}
+            size="small"
+            variant="outlined"
+            sx={(theme) => ({
+              border: '1px solid',
+              borderColor: 'rgba(220, 220, 220, 1)',
+              borderRadius: '32px',
+              backgroundColor: 'rgba(255, 255, 255, 1)',
+              fontWeight: 100,
+              fontStyle: 'medium',
+              fontSize: '10px',
+              lineHeight: '100%',
+              letterSpacing: '0.2em',
+              paddingRight: '8px',
+              paddingLeft: '8px',
+              boxShadow: '0px 2px 6px 0px rgba(0, 0, 0, 0.1)',
+            })}
+          >
+            <Box>
+              {isEModeDisabled ? (
+                // <Typography variant="buttonS" color="rgba(130, 130, 130, 1)">
+                <Typography
+                  sx={{
+                    fontWeight: 500,
+                    fontSize: '10px',
+                    lineHeight: '1em',
+                    letterSpacing: '0.08em',
+                    color: '#828282',
+                    py: '6px',
+                  }}
+                >
+                  <EModeLabelMessage />
+                </Typography>
+              ) : (
+                <TypographyGradient variant="buttonS">
+                  <EModeLabelMessage />
+                  {/* <Typography>hi</Typography> */}
+                </TypographyGradient>
+              )}
+            </Box>
+          </Button>
+        </Box>
+      ) : (
+        <Box
+          sx={{
+            display: 'inline-flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            width: '100%',
+            gap: '8px',
+            mt: { xs: '7px', md: '0px' },
+            py: '5px',
+            paddingRight: '5px',
+            paddingLeft: '8px',
             border: '1px solid',
             borderColor: '#FF7E091A',
             borderRadius: '32px',
-            // backgroundColor: 'rgba(255, 255, 255, 1)',
-            backgroundColor: '#FF7E09',
-            color: '#FFFFFF',
-            fontWeight: 500,
-            fontStyle: 'medium',
-            fontSize: '10px',
-            lineHeight: '1em',
-            letterSpacing: '0.08em',
-            paddingRight: '8px',
-            paddingLeft: '8px',
-            boxShadow: '0px 2px 6px 0px rgba(0, 0, 0, 0.1)',
-            '&:hover, &.Mui-focusVisible': {
+            backgroundColor: '#FFF2E6',
+            // backgroundColor: 'red',
+          }}
+        >
+          <Box
+            sx={{
+              display: 'flex',
+              gap: '8px',
+              alignItems: 'center',
+            }}
+          >
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginLeft: '1px',
+              }}
+            >
+              <img src={uiConfig.emodeLeafOn} alt="E-Mode" />
+            </Box>
+            <Typography
+              mr={1}
+              variant="description"
+              color="text.secondary"
+              sx={{
+                fontWeight: 500,
+                fontStyle: 'medium',
+                fontSize: '14px',
+                lineHeight: '100%',
+                letterSpacing: '-2%',
+                horizontalAlign: 'center',
+                color: 'rgba(6, 21, 18, 1)',
+              }}
+            >
+              <Trans>E-Mode</Trans>
+            </Typography>
+          </Box>
+
+          <Button
+            onClick={(e) => {
+              e.stopPropagation();
+              handleClick(e);
+            }}
+            data-cy={`emode-open`}
+            size="small"
+            variant="contained"
+            sx={(theme) => ({
+              // ml: 1,
+              border: '1px solid',
+              borderColor: '#FF7E091A',
+              borderRadius: '32px',
+              // backgroundColor: 'rgba(255, 255, 255, 1)',
+              backgroundColor: '#FF7E09',
+              color: '#FFFFFF',
+              fontWeight: 500,
+              fontStyle: 'medium',
+              fontSize: '10px',
+              lineHeight: '1em',
+              letterSpacing: '0.08em',
+              paddingRight: '8px',
+              paddingLeft: '8px',
+              boxShadow: '0px 2px 6px 0px rgba(0, 0, 0, 0.1)',
+              '&:hover, &.Mui-focusVisible': {
                 backgroundColor: '#FF7A00',
-                boxShadow: '0px 4px 10px 0 rgba(255, 126, 9, 0.39)'
-            }
-          })}>
-          <Typography variant="buttonS" color="#FFFFFF" >
-            <EModeLabelMessage />
-          </Typography>
-        </Button>
-      </Box>
+                boxShadow: '0px 4px 10px 0 rgba(255, 126, 9, 0.39)',
+              },
+            })}
+          >
+            <Typography variant="buttonS" color="#FFFFFF">
+              <EModeLabelMessage />
+            </Typography>
+          </Button>
+        </Box>
       )}
       {/* <Box
         sx={{ 
@@ -346,8 +369,8 @@ export const DashboardEModeButton = ({ userEmodeCategoryId }: DashboardEModeButt
       <Menu
         open={open}
         anchorEl={anchorEl}
-        sx={{ 
-          '.MuiMenu-paper': { 
+        sx={{
+          '.MuiMenu-paper': {
             maxWidth: '280px',
             borderRadius: '16px',
             border: '1px solid',
@@ -355,18 +378,19 @@ export const DashboardEModeButton = ({ userEmodeCategoryId }: DashboardEModeButt
             backgroundColor: 'rgba(255, 255, 255, 1)',
             boxShadow: '0px 14px 24px 0px rgba(0, 0, 0, 0.3)',
           },
-         }}
+        }}
         onClose={handleClose}
         keepMounted={true}
       >
-        <Box 
-          sx={{ 
-            px: 4, 
-            pt: 2, 
+        <Box
+          sx={{
+            px: 4,
+            pt: 2,
             pb: 3,
-          }}>
-          <Typography 
-            variant="subheader1" 
+          }}
+        >
+          <Typography
+            variant="subheader1"
             mb={isEModeDisabled ? 1 : 3}
             sx={{
               // font-family: Geist;
@@ -378,7 +402,8 @@ export const DashboardEModeButton = ({ userEmodeCategoryId }: DashboardEModeButt
               marginLeft: '1px',
               marginTop: '6px',
               marginBottom: '20px',
-            }}>
+            }}
+          >
             <Trans>Efficiency Mode</Trans>
           </Typography>
 
@@ -434,9 +459,9 @@ export const DashboardEModeButton = ({ userEmodeCategoryId }: DashboardEModeButt
             </Box>
           )} */}
 
-          <Typography 
-            variant="caption" 
-            color="text.secondary" 
+          <Typography
+            variant="caption"
+            color="text.secondary"
             mb={4}
             sx={{
               // fontFamily: Geist,
@@ -447,7 +472,8 @@ export const DashboardEModeButton = ({ userEmodeCategoryId }: DashboardEModeButt
               color: 'rgba(67, 67, 67, 1)',
               marginLeft: '1px',
               marginBottom: '17px',
-            }}>
+            }}
+          >
             <Trans>
               E-mode increases your LTV for a selected category of assets.{' '}
               {/* <Link
@@ -525,7 +551,7 @@ export const DashboardEModeButton = ({ userEmodeCategoryId }: DashboardEModeButt
                   lineHeight: '1em',
                 }}
               >
-              <img src={uiConfig.starWhite} alt="E-Mode" />
+                <img src={uiConfig.starWhite} alt="E-Mode" />
                 <Trans>Disable E-Mode</Trans>
               </Button>
             </>

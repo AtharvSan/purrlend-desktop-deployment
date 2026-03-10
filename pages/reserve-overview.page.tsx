@@ -54,28 +54,33 @@ export default function ReserveOverview() {
             exclusive
             onChange={(_, value) => setMode(value)}
             sx={{
-              width: { xs: '96%', xsm: '359px' }, 
+              width: { xs: '96%', xsm: '359px' },
               height: '44px',
-
             }}
           >
             <StyledToggleButton value="overview" disabled={mode === 'overview'}>
-              <Typography variant="subheader1" sx={{
-                fontWeight: 500,
-                fontSize: '14px',
-                lineHeight: '1em',
-                letterSpacing: '-0.02em',
-              }}>
+              <Typography
+                variant="subheader1"
+                sx={{
+                  fontWeight: 500,
+                  fontSize: '14px',
+                  lineHeight: '1em',
+                  letterSpacing: '-0.02em',
+                }}
+              >
                 <Trans>Supply Info</Trans>
               </Typography>
             </StyledToggleButton>
             <StyledToggleButton value="actions" disabled={mode === 'actions'}>
-              <Typography variant="subheader1" sx={{
-                fontWeight: 500,
-                fontSize: '14px',
-                lineHeight: '1em',
-                letterSpacing: '-0.02em',
-              }}>
+              <Typography
+                variant="subheader1"
+                sx={{
+                  fontWeight: 500,
+                  fontSize: '14px',
+                  lineHeight: '1em',
+                  letterSpacing: '-0.02em',
+                }}
+              >
                 <Trans>Your Wallet</Trans>
               </Typography>
             </StyledToggleButton>
@@ -147,7 +152,6 @@ export default function ReserveOverview() {
             <ReserveActions reserve={reserve} />
           </Box>
         </Box>
-
       </ContentContainer>
     </AssetCapsProvider>
   );

@@ -5,7 +5,6 @@ import { MainLayout } from 'src/layouts/MainLayout';
 import { uiConfig } from 'src/uiConfig';
 
 export default function Aave404Page() {
-
   return (
     <>
       {/* <TopInfoPanel /> */}
@@ -39,52 +38,67 @@ export default function Aave404Page() {
             </Button>
           </Link>
         </Paper> */}
-        <Box sx={{
-          mx: '8%',
-          mt: '15%',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          }}>
-          <Box sx={{
-            display: 'inline-flex', 
-            justifyContent: 'center', 
-            position: 'relative',
-          }}>
-            <img src={uiConfig.cs1} height={66}/>
+        <Box
+          sx={{
+            mx: '8%',
+            mt: '15%',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+          }}
+        >
+          <Box
+            sx={{
+              display: 'inline-flex',
+              justifyContent: 'center',
+              position: 'relative',
+            }}
+          >
+            <img src={uiConfig.cs1} height={66} />
           </Box>
-          <Box sx={{
-            display: 'inline-flex', 
-            justifyContent: 'center', 
-            position: 'relative',
-            top: '-50px',
-          }}>
-            <img src={uiConfig.cs2} width={1000}/>
+          <Box
+            sx={{
+              display: 'inline-flex',
+              justifyContent: 'center',
+              position: 'relative',
+              top: '-50px',
+            }}
+          >
+            <img src={uiConfig.cs2} width={1000} />
           </Box>
 
-          <Box sx={{
-            display: 'inline-flex', 
-            justifyContent: 'center', 
-            position: 'relative',
-            top: '-165px'
-            }}>
-            <img src={uiConfig.stakeVault} width={382} /></Box>
-          
-          <Box sx={{
-            display: 'inline-flex', 
-            justifyContent: 'center', 
-            position: 'relative',
-            top: '-150px',
-            }}>
-            <Typography sx={{
-              fontWeight: 400,
-              fontSize: '20px',
-              lineHeight: '1em',
-              letterSpacing: '-0.02em',
-              color: '#828282',
-            }}>Stay tuned for our vault features.</Typography></Box>
+          <Box
+            sx={{
+              display: 'inline-flex',
+              justifyContent: 'center',
+              position: 'relative',
+              top: '-165px',
+            }}
+          >
+            <img src={uiConfig.stakeVault} width={382} />
+          </Box>
+
+          <Box
+            sx={{
+              display: 'inline-flex',
+              justifyContent: 'center',
+              position: 'relative',
+              top: '-150px',
+            }}
+          >
+            <Typography
+              sx={{
+                fontWeight: 400,
+                fontSize: '20px',
+                lineHeight: '1em',
+                letterSpacing: '-0.02em',
+                color: '#828282',
+              }}
+            >
+              Stay tuned for our vault features.
+            </Typography>
+          </Box>
         </Box>
-
       </ContentContainer>
     </>
   );

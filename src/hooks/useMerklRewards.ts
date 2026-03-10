@@ -1,6 +1,6 @@
-import { useEffect, useState, useCallback } from 'react';
-import { getMerklUserRewards } from 'src/services/merklRewardsService';
+import { useCallback, useEffect, useState } from 'react';
 import type { MerklTokenReward } from 'src/services/merklRewardsService';
+import { getMerklUserRewards } from 'src/services/merklRewardsService';
 
 type MerklRewardsState = {
   totalUsd: number;

@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react';
-import { Box, Typography, CircularProgress, Skeleton } from '@mui/material';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
-
+import { Box, CircularProgress, Skeleton, Typography } from '@mui/material';
+import { useEffect, useState } from 'react';
 import { getMerklLeaderboard, LeaderboardEntry } from 'src/services/merklLeaderboardService';
 
 const MEDAL: Record<number, string> = { 1: '🥇', 2: '🥈', 3: '🥉' };
@@ -31,7 +30,6 @@ export const MerklLeaderboard = () => {
 
   return (
     <Box sx={{ maxWidth: 720, mx: 'auto', py: 3 }}>
-
       {/* Header */}
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 3 }}>
         <EmojiEventsIcon sx={{ color: '#22c55e', fontSize: 28 }} />
@@ -47,18 +45,56 @@ export const MerklLeaderboard = () => {
 
       {/* Column headers */}
       {!loading && !error && rows.length > 0 && (
-        <Box sx={{
-          display: 'flex', px: 2, pb: 1,
-          borderBottom: '1px solid #EAEAEA',
-        }}>
-          <Typography fontSize={11} fontWeight={600} color="#828282" textTransform="uppercase"
-            letterSpacing="0.06em" width={60}>Rank</Typography>
-          <Typography fontSize={11} fontWeight={600} color="#828282" textTransform="uppercase"
-            letterSpacing="0.06em" flex={1}>Address</Typography>
-          <Typography fontSize={11} fontWeight={600} color="#828282" textTransform="uppercase"
-            letterSpacing="0.06em" width={150} textAlign="right">Purr Points</Typography>
-          <Typography fontSize={11} fontWeight={600} color="#828282" textTransform="uppercase"
-            letterSpacing="0.06em" width={110} textAlign="right">USD Value</Typography>
+        <Box
+          sx={{
+            display: 'flex',
+            px: 2,
+            pb: 1,
+            borderBottom: '1px solid #EAEAEA',
+          }}
+        >
+          <Typography
+            fontSize={11}
+            fontWeight={600}
+            color="#828282"
+            textTransform="uppercase"
+            letterSpacing="0.06em"
+            width={60}
+          >
+            Rank
+          </Typography>
+          <Typography
+            fontSize={11}
+            fontWeight={600}
+            color="#828282"
+            textTransform="uppercase"
+            letterSpacing="0.06em"
+            flex={1}
+          >
+            Address
+          </Typography>
+          <Typography
+            fontSize={11}
+            fontWeight={600}
+            color="#828282"
+            textTransform="uppercase"
+            letterSpacing="0.06em"
+            width={150}
+            textAlign="right"
+          >
+            Purr Points
+          </Typography>
+          <Typography
+            fontSize={11}
+            fontWeight={600}
+            color="#828282"
+            textTransform="uppercase"
+            letterSpacing="0.06em"
+            width={110}
+            textAlign="right"
+          >
+            USD Value
+          </Typography>
         </Box>
       )}
 
@@ -73,11 +109,18 @@ export const MerklLeaderboard = () => {
 
       {/* Error */}
       {!loading && error && (
-        <Box sx={{
-          p: 3, textAlign: 'center', border: '1px solid #EAEAEA',
-          borderRadius: '12px', bgcolor: '#fff',
-        }}>
-          <Typography color="error" fontSize={14}>Failed to load leaderboard</Typography>
+        <Box
+          sx={{
+            p: 3,
+            textAlign: 'center',
+            border: '1px solid #EAEAEA',
+            borderRadius: '12px',
+            bgcolor: '#fff',
+          }}
+        >
+          <Typography color="error" fontSize={14}>
+            Failed to load leaderboard
+          </Typography>
           <Typography fontSize={12} color="#828282" mt={0.5}>
             Merkl leaderboard API may not be available yet for this opportunity
           </Typography>
@@ -86,11 +129,18 @@ export const MerklLeaderboard = () => {
 
       {/* Empty */}
       {!loading && !error && rows.length === 0 && (
-        <Box sx={{
-          p: 4, textAlign: 'center', border: '1px solid #EAEAEA',
-          borderRadius: '12px', bgcolor: '#fff',
-        }}>
-          <Typography fontSize={14} color="#828282">No leaderboard data yet</Typography>
+        <Box
+          sx={{
+            p: 4,
+            textAlign: 'center',
+            border: '1px solid #EAEAEA',
+            borderRadius: '12px',
+            bgcolor: '#fff',
+          }}
+        >
+          <Typography fontSize={14} color="#828282">
+            No leaderboard data yet
+          </Typography>
           <Typography fontSize={12} color="#828282" mt={0.5}>
             Rewards are distributed every few hours — check back soon
           </Typography>
@@ -98,64 +148,75 @@ export const MerklLeaderboard = () => {
       )}
 
       {/* Rows */}
-      {!loading && !error && rows.map((r) => (
-        <Box
-          key={r.address}
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            px: 2,
-            py: 1.5,
-            my: '4px',
-            border: '1px solid',
-            borderColor: r.rank <= 3 ? '#22c55e33' : '#EAEAEA',
-            borderRadius: '12px',
-            bgcolor: r.rank <= 3 ? '#f0fdf4' : '#fff',
-            transition: 'background 0.15s',
-            '&:hover': { bgcolor: '#f8f8f8' },
-          }}
-        >
-          {/* Rank */}
-          <Box width={60}>
-            {MEDAL[r.rank] ? (
-              <Typography fontSize={18} lineHeight={1}>{MEDAL[r.rank]}</Typography>
-            ) : (
-              <Typography fontSize={14} fontWeight={600} color="#828282">
-                #{r.rank}
+      {!loading &&
+        !error &&
+        rows.map((r) => (
+          <Box
+            key={r.address}
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              px: 2,
+              py: 1.5,
+              my: '4px',
+              border: '1px solid',
+              borderColor: r.rank <= 3 ? '#22c55e33' : '#EAEAEA',
+              borderRadius: '12px',
+              bgcolor: r.rank <= 3 ? '#f0fdf4' : '#fff',
+              transition: 'background 0.15s',
+              '&:hover': { bgcolor: '#f8f8f8' },
+            }}
+          >
+            {/* Rank */}
+            <Box width={60}>
+              {MEDAL[r.rank] ? (
+                <Typography fontSize={18} lineHeight={1}>
+                  {MEDAL[r.rank]}
+                </Typography>
+              ) : (
+                <Typography fontSize={14} fontWeight={600} color="#828282">
+                  #{r.rank}
+                </Typography>
+              )}
+            </Box>
+
+            {/* Address */}
+            <Box flex={1}>
+              <Typography
+                fontSize={14}
+                fontFamily="monospace"
+                color="#061512"
+                sx={{ cursor: 'pointer', '&:hover': { textDecoration: 'underline' } }}
+                onClick={() =>
+                  window.open(`https://hyperevmscan.io/address/${r.address}`, '_blank')
+                }
+              >
+                {shortAddr(r.address)}
               </Typography>
-            )}
-          </Box>
+            </Box>
 
-          {/* Address */}
-          <Box flex={1}>
-            <Typography
-              fontSize={14}
-              fontFamily="monospace"
-              color="#061512"
-              sx={{ cursor: 'pointer', '&:hover': { textDecoration: 'underline' } }}
-              onClick={() => window.open(`https://hyperevmscan.io/address/${r.address}`, '_blank')}
-            >
-              {shortAddr(r.address)}
-            </Typography>
-          </Box>
+            {/* Points */}
+            <Box width={150} textAlign="right">
+              <Typography fontSize={14} fontWeight={600} color="#061512">
+                {formatPoints(r.points)}
+              </Typography>
+              <Typography fontSize={11} color="#828282">
+                Purr points
+              </Typography>
+            </Box>
 
-          {/* Points */}
-          <Box width={150} textAlign="right">
-            <Typography fontSize={14} fontWeight={600} color="#061512">
-              {formatPoints(r.points)}
-            </Typography>
-            <Typography fontSize={11} color="#828282">Purr points</Typography>
+            {/* USD */}
+            <Box width={110} textAlign="right">
+              <Typography
+                fontSize={14}
+                color={r.usd > 0 ? '#22c55e' : '#828282'}
+                fontWeight={r.usd > 0 ? 600 : 400}
+              >
+                {r.usd > 0 ? `$${r.usd.toFixed(2)}` : '—'}
+              </Typography>
+            </Box>
           </Box>
-
-          {/* USD */}
-          <Box width={110} textAlign="right">
-            <Typography fontSize={14} color={r.usd > 0 ? '#22c55e' : '#828282'} fontWeight={r.usd > 0 ? 600 : 400}>
-              {r.usd > 0 ? `$${r.usd.toFixed(2)}` : '—'}
-            </Typography>
-          </Box>
-        </Box>
-      ))}
-
+        ))}
     </Box>
   );
 };

@@ -34,7 +34,7 @@ export function ReserveSubheader({ value, rightAlign, fs }: ReserveSubheaderProp
           symbolsColor="rgba(130, 130, 130, 1)"
           symbol="USD"
           sx={{
-            fontSize:{xs: fs, md: '16px'},
+            fontSize: { xs: fs, md: '16px' },
             fontWeight: 400,
             fontStyle: 'regular',
             letterSpacing: '-2%',

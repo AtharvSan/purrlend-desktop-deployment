@@ -60,8 +60,8 @@ export const HealthFactorNumber = ({
           onClick={onInfoClick}
           variant="surfaceWhite"
           size="small"
-          sx={{ 
-            minWidth: 'unset', 
+          sx={{
+            minWidth: 'unset',
             ml: { xs: 2, xsm: 2 },
             borderRadius: '32px',
             border: '1px solid #06151226',
@@ -69,15 +69,17 @@ export const HealthFactorNumber = ({
             textTransform: 'none',
           }}
         >
-          <Typography sx={{
-            fontWeight: 500,
-            fontSize: '12px',
-            lineHeight: '1em',
-            letterSpacing: '-0.02em',
-            color: '#061512',
-            py: '6px',
-            px: '4px',
-          }}>
+          <Typography
+            sx={{
+              fontWeight: 500,
+              fontSize: '12px',
+              lineHeight: '1em',
+              letterSpacing: '-0.02em',
+              color: '#061512',
+              py: '6px',
+              px: '4px',
+            }}
+          >
             <Trans>Risk details</Trans>
           </Typography>
         </Button>

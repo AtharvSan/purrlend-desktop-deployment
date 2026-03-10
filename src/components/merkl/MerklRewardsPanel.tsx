@@ -1,8 +1,8 @@
-import { Box, Typography, Button } from '@mui/material';
-import { useProtocolDataContext } from 'src/hooks/useProtocolDataContext';
+import { Box, Button, Typography } from '@mui/material';
 import { useAppDataContext } from 'src/hooks/app-data-provider/useAppDataProvider';
-import { useMerklRewards } from 'src/hooks/useMerklRewards';
 import { useMerklClaim } from 'src/hooks/useMerklClaim';
+import { useMerklRewards } from 'src/hooks/useMerklRewards';
+import { useProtocolDataContext } from 'src/hooks/useProtocolDataContext';
 
 export const MerklRewardsPanel = () => {
   console.log('MerklRewardsPanel mounted');
@@ -38,9 +38,7 @@ export const MerklRewardsPanel = () => {
         width: '100%',
       }}
     >
-      <Typography fontWeight={600}>
-        Merkl Rewards
-      </Typography>
+      <Typography fontWeight={600}>Merkl Rewards</Typography>
 
       <Typography fontSize={14} mt={1}>
         ${totalUsd.toFixed(2)} available

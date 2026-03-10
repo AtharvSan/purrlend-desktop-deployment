@@ -4,8 +4,9 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { getWalletPoints, getWalletBreakdown } from '../../../lib/purrPoints/db';
+
 import { getCurrentSeason } from '../../../lib/purrPoints/config';
+import { getWalletBreakdown, getWalletPoints } from '../../../lib/purrPoints/db';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'GET') return res.status(405).json({ error: 'Method not allowed' });

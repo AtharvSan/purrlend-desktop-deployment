@@ -7,7 +7,7 @@ export default function Markets() {
   return (
     <>
       <MarketsTopPanel />
-      <ContentContainer >
+      <ContentContainer>
         <MarketAssetsListContainer />
       </ContentContainer>
     </>

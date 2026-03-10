@@ -48,16 +48,18 @@ export const BorrowAssetsListMobileItem = ({
     >
       <ListValueRow
         title={
-          <Typography sx={{
-            fontWeight: 400,
-            fontSize: '16px',
-            lineHeight: '1em',
-            letterSpacing: '-0.02em',
-            color: '#828282',
-          }}>
+          <Typography
+            sx={{
+              fontWeight: 400,
+              fontSize: '16px',
+              lineHeight: '1em',
+              letterSpacing: '-0.02em',
+              color: '#828282',
+            }}
+          >
             <Trans>Available to borrow</Trans>
           </Typography>
-      }
+        }
         value={Number(availableBorrows)}
         subValue={Number(availableBorrowsInUSD)}
         disabled={Number(availableBorrows) === 0}
@@ -75,13 +77,15 @@ export const BorrowAssetsListMobileItem = ({
         caption={
           <VariableAPYTooltip
             text={
-              <Typography sx={{
-                fontWeight: 400,
-                fontSize: '16px',
-                lineHeight: '1em',
-                letterSpacing: '-0.02em',
-                color: '#828282',
-              }}>
+              <Typography
+                sx={{
+                  fontWeight: 400,
+                  fontSize: '16px',
+                  lineHeight: '1em',
+                  letterSpacing: '-0.02em',
+                  color: '#828282',
+                }}
+              >
                 <Trans>APY, variable</Trans>
               </Typography>
             }
@@ -101,7 +105,15 @@ export const BorrowAssetsListMobileItem = ({
         />
       </Row>
 
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '3%', mt: 5 }}>
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: '3%',
+          mt: 5,
+        }}
+      >
         <Button
           disabled={borrowButtonDisable}
           variant="contained"
@@ -115,12 +127,14 @@ export const BorrowAssetsListMobileItem = ({
             height: '38px',
           }}
         >
-          <Typography sx={{
-            fontWeight: 500,
-            fontSize: '14px',
-            lineHeight: '1em',
-            letterSpacing: '-0.02em',
-          }}>
+          <Typography
+            sx={{
+              fontWeight: 500,
+              fontSize: '14px',
+              lineHeight: '1em',
+              letterSpacing: '-0.02em',
+            }}
+          >
             <Trans>Borrow</Trans>
           </Typography>
         </Button>
@@ -129,7 +143,7 @@ export const BorrowAssetsListMobileItem = ({
           component={Link}
           href={ROUTES.reserveOverview(underlyingAsset, currentMarket)}
           fullWidth
-          sx={{ 
+          sx={{
             border: '1px solid #DCDCDC',
             borderRadius: '70px',
             backgroundColor: '#FFFFFF',
@@ -137,12 +151,14 @@ export const BorrowAssetsListMobileItem = ({
             height: '38px',
           }}
         >
-          <Typography sx={{
-            fontWeight: 500,
-            fontSize: '14px',
-            lineHeight: '1em',
-            letterSpacing: '-0.02em',
-          }}>
+          <Typography
+            sx={{
+              fontWeight: 500,
+              fontSize: '14px',
+              lineHeight: '1em',
+              letterSpacing: '-0.02em',
+            }}
+          >
             <Trans>Details</Trans>
           </Typography>
         </Button>

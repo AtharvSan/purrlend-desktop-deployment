@@ -182,56 +182,67 @@ export const SupplyAssetsList = () => {
   const RenderHeader: React.FC = () => {
     return (
       <>
-      <Box sx={{
-      display: 'flex',
-      justifyContent: 'space-between',
-      pl: '18px',
-      pr: '117px',
-      mt: '16px',
-      pb: '10px',
-      }}>
-        <Box>
-          <ListHeaderTitle
-          sortName={sortName}
-          sortDesc={sortDesc}
-          setSortName={setSortName}
-          setSortDesc={setSortDesc}
-          sortKey='symbol'
-          ><Trans key="assets"> Assets </Trans></ListHeaderTitle>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            pl: '18px',
+            pr: '117px',
+            mt: '16px',
+            pb: '10px',
+          }}
+        >
+          <Box>
+            <ListHeaderTitle
+              sortName={sortName}
+              sortDesc={sortDesc}
+              setSortName={setSortName}
+              setSortDesc={setSortDesc}
+              sortKey="symbol"
+            >
+              <Trans key="assets"> Assets </Trans>
+            </ListHeaderTitle>
+          </Box>
+          <Box>
+            <ListHeaderTitle
+              sortName={sortName}
+              sortDesc={sortDesc}
+              setSortName={setSortName}
+              setSortDesc={setSortDesc}
+              sortKey="walletBalance"
+            >
+              <Trans key="Wallet balance"> balance </Trans>
+            </ListHeaderTitle>
+          </Box>
+          <Box>
+            <ListHeaderTitle
+              sortName={sortName}
+              sortDesc={sortDesc}
+              setSortName={setSortName}
+              setSortDesc={setSortDesc}
+              sortKey="supplyAPY"
+            >
+              <Trans key="APY">APY</Trans>
+            </ListHeaderTitle>
+          </Box>
+          <Box>
+            <ListHeaderTitle
+            // sortName={sortName}
+            // sortDesc={sortDesc}
+            // setSortName={setSortName}
+            // setSortDesc={setSortDesc}
+            // sortKey='usageAsCollateralEnabledOnUser'
+            >
+              <Trans key="Can be collateral">Can be collateral</Trans>
+            </ListHeaderTitle>
+          </Box>
+          <Box>
+            <ListHeaderTitle>
+              <Trans>Action</Trans>
+            </ListHeaderTitle>
+          </Box>
         </Box>
-        <Box>
-          <ListHeaderTitle
-          sortName={sortName}
-          sortDesc={sortDesc}
-          setSortName={setSortName}
-          setSortDesc={setSortDesc}
-          sortKey='walletBalance'
-          ><Trans key="Wallet balance"> balance </Trans></ListHeaderTitle>
-        </Box>
-        <Box>
-          <ListHeaderTitle
-          sortName={sortName}
-          sortDesc={sortDesc}
-          setSortName={setSortName}
-          setSortDesc={setSortDesc}
-          sortKey='supplyAPY'
-          ><Trans key="APY">APY</Trans></ListHeaderTitle>
-        </Box>
-        <Box>
-          <ListHeaderTitle
-          // sortName={sortName}
-          // sortDesc={sortDesc}
-          // setSortName={setSortName}
-          // setSortDesc={setSortDesc}
-          // sortKey='usageAsCollateralEnabledOnUser'
-          ><Trans key="Can be collateral">Can be collateral</Trans></ListHeaderTitle>
-        </Box>
-        <Box>
-          <ListHeaderTitle
-          ><Trans>Action</Trans></ListHeaderTitle>
-        </Box>
-      </Box>
-      <Divider sx={{borderColor: '#E8E8E8', mx: '18px', mb: '10px'}}/>
+        <Divider sx={{ borderColor: '#E8E8E8', mx: '18px', mb: '10px' }} />
       </>
     );
   };
@@ -250,13 +261,17 @@ export const SupplyAssetsList = () => {
   return (
     <ListWrapper
       titleComponent={
-        <Typography sx={{
-          fontWeight: 500,
-          fontSize: '20px',
-          lineHeight: '1em',
-          letterSpacing: '-0.02em',
-          color: '#061512',
-          }}>Assets to supply</Typography>
+        <Typography
+          sx={{
+            fontWeight: 500,
+            fontSize: '20px',
+            lineHeight: '1em',
+            letterSpacing: '-0.02em',
+            color: '#061512',
+          }}
+        >
+          Assets to supply
+        </Typography>
       }
       localStorageName="supplyAssetsDashboardTableCollapse"
       withTopMargin
@@ -305,15 +320,15 @@ export const SupplyAssetsList = () => {
     >
       <>
         {!downToXSM && !!sortedReserves && !supplyDisabled && <RenderHeader />}
-        {sortedReserves.map((item,index) => (
+        {sortedReserves.map((item, index) => (
           <Fragment key={item.underlyingAsset}>
             <AssetCapsProvider asset={item.reserve}>
               {downToXSM ? (
                 <>
-                <SupplyAssetsListMobileItem {...item} key={item.id} />
-                {index !== sortedReserves.length - 1 && ( // show divider only if not last item
-                  <Divider sx={{ mb: 1, borderColor: '#E8E8E8' }} />
-                )}
+                  <SupplyAssetsListMobileItem {...item} key={item.id} />
+                  {index !== sortedReserves.length - 1 && ( // show divider only if not last item
+                    <Divider sx={{ mb: 1, borderColor: '#E8E8E8' }} />
+                  )}
                 </>
               ) : (
                 <SupplyAssetsListItem {...item} key={item.id} />

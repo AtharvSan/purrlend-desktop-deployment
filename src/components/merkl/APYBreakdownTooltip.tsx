@@ -1,22 +1,22 @@
-import { useState, useRef } from 'react';
-import { Box, Typography, Popover, Divider } from '@mui/material';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
-import { FormattedNumber } from 'src/components/primitives/FormattedNumber';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import { Box, Divider, Popover, Typography } from '@mui/material';
+import { useRef, useState } from 'react';
+import { FormattedNumber } from 'src/components/primitives/FormattedNumber';
 import { uiConfig } from 'src/uiConfig';
+
 import { TokenIcon } from '../primitives/TokenIcon';
 
-
 interface APYBreakdownTooltipProps {
-  baseAPY: number;           // raw decimal e.g. 0.0004 for 0.04%
-  merklApr: number;          // percent e.g. 211.42 — 0 if unpriced
-  dailyRewards: number;      // e.g. 1500000 pts/day (whole units)
-  rewardToken: string;       // e.g. "Purr points"
+  baseAPY: number; // raw decimal e.g. 0.0004 for 0.04%
+  merklApr: number; // percent e.g. 211.42 — 0 if unpriced
+  dailyRewards: number; // e.g. 1500000 pts/day (whole units)
+  rewardToken: string; // e.g. "Purr points"
   hasMerkl: boolean;
-  symbol: string;            // asset symbol e.g. "USDC"
-  tvlUsd: number;            // merkl pool TVL in USD
+  symbol: string; // asset symbol e.g. "USDC"
+  tvlUsd: number; // merkl pool TVL in USD
   totalLiquidityUsd: number; // reserve TVL in USD (fallback)
-  fontsize?: string;        // optional font size for the trigger text
+  fontsize?: string; // optional font size for the trigger text
 }
 
 export const APYBreakdownTooltip = ({
@@ -28,7 +28,7 @@ export const APYBreakdownTooltip = ({
   symbol,
   tvlUsd,
   totalLiquidityUsd,
-  fontsize
+  fontsize,
 }: APYBreakdownTooltipProps) => {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const ref = useRef<HTMLDivElement>(null);
@@ -40,9 +40,8 @@ export const APYBreakdownTooltip = ({
   // Points per $1 supplied per day = dailyRewards / tvl
   // Use whichever TVL is available
   const effectiveTvl = tvlUsd > 0 ? tvlUsd : totalLiquidityUsd;
-  const pointsPerDollarPerDay = dailyRewards > 0 && effectiveTvl > 0
-    ? dailyRewards / effectiveTvl
-    : 0;
+  const pointsPerDollarPerDay =
+    dailyRewards > 0 && effectiveTvl > 0 ? dailyRewards / effectiveTvl : 0;
 
   function formatPts(n: number): string {
     if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(2)}M`;
@@ -66,13 +65,14 @@ export const APYBreakdownTooltip = ({
   }
 
   // Right-side label for the reward row
-  const rewardLabel = merklApr >= 1
-    ? formatApr(merklApr)
-    : pointsPerDollarPerDay > 0
-    ? `${formatPts(pointsPerDollarPerDay)} pts/$1/d`
-    : dailyRewards > 0
-    ? `${formatDailyRewards(dailyRewards)}/day`
-    : '—';
+  const rewardLabel =
+    merklApr >= 1
+      ? formatApr(merklApr)
+      : pointsPerDollarPerDay > 0
+      ? `${formatPts(pointsPerDollarPerDay)} pts/$1/d`
+      : dailyRewards > 0
+      ? `${formatDailyRewards(dailyRewards)}/day`
+      : '—';
 
   // Live APY label
   const totalAprPercent = totalAPY * 100;
@@ -133,14 +133,20 @@ export const APYBreakdownTooltip = ({
         )}
 
         {hasMerkl && (
-          <Box sx={{
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            width: 20, height: 20, borderRadius: '50%',
-            bgcolor: open ? '#ff7e09' : '#fdeee1',
-            flexShrink: 0,
-            transition: 'background 0.15s',
-            '&:hover': { bgcolor: '#ff7e09', '& svg': { color: '#fff' } },
-          }}>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: 20,
+              height: 20,
+              borderRadius: '50%',
+              bgcolor: open ? '#ff7e09' : '#fdeee1',
+              flexShrink: 0,
+              transition: 'background 0.15s',
+              '&:hover': { bgcolor: '#ff7e09', '& svg': { color: '#fff' } },
+            }}
+          >
             <AutoAwesomeIcon sx={{ fontSize: 11, color: open ? '#fff' : '#ff7e09' }} />
           </Box>
         )}
@@ -167,21 +173,32 @@ export const APYBreakdownTooltip = ({
       >
         {/* Header */}
         {hasMerkl && (
-          <Box sx={{
-            px: '24px',
-            py: 1.5,
-            bgcolor: '#white',
-            borderTop: '1px solid #e8faf0',
-          }}>
-            <Box sx={{
-              pt: '18px',
-              pb: '8px',
-            }}>
+          <Box
+            sx={{
+              px: '24px',
+              py: 1.5,
+              bgcolor: '#white',
+              borderTop: '1px solid #e8faf0',
+            }}
+          >
+            <Box
+              sx={{
+                pt: '18px',
+                pb: '8px',
+              }}
+            >
               <img src={uiConfig.merkl} width={120} />
             </Box>
             <Box sx={{ display: 'flex', gap: 1, alignItems: 'flex-start' }}>
-              <Typography fontSize={12} color="#black" lineHeight={1.75} sx={{ textTransform: 'uppercase' }}>
-                campaign initiated by Purrlend and implemented by Merkl.<br/><br/>
+              <Typography
+                fontSize={12}
+                color="#black"
+                lineHeight={1.75}
+                sx={{ textTransform: 'uppercase' }}
+              >
+                campaign initiated by Purrlend and implemented by Merkl.
+                <br />
+                <br />
                 claim Merkl rewards through the{' '}
                 <Typography
                   component="a"
@@ -194,7 +211,6 @@ export const APYBreakdownTooltip = ({
                     fontWeight: 600,
                     textDecoration: 'underline',
                     '&:hover': { color: '#1cb554' },
-                    
                   }}
                 >
                   official Merkl app
@@ -212,13 +228,23 @@ export const APYBreakdownTooltip = ({
           </Typography>
         </Box> */}
 
-        <Box sx={{ px: '24px', pb: '24px', pt: '16px', display: 'flex', flexDirection: 'column', gap: 3.5 }}>
-
+        <Box
+          sx={{
+            px: '24px',
+            pb: '24px',
+            pt: '16px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 3.5,
+          }}
+        >
           {/* Base Yield row */}
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
               <TokenIcon symbol={symbol} sx={{ fontSize: '22px' }} />
-              <Typography fontSize={14} color="#444">Base APY</Typography>
+              <Typography fontSize={14} color="#444">
+                Base APY
+              </Typography>
             </Box>
             <Typography fontSize={14} fontWeight={600} color="#061512">
               {baseAPY > 0 ? `${(baseAPY * 100).toFixed(2)}%` : '—'}
@@ -227,11 +253,17 @@ export const APYBreakdownTooltip = ({
 
           {/* Merkl Reward row */}
           {hasMerkl && (
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+            <Box
+              sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}
+            >
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, alignItems: 'flex-start'}}>
+                <Box
+                  sx={{ display: 'flex', flexDirection: 'row', gap: 2, alignItems: 'flex-start' }}
+                >
                   <TokenIcon symbol="USDC" aToken sx={{ fontSize: '22px' }} />
-                  <Typography fontSize={14} color="#444">{rewardToken}</Typography>
+                  <Typography fontSize={14} color="#444">
+                    {rewardToken}
+                  </Typography>
                   {merklApr < 1 && dailyRewards > 0 && (
                     <Typography fontSize={14} color="#828282">
                       {formatDailyRewards(dailyRewards)} pts total/day
@@ -239,15 +271,17 @@ export const APYBreakdownTooltip = ({
                   )}
                 </Box>
               </Box>
-              <Typography fontSize={13} fontWeight={600} color={merklApr >= 1 ? '#061512' : '#061512'}
-                sx={{ textAlign: 'right', ml: 1 }}>
+              <Typography
+                fontSize={13}
+                fontWeight={600}
+                color={merklApr >= 1 ? '#061512' : '#061512'}
+                sx={{ textAlign: 'right', ml: 1 }}
+              >
                 {rewardLabel}
               </Typography>
             </Box>
           )}
         </Box>
-
-        
       </Popover>
     </>
   );

@@ -18,9 +18,9 @@ export type MerklTokenReward = {
   symbol: string;
   decimals: number;
   priceUsd: number;
-  rawAmount: string;   // as returned by API (may be bigint string)
-  amount: number;      // normalized by decimals
-  usdValue: number;    // amount * priceUsd
+  rawAmount: string; // as returned by API (may be bigint string)
+  amount: number; // normalized by decimals
+  usdValue: number; // amount * priceUsd
 };
 
 export async function getMerklUserRewards(

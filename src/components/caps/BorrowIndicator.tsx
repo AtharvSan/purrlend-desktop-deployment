@@ -1,14 +1,14 @@
 // BorrowPowerMUI.jsx
-import React from 'react';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
+import React from 'react';
 
 export default function BorrowIndicator({
   percentage = 0,
   label = 'Borrow power used',
-  width = {xs: '1.39cm' , md: '1.8cm'},      // visual bar width
-  height = 8,         // bar height in px
+  width = { xs: '1.39cm', md: '1.8cm' }, // visual bar width
+  height = 8, // bar height in px
   gradient = 'linear-gradient(90deg,#ff8a00dd,#ff5f6dee)', // default accent (change as needed)
 }) {
   const pct = Math.max(0, Math.min(100, Number(percentage || 0)));
@@ -41,7 +41,10 @@ export default function BorrowIndicator({
             position: 'relative',
             backgroundColor: 'white',
             overflow: 'hidden',
-            boxShadow: (theme) => `inset 0 1px 2px ${theme.palette.mode === 'light' ? 'rgba(0,0,0,0.04)' : 'rgba(255,255,255,0.02)'}`,
+            boxShadow: (theme) =>
+              `inset 0 1px 2px ${
+                theme.palette.mode === 'light' ? 'rgba(0,0,0,0.04)' : 'rgba(255,255,255,0.02)'
+              }`,
           }}
         >
           {/* Fill */}

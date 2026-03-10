@@ -1,10 +1,9 @@
 import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
 import { NetworkConfig } from '../../ui-config/networksConfig';
 // import { BridgeButton } from '../BridgeButton';
 import { getMarketHelpData, MarketLogo, MarketSwitcher } from '../MarketSwitcherDashboard';
-import React from 'react';
 
 export interface PageTitleProps extends Pick<NetworkConfig, 'bridge'> {
   pageTitle?: ReactNode;
@@ -50,15 +49,19 @@ export const PageTitle = ({ pageTitle, withMarketSwitcher }: PageTitleProps) => 
         }}
       >
         {/* {withMarketSwitcher && <MarketSwitcher />} */}
-        <Typography sx={{
-          color: 'rgba(255, 255, 255, 1)',
-          fontSize: '32px',
-          fontWeight: 600,
-          fontStyle: 'semiBold',
-          lineHeight: '100%',
-          letterSpacing: '-0.02em',
-          paddingTop: '4px',
-        }}>HyperEVM</Typography>
+        <Typography
+          sx={{
+            color: 'rgba(255, 255, 255, 1)',
+            fontSize: '32px',
+            fontWeight: 600,
+            fontStyle: 'semiBold',
+            lineHeight: '100%',
+            letterSpacing: '-0.02em',
+            paddingTop: '4px',
+          }}
+        >
+          HyperEVM
+        </Typography>
         {/* <BridgeButton bridge={bridge} variant="surface" withoutIcon={!upToMD} /> */}
         {/* NOTE:// Removing for now  */}
       </Box>

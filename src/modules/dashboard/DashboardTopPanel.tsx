@@ -5,9 +5,11 @@ import { Box, Button, Typography, useMediaQuery, useTheme } from '@mui/material'
 import * as React from 'react';
 import { useState } from 'react';
 import { NetAPYTooltip } from 'src/components/infoTooltips/NetAPYTooltip';
+import { MarketSwitcherDashboard } from 'src/components/MarketSwitcherDashboard';
 import { useModalContext } from 'src/hooks/useModal';
 import { useProtocolDataContext } from 'src/hooks/useProtocolDataContext';
 import { useWeb3Context } from 'src/libs/hooks/useWeb3Context';
+import { uiConfig } from 'src/uiConfig';
 
 import ClaimGiftIcon from '../../../public/icons/markets/claim-gift-icon.svg';
 import EmptyHeartIcon from '../../../public/icons/markets/empty-heart-icon.svg';
@@ -26,8 +28,6 @@ import { TopInfoPanel } from '../../components/TopInfoPanel/TopInfoPanel';
 import { TopInfoPanelItem } from '../../components/TopInfoPanel/TopInfoPanelItem';
 import { useAppDataContext } from '../../hooks/app-data-provider/useAppDataProvider';
 import { LiquidationRiskParametresInfoModal } from './LiquidationRiskParametresModal/LiquidationRiskParametresModal';
-import { uiConfig } from 'src/uiConfig';
-import { MarketSwitcherDashboard } from 'src/components/MarketSwitcherDashboard';
 
 export const DashboardTopPanel = () => {
   const { currentNetworkConfig, currentMarketData } = useProtocolDataContext();
@@ -87,59 +87,74 @@ export const DashboardTopPanel = () => {
   const noDataTypographyVariant = downToSM ? 'secondary16' : 'secondary21';
 
   return (
-    <Box sx={{
-      backgroundImage: 'linear-gradient(90deg, #061512 0%, #00380D 100%)',
-      color: '#F1F1F3',
-      mx: 'auto',
-      width: {xs: '95%', md: '1199px'},
-      height: {xs: '128px', md: '77px'},
-      marginTop: '25px',
-      borderRadius: '16px',
-      display: 'flex',
-      flexDirection: {xs: 'column', md: 'row'},
-      justifyContent: 'space-between',
-      pt: '14px',
-      pb: '12px',
-      px: '20px',
-      }}>
-      <Box sx={{ 
-        display: 'flex', 
-        alignItems: 'center', 
-        gap: '16px',
-        }}>
+    <Box
+      sx={{
+        backgroundImage: 'linear-gradient(90deg, #061512 0%, #00380D 100%)',
+        color: '#F1F1F3',
+        mx: 'auto',
+        width: { xs: '95%', md: '1199px' },
+        height: { xs: '128px', md: '77px' },
+        marginTop: '25px',
+        borderRadius: '16px',
+        display: 'flex',
+        flexDirection: { xs: 'column', md: 'row' },
+        justifyContent: 'space-between',
+        pt: '14px',
+        pb: '12px',
+        px: '20px',
+      }}
+    >
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '16px',
+        }}
+      >
         {/* <img src={uiConfig.hype} height={38} /> */}
-        <MarketSwitcherDashboard></MarketSwitcherDashboard>
-        <Typography sx={{ 
-          color: '#FFFFFF',
-          fontWeight: 600,
-          fontSize: '32px',
-          lineHeight: '1em',
-          letterSpacing: '-0.02em',
-          }}> 
+        <MarketSwitcherDashboard />
+        <Typography
+          sx={{
+            color: '#FFFFFF',
+            fontWeight: 600,
+            fontSize: '32px',
+            lineHeight: '1em',
+            letterSpacing: '-0.02em',
+          }}
+        >
           {/* {currentNetworkConfig.name}  */}
           {/* {!downToSM && (' Market')} */}
         </Typography>
       </Box>
 
-      <Box sx={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        gap: {xs: 'auto', md: '50px'},
-        }}>
-        <Box sx={{
+      <Box
+        sx={{
           display: 'flex',
-          flexDirection: 'column',
           justifyContent: 'space-between',
-          gap: '9px',
-          }}>
-          <Typography sx={{
-            fontWeight: 600,
-            fontSize: '10px',
-            lineHeight: '1em',
-            letterSpacing: '0.08em',
-            textTransform: 'uppercase',
-            color: '#FFFFFF99',
-            }}> net worth </Typography>
+          gap: { xs: 'auto', md: '50px' },
+        }}
+      >
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            gap: '9px',
+          }}
+        >
+          <Typography
+            sx={{
+              fontWeight: 600,
+              fontSize: '10px',
+              lineHeight: '1em',
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+              color: '#FFFFFF99',
+            }}
+          >
+            {' '}
+            net worth{' '}
+          </Typography>
           {currentAccount ? (
             <FormattedNumber
               value={Number(user?.netWorthUSD || 0)}
@@ -159,20 +174,27 @@ export const DashboardTopPanel = () => {
           )}
         </Box>
 
-        <Box sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          gap: '9px',
-          }}>
-          <Typography sx={{
-            fontWeight: 600,
-            fontSize: '10px',
-            lineHeight: '1em',
-            letterSpacing: '0.08em',
-            textTransform: 'uppercase',
-            color: '#FFFFFF99',
-            }}> net apy </Typography>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            gap: '9px',
+          }}
+        >
+          <Typography
+            sx={{
+              fontWeight: 600,
+              fontSize: '10px',
+              lineHeight: '1em',
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+              color: '#FFFFFF99',
+            }}
+          >
+            {' '}
+            net apy{' '}
+          </Typography>
           {currentAccount && Number(user?.netWorthUSD) > 0 ? (
             <FormattedNumber
               value={user.netAPY}
@@ -191,21 +213,28 @@ export const DashboardTopPanel = () => {
           )}
         </Box>
 
-        <Box sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          gap: '9px',
-          }}>
-          <Typography sx={{
-            fontWeight: 600,
-            fontSize: '10px',
-            lineHeight: '1em',
-            letterSpacing: '0.08em',
-            textTransform: 'uppercase',
-            color: '#FFFFFF99',
-            // bgcolor: 'red',
-            }}> health factor </Typography>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            gap: '9px',
+          }}
+        >
+          <Typography
+            sx={{
+              fontWeight: 600,
+              fontSize: '10px',
+              lineHeight: '1em',
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+              color: '#FFFFFF99',
+              // bgcolor: 'red',
+            }}
+          >
+            {' '}
+            health factor{' '}
+          </Typography>
           <HealthFactorNumber
             fontSize={'24px'}
             fontWeight={500}

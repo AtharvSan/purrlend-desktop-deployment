@@ -140,47 +140,56 @@ export const BorrowAssetsList = () => {
   const RenderHeader: React.FC = () => {
     return (
       <>
-      <Box sx={{
-      display: 'flex',
-      justifyContent: 'space-between',
-      pl: '18px',
-      pr: '120px',
-      mt: '12px',
-      pb: '10px',
-      }}>
-        <Box>
-          <ListHeaderTitle
-          sortName={sortName}
-          sortDesc={sortDesc}
-          setSortName={setSortName}
-          setSortDesc={setSortDesc}
-          sortKey='symbol'
-          ><Trans key="assets"> Assets </Trans></ListHeaderTitle>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            pl: '18px',
+            pr: '120px',
+            mt: '12px',
+            pb: '10px',
+          }}
+        >
+          <Box>
+            <ListHeaderTitle
+              sortName={sortName}
+              sortDesc={sortDesc}
+              setSortName={setSortName}
+              setSortDesc={setSortDesc}
+              sortKey="symbol"
+            >
+              <Trans key="assets"> Assets </Trans>
+            </ListHeaderTitle>
+          </Box>
+          <Box>
+            <ListHeaderTitle
+              sortName={sortName}
+              sortDesc={sortDesc}
+              setSortName={setSortName}
+              setSortDesc={setSortDesc}
+              sortKey="availableBorrows"
+            >
+              <Trans key="availableBorrows"> Available </Trans>
+            </ListHeaderTitle>
+          </Box>
+          <Box>
+            <ListHeaderTitle
+              sortName={sortName}
+              sortDesc={sortDesc}
+              setSortName={setSortName}
+              setSortDesc={setSortDesc}
+              sortKey="variableBorrowAPY"
+            >
+              <Trans key="variableBorrowAPY">APY </Trans>
+            </ListHeaderTitle>
+          </Box>
+          <Box>
+            <ListHeaderTitle>
+              <Trans>Action</Trans>
+            </ListHeaderTitle>
+          </Box>
         </Box>
-        <Box>
-          <ListHeaderTitle
-          sortName={sortName}
-          sortDesc={sortDesc}
-          setSortName={setSortName}
-          setSortDesc={setSortDesc}
-          sortKey='availableBorrows'
-          ><Trans key="availableBorrows"> Available </Trans></ListHeaderTitle>
-        </Box>
-        <Box>
-          <ListHeaderTitle
-          sortName={sortName}
-          sortDesc={sortDesc}
-          setSortName={setSortName}
-          setSortDesc={setSortDesc}
-          sortKey='variableBorrowAPY'
-          ><Trans key="variableBorrowAPY">APY </Trans></ListHeaderTitle>
-        </Box>
-        <Box>
-          <ListHeaderTitle
-          ><Trans>Action</Trans></ListHeaderTitle>
-        </Box>
-      </Box>
-      <Divider sx={{borderColor: '#E8E8E8', mx: '18px', mb: '10px'}}/>
+        <Divider sx={{ borderColor: '#E8E8E8', mx: '18px', mb: '10px' }} />
       </>
     );
   };
@@ -197,13 +206,15 @@ export const BorrowAssetsList = () => {
   return (
     <ListWrapper
       titleComponent={
-        <Typography sx={{
-          fontWeight: 500,
-          fontSize: '20px',
-          lineHeight: '1em',
-          letterSpacing: '-0.02em',
-          color: '#061512',
-          }}>
+        <Typography
+          sx={{
+            fontWeight: 500,
+            fontSize: '20px',
+            lineHeight: '1em',
+            letterSpacing: '-0.02em',
+            color: '#061512',
+          }}
+        >
           <Trans>Assets to borrow</Trans>
         </Typography>
       }
@@ -211,7 +222,7 @@ export const BorrowAssetsList = () => {
       withTopMargin
       noData={borrowDisabled}
       subChildrenComponent={
-        <Box sx={{ px: {xs: '10px', md: '7px'}, mb: 4 }}>
+        <Box sx={{ px: { xs: '10px', md: '7px' }, mb: 4 }}>
           {+collateralUsagePercent >= 0.98 && (
             <Warning severity="error">
               <Trans>
@@ -248,15 +259,15 @@ export const BorrowAssetsList = () => {
     >
       <>
         {!downToXSM && !!sortedReserves.length && <RenderHeader />}
-        {sortedReserves?.map((item,index) => (
+        {sortedReserves?.map((item, index) => (
           <Fragment key={item.underlyingAsset}>
             <AssetCapsProvider asset={item.reserve}>
               {downToXSM ? (
                 <>
-                <BorrowAssetsListMobileItem {...item} />
-                {index !== sortedReserves.length - 1 && ( // show divider only if not last item
-                  <Divider sx={{ mb: 1, borderColor: '#E8E8E8' }} />
-                )}
+                  <BorrowAssetsListMobileItem {...item} />
+                  {index !== sortedReserves.length - 1 && ( // show divider only if not last item
+                    <Divider sx={{ mb: 1, borderColor: '#E8E8E8' }} />
+                  )}
                 </>
               ) : (
                 <BorrowAssetsListItem {...item} />

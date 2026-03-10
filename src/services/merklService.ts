@@ -5,9 +5,7 @@ const BASE = MERKL_CONFIG.API_BASE;
 export async function getAllMerklOpportunities(_chainId: number) {
   try {
     const results = await Promise.allSettled(
-      MERKL_POOL_ADDRESSES.map((poolAddress) =>
-        fetchOpportunityForPool(poolAddress)
-      )
+      MERKL_POOL_ADDRESSES.map((poolAddress) => fetchOpportunityForPool(poolAddress))
     );
 
     const opps: any[] = [];
@@ -17,7 +15,7 @@ export async function getAllMerklOpportunities(_chainId: number) {
         opps.push(result.value);
         if (MERKL_CONFIG.DEBUG) {
           const o = result.value;
-          console.log('MERKL POOL OK', o.name, '| pool:', MERKL_POOL_ADDRESSES[i].slice(0,10));
+          console.log('MERKL POOL OK', o.name, '| pool:', MERKL_POOL_ADDRESSES[i].slice(0, 10));
         }
       } else if (result.status === 'rejected') {
         console.warn('MERKL pool fetch failed', MERKL_POOL_ADDRESSES[i], (result as any).reason);

@@ -5,7 +5,6 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const POINTS_CONFIG = {
-
   // ── Points Rate ────────────────────────────────────────────────────────────
   // How many Purr points a user earns per $1 per hour
   // Client confirmed: both supply and borrow = 1 point per $1 per hour
@@ -19,13 +18,13 @@ export const POINTS_CONFIG = {
   // 0   = this asset earns NO points
   // To whitelist only specific assets, set unlisted assets to 0
   ASSET_MULTIPLIERS: {
-    '0x5555555555555555555555555555555555555555': 1,    // HYPE
-    '0x94e8396e0869c9f2200760af0621afd240e1cf38': 1,    // wstHYPE
-    '0xfd739d4e423301ce9385c1fb8850539d657c296d': 1,    // kHYPE
-    '0x9fdbda0a5e284c32744d2f17ee5c74b284993463': 1,    // UBTC
-    '0xbe6727b535545c67d5caa73dea54865b92cf7907': 1,    // UETH
-    '0xb88339cb7199b77e23db6e890353e22632ba630f': 1,    // USDC
-    '0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb': 1,    // USD0
+    '0x5555555555555555555555555555555555555555': 1, // HYPE
+    '0x94e8396e0869c9f2200760af0621afd240e1cf38': 1, // wstHYPE
+    '0xfd739d4e423301ce9385c1fb8850539d657c296d': 1, // kHYPE
+    '0x9fdbda0a5e284c32744d2f17ee5c74b284993463': 1, // UBTC
+    '0xbe6727b535545c67d5caa73dea54865b92cf7907': 1, // UETH
+    '0xb88339cb7199b77e23db6e890353e22632ba630f': 1, // USDC
+    '0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb': 1, // USD0
   } as Record<string, number>,
 
   // ── Seasons ────────────────────────────────────────────────────────────────
@@ -48,9 +47,9 @@ export const POINTS_CONFIG = {
   // ── Chain / Contracts ──────────────────────────────────────────────────────
   CHAIN_ID: 999,
   RPC_URL: 'https://rpc.hyperliquid.xyz/evm',
-  LENDING_POOL:            '0xb61218d3efE306f7579eE50D1a606d56bc222048',
-  UI_POOL_DATA_PROVIDER:   '0x0C591b5A3615c21cbd09F028F2E4509C2938F65E',
-  POOL_ADDRESS_PROVIDER:   '0xf33e33b35163ce2f46bf7150e1592839ac199124',
+  LENDING_POOL: '0xb61218d3efE306f7579eE50D1a606d56bc222048',
+  UI_POOL_DATA_PROVIDER: '0x0C591b5A3615c21cbd09F028F2E4509C2938F65E',
+  POOL_ADDRESS_PROVIDER: '0xf33e33b35163ce2f46bf7150e1592839ac199124',
 };
 
 // ── Asset display names ────────────────────────────────────────────────────

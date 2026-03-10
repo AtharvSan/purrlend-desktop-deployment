@@ -1,9 +1,9 @@
 import { CheckIcon, ExclamationCircleIcon } from '@heroicons/react/outline';
 import { Box, SvgIcon } from '@mui/material';
+import { uiConfig } from 'src/uiConfig';
 
 import { NoData } from '../../../components/primitives/NoData';
 import { ListItemIsolationBadge } from './ListItemIsolationBadge';
-import { uiConfig } from 'src/uiConfig';
 
 interface ListItemCanBeCollateralProps {
   isIsolated: boolean;

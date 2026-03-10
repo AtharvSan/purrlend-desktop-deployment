@@ -1,5 +1,6 @@
 import { SearchIcon } from '@heroicons/react/solid';
 import { Trans } from '@lingui/macro';
+import SecurityIcon from '@mui/icons-material/Security';
 import {
   Box,
   Button,
@@ -10,7 +11,6 @@ import {
   useTheme,
 } from '@mui/material';
 import { useState } from 'react';
-import SecurityIcon from '@mui/icons-material/Security';
 
 import { MarketAssetSearchInput } from './MarketAssetSearchInput';
 
@@ -48,17 +48,21 @@ export const MarketAssetListTitle = ({
     >
       {showMarketTitle && (
         <Box sx={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-          <Box sx={{
-            width: '3px',
-            height: '23px',
-            backgroundColor: '#FF7E09',
-          }} />
-          <Typography sx={{
-            fontWeight: 600,
-            fontSize: '20px',
-            lineHeight: '1em',
-            letterSpacing: '-0.02em',
-          }}>
+          <Box
+            sx={{
+              width: '3px',
+              height: '23px',
+              backgroundColor: '#FF7E09',
+            }}
+          />
+          <Typography
+            sx={{
+              fontWeight: 600,
+              fontSize: '20px',
+              lineHeight: '1em',
+              letterSpacing: '-0.02em',
+            }}
+          >
             Assets
           </Typography>
         </Box>
@@ -90,12 +94,14 @@ export const MarketAssetListTitle = ({
         }}
       >
         <SecurityIcon sx={{ fontSize: 14, color: '#16a34a' }} />
-        <Typography sx={{
-          fontSize: '12px',
-          fontWeight: 600,
-          color: '#16a34a',
-          lineHeight: 1,
-        }}>
+        <Typography
+          sx={{
+            fontSize: '12px',
+            fontWeight: 600,
+            color: '#16a34a',
+            lineHeight: 1,
+          }}
+        >
           Audited and KYC Verified
         </Typography>
       </Box>

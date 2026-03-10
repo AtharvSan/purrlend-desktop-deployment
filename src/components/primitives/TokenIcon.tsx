@@ -243,7 +243,10 @@ export function TokenIcon({ symbol, ...rest }: TokenIconProps) {
     console.warn('TokenIcon: missing symbol prop', rest);
     // Render a small fallback — adjust to whatever you want as fallback UI
     return (
-      <Icon {...rest} sx={{ display: 'flex', position: 'relative', borderRadius: '50%', ...rest.sx }}>
+      <Icon
+        {...rest}
+        sx={{ display: 'flex', position: 'relative', borderRadius: '50%', ...rest.sx }}
+      >
         {/* tiny empty circle / placeholder. You can also use an inline SVG or default image */}
         <svg width="100%" height="100%" viewBox="0 0 24 24" aria-hidden>
           <circle cx="12" cy="12" r="10" fill="rgba(0,0,0,0.06)" />

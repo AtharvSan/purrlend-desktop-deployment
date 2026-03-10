@@ -1,11 +1,6 @@
-export async function getMerklUserRewards(
-  chainId: number,
-  user: string
-) {
+export async function getMerklUserRewards(chainId: number, user: string) {
   try {
-    const res = await fetch(
-      `https://api.merkl.xyz/users/${user}/rewards?chainId=${chainId}`
-    );
+    const res = await fetch(`https://api.merkl.xyz/users/${user}/rewards?chainId=${chainId}`);
 
     if (!res.ok) {
       console.warn('Merkl user rewards failed', res.status);

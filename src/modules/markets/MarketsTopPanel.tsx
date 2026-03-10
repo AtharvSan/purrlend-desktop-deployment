@@ -2,6 +2,9 @@ import { valueToBigNumber } from '@aave/math-utils';
 import { Trans } from '@lingui/macro';
 import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import * as React from 'react';
+import { MarketSwitcherMarkets } from 'src/components/MarketSwitcherMarkets';
+import { networkConfigs } from 'src/ui-config/networksConfig';
+import { uiConfig } from 'src/uiConfig';
 
 import PieIcon from '../../../public/icons/markets/pie-icon.svg';
 import TotalBorrowIcon from '../../../public/icons/markets/total-borrow-indicator.svg';
@@ -10,9 +13,6 @@ import { FormattedNumber } from '../../components/primitives/FormattedNumber';
 import { TopInfoPanel } from '../../components/TopInfoPanel/TopInfoPanel';
 import { TopInfoPanelItem } from '../../components/TopInfoPanel/TopInfoPanelItem';
 import { useAppDataContext } from '../../hooks/app-data-provider/useAppDataProvider';
-import { uiConfig } from 'src/uiConfig';
-import { networkConfigs } from 'src/ui-config/networksConfig';
-import { MarketSwitcherMarkets } from 'src/components/MarketSwitcherMarkets';
 
 export const MarketsTopPanel = () => {
   const { reserves, loading } = useAppDataContext();
@@ -38,129 +38,160 @@ export const MarketsTopPanel = () => {
 
   return (
     <>
-    <Box sx={{
-      backgroundImage: 'linear-gradient(90deg, #061512 0%, #00380D 100%)',
-      color: '#F1F1F3',
-      mx: 'auto',
-      width: {xs: '95%', md: '1199px'},
-      height: {xs: '128px', md: '77px'},
-      mt: '25px',
-      borderRadius: '16px',
-      display: 'flex',
-      flexDirection: {xs: 'column', md: 'row'},
-      justifyContent: 'space-between',
-      pt: '14px',
-      pb: '12px',
-      px: '20px',
-      }}>
-      <Box sx={{ 
-        display: 'flex', 
-        alignItems: 'center', 
-        gap: '16px',
-        }}>
-        {/* <img src={uiConfig.hype} height={38} /> */}
-        <MarketSwitcherMarkets></MarketSwitcherMarkets>
-        <Typography sx={{ 
-          color: '#FFFFFF',
-          fontWeight: 600,
-          fontSize: '32px',
-          lineHeight: '1em',
-          letterSpacing: '-0.02em',
-          }}>
+      <Box
+        sx={{
+          backgroundImage: 'linear-gradient(90deg, #061512 0%, #00380D 100%)',
+          color: '#F1F1F3',
+          mx: 'auto',
+          width: { xs: '95%', md: '1199px' },
+          height: { xs: '128px', md: '77px' },
+          mt: '25px',
+          borderRadius: '16px',
+          display: 'flex',
+          flexDirection: { xs: 'column', md: 'row' },
+          justifyContent: 'space-between',
+          pt: '14px',
+          pb: '12px',
+          px: '20px',
+        }}
+      >
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '16px',
+          }}
+        >
+          {/* <img src={uiConfig.hype} height={38} /> */}
+          <MarketSwitcherMarkets />
+          <Typography
+            sx={{
+              color: '#FFFFFF',
+              fontWeight: 600,
+              fontSize: '32px',
+              lineHeight: '1em',
+              letterSpacing: '-0.02em',
+            }}
+          >
             {/* HyperEVM  */}
             {/* {!downToSM && (' Market')} */}
-        </Typography>
+          </Typography>
+        </Box>
+
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            gap: { xs: 'auto', md: '50px' },
+          }}
+        >
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              gap: '9px',
+            }}
+          >
+            <Typography
+              sx={{
+                fontWeight: 600,
+                fontSize: '10px',
+                lineHeight: '1em',
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                color: '#FFFFFF99',
+              }}
+            >
+              {' '}
+              total market size{' '}
+            </Typography>
+            <FormattedNumber
+              value={aggregatedStats.totalLiquidity.toString()}
+              symbol="USD"
+              variant={valueTypographyVariant}
+              visibleDecimals={2}
+              compact
+              symbolsColor="#FFFFFF99"
+              symbolsVariant={symbolsVariant}
+              size="24px"
+              fontSize={'24px'}
+              fontWeight={500}
+              letterSpacing={'-0.02em'}
+            />
+          </Box>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+            }}
+          >
+            <Typography
+              sx={{
+                fontWeight: 600,
+                fontSize: '10px',
+                lineHeight: '1em',
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                color: '#FFFFFF99',
+              }}
+            >
+              {' '}
+              Total available{' '}
+            </Typography>
+            <FormattedNumber
+              value={aggregatedStats.totalLiquidity.minus(aggregatedStats.totalDebt).toString()}
+              symbol="USD"
+              variant={valueTypographyVariant}
+              visibleDecimals={2}
+              compact
+              symbolsColor="#FFFFFF99"
+              symbolsVariant={symbolsVariant}
+              size="24px"
+              fontSize={'24px'}
+              fontWeight={500}
+              letterSpacing={'-0.02em'}
+            />
+          </Box>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+            }}
+          >
+            <Typography
+              sx={{
+                fontWeight: 600,
+                fontSize: '10px',
+                lineHeight: '1em',
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                color: '#FFFFFF99',
+              }}
+            >
+              {' '}
+              Total borrows{' '}
+            </Typography>
+            <FormattedNumber
+              value={aggregatedStats.totalDebt.toString()}
+              symbol="USD"
+              variant={valueTypographyVariant}
+              visibleDecimals={2}
+              compact
+              symbolsColor="#FFFFFF99"
+              symbolsVariant={symbolsVariant}
+              size="24px"
+              fontSize={'24px'}
+              fontWeight={500}
+              letterSpacing={'-0.02em'}
+            />
+          </Box>
+        </Box>
       </Box>
 
-      <Box sx={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        gap: {xs: 'auto', md: '50px'},
-        }}>
-        <Box sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          gap: '9px',
-          }}>
-          <Typography sx={{
-            fontWeight: 600,
-            fontSize: '10px',
-            lineHeight: '1em',
-            letterSpacing: '0.08em',
-            textTransform: 'uppercase',
-            color: '#FFFFFF99',
-            }}> total market size </Typography>
-          <FormattedNumber
-            value={aggregatedStats.totalLiquidity.toString()}
-            symbol="USD"
-            variant={valueTypographyVariant}
-            visibleDecimals={2}
-            compact
-            symbolsColor="#FFFFFF99"
-            symbolsVariant={symbolsVariant}
-            size='24px'
-            fontSize={'24px'}
-            fontWeight={500}
-            letterSpacing={'-0.02em'}
-            />
-        </Box>
-        <Box sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          }}>
-          <Typography sx={{
-            fontWeight: 600,
-            fontSize: '10px',
-            lineHeight: '1em',
-            letterSpacing: '0.08em',
-            textTransform: 'uppercase',
-            color: '#FFFFFF99',
-            }}> Total available </Typography>
-          <FormattedNumber
-            value={aggregatedStats.totalLiquidity.minus(aggregatedStats.totalDebt).toString()}
-            symbol="USD"
-            variant={valueTypographyVariant}
-            visibleDecimals={2}
-            compact
-            symbolsColor="#FFFFFF99"
-            symbolsVariant={symbolsVariant}
-            size='24px'
-            fontSize={'24px'}
-            fontWeight={500}
-            letterSpacing={'-0.02em'}
-            />
-        </Box>
-        <Box sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          }}>
-          <Typography sx={{
-            fontWeight: 600,
-            fontSize: '10px',
-            lineHeight: '1em',
-            letterSpacing: '0.08em',
-            textTransform: 'uppercase',
-            color: '#FFFFFF99',
-            }}> Total borrows </Typography>
-          <FormattedNumber
-            value={aggregatedStats.totalDebt.toString()}
-            symbol="USD"
-            variant={valueTypographyVariant}
-            visibleDecimals={2}
-            compact
-            symbolsColor="#FFFFFF99"
-            symbolsVariant={symbolsVariant}
-            size='24px'
-            fontSize={'24px'}
-            fontWeight={500}
-            letterSpacing={'-0.02em'}
-            /></Box></Box>
-    </Box>
-
-    {/* <TopInfoPanel pageTitle={<Trans>Markets</Trans>} withMarketSwitcher>
+      {/* <TopInfoPanel pageTitle={<Trans>Markets</Trans>} withMarketSwitcher>
       <TopInfoPanelItem
         icon={<PieIcon />}
         title={<Trans>Total market size</Trans>}

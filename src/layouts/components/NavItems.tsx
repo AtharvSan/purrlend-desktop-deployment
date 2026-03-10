@@ -1,12 +1,12 @@
 import { useLingui } from '@lingui/react';
 import { Button, List, ListItem, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { blue, blueGrey, orange } from '@mui/material/colors';
 import * as React from 'react';
 
 import { Link } from '../../components/primitives/Link';
 import { useProtocolDataContext } from '../../hooks/useProtocolDataContext';
 import { navigation } from '../../ui-config/menu-items';
 import { MoreMenu } from '../MoreMenu';
-import { blue, blueGrey, orange } from '@mui/material/colors';
 
 interface NavItemsProps {
   setOpen?: (value: boolean) => void;
@@ -26,7 +26,7 @@ export const NavItems = ({ setOpen }: NavItemsProps) => {
 
         alignItems: { xs: 'flex-start', md: 'center' },
         flexDirection: { xs: 'column', md: 'row' },
-        gap: {xs: '10px', md: '33px'},
+        gap: { xs: '10px', md: '33px' },
       }}
       disablePadding
     >
@@ -38,7 +38,7 @@ export const NavItems = ({ setOpen }: NavItemsProps) => {
               // backgroundColor: 'red',
               display: 'flex',
               justifyContent: 'start',
-              border: {xs: '1px solid #D7D7D7', md: 'none'},
+              border: { xs: '1px solid #D7D7D7', md: 'none' },
               borderRadius: '16px',
               width: { xs: '96%', md: 'unset' },
               mx: 'auto',
@@ -53,8 +53,8 @@ export const NavItems = ({ setOpen }: NavItemsProps) => {
                 href={item.link}
                 activePaths={item.activePaths}
                 color="#061512"
-                sx={{ 
-                  width: '100%', 
+                sx={{
+                  width: '100%',
                   py: '21px',
                   px: 4,
                   fontWeight: 500,
@@ -71,7 +71,7 @@ export const NavItems = ({ setOpen }: NavItemsProps) => {
               <Button
                 component={Link}
                 href={item.link}
-                activePaths={item.activePaths}  
+                activePaths={item.activePaths}
                 sx={(theme) => ({
                   fontSize: '14px',
                   fontWeight: 500,
@@ -114,4 +114,3 @@ export const NavItems = ({ setOpen }: NavItemsProps) => {
     </List>
   );
 };
-

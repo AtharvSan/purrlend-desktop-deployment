@@ -1,6 +1,7 @@
 import { API_ETH_MOCK_ADDRESS } from '@aave/contract-helpers';
 import {
   calculateHealthFactorFromBalancesBigUnits,
+  normalize,
   USD_DECIMALS,
   valueToBigNumber,
 } from '@aave/math-utils';
@@ -10,12 +11,16 @@ import BigNumber from 'bignumber.js';
 import React, { useEffect, useRef, useState } from 'react';
 import { Warning } from 'src/components/primitives/Warning';
 import { AMPLWarning } from 'src/components/Warnings/AMPLWarning';
+import { MERKL_CONFIG } from 'src/config/merkl';
+import { buildMerklMarketMap, UNDERLYING_TO_POOL } from 'src/helpers/merklMarketMapper';
 import { CollateralType } from 'src/helpers/types';
 import { useAssetCaps } from 'src/hooks/useAssetCaps';
 import { useModalContext } from 'src/hooks/useModal';
 import { useProtocolDataContext } from 'src/hooks/useProtocolDataContext';
 import { ERC20TokenType } from 'src/libs/web3-data-provider/Web3Provider';
+import { getAllMerklOpportunities } from 'src/services/merklService';
 import { useRootStore } from 'src/store/root';
+import { DashboardReserve } from 'src/utils/dashboardSortUtils';
 import { getMaxAmountAvailableToSupply } from 'src/utils/getMaxAmountAvailableToSupply';
 import { isFeatureEnabled } from 'src/utils/marketsAndNetworksConfig';
 
@@ -36,11 +41,6 @@ import { AAVEWarning } from '../Warnings/AAVEWarning';
 import { IsolationModeWarning } from '../Warnings/IsolationModeWarning';
 import { SNXWarning } from '../Warnings/SNXWarning';
 import { SupplyActions } from './SupplyActions';
-import { MERKL_CONFIG } from 'src/config/merkl';
-import { getAllMerklOpportunities } from 'src/services/merklService';
-import { buildMerklMarketMap, UNDERLYING_TO_POOL } from 'src/helpers/merklMarketMapper';
-import { normalize } from '@aave/math-utils';
-import { DashboardReserve } from 'src/utils/dashboardSortUtils';
 
 export enum ErrorType {
   CAP_REACHED,
@@ -74,15 +74,15 @@ export const SupplyModalContent = ({
   const supplyApy = poolReserve.supplyAPY;
   const [merklMap, setMerklMap] = useState<Record<string, any>>({});
   useEffect(() => {
-      if (!MERKL_CONFIG.ENABLED) return;
-  
-      getAllMerklOpportunities(currentChainId)
-        .then((data) => {
-          const map = buildMerklMarketMap(data || [], currentChainId);
-          setMerklMap(map);
-        })
-        .catch(() => setMerklMap({}));
-    }, [currentChainId]);
+    if (!MERKL_CONFIG.ENABLED) return;
+
+    getAllMerklOpportunities(currentChainId)
+      .then((data) => {
+        const map = buildMerklMarketMap(data || [], currentChainId);
+        setMerklMap(map);
+      })
+      .catch(() => setMerklMap({}));
+  }, [currentChainId]);
 
   // Calculate max amount to supply
   const maxAmountToSupply = getMaxAmountAvailableToSupply(
@@ -229,11 +229,10 @@ export const SupplyModalContent = ({
         addToken={addToken}
       />
     );
-  
-  const normalizedUnderlying =
-    UNDERLYING_TO_POOL[underlyingAsset?.toLowerCase()] 
-      ? underlyingAsset?.toLowerCase()
-      : underlyingAsset?.toLowerCase();
+
+  const normalizedUnderlying = UNDERLYING_TO_POOL[underlyingAsset?.toLowerCase()]
+    ? underlyingAsset?.toLowerCase()
+    : underlyingAsset?.toLowerCase();
 
   const merkl = merklMap[normalizedUnderlying];
   const merklApr = Number(merkl?.apr ?? 0) / 100;
@@ -281,7 +280,11 @@ export const SupplyModalContent = ({
       )}
 
       <TxModalDetails gasLimit={gasLimit}>
-        <DetailsNumberLine description={<Trans>Supply APY</Trans>} value={Number(baseApy + merklApr)} percent />
+        <DetailsNumberLine
+          description={<Trans>Supply APY</Trans>}
+          value={Number(baseApy + merklApr)}
+          percent
+        />
         <DetailsIncentivesLine
           incentives={poolReserve.aIncentivesData}
           symbol={poolReserve.symbol}

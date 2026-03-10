@@ -45,11 +45,10 @@ export const MarketAssetSearchInput = ({ onSearchTermChange }: MarketAssetSearch
         <Box sx={{ ml: 3, mt: 1 }}>
           <img src={uiConfig.search} alt="search icon" />
         </Box>
-        <InputBase autoFocus
+        <InputBase
+          autoFocus
           inputRef={inputEl}
-          sx={{ flexGrow: 1, fontSize: 16 ,
-            width: '164px',
-          }}
+          sx={{ flexGrow: 1, fontSize: 16, width: '164px' }}
           placeholder="Search asset"
           onChange={(e) => {
             setSearchTerm(e.target.value);
@@ -82,17 +81,17 @@ export const MarketAssetSearchInput = ({ onSearchTermChange }: MarketAssetSearch
         </Box>
         <InputBase
           inputRef={inputEl}
-          sx={{ 
-          width: '270px', 
-          color: '#828282', 
-          fontWeight: 400, 
-          fontSize: '15px', 
-          lineHeight: '1em', 
-          // letterSpacing: '-0.02em',
-          '& .MuiInputBase-input::placeholder': {
+          sx={{
+            width: '270px',
             color: '#828282',
-            opacity: 1
-            }
+            fontWeight: 400,
+            fontSize: '15px',
+            lineHeight: '1em',
+            // letterSpacing: '-0.02em',
+            '& .MuiInputBase-input::placeholder': {
+              color: '#828282',
+              opacity: 1,
+            },
           }}
           placeholder="Search asset name, symbol, or address"
           value={searchTerm}

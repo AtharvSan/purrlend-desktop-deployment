@@ -47,14 +47,16 @@ export const MarketAssetsListContainer = () => {
   const frozenReserves = filteredData.filter((r) => r.isFrozen);
 
   return (
-    <Box sx={{
-      display: 'flex',
-      flexDirection: 'column',
-      // mx: '2.05%',
-      mx: 'auto',
-      width:{xs: '97%', md: '1199px'},
-      my: '2.7%',
-      }}>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        // mx: '2.05%',
+        mx: 'auto',
+        width: { xs: '97%', md: '1199px' },
+        my: '2.7%',
+      }}
+    >
       <MarketAssetListTitle
         onSearchTermChange={setSearchTerm}
         marketTitle={currentMarketData.marketTitle}
@@ -72,7 +74,7 @@ export const MarketAssetsListContainer = () => {
       {/* Frozen assets list */}
       {frozenReserves.length > 0 && (
         <Box>
-        {/* <Box sx={{ 
+          {/* <Box sx={{ 
           mt: 15, 
           px: { xs: 1, md: '1px' },
           mb: 4,
@@ -83,36 +85,44 @@ export const MarketAssetsListContainer = () => {
           </Typography>
           
         </Box> */}
-          <Box sx={{ 
-            display: 'flex', 
-            alignItems: 'center', 
-            gap: '15px',
-            mt: 15, 
-            mb: 4, 
-          }}>
-            <Box sx={{
-              width: '3px',
-              height: '23px',
-              backgroundColor: '#FF7E09',
-            }} />
-            <Typography sx={{
-              fontWeight: 600,
-              fontSize: '20px',
-              lineHeight: '1em',
-              letterSpacing: '-0.02em',
-            }}>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '15px',
+              mt: 15,
+              mb: 4,
+            }}
+          >
+            <Box
+              sx={{
+                width: '3px',
+                height: '23px',
+                backgroundColor: '#FF7E09',
+              }}
+            />
+            <Typography
+              sx={{
+                fontWeight: 600,
+                fontSize: '20px',
+                lineHeight: '1em',
+                letterSpacing: '-0.02em',
+              }}
+            >
               Frozen assets
             </Typography>
           </Box>
           <Warning severity="info" sx={{ mb: 4 }}>
-            <Typography sx={{
-              fontWeight: 400,
-              fontSize: '13px',
-              lineHeight: '1.5em',
-              letterSpacing: '0em',
-            }}>
-              These assets are temporarily frozen, supply / borrow of these assets are unavailable. Withdrawals and debt
-              repayments are allowed.
+            <Typography
+              sx={{
+                fontWeight: 400,
+                fontSize: '13px',
+                lineHeight: '1.5em',
+                letterSpacing: '0em',
+              }}
+            >
+              These assets are temporarily frozen, supply / borrow of these assets are unavailable.
+              Withdrawals and debt repayments are allowed.
             </Typography>
           </Warning>
         </Box>
@@ -161,8 +171,6 @@ export const MarketAssetsListContainer = () => {
           </Typography>
         </Box>
       )}
-    </Box>    
+    </Box>
   );
 };
-
-

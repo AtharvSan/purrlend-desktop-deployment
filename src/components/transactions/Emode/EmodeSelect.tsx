@@ -23,9 +23,9 @@ export const EmodeSelect = ({
 }: EmodeSelectProps) => {
   return (
     <FormControl sx={{ mb: 1, width: '100%' }}>
-      <FormLabel 
-        sx={{ 
-          mb: 1, 
+      <FormLabel
+        sx={{
+          mb: 1,
           // font-family: 'Geist',
           fontWeight: 400,
           fontStyle: 'Regular',
@@ -35,7 +35,8 @@ export const EmodeSelect = ({
           color: 'rgba(67, 67, 67, 1)',
           marginBottom: '8px',
           mt: '24px',
-        }}>
+        }}
+      >
         <Trans>Asset category</Trans>
       </FormLabel>
 
@@ -78,7 +79,7 @@ export const EmodeSelect = ({
         renderValue={(emode) => {
           if (emode !== 0) {
             return (
-              <Typography 
+              <Typography
                 sx={{
                   // font: 'Geist',
                   fontWeight: 500,
@@ -87,7 +88,8 @@ export const EmodeSelect = ({
                   lineHeight: '100%',
                   letterSpacing: '-2%',
                   color: 'rgba(6, 21, 18, 1)',
-                }}>
+                }}
+              >
                 {getEmodeMessage(emodeCategories[emode].label)}
               </Typography>
             );

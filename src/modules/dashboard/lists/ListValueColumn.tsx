@@ -21,24 +21,26 @@ const Content = ({
   capsComponent,
 }: ListValueColumnProps) => {
   return (
-    <Box sx={{ 
-      display: 'flex',
-      flexDirection: 'column', 
-      alignItems: 'start', 
-      justifyContent:'start',
-      // pt: '20px',
-      gap: '4px', 
-      }}>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'start',
+        justifyContent: 'start',
+        // pt: '20px',
+        gap: '4px',
+      }}
+    >
       <FormattedNumber
         value={value}
         variant="secondary14"
         visibleDecimals={2}
-        sx={{ 
-        fontWeight: 400,
-        fontSize: '14px',
-        lineHeight: '1em',
-        letterSpacing: '-0.02em',
-        color: '#061512',
+        sx={{
+          fontWeight: 400,
+          fontSize: '14px',
+          lineHeight: '1em',
+          letterSpacing: '-0.02em',
+          color: '#061512',
         }}
         // color={disabled ? 'text.disabled' : 'text.main'}
         data-cy={`nativeAmount`}
@@ -71,15 +73,15 @@ export const ListValueColumn = ({
   disabled,
 }: ListValueColumnProps) => {
   return (
-    <ListColumn basis={140} align="start" >
+    <ListColumn basis={140} align="start">
       <Content
-          symbol={symbol}
-          value={value}
-          subValue={subValue}
-          capsComponent={capsComponent}
-          disabled={disabled}
-          withTooltip={withTooltip}
-        />
+        symbol={symbol}
+        value={value}
+        subValue={subValue}
+        capsComponent={capsComponent}
+        disabled={disabled}
+        withTooltip={withTooltip}
+      />
     </ListColumn>
   );
 };

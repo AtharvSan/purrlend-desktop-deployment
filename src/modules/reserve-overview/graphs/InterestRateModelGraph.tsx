@@ -187,7 +187,7 @@ export const InterestRateModelGraph = withTooltip<AreaProps, TooltipData>(
       [innerWidth]
     );
     const yValueScale = useMemo(() => {
-      const maxY = (max(data, (d) => getVariableBorrowRate(d)) as number);
+      const maxY = max(data, (d) => getVariableBorrowRate(d)) as number;
       return scaleLinear({
         range: [innerHeight, 0],
         domain: [0, (maxY || 0) * 1.1],
@@ -235,7 +235,7 @@ export const InterestRateModelGraph = withTooltip<AreaProps, TooltipData>(
             <GridRows
               scale={yValueScale}
               width={innerWidth}
-              stroke='#E8E8E8'
+              stroke="#E8E8E8"
               pointerEvents="none"
               numTicks={3}
             />
@@ -276,7 +276,6 @@ export const InterestRateModelGraph = withTooltip<AreaProps, TooltipData>(
                 // color: '#18CC6F',
               })}
               tickFormat={(n) => `${n}%`}
-              
             />
 
             {/* Y Axis */}

@@ -15,33 +15,33 @@ export const PanelRow: React.FC<BoxProps> = (props) => (
   />
 );
 export const PanelTitle: React.FC<TypographyProps> = (props) => (
-  <Box sx={{mt: '10px',}}>
-      <Box 
-        sx={{
-          backgroundColor: 'rgba(255, 126, 9, 1)',
-          width: '2px',
-          height: '24px',
-          position: 'absolute',
-          top: '-1px',
-          mt: {xs: 'unset', md: '9.5px'},
-        }}>
-      </Box>
-      <Typography
-        {...props}
-        sx={{ 
-          minWidth: { xs: '170px' }, 
-          mr: 4, 
-          mb: { xs: 0, md: '2px' },
-          ml: '16.2px',
-          fontWeight: 600,
-          fontSize: '20px',
-          lineHeight: '1em',
-          letterSpacing: '-0.02em',
+  <Box sx={{ mt: '10px' }}>
+    <Box
+      sx={{
+        backgroundColor: 'rgba(255, 126, 9, 1)',
+        width: '2px',
+        height: '24px',
+        position: 'absolute',
+        top: '-1px',
+        mt: { xs: 'unset', md: '9.5px' },
+      }}
+    />
+    <Typography
+      {...props}
+      sx={{
+        minWidth: { xs: '170px' },
+        mr: 4,
+        mb: { xs: 0, md: '2px' },
+        ml: '16.2px',
+        fontWeight: 600,
+        fontSize: '20px',
+        lineHeight: '1em',
+        letterSpacing: '-0.02em',
 
-          color: '#061512',
-          ...props.sx 
-        }}
-      />
+        color: '#061512',
+        ...props.sx,
+      }}
+    />
   </Box>
 );
 
@@ -80,7 +80,9 @@ export const PanelItem: React.FC<PanelItemProps> = ({ title, children, className
       }}
       className={className}
     >
-      <Typography color="text.secondary" component="span" 
+      <Typography
+        color="text.secondary"
+        component="span"
         sx={{
           fontSize: '10px',
           letterSpacing: '0.08em',
@@ -89,7 +91,8 @@ export const PanelItem: React.FC<PanelItemProps> = ({ title, children, className
           color: 'rgba(130, 130, 130, 1)',
           // md: '50px',
           // backgroundColor: 'red',
-        }}>
+        }}
+      >
         {title}
       </Typography>
       <Box

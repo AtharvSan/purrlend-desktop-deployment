@@ -44,23 +44,25 @@ export const InfoWrapper = ({
           </Typography>
         </Box>
 
-        <Box sx={{
-        width: '56px',
-        height: '56px',
-        borderRadius: '8px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#FD94441A',
-        borderColor: '#FD944440',
-        }}>
+        <Box
+          sx={{
+            width: '56px',
+            height: '56px',
+            borderRadius: '8px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: '#FD94441A',
+            borderColor: '#FD944440',
+          }}
+        >
           {topValue}
         </Box>
       </Box>
 
       <Box>{children}</Box>
 
-      <Warning severity='info'>
+      <Warning severity="info">
         <Typography variant="secondary12" color="#2F75F8" textAlign="left">
           {bottomText}
         </Typography>

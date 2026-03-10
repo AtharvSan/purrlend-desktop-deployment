@@ -104,85 +104,112 @@ export default function MarketAssetsList({ reserves, loading }: MarketAssetsList
   return (
     <>
       {!isTableChangedToCards && (
-        <Box sx={{
-        display: 'flex',
-        pl: '18px',
-        pt: '10px',
-        pb: '16px',
-        }}>
-          <Box sx={{
-            width: '255px'
-          }}>
+        <Box
+          sx={{
+            display: 'flex',
+            pl: '18px',
+            pt: '10px',
+            pb: '16px',
+          }}
+        >
+          <Box
+            sx={{
+              width: '255px',
+            }}
+          >
             <ListHeaderTitle
-            sortName={sortName}
-            sortDesc={sortDesc}
-            setSortName={setSortName}
-            setSortDesc={setSortDesc}
-            sortKey='symbol'
-            ><Trans> Asset </Trans></ListHeaderTitle>
-          </Box>
-          <Box sx={{
-            width: '190px'
-          }}>
-            <ListHeaderTitle
-            sortName={sortName}
-            sortDesc={sortDesc}
-            setSortName={setSortName}
-            setSortDesc={setSortDesc}
-            sortKey='totalLiquidityUSD'
-            ><Trans> total supplied </Trans></ListHeaderTitle>
-          </Box>
-          <Box sx={{
-            width: '150px'
-          }}>
-            <ListHeaderTitle
-            sortName={sortName}
-            sortDesc={sortDesc}
-            setSortName={setSortName}
-            setSortDesc={setSortDesc}
-            sortKey='supplyAPY'
-            ><Trans> supply apy </Trans></ListHeaderTitle>
-          </Box>
-          <Box sx={{
-            width: '170px'
-          }}>
-            <ListHeaderTitle
-            sortName={sortName}
-            sortDesc={sortDesc}
-            setSortName={setSortName}
-            setSortDesc={setSortDesc}
-            sortKey='totalDebtUSD'
-            ><Trans> Total borrowed </Trans></ListHeaderTitle>
+              sortName={sortName}
+              sortDesc={sortDesc}
+              setSortName={setSortName}
+              setSortDesc={setSortDesc}
+              sortKey="symbol"
+            >
+              <Trans> Asset </Trans>
+            </ListHeaderTitle>
           </Box>
           <Box
-          sx={{
-            width: '150px'
-          }}>
+            sx={{
+              width: '190px',
+            }}
+          >
             <ListHeaderTitle
-            sortName={sortName}
-            sortDesc={sortDesc}
-            setSortName={setSortName}
-            setSortDesc={setSortDesc}
-            sortKey='variableBorrowAPY'
-            ><Trans> Borrow APY </Trans></ListHeaderTitle>
+              sortName={sortName}
+              sortDesc={sortDesc}
+              setSortName={setSortName}
+              setSortDesc={setSortDesc}
+              sortKey="totalLiquidityUSD"
+            >
+              <Trans> total supplied </Trans>
+            </ListHeaderTitle>
           </Box>
-          <Box sx={{
-            width: '165px'
-          }}>
+          <Box
+            sx={{
+              width: '150px',
+            }}
+          >
             <ListHeaderTitle
-            ><Trans> oracle </Trans></ListHeaderTitle>
+              sortName={sortName}
+              sortDesc={sortDesc}
+              setSortName={setSortName}
+              setSortDesc={setSortDesc}
+              sortKey="supplyAPY"
+            >
+              <Trans> supply apy </Trans>
+            </ListHeaderTitle>
+          </Box>
+          <Box
+            sx={{
+              width: '170px',
+            }}
+          >
+            <ListHeaderTitle
+              sortName={sortName}
+              sortDesc={sortDesc}
+              setSortName={setSortName}
+              setSortDesc={setSortDesc}
+              sortKey="totalDebtUSD"
+            >
+              <Trans> Total borrowed </Trans>
+            </ListHeaderTitle>
+          </Box>
+          <Box
+            sx={{
+              width: '150px',
+            }}
+          >
+            <ListHeaderTitle
+              sortName={sortName}
+              sortDesc={sortDesc}
+              setSortName={setSortName}
+              setSortDesc={setSortDesc}
+              sortKey="variableBorrowAPY"
+            >
+              <Trans> Borrow APY </Trans>
+            </ListHeaderTitle>
+          </Box>
+          <Box
+            sx={{
+              width: '165px',
+            }}
+          >
+            <ListHeaderTitle>
+              <Trans> oracle </Trans>
+            </ListHeaderTitle>
           </Box>
           <Box>
-            <ListHeaderTitle
-            ><Trans> action </Trans></ListHeaderTitle>
+            <ListHeaderTitle>
+              <Trans> action </Trans>
+            </ListHeaderTitle>
           </Box>
         </Box>
       )}
-      <Box sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '8px',
-        }}>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '8px',
+        }}
+      >
         {reserves.map((reserve) =>
           isTableChangedToCards ? (
             <MarketAssetsListMobileItem {...reserve} key={reserve.id} />

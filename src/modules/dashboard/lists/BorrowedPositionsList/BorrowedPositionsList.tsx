@@ -3,9 +3,11 @@ import { valueToBigNumber } from '@aave/math-utils';
 import { Trans } from '@lingui/macro';
 import { Box, Divider, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { Fragment, useState } from 'react';
+import BorrowIndicator from 'src/components/caps/BorrowIndicator';
 import { ListColumn } from 'src/components/lists/ListColumn';
 import { ListHeaderTitle } from 'src/components/lists/ListHeaderTitle';
 import { ListHeaderWrapper } from 'src/components/lists/ListHeaderWrapper';
+import { FormattedNumber } from 'src/components/primitives/FormattedNumber';
 import { AssetCapsProvider } from 'src/hooks/useAssetCaps';
 import { useProtocolDataContext } from 'src/hooks/useProtocolDataContext';
 import { fetchIconSymbolAndName } from 'src/ui-config/reservePatches';
@@ -30,8 +32,6 @@ import { ListLoader } from '../ListLoader';
 import { ListTopInfoItem } from '../ListTopInfoItem';
 import { BorrowedPositionsListItem } from './BorrowedPositionsListItem';
 import { BorrowedPositionsListMobileItem } from './BorrowedPositionsListMobileItem';
-import BorrowIndicator from 'src/components/caps/BorrowIndicator';
-import { FormattedNumber } from 'src/components/primitives/FormattedNumber';
 
 const head = [
   {
@@ -115,48 +115,56 @@ export const BorrowedPositionsList = () => {
   const RenderHeader: React.FC = () => {
     return (
       <>
-      <Box sx={{
-      display: 'flex',
-      justifyContent: 'space-between',
-      pl: '18px',
-      pr: '120px',
-      pt: '12px',
-      pb: '10px',
-      }}>
-        <Box>
-          <ListHeaderTitle
-          sortName={sortName}
-          sortDesc={sortDesc}
-          setSortName={setSortName}
-          setSortDesc={setSortDesc}
-          sortKey='symbol'
-          ><Trans> Assets </Trans></ListHeaderTitle>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            pl: '18px',
+            pr: '120px',
+            pt: '12px',
+            pb: '10px',
+          }}
+        >
+          <Box>
+            <ListHeaderTitle
+              sortName={sortName}
+              sortDesc={sortDesc}
+              setSortName={setSortName}
+              setSortDesc={setSortDesc}
+              sortKey="symbol"
+            >
+              <Trans> Assets </Trans>
+            </ListHeaderTitle>
+          </Box>
+          <Box>
+            <ListHeaderTitle
+              sortName={sortName}
+              sortDesc={sortDesc}
+              setSortName={setSortName}
+              setSortDesc={setSortDesc}
+              sortKey="variableBorrows"
+            >
+              <Trans key="Debt">Debt</Trans>
+            </ListHeaderTitle>
+          </Box>
+          <Box>
+            <ListHeaderTitle
+              sortName={sortName}
+              sortDesc={sortDesc}
+              setSortName={setSortName}
+              setSortDesc={setSortDesc}
+              sortKey="borrowAPY"
+            >
+              <Trans key="APY">APY</Trans>
+            </ListHeaderTitle>
+          </Box>
+          <Box>
+            <ListHeaderTitle>
+              <Trans>action</Trans>
+            </ListHeaderTitle>
+          </Box>
         </Box>
-        <Box>
-          <ListHeaderTitle
-          sortName={sortName}
-          sortDesc={sortDesc}
-          setSortName={setSortName}
-          setSortDesc={setSortDesc}
-          sortKey='variableBorrows'
-          ><Trans key="Debt">Debt</Trans></ListHeaderTitle>
-        </Box>
-        <Box>
-          <ListHeaderTitle
-          sortName={sortName}
-          sortDesc={sortDesc}
-          setSortName={setSortName}
-          setSortDesc={setSortDesc}
-          sortKey='borrowAPY'
-          ><Trans key="APY">APY</Trans></ListHeaderTitle>
-        </Box>
-        <Box>
-          <ListHeaderTitle
-          ><Trans>action</Trans></ListHeaderTitle>
-        </Box>
-
-      </Box>
-      <Divider sx={{borderColor: '#E8E8E8', mx: '18px', mb: '12px'}}/>
+        <Divider sx={{ borderColor: '#E8E8E8', mx: '18px', mb: '12px' }} />
       </>
     );
   };
@@ -167,13 +175,15 @@ export const BorrowedPositionsList = () => {
   return (
     <ListWrapper
       titleComponent={
-        <Typography sx={{
-          fontWeight: 600,
-          fontSize: '20px',
-          lineHeight: '1em',
-          letterSpacing: '-0.02em',
-          color: '#061512',
-          }}>
+        <Typography
+          sx={{
+            fontWeight: 600,
+            fontSize: '20px',
+            lineHeight: '1em',
+            letterSpacing: '-0.02em',
+            color: '#061512',
+          }}
+        >
           <Trans>Your borrows</Trans>
         </Typography>
       }
@@ -189,26 +199,30 @@ export const BorrowedPositionsList = () => {
           {!!sortedReserves.length && (
             <>
               <ListTopInfoItem title={<Trans>Balance</Trans>} value={user?.totalBorrowsUSD || 0} />
-              <Box sx={{
-                width: '3px',
-                height: '40px',
-                position: 'relative',
-                top: '-1px',
-                backgroundColor: '#DCDCDC',
-              }}></Box>
+              <Box
+                sx={{
+                  width: '3px',
+                  height: '40px',
+                  position: 'relative',
+                  top: '-1px',
+                  backgroundColor: '#DCDCDC',
+                }}
+              />
               <ListTopInfoItem
                 title={<Trans>APY</Trans>}
                 value={user?.debtAPY || 0}
                 percent
                 tooltip={<TotalBorrowAPYTooltip />}
               />
-              <Box sx={{
-                width: '3px',
-                height: '40px',
-                position: 'relative',
-                top: '-1px',
-                backgroundColor: '#DCDCDC',
-              }}></Box>
+              <Box
+                sx={{
+                  width: '3px',
+                  height: '40px',
+                  position: 'relative',
+                  top: '-1px',
+                  backgroundColor: '#DCDCDC',
+                }}
+              />
               <ListTopInfoItem
                 title={<Trans>Borrow power used</Trans>}
                 value={collateralUsagePercent || 0}
@@ -216,7 +230,6 @@ export const BorrowedPositionsList = () => {
                 tooltip={<BorrowPowerTooltip />}
                 power={true}
               />
-              
             </>
           )}
         </>
@@ -225,15 +238,15 @@ export const BorrowedPositionsList = () => {
       {sortedReserves.length ? (
         <>
           {!downToXSM && <RenderHeader />}
-          {sortedReserves.map((item,index) => (
+          {sortedReserves.map((item, index) => (
             <Fragment key={item.underlyingAsset + item.borrowRateMode}>
               <AssetCapsProvider asset={item.reserve}>
                 {downToXSM ? (
                   <>
-                  <BorrowedPositionsListMobileItem {...item} />
-                  {index !== sortedReserves.length - 1 && ( // show divider only if not last item
-                    <Divider sx={{ mb: 1, borderColor: '#E8E8E8' }} />
-                  )}
+                    <BorrowedPositionsListMobileItem {...item} />
+                    {index !== sortedReserves.length - 1 && ( // show divider only if not last item
+                      <Divider sx={{ mb: 1, borderColor: '#E8E8E8' }} />
+                    )}
                   </>
                 ) : (
                   <BorrowedPositionsListItem

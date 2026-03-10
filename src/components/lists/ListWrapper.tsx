@@ -64,15 +64,16 @@ export const ListWrapper = ({
             py: '3.6px',
           }}
         >
-          <Box sx={{
-            width: '2px',
-            height: '23px',
-            position: 'relative',
-            left: '-14px',
-            backgroundColor: '#FC9538',
-            boxShadow: '2px 0px 12px 0px #FFFFFF80',
-            }}>
-          </Box>
+          <Box
+            sx={{
+              width: '2px',
+              height: '23px',
+              position: 'relative',
+              left: '-14px',
+              backgroundColor: '#FC9538',
+              boxShadow: '2px 0px 12px 0px #FFFFFF80',
+            }}
+          />
           {titleComponent}
           {isDesktop && subTitleComponent}
         </Box>
@@ -117,13 +118,17 @@ export const ListWrapper = ({
                 : undefined
             }
           >
-            <Typography sx={{
-              fontWeight: 500,
-              fontSize: '14px',
-              lineHeight: '1em',
-              letterSpacing: '-0.02em',
-              color: '#061512',
-              }}>{collapsed ? <Trans>Show</Trans> : <Trans>Hide</Trans>}</Typography>
+            <Typography
+              sx={{
+                fontWeight: 500,
+                fontSize: '14px',
+                lineHeight: '1em',
+                letterSpacing: '-0.02em',
+                color: '#061512',
+              }}
+            >
+              {collapsed ? <Trans>Show</Trans> : <Trans>Hide</Trans>}
+            </Typography>
             <Box
               sx={{
                 ml: 1,
@@ -131,18 +136,17 @@ export const ListWrapper = ({
                 height: 20,
                 border: '1px solid',
                 borderColor: 'rgba(220, 220, 220, 1)',
-                borderRadius: '32px',      // 👈 makes it a circle (or use 4px for square)
+                borderRadius: '32px', // 👈 makes it a circle (or use 4px for square)
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 boxShadow: '0px 2px 6px rgba(0, 0, 0, 0.1)',
               }}
             >
-              <span/>
+              <span />
             </Box>
           </Box>
         )}
-        
       </Box>
       {!isDesktop && subTitleComponent}
       {topInfo && (
@@ -155,7 +159,7 @@ export const ListWrapper = ({
             borderRadius: '8px',
             height: '63px',
             margin: 'auto',
-            mt: {xs: '18px', md: '25px'},
+            mt: { xs: '18px', md: '25px' },
             mb: '18px',
             mx: '16px',
             pt: '8px',
@@ -169,11 +173,15 @@ export const ListWrapper = ({
         </Box>
       )}
       {subChildrenComponent && !collapsed && (
-        <Box sx={{ 
-          marginBottom: { xs: 2, xsm: 0 },
-          width: '97%',
-          mx: 'auto',
-        }}>{subChildrenComponent}</Box>
+        <Box
+          sx={{
+            marginBottom: { xs: 2, xsm: 0 },
+            width: '97%',
+            mx: 'auto',
+          }}
+        >
+          {subChildrenComponent}
+        </Box>
       )}
       {/* <Box sx={{ display: collapsed ? 'none' : 'block' }}>
         <Collapse
@@ -185,14 +193,14 @@ export const ListWrapper = ({
         </Collapse>
       </Box> */}
 
-        <Collapse
-          in={!collapsed}
-          timeout={370}
-          easing={{ enter: 'ease-out', exit: 'ease-in' }}
-          unmountOnExit
-        >
-          {children}
-        </Collapse>
+      <Collapse
+        in={!collapsed}
+        timeout={370}
+        easing={{ enter: 'ease-out', exit: 'ease-in' }}
+        unmountOnExit
+      >
+        {children}
+      </Collapse>
     </Paper>
   );
 };

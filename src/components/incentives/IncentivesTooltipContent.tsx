@@ -22,7 +22,11 @@ export const IncentivesTooltipContent = ({
   // FIX: renamed from `Number` → `IncentiveAPRDisplay`.
   // `Number` shadows the global Number constructor, breaking FormattedNumber
   // and any other code that calls Number() inside this render tree.
-  const IncentiveAPRDisplay = ({ incentiveAPR }: { incentiveAPR: 'Infinity' | number | string }) => {
+  const IncentiveAPRDisplay = ({
+    incentiveAPR,
+  }: {
+    incentiveAPR: 'Infinity' | number | string;
+  }) => {
     return (
       <Box sx={{ display: 'inline-flex', alignItems: 'center' }}>
         {incentiveAPR !== 'Infinity' ? (

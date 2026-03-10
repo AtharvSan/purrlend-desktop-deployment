@@ -26,7 +26,7 @@ export const ListValueRow = ({
           <FormattedNumber
             value={value}
             variant="secondary14"
-            symbolsColor='#828282'
+            symbolsColor="#828282"
             fontWeight={400}
             fontSize={'16px'}
             lineHeight={'1em'}
@@ -42,13 +42,13 @@ export const ListValueRow = ({
             value={subValue}
             variant="secondary12"
             color="#828282"
-            symbolsColor='#828282'
+            symbolsColor="#828282"
             symbol="USD"
             mb={0.5}
             visibleDecimals={2}
             fontWeight={400}
             fontSize={'14px'}
-            size='14px'
+            size="14px"
             lineHeight={'1em'}
             letterSpacing={'-0.02em'}
           />

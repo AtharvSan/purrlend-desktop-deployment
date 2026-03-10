@@ -47,17 +47,25 @@ export const ListHeaderTitle = ({
       {children}
 
       {!!sortKey && (
-        <Box sx={{ display: 'flex', flexDirection: 'column',justifyContent: 'center',gap: '2px', ml: 1 }}>
-            {(sortName === sortKey && !sortDesc) ? (
-              <img src={uiConfig.upOrange} />
-            ):(
-              <img src={uiConfig.upDark} />
-            )}
-            {(sortName === sortKey && sortDesc) ? (
-              <img src={uiConfig.downOrange} />
-            ):(
-              <img src={uiConfig.downDark} />
-            )}
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            gap: '2px',
+            ml: 1,
+          }}
+        >
+          {sortName === sortKey && !sortDesc ? (
+            <img src={uiConfig.upOrange} />
+          ) : (
+            <img src={uiConfig.upDark} />
+          )}
+          {sortName === sortKey && sortDesc ? (
+            <img src={uiConfig.downOrange} />
+          ) : (
+            <img src={uiConfig.downDark} />
+          )}
         </Box>
       )}
     </Typography>

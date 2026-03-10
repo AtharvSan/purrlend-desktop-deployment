@@ -62,7 +62,12 @@ export function buildMerklMarketMap(
   const map: Record<string, MerklMarketEntry> = {};
 
   for (const opp of opps) {
-    const poolAddress = (opp._poolAddress || opp.identifier || opp.explorerAddress || '').toLowerCase();
+    const poolAddress = (
+      opp._poolAddress ||
+      opp.identifier ||
+      opp.explorerAddress ||
+      ''
+    ).toLowerCase();
     if (!poolAddress) continue;
 
     const underlyingAsset = poolToUnderlying[poolAddress];
@@ -89,16 +94,31 @@ export function buildMerklMarketMap(
       hasMerkl,
     };
 
-    console.log('MERKL MAP OK', opp.name, '| underlying:', underlyingAsset.slice(0, 10), '| apr:', apr.toFixed(2), '| tvl:', tvlUsd.toFixed(2));
+    console.log(
+      'MERKL MAP OK',
+      opp.name,
+      '| underlying:',
+      underlyingAsset.slice(0, 10),
+      '| apr:',
+      apr.toFixed(2),
+      '| tvl:',
+      tvlUsd.toFixed(2)
+    );
   }
 
   return map;
 }
 
-export function getMerklAprForAsset(map: Record<string, MerklMarketEntry>, underlyingAsset: string): number {
+export function getMerklAprForAsset(
+  map: Record<string, MerklMarketEntry>,
+  underlyingAsset: string
+): number {
   return map[underlyingAsset.toLowerCase()]?.apr ?? 0;
 }
 
-export function hasMerklCampaign(map: Record<string, MerklMarketEntry>, underlyingAsset: string): boolean {
+export function hasMerklCampaign(
+  map: Record<string, MerklMarketEntry>,
+  underlyingAsset: string
+): boolean {
   return map[underlyingAsset.toLowerCase()]?.hasMerkl ?? false;
 }

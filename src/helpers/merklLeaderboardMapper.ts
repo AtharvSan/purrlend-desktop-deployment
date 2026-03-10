@@ -1,9 +1,5 @@
 export function mapMerklLeaderboard(raw: any): any[] {
-  const list =
-    raw?.users ||
-    raw?.leaderboard ||
-    raw?.data ||
-    [];
+  const list = raw?.users || raw?.leaderboard || raw?.data || [];
 
   return list
     .map((u: any) => ({

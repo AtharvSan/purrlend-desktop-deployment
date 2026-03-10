@@ -48,13 +48,15 @@ export const SuppliedPositionsListMobileItem = ({
     >
       <ListValueRow
         title={
-          <Typography sx={{
-            fontWeight: 400,
-            fontSize: '16px',
-            lineHeight: '1em',
-            letterSpacing: '-0.02em',
-            color: '#828282',
-          }}>
+          <Typography
+            sx={{
+              fontWeight: 400,
+              fontSize: '16px',
+              lineHeight: '1em',
+              letterSpacing: '-0.02em',
+              color: '#828282',
+            }}
+          >
             <Trans>balance</Trans>
           </Typography>
         }
@@ -65,13 +67,15 @@ export const SuppliedPositionsListMobileItem = ({
 
       <Row
         caption={
-          <Typography sx={{
-            fontWeight: 400,
-            fontSize: '16px',
-            lineHeight: '1em',
-            letterSpacing: '-0.02em',
-            color: '#828282',
-          }}>
+          <Typography
+            sx={{
+              fontWeight: 400,
+              fontSize: '16px',
+              lineHeight: '1em',
+              letterSpacing: '-0.02em',
+              color: '#828282',
+            }}
+          >
             <Trans>APY</Trans>
           </Typography>
         }
@@ -89,13 +93,15 @@ export const SuppliedPositionsListMobileItem = ({
 
       <Row
         caption={
-          <Typography sx={{
-            fontWeight: 400,
-            fontSize: '16px',
-            lineHeight: '1em',
-            letterSpacing: '-0.02em',
-            color: '#828282',
-          }}>
+          <Typography
+            sx={{
+              fontWeight: 400,
+              fontSize: '16px',
+              lineHeight: '1em',
+              letterSpacing: '-0.02em',
+              color: '#828282',
+            }}
+          >
             <Trans>Used as collateral</Trans>
           </Typography>
         }
@@ -111,7 +117,15 @@ export const SuppliedPositionsListMobileItem = ({
         />
       </Row>
 
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '2%', mt: 5 }}>
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: '2%',
+          mt: 5,
+        }}
+      >
         <Button
           disabled={!isActive || isFrozen}
           variant="outlined"
@@ -125,12 +139,14 @@ export const SuppliedPositionsListMobileItem = ({
             height: '38px',
           }}
         >
-          <Typography sx={{
-            fontWeight: 500,
-            fontSize: '14px',
-            lineHeight: '1em',
-            letterSpacing: '-0.02em',
-          }}>
+          <Typography
+            sx={{
+              fontWeight: 500,
+              fontSize: '14px',
+              lineHeight: '1em',
+              letterSpacing: '-0.02em',
+            }}
+          >
             <Trans>Supply</Trans>
           </Typography>
         </Button>
@@ -139,7 +155,7 @@ export const SuppliedPositionsListMobileItem = ({
           variant="contained"
           onClick={() => openWithdraw(underlyingAsset)}
           fullWidth
-          sx={{ 
+          sx={{
             border: '1px solid #DCDCDC',
             borderRadius: '70px',
             backgroundColor: '#FFFFFF',
@@ -147,12 +163,14 @@ export const SuppliedPositionsListMobileItem = ({
             height: '38px',
           }}
         >
-          <Typography sx={{
-            fontWeight: 500,
-            fontSize: '14px',
-            lineHeight: '1em',
-            letterSpacing: '-0.02em',
-          }}>
+          <Typography
+            sx={{
+              fontWeight: 500,
+              fontSize: '14px',
+              lineHeight: '1em',
+              letterSpacing: '-0.02em',
+            }}
+          >
             <Trans>Withdraw</Trans>
           </Typography>
         </Button>

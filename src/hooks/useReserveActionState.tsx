@@ -95,7 +95,7 @@ export const useReserveActionState = ({
           <Warning sx={{ mb: 0 }} severity="info" icon={false}>
             <Trans>
               Borrowing is unavailable because you’ve enabled Efficiency Mode (E-Mode) and Isolation
-              mode. 
+              mode.
             </Trans>
           </Warning>
         )}

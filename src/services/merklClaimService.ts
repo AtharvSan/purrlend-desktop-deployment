@@ -21,10 +21,7 @@ export type MerklClaimTx = {
   value: string;
 };
 
-export async function getMerklClaimTxs(
-  address: string,
-  chainId: number
-): Promise<MerklClaimTx[]> {
+export async function getMerklClaimTxs(address: string, chainId: number): Promise<MerklClaimTx[]> {
   try {
     const url = `${BASE}/users/${address}/claimData?chainId=${chainId}`;
 
@@ -55,10 +52,7 @@ export async function getMerklClaimTxs(
 }
 
 /** Check if a user has any unclaimed rewards (for showing the claim button) */
-export async function hasMerklPendingRewards(
-  address: string,
-  chainId: number
-): Promise<boolean> {
+export async function hasMerklPendingRewards(address: string, chainId: number): Promise<boolean> {
   const txs = await getMerklClaimTxs(address, chainId);
   return txs.length > 0;
 }

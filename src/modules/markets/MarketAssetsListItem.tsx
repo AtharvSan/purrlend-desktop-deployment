@@ -1,25 +1,21 @@
-import { useEffect, useState } from 'react';
 import { Trans } from '@lingui/macro';
 import { Box, Button, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
-
-import { getAllMerklOpportunities } from 'src/services/merklService';
-import { buildMerklMarketMap } from 'src/helpers/merklMarketMapper';
-import { MERKL_CONFIG } from 'src/config/merkl';
-import { APYBreakdownTooltip } from 'src/components/merkl/APYBreakdownTooltip';
-
-import { NoData } from 'src/components/primitives/NoData';
-import { ReserveSubheader } from 'src/components/ReserveSubheader';
-import { ListColumn } from 'src/components/lists/ListColumn';
-import { FormattedNumber } from 'src/components/primitives/FormattedNumber';
-import { TokenIcon } from 'src/components/primitives/TokenIcon';
-import { ROUTES } from 'src/components/primitives/Link';
+import { useEffect, useState } from 'react';
 import { IncentivesCard } from 'src/components/incentives/IncentivesCard';
-
+import { ListColumn } from 'src/components/lists/ListColumn';
+import { APYBreakdownTooltip } from 'src/components/merkl/APYBreakdownTooltip';
+import { FormattedNumber } from 'src/components/primitives/FormattedNumber';
+import { ROUTES } from 'src/components/primitives/Link';
+import { NoData } from 'src/components/primitives/NoData';
+import { TokenIcon } from 'src/components/primitives/TokenIcon';
+import { ReserveSubheader } from 'src/components/ReserveSubheader';
+import { MERKL_CONFIG } from 'src/config/merkl';
+import { buildMerklMarketMap } from 'src/helpers/merklMarketMapper';
 import { ComputedReserveData } from 'src/hooks/app-data-provider/useAppDataProvider';
-import { useProtocolDataContext } from 'src/hooks/useProtocolDataContext';
 import { useModalContext } from 'src/hooks/useModal';
-
+import { useProtocolDataContext } from 'src/hooks/useProtocolDataContext';
+import { getAllMerklOpportunities } from 'src/services/merklService';
 import { uiConfig } from 'src/uiConfig';
 
 export const MarketAssetsListItem = ({ ...reserve }: ComputedReserveData) => {
@@ -46,7 +42,7 @@ export const MarketAssetsListItem = ({ ...reserve }: ComputedReserveData) => {
   const hasMerkl = merkl?.hasMerkl === true;
   const dailyRewardsWhole = Number(merkl?.dailyRewardsWhole ?? 0);
   const pointsPerDollarPerDay = Number(merkl?.pointsPerDollarPerDay ?? 0);
-  const rewardTokenIcon = merkl?.rewardTokenIcon ?? "";
+  const rewardTokenIcon = merkl?.rewardTokenIcon ?? '';
 
   return (
     <Box
@@ -72,7 +68,9 @@ export const MarketAssetsListItem = ({ ...reserve }: ComputedReserveData) => {
           <TokenIcon symbol={reserve.iconSymbol} sx={{ height: 32, width: 32 }} />
           <Box sx={{ pl: '16px' }}>
             <Typography fontSize={16}>{reserve.name}</Typography>
-            <Typography fontSize={14} color="#828282">{reserve.symbol}</Typography>
+            <Typography fontSize={14} color="#828282">
+              {reserve.symbol}
+            </Typography>
           </Box>
         </ListColumn>
       </Box>
@@ -88,15 +86,15 @@ export const MarketAssetsListItem = ({ ...reserve }: ComputedReserveData) => {
       {/* Supply APY */}
       <Box sx={{ width: '165px' }}>
         <ListColumn>
-          {(hasMerkl && currentChainId==999) ? (
+          {hasMerkl && currentChainId == 999 ? (
             <APYBreakdownTooltip
-              fontsize='16px'
+              fontsize="16px"
               baseAPY={baseAPY}
               merklApr={merklApr}
               dailyRewardsWhole={dailyRewardsWhole}
               pointsPerDollarPerDay={pointsPerDollarPerDay}
               rewardTokenIcon={rewardTokenIcon}
-              rewardToken={merkl?.rewardToken ?? "Purr points"}
+              rewardToken={merkl?.rewardToken ?? 'Purr points'}
               hasMerkl={hasMerkl}
               symbol={reserve.symbol}
               tvlUsd={merkl?.tvlUsd ?? 0}
@@ -117,7 +115,7 @@ export const MarketAssetsListItem = ({ ...reserve }: ComputedReserveData) => {
         <ListColumn gapVal="5px">
           {reserve.borrowingEnabled || Number(reserve.totalDebt) > 0 ? (
             <>
-              <FormattedNumber compact value={reserve.totalDebt} fontSize={16}/>
+              <FormattedNumber compact value={reserve.totalDebt} fontSize={16} />
               <FormattedNumber compact symbol="USD" value={reserve.totalDebtUSD} color="#828282" />
             </>
           ) : (
@@ -134,9 +132,9 @@ export const MarketAssetsListItem = ({ ...reserve }: ComputedReserveData) => {
             incentives={reserve.vIncentivesData || []}
             symbol={reserve.symbol}
           />
-          {!reserve.borrowingEnabled && Number(reserve.totalVariableDebt) > 0 && !reserve.isFrozen && (
-            <ReserveSubheader value="Disabled" />
-          )}
+          {!reserve.borrowingEnabled &&
+            Number(reserve.totalVariableDebt) > 0 &&
+            !reserve.isFrozen && <ReserveSubheader value="Disabled" />}
         </ListColumn>
       </Box>
 
@@ -155,7 +153,10 @@ export const MarketAssetsListItem = ({ ...reserve }: ComputedReserveData) => {
         <ListColumn align="right">
           <Button
             variant="contained"
-            onClick={(e) => { e.stopPropagation(); openSupply(reserve.underlyingAsset); }}
+            onClick={(e) => {
+              e.stopPropagation();
+              openSupply(reserve.underlyingAsset);
+            }}
             sx={{
               backgroundColor: '#061512',
               color: '#FFFFFF',

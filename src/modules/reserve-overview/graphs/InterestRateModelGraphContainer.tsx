@@ -20,19 +20,21 @@ export const InterestRateModelGraphContainer = ({
 }: InteresetRateModelGraphContainerProps): JSX.Element => {
   const CHART_HEIGHT = 155;
   const fields: Fields = [
-    { name: 'variableBorrowRate', text: 'Borrow APR', color: '#18CC6F' },// #B6509E
+    { name: 'variableBorrowRate', text: 'Borrow APR', color: '#18CC6F' }, // #B6509E
     ...(reserve.stableBorrowRateEnabled
       ? ([{ name: 'stableBorrowRate', text: 'Borrow APR, stable', color: '#E7C6DF' }] as const)
       : []),
   ];
 
   return (
-    <Box sx={{
-      mt: '16px', 
-      ml: '25px',
-      mr: '25px',
-      mb: 10 
-      }}>
+    <Box
+      sx={{
+        mt: '16px',
+        ml: '25px',
+        mr: '25px',
+        mb: 10,
+      }}
+    >
       <ParentSize>
         {({ width }) => (
           <InterestRateModelGraph

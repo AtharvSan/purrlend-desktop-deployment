@@ -32,15 +32,17 @@ interface MobileMenuProps {
 }
 
 const MenuItemsWrapper = ({ children, title }: { children: ReactNode; title: ReactNode }) => (
-  <Box sx={{
-    px: 2, 
-    mb: 6, 
-    '&:last-of-type': { 
-      mb: 0, 
-      '.MuiDivider-root': { display: 'none' } 
-    } 
-  }}>
-      {children}
+  <Box
+    sx={{
+      px: 2,
+      mb: 6,
+      '&:last-of-type': {
+        mb: 0,
+        '.MuiDivider-root': { display: 'none' },
+      },
+    }}
+  >
+    {children}
   </Box>
 );
 
@@ -54,23 +56,25 @@ export const MobileMenu = ({ open, setOpen, headerHeight }: MobileMenuProps) => 
   return (
     <>
       {open ? (
-        <Box sx={{
-          display: 'flex',
-          gap: '10px',
-        }}>
+        <Box
+          sx={{
+            display: 'flex',
+            gap: '10px',
+          }}
+        >
           <WalletWidget
             open={walletWidgetOpen}
             setOpen={setWalletWidgetOpen}
             headerHeight={headerHeight}
           />
-          {!walletWidgetOpen &&(<MobileCloseButton setOpen={setOpen} />)}
+          {!walletWidgetOpen && <MobileCloseButton setOpen={setOpen} />}
         </Box>
       ) : (
         <Button
           id="settings-button-mobile"
           variant="surface"
-          sx={{ 
-            p: '7px 8px', 
+          sx={{
+            p: '7px 8px',
             minWidth: '44px',
             ml: '10px',
             // mr: '10px',

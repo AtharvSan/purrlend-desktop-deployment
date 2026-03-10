@@ -199,7 +199,7 @@ export const getDesignTokens = (mode: 'light' | 'dark') => {
       },
       purr: {
         main: getColor('#FF7E09', '#FF7A00'),
-      }
+      },
     },
     spacing: 4,
     typography: {
@@ -446,7 +446,7 @@ export function getThemedComponents(theme: Theme) {
             },
           },
           {
-            props: { variant: 'purrButton'},
+            props: { variant: 'purrButton' },
             style: {
               color: theme.palette.common.white,
               backgroundColor: '#FF7E09',
@@ -455,10 +455,10 @@ export function getThemedComponents(theme: Theme) {
                 boxShadow: '0px 4px 10px 0 rgba(255, 126, 9, 0.39)',
               },
               boxShadow: '0px 4px 10px 0 rgba(255, 126, 9, 0.39)',
-            }
+            },
           },
           {
-            props: { variant: 'purrButtonNav'},
+            props: { variant: 'purrButtonNav' },
             style: {
               color: theme.palette.common.white,
               backgroundColor: '#FF7E09',
@@ -472,7 +472,7 @@ export function getThemedComponents(theme: Theme) {
               padding: 16,
               // gap: 10,
               boxShadow: '0px 4px 10px 0 rgba(255, 126, 9, 0.39)',
-            }
+            },
           },
           {
             props: { variant: 'gradient' },
@@ -681,7 +681,7 @@ export function getThemedComponents(theme: Theme) {
               transform: 'translateX(12px)',
             },
             '&.Mui-disabled': {
-              opacity: theme => (theme.palette.mode === 'dark' ? 0.3 : 0.7),
+              opacity: (theme) => (theme.palette.mode === 'dark' ? 0.3 : 0.7),
             },
           },
           thumb: {
@@ -732,7 +732,7 @@ export function getThemedComponents(theme: Theme) {
               padding: 0,
               opacity: 1,
               '.MuiSvgIcon-root': {
-                color: '#ef5e5eff',//rgba(47, 117, 248, 1)
+                color: '#ef5e5eff', //rgba(47, 117, 248, 1)
                 fontSize: pxToRem(20),
               },
             },

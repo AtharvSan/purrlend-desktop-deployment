@@ -88,9 +88,13 @@ export type AssetBreakdown = {
 // ── Read: get points for one wallet ──────────────────────────────────────────
 export function getWalletPoints(wallet: string, season: number): WalletPoints | null {
   const db = getDb();
-  const row = db.prepare(`
+  const row = db
+    .prepare(
+      `
     SELECT * FROM wallet_points WHERE wallet = ? AND season = ?
-  `).get(wallet.toLowerCase(), season) as any;
+  `
+    )
+    .get(wallet.toLowerCase(), season) as any;
 
   if (!row) return null;
   return {
@@ -106,9 +110,13 @@ export function getWalletPoints(wallet: string, season: number): WalletPoints | 
 // ── Read: get asset breakdown for one wallet ──────────────────────────────────
 export function getWalletBreakdown(wallet: string, season: number): AssetBreakdown[] {
   const db = getDb();
-  const rows = db.prepare(`
+  const rows = db
+    .prepare(
+      `
     SELECT * FROM wallet_asset_breakdown WHERE wallet = ? AND season = ?
-  `).all(wallet.toLowerCase(), season) as any[];
+  `
+    )
+    .all(wallet.toLowerCase(), season) as any[];
 
   return rows.map((r) => ({
     asset: r.asset,
@@ -123,12 +131,16 @@ export function getWalletBreakdown(wallet: string, season: number): AssetBreakdo
 // ── Read: leaderboard ─────────────────────────────────────────────────────────
 export function getLeaderboard(season: number, limit = 100): WalletPoints[] {
   const db = getDb();
-  const rows = db.prepare(`
+  const rows = db
+    .prepare(
+      `
     SELECT * FROM wallet_points
     WHERE season = ?
     ORDER BY total_points DESC
     LIMIT ?
-  `).all(season, limit) as any[];
+  `
+    )
+    .all(season, limit) as any[];
 
   return rows.map((r) => ({
     wallet: r.wallet,
@@ -143,9 +155,13 @@ export function getLeaderboard(season: number, limit = 100): WalletPoints[] {
 // ── Read: last snapshot time ───────────────────────────────────────────────────
 export function getLastSnapshotTime(season: number): number {
   const db = getDb();
-  const row = db.prepare(`
+  const row = db
+    .prepare(
+      `
     SELECT ran_at FROM snapshot_log WHERE season = ? ORDER BY ran_at DESC LIMIT 1
-  `).get(season) as any;
+  `
+    )
+    .get(season) as any;
   return row?.ran_at ?? 0;
 }
 
@@ -164,7 +180,8 @@ export function upsertWalletPoints(
   // Use a transaction so all writes succeed or none do
   const upsert = db.transaction(() => {
     // Upsert total points — add to existing
-    db.prepare(`
+    db.prepare(
+      `
       INSERT INTO wallet_points (wallet, season, supply_points, borrow_points, total_points, last_updated)
       VALUES (?, ?, ?, ?, ?, ?)
       ON CONFLICT(wallet, season) DO UPDATE SET
@@ -172,11 +189,13 @@ export function upsertWalletPoints(
         borrow_points = borrow_points + excluded.borrow_points,
         total_points  = total_points  + excluded.supply_points + excluded.borrow_points,
         last_updated  = excluded.last_updated
-    `).run(w, season, addSupplyPoints, addBorrowPoints, addSupplyPoints + addBorrowPoints, now);
+    `
+    ).run(w, season, addSupplyPoints, addBorrowPoints, addSupplyPoints + addBorrowPoints, now);
 
     // Upsert per-asset breakdown
     for (const b of breakdown) {
-      db.prepare(`
+      db.prepare(
+        `
         INSERT INTO wallet_asset_breakdown
           (wallet, season, asset, symbol, supply_points, borrow_points, supply_usd, borrow_usd)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?)
@@ -185,7 +204,8 @@ export function upsertWalletPoints(
           borrow_points = borrow_points + excluded.borrow_points,
           supply_usd    = excluded.supply_usd,
           borrow_usd    = excluded.borrow_usd
-      `).run(w, season, b.asset, b.symbol, b.supplyPoints, b.borrowPoints, b.supplyUsd, b.borrowUsd);
+      `
+      ).run(w, season, b.asset, b.symbol, b.supplyPoints, b.borrowPoints, b.supplyUsd, b.borrowUsd);
     }
   });
 
@@ -200,8 +220,10 @@ export function logSnapshot(
   durationMs: number
 ): void {
   const db = getDb();
-  db.prepare(`
+  db.prepare(
+    `
     INSERT INTO snapshot_log (season, ran_at, wallets, points, duration_ms)
     VALUES (?, ?, ?, ?, ?)
-  `).run(season, Date.now(), wallets, points, durationMs);
+  `
+  ).run(season, Date.now(), wallets, points, durationMs);
 }

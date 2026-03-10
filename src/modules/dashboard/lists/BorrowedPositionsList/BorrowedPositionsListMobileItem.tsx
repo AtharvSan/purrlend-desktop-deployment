@@ -48,13 +48,15 @@ export const BorrowedPositionsListMobileItem = ({
     >
       <ListValueRow
         title={
-          <Typography sx={{
-            fontWeight: 400,
-            fontSize: '16px',
-            lineHeight: '1em',
-            letterSpacing: '-0.02em',
-            color: '#828282',
-          }}>
+          <Typography
+            sx={{
+              fontWeight: 400,
+              fontSize: '16px',
+              lineHeight: '1em',
+              letterSpacing: '-0.02em',
+              color: '#828282',
+            }}
+          >
             <Trans>Debt</Trans>
           </Typography>
         }
@@ -63,17 +65,24 @@ export const BorrowedPositionsListMobileItem = ({
         disabled={Number(totalBorrows) === 0}
       />
 
-      <Row caption={
-      <Typography sx={{
-        fontWeight: 400,
-        fontSize: '16px',
-        lineHeight: '1em',
-        letterSpacing: '-0.02em',
-        color: '#828282',
-      }}>
-        <Trans>APY</Trans>
-      </Typography>
-      } align="flex-start" captionVariant="description" mb={2}>
+      <Row
+        caption={
+          <Typography
+            sx={{
+              fontWeight: 400,
+              fontSize: '16px',
+              lineHeight: '1em',
+              letterSpacing: '-0.02em',
+              color: '#828282',
+            }}
+          >
+            <Trans>APY</Trans>
+          </Typography>
+        }
+        align="flex-start"
+        captionVariant="description"
+        mb={2}
+      >
         <IncentivesCard
           value={Number(
             borrowRateMode === InterestRate.Variable ? variableBorrowAPY : stableBorrowAPY
@@ -103,7 +112,15 @@ export const BorrowedPositionsListMobileItem = ({
         />
       </Row> */}
 
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '3%', mt: 5 }}>
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: '3%',
+          mt: 5,
+        }}
+      >
         <Button
           disabled={!isActive}
           variant="contained"
@@ -117,12 +134,14 @@ export const BorrowedPositionsListMobileItem = ({
             height: '38px',
           }}
         >
-          <Typography sx={{
-            fontWeight: 500,
-            fontSize: '14px',
-            lineHeight: '1em',
-            letterSpacing: '-0.02em',
-          }}>
+          <Typography
+            sx={{
+              fontWeight: 500,
+              fontSize: '14px',
+              lineHeight: '1em',
+              letterSpacing: '-0.02em',
+            }}
+          >
             <Trans>Repay</Trans>
           </Typography>
         </Button>
@@ -131,7 +150,7 @@ export const BorrowedPositionsListMobileItem = ({
           variant="outlined"
           onClick={() => openBorrow(underlyingAsset)}
           fullWidth
-          sx={{ 
+          sx={{
             border: '1px solid #DCDCDC',
             borderRadius: '70px',
             backgroundColor: '#FFFFFF',
@@ -139,12 +158,14 @@ export const BorrowedPositionsListMobileItem = ({
             height: '38px',
           }}
         >
-          <Typography sx={{
-            fontWeight: 500,
-            fontSize: '14px',
-            lineHeight: '1em',
-            letterSpacing: '-0.02em',
-          }}>
+          <Typography
+            sx={{
+              fontWeight: 500,
+              fontSize: '14px',
+              lineHeight: '1em',
+              letterSpacing: '-0.02em',
+            }}
+          >
             <Trans>Borrow</Trans>
           </Typography>
         </Button>

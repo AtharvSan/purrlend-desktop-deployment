@@ -123,18 +123,55 @@
 
 import { BookOpenIcon, CreditCardIcon, QuestionMarkCircleIcon } from '@heroicons/react/outline';
 import { t } from '@lingui/macro';
-import { ReactNode, useState, MouseEvent } from 'react';
+import {
+  Button,
+  Link,
+  ListItemIcon,
+  ListItemText,
+  Menu,
+  MenuItem,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
+import Box from '@mui/material/Box';
+// /**
+//  * Small wrapper component used only here to render responsive icon for the Info nav item.
+//  * Placing it in this file keeps the navigation array static while letting us use MUI hooks.
+//  */
+// function InfoNavTitle() {
+//   const theme = useTheme();
+//   const isMdUp = useMediaQuery(theme.breakpoints.up('md'));
+//   return (
+//     <Box
+//       sx={{
+//         display: 'flex',
+//         justifyContent: 'space-between',
+//         alignItems: 'center',
+//         gap: '4.5px',
+//       }}
+//     >
+//       {t`Info`}
+//       {/* prefer next/image for proper optimization, but a plain <img /> works too */}
+//       {isMdUp ? (
+//         <img src={uiConfig.docArrow} alt="docs arrow" width={14} height={14} />
+//       ) : (
+//         // use a mobile-specific icon from /public; create this file if it doesn't exist
+//         <img src={uiConfig.view} alt="mobile docs arrow" width={20} height={20} />
+//       )}
+//     </Box>
+//   );
+// }
+import NextLink from 'next/link';
+import { MouseEvent, ReactNode, useState } from 'react';
 import { ROUTES } from 'src/components/primitives/Link';
+import { uiConfig } from 'src/uiConfig';
 import { ENABLE_TESTNET } from 'src/utils/marketsAndNetworksConfig';
 
 import DiscordIcon from '/public/icons/discord.svg';
 import GithubIcon from '/public/icons/github.svg';
-// OracleArrow removed (unused)
 
+// OracleArrow removed (unused)
 import { MarketDataType } from '../marketsConfig';
-import { uiConfig } from 'src/uiConfig';
-import Box from '@mui/material/Box';
-import { useTheme, useMediaQuery, Button, Menu, MenuItem, ListItemIcon, ListItemText, Link } from '@mui/material';
 
 interface Navigation {
   link: string;
@@ -244,37 +281,6 @@ export const mobileNavigation: Navigation[] = [
   ...moreMenuItems,
   ...moreMenuMobileOnlyItems,
 ];
-
-// /**
-//  * Small wrapper component used only here to render responsive icon for the Info nav item.
-//  * Placing it in this file keeps the navigation array static while letting us use MUI hooks.
-//  */
-// function InfoNavTitle() {
-//   const theme = useTheme();
-//   const isMdUp = useMediaQuery(theme.breakpoints.up('md'));
-
-//   return (
-//     <Box
-//       sx={{
-//         display: 'flex',
-//         justifyContent: 'space-between',
-//         alignItems: 'center',
-//         gap: '4.5px',
-//       }}
-//     >
-//       {t`Info`}
-//       {/* prefer next/image for proper optimization, but a plain <img /> works too */}
-//       {isMdUp ? (
-//         <img src={uiConfig.docArrow} alt="docs arrow" width={14} height={14} />
-//       ) : (
-//         // use a mobile-specific icon from /public; create this file if it doesn't exist
-//         <img src={uiConfig.view} alt="mobile docs arrow" width={20} height={20} />
-//       )}
-//     </Box>
-//   );
-// }
-
-import NextLink from 'next/link';
 // import { Button, Menu, MenuItem, ListItemIcon, ListItemText, useTheme, useMediaQuery, Box } from '@mui/material';
 // ...other imports (uiConfig, moreMenuItems, t, etc.)
 

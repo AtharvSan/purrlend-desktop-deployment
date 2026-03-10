@@ -63,21 +63,20 @@ export const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(function Link
 
   const router = useRouter();
   // const pathname = typeof href === 'string' ? href : href.pathname;
-  
+
   // const isActive =
   // Array.isArray((props as any).activePaths)
   //   ? (props as any).activePaths.some((p: string) => pathname.startsWith(p))
   //   : pathname === href;
-  
+
   //   const className = clsx(classNameProps, {
   //   active: router?.pathname === pathname,
   // });
   const pathname = router.pathname;
 
-  const isActive =
-    Array.isArray((props as any).activePaths)
-      ? (props as any).activePaths.some((p: string) => pathname.startsWith(p))
-      : pathname === href;
+  const isActive = Array.isArray((props as any).activePaths)
+    ? (props as any).activePaths.some((p: string) => pathname.startsWith(p))
+    : pathname === href;
 
   const className = clsx(classNameProps, { active: isActive });
 

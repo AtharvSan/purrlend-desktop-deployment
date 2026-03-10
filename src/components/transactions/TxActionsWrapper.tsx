@@ -6,10 +6,10 @@ import { ReactNode } from 'react';
 import { TxStateType, useModalContext } from 'src/hooks/useModal';
 import { useWeb3Context } from 'src/libs/hooks/useWeb3Context';
 import { TxAction } from 'src/ui-config/errorMapping';
+import { uiConfig } from 'src/uiConfig';
 
 import { ApprovalTooltip } from '../infoTooltips/ApprovalTooltip';
 import { RightHelperText } from './FlowCommons/RightHelperText';
-import { uiConfig } from 'src/uiConfig';
 
 interface TxActionsWrapperProps extends BoxProps {
   actionInProgressText: ReactNode;
@@ -111,13 +111,17 @@ export const TxActionsWrapper = ({
 
     return {
       content: (
-        <Typography sx={{
-          fontWeight: 600,
-          fontSize: '16px',
-          lineHeight: '1em',
-          letterSpacing: '-0.02em',
-          color: '#FFFFFF',
-        }}><Trans>Approve {symbol} to continue</Trans></Typography>
+        <Typography
+          sx={{
+            fontWeight: 600,
+            fontSize: '16px',
+            lineHeight: '1em',
+            letterSpacing: '-0.02em',
+            color: '#FFFFFF',
+          }}
+        >
+          <Trans>Approve {symbol} to continue</Trans>
+        </Typography>
       ),
       handleClick: handleApproval,
     };
@@ -139,7 +143,7 @@ export const TxActionsWrapper = ({
           disabled={approvalParams.disabled || blocked}
           onClick={() => approvalParams.handleClick && approvalParams.handleClick()}
           size="large"
-          sx={{ 
+          sx={{
             minHeight: '44px',
             marginBottom: '8px',
             backgroundColor: 'rgba(255, 126, 9, 1)',
@@ -166,8 +170,8 @@ export const TxActionsWrapper = ({
         disabled={disabled || blocked || readOnlyModeAddress !== undefined}
         onClick={handleClick}
         size="large"
-        sx={{ 
-          minHeight: '44px', 
+        sx={{
+          minHeight: '44px',
           marginBottom: '8px',
           backgroundColor: 'rgba(255, 126, 9, 1)',
           border: '1px solid',
@@ -178,7 +182,7 @@ export const TxActionsWrapper = ({
             backgroundColor: '#FF7A00',
             boxShadow: '0px 4px 10px 0 rgba(255, 126, 9, 0.39)',
           },
-          ...(approvalParams ? { mt: 2 } : {}) 
+          ...(approvalParams ? { mt: 2 } : {}),
         }}
         data-cy="actionButton"
       >
@@ -189,7 +193,8 @@ export const TxActionsWrapper = ({
             justifyContent: 'center',
             alignItems: 'center',
             gap: '10px',
-          }}>
+          }}
+        >
           <img src={uiConfig.starWhite} alt="E-Mode" />
           {content}
         </Box>

@@ -1,9 +1,6 @@
-import { Tooltip, Box, Typography } from '@mui/material';
+import { Box, Tooltip, Typography } from '@mui/material';
 
-export const MerklAprTooltip = ({ baseApr, merklApr }: {
-  baseApr: number;
-  merklApr: number;
-}) => {
+export const MerklAprTooltip = ({ baseApr, merklApr }: { baseApr: number; merklApr: number }) => {
   const total = baseApr + merklApr;
 
   return (

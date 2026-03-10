@@ -1,5 +1,14 @@
 import { Trans } from '@lingui/macro';
-import { Box, Button, colors, InputBase, Link, Typography, useMediaQuery, useTheme } from '@mui/material';
+import {
+  Box,
+  Button,
+  colors,
+  InputBase,
+  Link,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import { UnsupportedChainIdError } from '@web3-react/core';
 import { NoEthereumProviderError } from '@web3-react/injected-connector';
 import { UserRejectedRequestError } from '@web3-react/walletconnect-connector';
@@ -96,12 +105,16 @@ const WalletRow = ({ walletName, walletType }: WalletRowProps) => {
       onClick={() => connectWallet(walletType)}
       startIcon={getWalletIcon(walletType)}
     >
-      <Typography sx={{
-      fontWeight: 500,
-      fontSize: '20px',
-      lineHeight: '1em',
-      letterSpacing: '-0.02em',
-      }}>{walletName}</Typography>
+      <Typography
+        sx={{
+          fontWeight: 500,
+          fontSize: '20px',
+          lineHeight: '1em',
+          letterSpacing: '-0.02em',
+        }}
+      >
+        {walletName}
+      </Typography>
     </Button>
   );
 };
@@ -175,14 +188,17 @@ export const WalletSelector = () => {
   };
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', 
-      // backgroundColor: 'red'
-    }}>
-      
-      <TxModalTitle title="Connect Wallet"/>
-      
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        // backgroundColor: 'red'
+      }}
+    >
+      <TxModalTitle title="Connect Wallet" />
+
       {error && <Warning severity="error">{handleBlocking()}</Warning>}
-      
+
       <WalletRow
         key="browser_wallet"
         walletName="Browser wallet"

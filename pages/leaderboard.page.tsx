@@ -1,11 +1,10 @@
-import { ReactElement } from 'react';
-import Head from 'next/head';
 import { Box, Typography } from '@mui/material';
-
-import { MainLayout } from 'src/layouts/MainLayout';
+import Head from 'next/head';
+import { ReactElement } from 'react';
 import { ContentContainer } from 'src/components/ContentContainer';
-import { MarketsTopPanel } from 'src/modules/markets/MarketsTopPanel';
 import { MerklLeaderboard } from 'src/components/merkl/MerklLeaderboard';
+import { MainLayout } from 'src/layouts/MainLayout';
+import { MarketsTopPanel } from 'src/modules/markets/MarketsTopPanel';
 
 export default function LeaderboardPage() {
   console.log('LeaderboardPage mounted');
@@ -22,7 +21,6 @@ export default function LeaderboardPage() {
       <ContentContainer>
         <Box sx={{ mt: 4, mb: 6 }}>
           {/* Page header */}
-          
 
           {/* Leaderboard table/card */}
           <MerklLeaderboard />

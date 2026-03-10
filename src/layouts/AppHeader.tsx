@@ -93,11 +93,11 @@ export function AppHeader() {
           position: 'sticky',
           top: 8,
           transition: theme.transitions.create('top'),
-          zIndex: (theme) => theme.zIndex.modal ,
+          zIndex: (theme) => theme.zIndex.modal,
           padding: {
             xs: '1px 0px 0px 0px',
             xsm: '8px 20px',
-            lg: '8px 0px 8px 0px'
+            lg: '8px 0px 8px 0px',
           },
           width: {
             xs: '95%',
@@ -111,64 +111,73 @@ export function AppHeader() {
           flexDirection: 'row',
           justifyContent: 'space-between',
           alignItems: 'center',
-          backgroundColor: {xs: 'white', md: 'unset'},
+          backgroundColor: { xs: 'white', md: 'unset' },
           borderRadius: '16px',
         })}
       >
-        <Box sx={{ 
-        height: '54px',
-        width: '54px',
-        backgroundColor: '#FFFFFF',
-        p: '12px',
-        borderTopLeftRadius: '16px',
-        borderBottomLeftRadius: mobileMenuOpen || walletWidgetOpen ? '0px' : '16px',
-        borderTopRightRadius: {xs: 'none', md: '16px'},
-        borderBottomRightRadius: {xs: 'none', md: '16px'},
-        boxShadow: mobileMenuOpen || walletWidgetOpen ? 'unset' : '0px 3px 5px 0px #0000000A',
-        // backgroundColor: 'red',
-        }}>
-          <Box
-          component={Link}
-          href="/"
-          aria-label="Go to homepage"
-          onClick={() => setMobileMenuOpen(false)}
+        <Box
           sx={{
-          '&:hover': { opacity: 0.7 },
-          }}>
+            height: '54px',
+            width: '54px',
+            backgroundColor: '#FFFFFF',
+            p: '12px',
+            borderTopLeftRadius: '16px',
+            borderBottomLeftRadius: mobileMenuOpen || walletWidgetOpen ? '0px' : '16px',
+            borderTopRightRadius: { xs: 'none', md: '16px' },
+            borderBottomRightRadius: { xs: 'none', md: '16px' },
+            boxShadow: mobileMenuOpen || walletWidgetOpen ? 'unset' : '0px 3px 5px 0px #0000000A',
+            // backgroundColor: 'red',
+          }}
+        >
+          <Box
+            component={Link}
+            href="/"
+            aria-label="Go to homepage"
+            onClick={() => setMobileMenuOpen(false)}
+            sx={{
+              '&:hover': { opacity: 0.7 },
+            }}
+          >
             <img src={uiConfig.appLogo} alt="An SVG of an eye" />
           </Box>
         </Box>
 
-        <Box sx={{ 
-          height: '54px',
-          width: '100%',
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          backgroundColor: '#FFFFFF',
-          borderTopRightRadius: '16px',
-          borderBottomRightRadius: mobileMenuOpen || walletWidgetOpen ? '0px': '16px',
-          borderTopLeftRadius: {xs: 'none', md: '16px'},
-          borderBottomLeftRadius: {xs: 'none', md: '16px'},
-          p: '8px 8px 8px 12px',
-          boxShadow: mobileMenuOpen || walletWidgetOpen ? 'unset' : '0px 3px 0px 0px #0000000A',
-        }}>
-          <Box sx={{
-            display: {xs: 'block',md: 'none'}
-          }}>
-
-          </Box>
-          <Box sx={{ 
-            display: { xs: 'none', md: 'block' },
-            ml: '24.5px',
-            }}>
+        <Box
+          sx={{
+            height: '54px',
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            backgroundColor: '#FFFFFF',
+            borderTopRightRadius: '16px',
+            borderBottomRightRadius: mobileMenuOpen || walletWidgetOpen ? '0px' : '16px',
+            borderTopLeftRadius: { xs: 'none', md: '16px' },
+            borderBottomLeftRadius: { xs: 'none', md: '16px' },
+            p: '8px 8px 8px 12px',
+            boxShadow: mobileMenuOpen || walletWidgetOpen ? 'unset' : '0px 3px 0px 0px #0000000A',
+          }}
+        >
+          <Box
+            sx={{
+              display: { xs: 'block', md: 'none' },
+            }}
+          />
+          <Box
+            sx={{
+              display: { xs: 'none', md: 'block' },
+              ml: '24.5px',
+            }}
+          >
             <NavItems />
           </Box>
 
-          <Box sx={{
-            display: 'flex',
-          }}>
+          <Box
+            sx={{
+              display: 'flex',
+            }}
+          >
             {!mobileMenuOpen && (
               <WalletWidget
                 open={walletWidgetOpen}
@@ -191,7 +200,6 @@ export function AppHeader() {
               </Box>
             )}
           </Box>
-
         </Box>
       </Box>
     </HideOnScroll>

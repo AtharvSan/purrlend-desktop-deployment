@@ -1,14 +1,19 @@
-import { useEffect, useState } from 'react';
-import { getAllMerklOpportunities } from 'src/services/merklService';
-import { buildMerklMarketMap } from 'src/helpers/merklMarketMapper';
-import { MERKL_CONFIG } from 'src/config/merkl';
-import { APYBreakdownTooltip } from 'src/components/merkl/APYBreakdownTooltip';
+import { ChainId } from '@aave/contract-helpers';
 import { Trans } from '@lingui/macro';
 import { Box, Button, Typography } from '@mui/material';
+import router from 'next/router';
+import { useEffect, useState } from 'react';
+import { APYBreakdownTooltip } from 'src/components/merkl/APYBreakdownTooltip';
+import { FormattedNumber } from 'src/components/primitives/FormattedNumber';
 import { NoData } from 'src/components/primitives/NoData';
+import { TokenIcon } from 'src/components/primitives/TokenIcon';
+import { MERKL_CONFIG } from 'src/config/merkl';
+import { buildMerklMarketMap } from 'src/helpers/merklMarketMapper';
 import { useAssetCaps } from 'src/hooks/useAssetCaps';
 import { useModalContext } from 'src/hooks/useModal';
 import { useProtocolDataContext } from 'src/hooks/useProtocolDataContext';
+import { getAllMerklOpportunities } from 'src/services/merklService';
+import { uiConfig } from 'src/uiConfig';
 import { DashboardReserve } from 'src/utils/dashboardSortUtils';
 
 import { CapsHint } from '../../../../components/caps/CapsHint';
@@ -20,11 +25,6 @@ import { ListButtonsColumn } from '../ListButtonsColumn';
 import { ListItemCanBeCollateral } from '../ListItemCanBeCollateral';
 import { ListItemWrapper } from '../ListItemWrapper';
 import { ListValueColumn } from '../ListValueColumn';
-import { uiConfig } from 'src/uiConfig';
-import { TokenIcon } from 'src/components/primitives/TokenIcon';
-import { FormattedNumber } from 'src/components/primitives/FormattedNumber';
-import router from 'next/router';
-import { ChainId } from '@aave/contract-helpers';
 
 export const SupplyAssetsListItem = ({
   symbol,
@@ -67,100 +67,109 @@ export const SupplyAssetsListItem = ({
   const baseAPY = Number(supplyAPY || 0);
   const dailyRewardsWhole = Number(merkl?.dailyRewardsWhole ?? 0);
   const pointsPerDollarPerDay = Number(merkl?.pointsPerDollarPerDay ?? 0);
-  const rewardTokenIcon = merkl?.rewardTokenIcon ?? "";
+  const rewardTokenIcon = merkl?.rewardTokenIcon ?? '';
 
   // Hide the asset to prevent it from being supplied if supply cap has been reached
   const { supplyCap: supplyCapUsage, debtCeiling } = useAssetCaps();
   if (supplyCapUsage.isMaxed) return null;
 
   return (
-    <Box sx={{
-    display: 'flex',
-    alignItems: 'center',
-    pl: '17px',
-    my: '15px',
-    }}>
-      <Box sx={{
+    <Box
+      sx={{
         display: 'flex',
         alignItems: 'center',
-        cursor: 'pointer',
+        pl: '17px',
+        my: '15px',
       }}
-      onClick={() => router.push(ROUTES.reserveOverview(detailsAddress, currentMarket))}
-      >
-        <TokenIcon symbol={iconSymbol} sx={{ height: '19px',width: '19px', mr: '6px'}} />
-        <Box sx={{
+    >
+      <Box
+        sx={{
           display: 'flex',
-          justifyContent: 'start',
-          width: '80px',
-          }}>
-            <Typography sx={{
-            fontWeight: 400,
-            fontSize: '14px',
-            lineHeight: '1em',
-            letterSpacing: '-0.02em',
-            }}>
-              {symbol}
-            </Typography>
+          alignItems: 'center',
+          cursor: 'pointer',
+        }}
+        onClick={() => router.push(ROUTES.reserveOverview(detailsAddress, currentMarket))}
+      >
+        <TokenIcon symbol={iconSymbol} sx={{ height: '19px', width: '19px', mr: '6px' }} />
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'start',
+            width: '80px',
+          }}
+        >
+          <Typography
+            sx={{
+              fontWeight: 400,
+              fontSize: '14px',
+              lineHeight: '1em',
+              letterSpacing: '-0.02em',
+            }}
+          >
+            {symbol}
+          </Typography>
         </Box>
       </Box>
-      <Box sx={{
-        display: 'flex',
-        justifyContent: 'start',
-        // width: '87px',
-        width: '80px',
-        // backgroundColor: 'red'
-        }}>
-          <ListValueColumn
-            symbol={symbol}
-            value={Number(walletBalance)}
-            subValue={walletBalanceUSD}
-            withTooltip
-            disabled={Number(walletBalance) === 0}
-            capsComponent={
-              <CapsHint
-                capType={CapType.supplyCap}
-                capAmount={supplyCap}
-                totalAmount={totalLiquidity}
-                withoutText
-              />
-            }
-          />
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'start',
+          // width: '87px',
+          width: '80px',
+          // backgroundColor: 'red'
+        }}
+      >
+        <ListValueColumn
+          symbol={symbol}
+          value={Number(walletBalance)}
+          subValue={walletBalanceUSD}
+          withTooltip
+          disabled={Number(walletBalance) === 0}
+          capsComponent={
+            <CapsHint
+              capType={CapType.supplyCap}
+              capAmount={supplyCap}
+              totalAmount={totalLiquidity}
+              withoutText
+            />
+          }
+        />
       </Box>
-      
-      <Box sx={{
-      display: 'flex',
-      justifyContent: 'start',
-      width: '98px',
-      pl: '7px',
-      }}>
-        {(hasMerkl && currentChainId==999)? (
+
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'start',
+          width: '98px',
+          pl: '7px',
+        }}
+      >
+        {hasMerkl && currentChainId == 999 ? (
           <APYBreakdownTooltip
             baseAPY={baseAPY}
             merklApr={merklApr}
             dailyRewardsWhole={dailyRewardsWhole}
             pointsPerDollarPerDay={pointsPerDollarPerDay}
             rewardTokenIcon={rewardTokenIcon}
-            rewardToken={merkl?.rewardToken ?? "Points"}
+            rewardToken={merkl?.rewardToken ?? 'Points'}
             hasMerkl={hasMerkl}
             symbol={symbol}
             tvlUsd={merkl?.tvlUsd ?? 0}
             totalLiquidityUsd={Number(totalLiquidity ?? 0)}
           />
         ) : (
-          <FormattedNumber
-            value={baseAPY}
-            percent
-            fontSize={'14px'}
-          />
+          <FormattedNumber value={baseAPY} percent fontSize={'14px'} />
         )}
       </Box>
 
-      <Box sx={{
-      display: 'flex',
-      justifyContent: 'start',
-      width: '113px',
-      }}>
-        <ListColumn basis={72} align="start" shrink={0} sx={{ml: '18px'}} >
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'start',
+          width: '113px',
+        }}
+      >
+        <ListColumn basis={72} align="start" shrink={0} sx={{ ml: '18px' }}>
           {debtCeiling.isMaxed ? (
             <NoData variant="main14" color="text.secondary" />
           ) : (
@@ -171,7 +180,7 @@ export const SupplyAssetsListItem = ({
           )}
         </ListColumn>
       </Box>
-      
+
       <ListButtonsColumn>
         <Button
           disabled={!isActive || isFreezed || Number(walletBalance) <= 0}
@@ -188,8 +197,11 @@ export const SupplyAssetsListItem = ({
             fontSize: '14px',
             lineHeight: '1em',
             letterSpacing: '-0.02em',
-            mr:'5px',
-          }}>Supply</Button>
+            mr: '5px',
+          }}
+        >
+          Supply
+        </Button>
         {/* <Button
           component={Link}
           href={ROUTES.reserveOverview(detailsAddress, currentMarket)}
@@ -212,17 +224,17 @@ export const SupplyAssetsListItem = ({
           component={Link}
           href={ROUTES.reserveOverview(detailsAddress, currentMarket)}
           sx={{
-          py: '7px',
-          px: '12px',
-          fontSize: '14px',
-          lineHeight: '1em',
-          letterSpacing: '-0.02em',
-          backgroundColor: 'rgba(255, 255, 255, 1)',
-          border: '1px solid',
-          borderColor: 'rgba(220, 220, 220, 1)',
-          color: 'rgba(6, 21, 18, 1)',
-          borderRadius: '70px',
-          minWidth: 'unset',
+            py: '7px',
+            px: '12px',
+            fontSize: '14px',
+            lineHeight: '1em',
+            letterSpacing: '-0.02em',
+            backgroundColor: 'rgba(255, 255, 255, 1)',
+            border: '1px solid',
+            borderColor: 'rgba(220, 220, 220, 1)',
+            color: 'rgba(6, 21, 18, 1)',
+            borderRadius: '70px',
+            minWidth: 'unset',
           }}
         >
           <Trans>Details</Trans>

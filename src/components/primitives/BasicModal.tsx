@@ -44,7 +44,7 @@ export const BasicModal = ({
           position: 'relative',
           margin: '10px',
           overflowY: 'auto',
-          width: {xs: '92%', md: '452px'},
+          width: { xs: '92%', md: '452px' },
           // maxWidth: { xs: '359px', xsm: `${contentMaxWidth}px` },
           maxHeight: 'calc(100vh - 20px)',
           // p: 6,

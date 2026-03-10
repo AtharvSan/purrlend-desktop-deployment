@@ -89,52 +89,61 @@ export const SuppliedPositionsList = () => {
   const RenderHeader: React.FC = () => {
     return (
       <>
-      <Box sx={{
-      display: 'flex',
-      justifyContent: 'space-between',
-      pl: '18px',
-      pr: '130px',
-      pt: '12px',
-      pb: '10px',
-      }}>
-        <Box >
-          <ListHeaderTitle
-          sortName={sortName}
-          sortDesc={sortDesc}
-          setSortName={setSortName}
-          setSortDesc={setSortDesc}
-          sortKey='symbol'
-          ><Trans key="assets"> Assets </Trans></ListHeaderTitle>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            pl: '18px',
+            pr: '130px',
+            pt: '12px',
+            pb: '10px',
+          }}
+        >
+          <Box>
+            <ListHeaderTitle
+              sortName={sortName}
+              sortDesc={sortDesc}
+              setSortName={setSortName}
+              setSortDesc={setSortDesc}
+              sortKey="symbol"
+            >
+              <Trans key="assets"> Assets </Trans>
+            </ListHeaderTitle>
+          </Box>
+          <Box>
+            <ListHeaderTitle
+              sortName={sortName}
+              sortDesc={sortDesc}
+              setSortName={setSortName}
+              setSortDesc={setSortDesc}
+              sortKey="underlyingBalance"
+            >
+              <Trans key="Balance">Balance</Trans>
+            </ListHeaderTitle>
+          </Box>
+          <Box>
+            <ListHeaderTitle
+              sortName={sortName}
+              sortDesc={sortDesc}
+              setSortName={setSortName}
+              setSortDesc={setSortDesc}
+              sortKey="supplyAPY"
+            >
+              <Trans key="APY">APY</Trans>
+            </ListHeaderTitle>
+          </Box>
+          <Box>
+            <ListHeaderTitle>
+              <Trans>Collateral</Trans>
+            </ListHeaderTitle>
+          </Box>
+          <Box>
+            <ListHeaderTitle>
+              <Trans> Action </Trans>
+            </ListHeaderTitle>
+          </Box>
         </Box>
-        <Box >
-          <ListHeaderTitle
-          sortName={sortName}
-          sortDesc={sortDesc}
-          setSortName={setSortName}
-          setSortDesc={setSortDesc}
-          sortKey='underlyingBalance'
-          ><Trans key="Balance">Balance</Trans></ListHeaderTitle>
-        </Box>
-        <Box >
-          <ListHeaderTitle
-          sortName={sortName}
-          sortDesc={sortDesc}
-          setSortName={setSortName}
-          setSortDesc={setSortDesc}
-          sortKey='supplyAPY'
-          ><Trans key="APY">APY</Trans></ListHeaderTitle>
-        </Box>
-        <Box >
-          <ListHeaderTitle
-          ><Trans>Collateral</Trans></ListHeaderTitle>
-        </Box>
-        <Box>
-          <ListHeaderTitle
-          ><Trans> Action </Trans></ListHeaderTitle>
-        </Box>
-
-      </Box>
-      <Divider sx={{borderColor: '#E8E8E8', mx: '18px', mb: '14px'}}/>
+        <Divider sx={{ borderColor: '#E8E8E8', mx: '18px', mb: '14px' }} />
       </>
       // <ListHeaderWrapper>
       //   {head.map((col) => (
@@ -165,13 +174,17 @@ export const SuppliedPositionsList = () => {
   return (
     <ListWrapper
       titleComponent={
-        <Typography sx={{
-          fontWeight: 600,
-          fontSize: '20px',
-          lineHeight: '1em',
-          letterSpacing: '-0.02em',
-          color: '#061512',
-          }}>Your supplies</Typography>
+        <Typography
+          sx={{
+            fontWeight: 600,
+            fontSize: '20px',
+            lineHeight: '1em',
+            letterSpacing: '-0.02em',
+            color: '#061512',
+          }}
+        >
+          Your supplies
+        </Typography>
       }
       localStorageName="suppliedAssetsDashboardTableCollapse"
       noData={!sortedReserves.length}
@@ -183,26 +196,30 @@ export const SuppliedPositionsList = () => {
                 title={<Trans>Balance</Trans>}
                 value={user?.totalLiquidityUSD || 0}
               />
-              <Box sx={{
-                width: '3px',
-                height: '40px',
-                position: 'relative',
-                top: '-1px',
-                backgroundColor: '#DCDCDC',
-              }}></Box>
+              <Box
+                sx={{
+                  width: '3px',
+                  height: '40px',
+                  position: 'relative',
+                  top: '-1px',
+                  backgroundColor: '#DCDCDC',
+                }}
+              />
               <ListTopInfoItem
                 title={<Trans>APY</Trans>}
                 value={user?.earnedAPY || 0}
                 percent
                 tooltip={<TotalSupplyAPYTooltip />}
               />
-              <Box sx={{
-                width: '3px',
-                height: '40px',
-                position: 'relative',
-                top: '-1px',
-                backgroundColor: '#DCDCDC',
-              }}></Box>
+              <Box
+                sx={{
+                  width: '3px',
+                  height: '40px',
+                  position: 'relative',
+                  top: '-1px',
+                  backgroundColor: '#DCDCDC',
+                }}
+              />
               <ListTopInfoItem
                 title={<Trans>Collateral</Trans>}
                 value={user?.totalCollateralUSD || 0}
@@ -216,15 +233,15 @@ export const SuppliedPositionsList = () => {
       {sortedReserves.length ? (
         <>
           {!downToXSM && <RenderHeader />}
-          {sortedReserves.map((item,index) => (
+          {sortedReserves.map((item, index) => (
             <Fragment key={item.underlyingAsset}>
               <AssetCapsProvider asset={item.reserve}>
                 {downToXSM ? (
                   <>
-                  <SuppliedPositionsListMobileItem {...item} />
-                  {index !== sortedReserves.length - 1 && ( // show divider only if not last item
-                    <Divider sx={{ mb: 1, borderColor: '#E8E8E8' }} />
-                  )}
+                    <SuppliedPositionsListMobileItem {...item} />
+                    {index !== sortedReserves.length - 1 && ( // show divider only if not last item
+                      <Divider sx={{ mb: 1, borderColor: '#E8E8E8' }} />
+                    )}
                   </>
                 ) : (
                   <SuppliedPositionsListItem {...item} />

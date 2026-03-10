@@ -5,8 +5,8 @@ export const MerklAprTooltip = ({ children }: { children: React.ReactNode }) => 
     <Tooltip
       title={
         <Typography fontSize="12px">
-          Extra APR from Merkl incentive campaign. Rewards are distributed
-          separately from base protocol yield.
+          Extra APR from Merkl incentive campaign. Rewards are distributed separately from base
+          protocol yield.
         </Typography>
       }
       arrow

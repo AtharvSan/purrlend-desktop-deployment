@@ -49,13 +49,15 @@ export const SupplyAssetsListMobileItem = ({
     >
       <ListValueRow
         title={
-          <Typography sx={{
-            fontWeight: 400,
-            fontSize: '16px',
-            lineHeight: '1em',
-            letterSpacing: '-0.02em',
-            color: '#828282',
-          }}>
+          <Typography
+            sx={{
+              fontWeight: 400,
+              fontSize: '16px',
+              lineHeight: '1em',
+              letterSpacing: '-0.02em',
+              color: '#828282',
+            }}
+          >
             <Trans>Supply balance</Trans>
           </Typography>
         }
@@ -74,13 +76,15 @@ export const SupplyAssetsListMobileItem = ({
 
       <Row
         caption={
-          <Typography sx={{
-            fontWeight: 400,
-            fontSize: '16px',
-            lineHeight: '1em',
-            letterSpacing: '-0.02em',
-            color: '#828282',
-          }}>
+          <Typography
+            sx={{
+              fontWeight: 400,
+              fontSize: '16px',
+              lineHeight: '1em',
+              letterSpacing: '-0.02em',
+              color: '#828282',
+            }}
+          >
             <Trans>Supply APY</Trans>
           </Typography>
         }
@@ -98,13 +102,15 @@ export const SupplyAssetsListMobileItem = ({
 
       <Row
         caption={
-          <Typography sx={{
-            fontWeight: 400,
-            fontSize: '16px',
-            lineHeight: '1em',
-            letterSpacing: '-0.02em',
-            color: '#828282',
-          }}>
+          <Typography
+            sx={{
+              fontWeight: 400,
+              fontSize: '16px',
+              lineHeight: '1em',
+              letterSpacing: '-0.02em',
+              color: '#828282',
+            }}
+          >
             <Trans>Can be collateral</Trans>
           </Typography>
         }
@@ -119,7 +125,15 @@ export const SupplyAssetsListMobileItem = ({
         />
       </Row>
 
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between',gap: '2%', mt: 5 }}>
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: '2%',
+          mt: 5,
+        }}
+      >
         <Button
           disabled={!isActive || isFreezed || Number(walletBalance) <= 0}
           variant="contained"
@@ -133,12 +147,14 @@ export const SupplyAssetsListMobileItem = ({
             height: '38px',
           }}
         >
-          <Typography sx={{
-            fontWeight: 500,
-            fontSize: '14px',
-            lineHeight: '1em',
-            letterSpacing: '-0.02em',
-          }}>
+          <Typography
+            sx={{
+              fontWeight: 500,
+              fontSize: '14px',
+              lineHeight: '1em',
+              letterSpacing: '-0.02em',
+            }}
+          >
             <Trans>Supply</Trans>
           </Typography>
         </Button>
@@ -147,7 +163,7 @@ export const SupplyAssetsListMobileItem = ({
           component={Link}
           href={ROUTES.reserveOverview(detailsAddress, currentMarket)}
           fullWidth
-          sx={{ 
+          sx={{
             border: '1px solid #DCDCDC',
             borderRadius: '70px',
             backgroundColor: '#FFFFFF',
@@ -155,12 +171,14 @@ export const SupplyAssetsListMobileItem = ({
             height: '38px',
           }}
         >
-          <Typography sx={{
-            fontWeight: 500,
-            fontSize: '14px',
-            lineHeight: '1em',
-            letterSpacing: '-0.02em',
-          }}>
+          <Typography
+            sx={{
+              fontWeight: 500,
+              fontSize: '14px',
+              lineHeight: '1em',
+              letterSpacing: '-0.02em',
+            }}
+          >
             <Trans>Details</Trans>
           </Typography>
         </Button>

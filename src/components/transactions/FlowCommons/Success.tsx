@@ -54,14 +54,15 @@ export const TxSuccessView = ({
         }}
       >
         <img src={uiConfig.allDone} />
-        
 
-        <Typography sx={{
-          fontWeight: 600,
-          fontSize: '32px',
-          lineHeight: '1em',
-          letterSpacing: '-0.02em',
-        }}>
+        <Typography
+          sx={{
+            fontWeight: 600,
+            fontSize: '32px',
+            lineHeight: '1em',
+            letterSpacing: '-0.02em',
+          }}
+        >
           <Trans>All done!</Trans>
         </Typography>
 
@@ -165,16 +166,18 @@ export const TxSuccessView = ({
             borderRadius: '12px',
             border: '1px solid #FFFFFF33',
             marginTop: 35,
-            boxShadow: '0px 4px 10px 0px #FF7E0963'
+            boxShadow: '0px 4px 10px 0px #FF7E0963',
           }}
         >
-          <Typography sx={{
-            color: '#FFFFFF',
-            fontWeight: 600,
-            fontSize: '16px',
-            lineHeight: '1em',
-            letterSpacing: '-0.02em',
-          }}>
+          <Typography
+            sx={{
+              color: '#FFFFFF',
+              fontWeight: 600,
+              fontSize: '16px',
+              lineHeight: '1em',
+              letterSpacing: '-0.02em',
+            }}
+          >
             <Trans>Okay</Trans>
           </Typography>
         </Button>
@@ -192,13 +195,15 @@ export const TxSuccessView = ({
           target="_blank"
           rel="noreferrer noopener"
         >
-          <Typography sx={{
-            color: '#FF7E09',
-            fontWeight: 400,
-            fontSize: '14px',
-            lineHeight: '1em',
-            letterSpacing: '-0.02em',
-          }}>
+          <Typography
+            sx={{
+              color: '#FF7E09',
+              fontWeight: 400,
+              fontSize: '14px',
+              lineHeight: '1em',
+              letterSpacing: '-0.02em',
+            }}
+          >
             <Trans>Check transaction details</Trans>
           </Typography>
           <img src={uiConfig.txArrow} />

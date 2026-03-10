@@ -16,6 +16,7 @@ import React, { ReactNode, useState } from 'react';
 import { WalletIcon } from 'src/components/icons/WalletIcon';
 import { getMarketInfoById } from 'src/components/MarketSwitcherDashboard';
 import { FormattedNumber } from 'src/components/primitives/FormattedNumber';
+import { TokenIcon } from 'src/components/primitives/TokenIcon';
 import { Warning } from 'src/components/primitives/Warning';
 import StyledToggleButton from 'src/components/StyledToggleButton';
 import StyledToggleButtonGroup from 'src/components/StyledToggleButtonGroup';
@@ -34,14 +35,12 @@ import { useRootStore } from 'src/store/root';
 import { getMaxAmountAvailableToBorrow } from 'src/utils/getMaxAmountAvailableToBorrow';
 import { getMaxAmountAvailableToSupply } from 'src/utils/getMaxAmountAvailableToSupply';
 
+import { uiConfig } from '/src/uiConfig';
+
 import { CapType } from '../../components/caps/helper';
 import { AvailableTooltip } from '../../components/infoTooltips/AvailableTooltip';
 import { Link, ROUTES } from '../../components/primitives/Link';
 import { useReserveActionState } from '../../hooks/useReserveActionState';
-
-import { uiConfig } from '/src/uiConfig';
-import { TokenIcon } from 'src/components/primitives/TokenIcon';
-
 
 const amountToUSD = (
   amount: string,
@@ -152,7 +151,7 @@ export const ReserveActions = ({ reserve }: ReserveActionsProps) => {
       ) : (
         <>
           {/* <Divider sx={{ my: 6 }} /> */}
-          <Box 
+          <Box
             sx={{
               display: 'flex',
               flexDirection: 'column',
@@ -160,7 +159,8 @@ export const ReserveActions = ({ reserve }: ReserveActionsProps) => {
               // backgroundColor: 'red',
               gap: '15px',
               // mb: '15px',
-            }}>
+            }}
+          >
             <SupplyAction
               value={maxAmountToSupply}
               usdValue={maxAmountToSupplyUSD}
@@ -176,11 +176,7 @@ export const ReserveActions = ({ reserve }: ReserveActionsProps) => {
               onActionClicked={() => openBorrow(reserve.underlyingAsset)}
             />
           </Box>
-          {disableBorrowButton && (
-            <Box sx={{mt: '15px'}}>
-              {alerts}
-            </Box>
-          )}
+          {disableBorrowButton && <Box sx={{ mt: '15px' }}>{alerts}</Box>}
         </>
       )}
     </PaperWrapper>
@@ -239,8 +235,8 @@ const ActionsSkeleton = () => {
 
 const PaperWrapper = ({ children }: { children: ReactNode }) => {
   return (
-    <Paper 
-      sx={{ 
+    <Paper
+      sx={{
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
@@ -248,12 +244,12 @@ const PaperWrapper = ({ children }: { children: ReactNode }) => {
         width: { xs: '100%', md: '384px' },
         maxWidth: { xs: '380px', md: '384px' },
         mx: { xs: 'auto', lg: 0 },
-        pt: 4, 
-        pb: { xs: 4, xsm: '15px' }, 
+        pt: 4,
+        pb: { xs: 4, xsm: '15px' },
         // px: { xs: 4, xsm: '16px 14px' },
         paddingLeft: '15px',
-        paddingRight: '15px', 
-        marginTop: {xs: '4px', md: '37px'},
+        paddingRight: '15px',
+        marginTop: { xs: '4px', md: '37px' },
         // marginLeft: '1px',
         // mt: '36px',
         border: '1px solid',
@@ -262,9 +258,8 @@ const PaperWrapper = ({ children }: { children: ReactNode }) => {
         backgroundColor: 'rgba(255, 255, 255, 1)',
         // backgroundColor: 'red',
         boxShadow: '0px 3px 5px 0px rgba(0, 0, 0, 0.04)',
-        
-      }}>
-      
+      }}
+    >
       <Typography
         sx={{
           position: 'relative',
@@ -277,7 +272,7 @@ const PaperWrapper = ({ children }: { children: ReactNode }) => {
           '&:before': {
             content: '""',
             position: 'absolute',
-            left: -16,                    // into the Paper’s left padding
+            left: -16, // into the Paper’s left padding
             top: '50%',
             transform: 'translateY(-50%)',
             width: 2,
@@ -329,9 +324,10 @@ const SupplyAction = ({ value, usdValue, symbol, disable, onActionClicked }: Act
     <Stack>
       <Box
         sx={{
-          mb:'10px',
-        }}>
-        <Typography 
+          mb: '10px',
+        }}
+      >
+        <Typography
           sx={{
             fontSize: '10px',
             fontWeight: 500,
@@ -339,7 +335,8 @@ const SupplyAction = ({ value, usdValue, symbol, disable, onActionClicked }: Act
             lineHeight: '1em',
             textTransform: 'uppercase',
             color: 'rgba(130, 130, 130, 1)',
-          }}>
+          }}
+        >
           <Trans>Available to supply</Trans>
         </Typography>
       </Box>
@@ -353,9 +350,10 @@ const SupplyAction = ({ value, usdValue, symbol, disable, onActionClicked }: Act
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
-            gap: '6px',  
+            gap: '6px',
             mt: '2px',
-          }}>
+          }}
+        >
           <ValueWithSymbol value={value} symbol={symbol} />
           <FormattedNumber
             value={usdValue}
@@ -374,7 +372,7 @@ const SupplyAction = ({ value, usdValue, symbol, disable, onActionClicked }: Act
           />
         </Box>
         <Button
-          sx={{ 
+          sx={{
             height: '30px',
             width: '69px',
             border: '1px solid',
@@ -389,13 +387,15 @@ const SupplyAction = ({ value, usdValue, symbol, disable, onActionClicked }: Act
           variant="contained"
           data-cy="supplyButton"
         >
-          <Typography sx={{
+          <Typography
+            sx={{
               fontWeight: 500,
               fontSize: '14px',
               lineHeight: '1em',
               letterSpacing: '-0.02em',
               color: '#FFFFFF',
-            }}>
+            }}
+          >
             <Trans>Supply</Trans>
           </Typography>
         </Button>
@@ -410,7 +410,8 @@ const BorrowAction = ({ value, usdValue, symbol, disable, onActionClicked }: Act
       <Box
         sx={{
           mb: '9px',
-        }}>
+        }}
+      >
         <Typography
           sx={{
             fontSize: '10px',
@@ -418,7 +419,8 @@ const BorrowAction = ({ value, usdValue, symbol, disable, onActionClicked }: Act
             letterSpacing: '0.08em',
             textTransform: 'uppercase',
             color: 'rgba(130, 130, 130, 1)',
-          }}>
+          }}
+        >
           <Trans>Available to borrow</Trans>
         </Typography>
       </Box>
@@ -432,9 +434,10 @@ const BorrowAction = ({ value, usdValue, symbol, disable, onActionClicked }: Act
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
-            gap: '6px',  
+            gap: '6px',
             mt: '2px',
-          }}>
+          }}
+        >
           <ValueWithSymbol value={value} symbol={symbol} />
           <FormattedNumber
             value={usdValue}
@@ -453,8 +456,8 @@ const BorrowAction = ({ value, usdValue, symbol, disable, onActionClicked }: Act
           />
         </Box>
         <Button
-          sx={{ 
-            height: '30px', 
+          sx={{
+            height: '30px',
             width: '70px',
             border: '1px solid',
             borderRadius: '70px',
@@ -468,13 +471,15 @@ const BorrowAction = ({ value, usdValue, symbol, disable, onActionClicked }: Act
           variant="contained"
           data-cy="borrowButton"
         >
-          <Typography sx={{
+          <Typography
+            sx={{
               fontWeight: 500,
               fontSize: '14px',
               lineHeight: '1em',
               letterSpacing: '-0.02em',
               color: '#FFFFFF',
-            }}>
+            }}
+          >
             <Trans>Borrow</Trans>
           </Typography>
         </Button>
@@ -526,14 +531,17 @@ interface ValueWithSymbolProps {
 const ValueWithSymbol = ({ value, symbol, children }: ValueWithSymbolProps) => {
   return (
     <Stack direction="row" alignItems="center" gap={1.4}>
-      <FormattedNumber value={value} visibleDecimals={2}
+      <FormattedNumber
+        value={value}
+        visibleDecimals={2}
         sx={{
           fontWeight: 500,
           fontSize: '24px',
           letterSpacing: '-0.02em',
           lineHeight: '1em',
           color: 'rgba(6, 21, 18, 1)',
-        }}/>
+        }}
+      />
       <Typography
         sx={{
           fontWeight: 500,
@@ -541,7 +549,8 @@ const ValueWithSymbol = ({ value, symbol, children }: ValueWithSymbolProps) => {
           letterSpacing: '-0.02em',
           lineHeight: '1em',
           color: 'rgba(130, 130, 130, 1)',
-        }}>
+        }}
+      >
         {symbol}
       </Typography>
       {children}
@@ -558,7 +567,7 @@ const WalletBalance = ({ balance, symbol, marketTitle }: WalletBalanceProps) => 
   const theme = useTheme();
 
   return (
-    <Box 
+    <Box
       sx={{
         display: 'flex',
         flexDirection: 'row',
@@ -571,7 +580,8 @@ const WalletBalance = ({ balance, symbol, marketTitle }: WalletBalanceProps) => 
         borderRadius: '8px',
         padding: '10px 6px 12px 14.5px',
         mb: '24px',
-      }}>
+      }}
+    >
       <Box
         sx={{
           display: 'flex',
@@ -580,8 +590,9 @@ const WalletBalance = ({ balance, symbol, marketTitle }: WalletBalanceProps) => 
           justifyContent: 'space-around',
           // justifyContent: 'space-between',
           // backgroundColor: 'red'
-        }}>
-        <Typography 
+        }}
+      >
+        <Typography
           sx={{
             fontWeight: 500,
             fontSize: '10px',
@@ -589,22 +600,27 @@ const WalletBalance = ({ balance, symbol, marketTitle }: WalletBalanceProps) => 
             letterSpacing: '0.08em',
             textTransform: 'uppercase',
             color: 'rgba(130, 130, 130, 1)',
-          }}>
+          }}
+        >
           Wallet balance
         </Typography>
         <Box
           sx={{
-            display:'flex',
+            display: 'flex',
             flexDirection: 'row',
             justifyContent: 'space-between',
             gap: '8px',
             // backgroundColor: 'red'
-          }}>
-          <TokenIcon symbol={symbol} fontSize="large" 
+          }}
+        >
+          <TokenIcon
+            symbol={symbol}
+            fontSize="large"
             sx={{
               height: '24px',
               width: '24px',
-            }} />
+            }}
+          />
           <ValueWithSymbol value={balance} symbol={symbol}>
             <Box sx={{ ml: 2 }}>
               <BuyWithFiat cryptoSymbol={symbol} networkMarketName={marketTitle} />

@@ -28,7 +28,7 @@ export default function Home() {
 
   return (
     <>
-      {currentAccount && !isPermissionsLoading &&(<DashboardTopPanel />)}
+      {currentAccount && !isPermissionsLoading && <DashboardTopPanel />}
 
       <ContentContainer>
         {currentAccount && !isPermissionsLoading && (
@@ -45,26 +45,30 @@ export default function Home() {
               value={mode}
               exclusive
               onChange={(_, value) => setMode(value)}
-              sx={{ width: {xs: '96.5%', xsm: '359px' }, height: '44px' }}
+              sx={{ width: { xs: '96.5%', xsm: '359px' }, height: '44px' }}
             >
               <StyledToggleButton value="supply" disabled={mode === 'supply'}>
-                <Typography sx={{
-                  fontWeight: 500,
-                  fontSize: '14px',
-                  lineHeight: '1em',
-                  letterSpacing: '-0.02em',
-                  py: 1
-                }}>
+                <Typography
+                  sx={{
+                    fontWeight: 500,
+                    fontSize: '14px',
+                    lineHeight: '1em',
+                    letterSpacing: '-0.02em',
+                    py: 1,
+                  }}
+                >
                   <Trans>Supplies</Trans>
                 </Typography>
               </StyledToggleButton>
               <StyledToggleButton value="borrow" disabled={mode === 'borrow'}>
-                <Typography sx={{
-                  fontWeight: 500,
-                  fontSize: '14px',
-                  lineHeight: '1em',
-                  letterSpacing: '-0.02em',
-                }}>
+                <Typography
+                  sx={{
+                    fontWeight: 500,
+                    fontSize: '14px',
+                    lineHeight: '1em',
+                    letterSpacing: '-0.02em',
+                  }}
+                >
                   <Trans>Borrow</Trans>
                 </Typography>
               </StyledToggleButton>
@@ -75,12 +79,14 @@ export default function Home() {
         {currentAccount && !isPermissionsLoading ? (
           <DashboardContentWrapper isBorrow={mode === 'borrow'} />
         ) : (
-          <Box sx={{
-            mx: 'auto',
-            mt: '100px',
-            // display: 'flex',
-            // justifyContent: 'center',
-            }}>
+          <Box
+            sx={{
+              mx: 'auto',
+              mt: '100px',
+              // display: 'flex',
+              // justifyContent: 'center',
+            }}
+          >
             <ConnectWalletPaper loading={web3Loading} />
           </Box>
         )}

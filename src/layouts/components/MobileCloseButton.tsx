@@ -9,7 +9,10 @@ interface MobileCloseButtonProps {
 
 export const MobileCloseButton = ({ setOpen }: MobileCloseButtonProps) => {
   return (
-    <IconButton onClick={() => setOpen(false)} sx={{ p: 0, mr: { xs: 0, xsm: 1 , backgroundColor: 'black'} }}>
+    <IconButton
+      onClick={() => setOpen(false)}
+      sx={{ p: 0, mr: { xs: 0, xsm: 1, backgroundColor: 'black' } }}
+    >
       {/* <SvgIcon sx={{ 
         color: '#F1F1F3',
         backgroundColor: '#061512', 
@@ -18,17 +21,17 @@ export const MobileCloseButton = ({ setOpen }: MobileCloseButtonProps) => {
       }}>
         <XIcon />
       </SvgIcon> */}
-      <Box sx={{
-        backgroundColor: '#061512',
-        width: '44px',
-        height: '38px',
-        borderRadius: '12px',
-        pt: '2.5px',
-        pl: '1px',
-        
-      }}>
+      <Box
+        sx={{
+          backgroundColor: '#061512',
+          width: '44px',
+          height: '38px',
+          borderRadius: '12px',
+          pt: '2.5px',
+          pl: '1px',
+        }}
+      >
         <img src={uiConfig.xicon} />
-
       </Box>
     </IconButton>
   );

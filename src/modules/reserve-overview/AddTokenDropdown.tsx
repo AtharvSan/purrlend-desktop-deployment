@@ -112,39 +112,47 @@ export const AddTokenDropdown = ({
             boxShadow: '0px 14px 24px 0px #0000004D',
             pt: '16px',
             pb: '8px',
-          }
+          },
         }}
       >
-        <Box sx={{ px: '16px',pb: '5px', width: '240px', display: 'flex' }}>
-          <Box sx={{
-            height: '24px',
-            width: '2px',
-            backgroundColor: '#FF7E09',
-            position: 'relative',
-            left: '-16px',
-            top: '-2px'
-          }}/>
-          <Typography sx={{
-            fontWeight: 600,
-            fontSize: '20px',
-            lineHeight: '1em',
-            letterSpacing: '-0.02em',
-            color: '#061512',
-          }}>
+        <Box sx={{ px: '16px', pb: '5px', width: '240px', display: 'flex' }}>
+          <Box
+            sx={{
+              height: '24px',
+              width: '2px',
+              backgroundColor: '#FF7E09',
+              position: 'relative',
+              left: '-16px',
+              top: '-2px',
+            }}
+          />
+          <Typography
+            sx={{
+              fontWeight: 600,
+              fontSize: '20px',
+              lineHeight: '1em',
+              letterSpacing: '-0.02em',
+              color: '#061512',
+            }}
+          >
             <Trans>Select token to add</Trans>
           </Typography>
         </Box>
 
-        <Typography sx={{
-          fontWeight: 500,
-          fontSize: '10px',
-          lineHeight: '1em',
-          letterSpacing: '0.08em',
-          textTransform: 'uppercase',
-          color: '#828282',
-          pl: '16px',
-          pt: '10px',
-        }}>underlying token</Typography>
+        <Typography
+          sx={{
+            fontWeight: 500,
+            fontSize: '10px',
+            lineHeight: '1em',
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            color: '#828282',
+            pl: '16px',
+            pt: '10px',
+          }}
+        >
+          underlying token
+        </Typography>
         <MenuItem
           key="underlying"
           value="underlying"
@@ -170,16 +178,20 @@ export const AddTokenDropdown = ({
           </Typography>
         </MenuItem>
 
-        <Typography sx={{
-          fontWeight: 500,
-          fontSize: '10px',
-          lineHeight: '1em',
-          letterSpacing: '0.08em',
-          textTransform: 'uppercase',
-          color: '#828282',
-          pl: '16px',
-          pt: '8px',
-        }}>Purr pToken</Typography>
+        <Typography
+          sx={{
+            fontWeight: 500,
+            fontSize: '10px',
+            lineHeight: '1em',
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            color: '#828282',
+            pl: '16px',
+            pt: '8px',
+          }}
+        >
+          Purr pToken
+        </Typography>
         <MenuItem
           key="atoken"
           value="atoken"

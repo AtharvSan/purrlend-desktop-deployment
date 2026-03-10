@@ -15,6 +15,7 @@ import { useCurrentTimestamp } from 'src/hooks/useCurrentTimestamp';
 import { useModalContext } from 'src/hooks/useModal';
 import { useProtocolDataContext } from 'src/hooks/useProtocolDataContext';
 import { useWeb3Context } from 'src/libs/hooks/useWeb3Context';
+import { uiConfig } from 'src/uiConfig';
 import { getNetworkConfig } from 'src/utils/marketsAndNetworksConfig';
 
 import LightningBoltGradient from '/public/lightningBoltGradient.svg';
@@ -28,7 +29,6 @@ import { ChangeNetworkWarning } from '../Warnings/ChangeNetworkWarning';
 import { EmodeActions } from './EmodeActions';
 import { getEmodeMessage } from './EmodeNaming';
 import { EmodeSelect } from './EmodeSelect';
-import { uiConfig } from 'src/uiConfig';
 
 export enum ErrorType {
   EMODE_DISABLED_LIQUIDATION,
@@ -185,12 +185,15 @@ export const EmodeModalContent = ({ mode }: EmodeModalContentProps) => {
 
       {user.userEmodeCategoryId === 0 && (
         <Warning severity="warning">
-          <Typography variant="caption" sx={{
-            fontWeight: '400',
-            fontStyle: 'Regular',
-            fontSize: '14px',
-            letterSpacing: '-0.02em',
-          }}>
+          <Typography
+            variant="caption"
+            sx={{
+              fontWeight: '400',
+              fontStyle: 'Regular',
+              fontSize: '14px',
+              letterSpacing: '-0.02em',
+            }}
+          >
             <Trans>
               Enabling E-Mode only allows you to borrow assets belonging to the selected category.
             </Trans>
@@ -209,7 +212,10 @@ export const EmodeModalContent = ({ mode }: EmodeModalContentProps) => {
 
       {blockingError === ErrorType.EMODE_DISABLED_LIQUIDATION && <Blocked />}
       {showLiquidationRiskWarning && (
-        <Warning severity="error" sx={{ mt: {xs: 0, md: 2}, mb: {xs: 2, md: 4}, alignItems: 'center' }}>
+        <Warning
+          severity="error"
+          sx={{ mt: { xs: 0, md: 2 }, mb: { xs: 2, md: 4 }, alignItems: 'center' }}
+        >
           <Typography variant="subheader1" color="#F24747">
             <Trans>Liquidation risk</Trans>
           </Typography>
@@ -224,25 +230,32 @@ export const EmodeModalContent = ({ mode }: EmodeModalContentProps) => {
 
       <TxModalDetails gasLimit={gasLimit}>
         {!showModal && (
-          <Row caption={<Trans>E-Mode category</Trans>} captionVariant="description" mb={4} sx={{
-            color: 'rgba(130, 130, 130, 1)',
-          }}>
+          <Row
+            caption={<Trans>E-Mode category</Trans>}
+            captionVariant="description"
+            mb={4}
+            sx={{
+              color: 'rgba(130, 130, 130, 1)',
+            }}
+          >
             <Box sx={{ display: 'flex', justifyContent: 'right', alignItems: 'center' }}>
-              <Box sx={{ display: 'inline-flex', alignItems: 'center', mx: 1, color: '#061512', }}>
+              <Box sx={{ display: 'inline-flex', alignItems: 'center', mx: 1, color: '#061512' }}>
                 {user.userEmodeCategoryId !== 0 ? (
                   <>
                     {/* <SvgIcon sx={{ fontSize: '12px' }}>
                       <LightningBoltGradient />
                     </SvgIcon> */}
-                    <img src={uiConfig.emodeLeaf} style={{marginRight: '4px'}} />
-                    <Typography sx={{
-                      fontWeight: 450,
-                    }}>
+                    <img src={uiConfig.emodeLeaf} style={{ marginRight: '4px' }} />
+                    <Typography
+                      sx={{
+                        fontWeight: 450,
+                      }}
+                    >
                       {getEmodeMessage(eModes[user.userEmodeCategoryId].label)}
                     </Typography>
                   </>
                 ) : (
-                  <Typography sx={{fontWeight: 450, color: '#061512'}}>
+                  <Typography sx={{ fontWeight: 450, color: '#061512' }}>
                     <Trans>None</Trans>
                   </Typography>
                 )}
@@ -256,13 +269,13 @@ export const EmodeModalContent = ({ mode }: EmodeModalContentProps) => {
                         {/* <SvgIcon sx={{ fontSize: '12px', mr: 0.5 }}>
                           <LightningBoltGradient />
                         </SvgIcon> */}
-                        <img src={uiConfig.emodeLeaf} style={{marginRight: '4px'}} />
-                        <Typography sx={{fontWeight: 450, color: '#061512'}}>
+                        <img src={uiConfig.emodeLeaf} style={{ marginRight: '4px' }} />
+                        <Typography sx={{ fontWeight: 450, color: '#061512' }}>
                           {getEmodeMessage(eModes[selectedEmode.id].label)}
                         </Typography>
                       </>
                     ) : (
-                      <Typography sx={{fontWeight: 450, color: '#061512'}}>
+                      <Typography sx={{ fontWeight: 450, color: '#061512' }}>
                         <Trans>None</Trans>
                       </Typography>
                     )}
@@ -277,7 +290,7 @@ export const EmodeModalContent = ({ mode }: EmodeModalContentProps) => {
           caption={<Trans>Available assets</Trans>}
           captionVariant="description"
           mb={4}
-          sx={{ 
+          sx={{
             alignContent: 'flex-end',
             color: 'rgba(130, 130, 130, 1)',
             // color: 'red',
@@ -297,14 +310,16 @@ export const EmodeModalContent = ({ mode }: EmodeModalContentProps) => {
                     {eModes[user.userEmodeCategoryId].assets.join(', ')}
                   </Typography>
                 ) : (
-                  <Typography sx={{
-                    fontWeight: 450,
-                    fontStyle: 'Regular',
-                    fontSize: '14px',
-                    lineHeight: '100%',
-                    letterSpacing: '-2%', 
-                    color: '#061512',
-                  }}>
+                  <Typography
+                    sx={{
+                      fontWeight: 450,
+                      fontStyle: 'Regular',
+                      fontSize: '14px',
+                      lineHeight: '100%',
+                      letterSpacing: '-2%',
+                      color: '#061512',
+                    }}
+                  >
                     <Trans>All Assets</Trans>
                   </Typography>
                 )}
@@ -321,20 +336,21 @@ export const EmodeModalContent = ({ mode }: EmodeModalContentProps) => {
                   }}
                 >
                   {selectedEmode?.id !== 0 ? (
-                    <Typography 
-                      sx={{ 
+                    <Typography
+                      sx={{
                         textAlign: 'end',
                         fontWeight: 450,
                         fontStyle: 'Regular',
                         fontSize: '14px',
                         lineHeight: '100%',
-                        letterSpacing: '-2%', 
+                        letterSpacing: '-2%',
                         color: '#061512',
-                      }}>
+                      }}
+                    >
                       {selectedEmode.assets.join(', ')}
                     </Typography>
                   ) : (
-                    <Typography sx={{fontWeight: 450, color: '#061512'}}>
+                    <Typography sx={{ fontWeight: 450, color: '#061512' }}>
                       <Trans>All Assets</Trans>
                     </Typography>
                   )}

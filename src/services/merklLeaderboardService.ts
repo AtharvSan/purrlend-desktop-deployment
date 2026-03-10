@@ -1,12 +1,12 @@
-import { MERKL_CONFIG, MERKL_CAMPAIGN_IDS } from 'src/config/merkl';
+import { MERKL_CAMPAIGN_IDS, MERKL_CONFIG } from 'src/config/merkl';
 
 const BASE = MERKL_CONFIG.API_BASE;
 const CHAIN_ID = 999;
 
 export type LeaderboardEntry = {
   address: string;
-  points: number;   // raw token amount (Purr points, already divided by 1e18)
-  usd: number;      // USD value (0 if unpriced)
+  points: number; // raw token amount (Purr points, already divided by 1e18)
+  usd: number; // USD value (0 if unpriced)
   rank: number;
 };
 
@@ -26,11 +26,10 @@ export async function getMerklLeaderboard(): Promise<LeaderboardEntry[]> {
 
     const results = await Promise.allSettled(
       campaignIds.map((campaignId) =>
-        fetch(`${BASE}/rewards?chainId=${CHAIN_ID}&campaignId=${campaignId}`)
-          .then((r) => {
-            if (!r.ok) throw new Error(`${r.status} for campaign ${campaignId}`);
-            return r.json();
-          })
+        fetch(`${BASE}/rewards?chainId=${CHAIN_ID}&campaignId=${campaignId}`).then((r) => {
+          if (!r.ok) throw new Error(`${r.status} for campaign ${campaignId}`);
+          return r.json();
+        })
       )
     );
 
@@ -68,7 +67,6 @@ export async function getMerklLeaderboard(): Promise<LeaderboardEntry[]> {
       .map(([address, { points, usd }]) => ({ address, points, usd, rank: 0 }))
       .sort((a, b) => b.points - a.points)
       .map((entry, i) => ({ ...entry, rank: i + 1 }));
-
   } catch (e) {
     console.error('Leaderboard error', e);
     return [];

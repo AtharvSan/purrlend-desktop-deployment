@@ -1,8 +1,8 @@
 import { Trans } from '@lingui/macro';
+import CheckRoundedIcon from '@mui/icons-material/CheckRounded'; // thin rounded check
 import { Box, Checkbox, FormControlLabel, Typography } from '@mui/material';
 import { FaucetButton } from 'src/components/FaucetButton';
 import { ENABLE_TESTNET, STAGING_ENV } from 'src/utils/marketsAndNetworksConfig';
-import CheckRoundedIcon from '@mui/icons-material/CheckRounded'; // thin rounded check
 
 import { BridgeButton } from '../../components/BridgeButton';
 import { toggleLocalStorageClick } from '../../helpers/toggle-local-storage-click';
@@ -77,7 +77,7 @@ export const DashboardListTopPanel = ({
           backgroundColor: 'rgba(242, 242, 242, 1)',
           borderRadius: '8px',
           // width: '94.6%',
-          width: {xs: '95%', md: '97.2%'},
+          width: { xs: '95%', md: '97.2%' },
           margin: 'auto',
           display: 'flex',
           alignItems: 'center',
@@ -104,8 +104,8 @@ export const DashboardListTopPanel = ({
                   width: 20,
                   height: 20,
                   borderRadius: '6px',
-                  backgroundColor: '#F2F2F2',      // no dark fill
-                  border: '1px solid #828282',         // thicker, colored border to indicate checked
+                  backgroundColor: '#F2F2F2', // no dark fill
+                  border: '1px solid #828282', // thicker, colored border to indicate checked
                   boxSizing: 'border-box',
                   pl: '1px',
                   pt: '0.5px',
@@ -119,7 +119,9 @@ export const DashboardListTopPanel = ({
           />
         }
         label={
-          <Typography sx={{ fontWeight: 400, fontSize: '14px', lineHeight: '1em', letterSpacing: '-0.02em' }}>
+          <Typography
+            sx={{ fontWeight: 400, fontSize: '14px', lineHeight: '1em', letterSpacing: '-0.02em' }}
+          >
             Show assets with 0 balance
           </Typography>
         }

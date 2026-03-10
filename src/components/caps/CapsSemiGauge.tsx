@@ -1,10 +1,10 @@
 'use client';
 
-import React from 'react';
 import { Box, Tooltip, Typography, useTheme } from '@mui/material';
+import React from 'react';
 
 export type CapsSemiGaugeProps = {
-  value: number;                 // 0–100
+  value: number; // 0–100
   label?: string;
   tooltipContent?: React.ReactNode;
 
@@ -15,7 +15,7 @@ export type CapsSemiGaugeProps = {
   arcColor?: string;
   borderOpacity?: number;
   shadowOpacity?: number;
-  gap?: number;                  // px gap between green & grey
+  gap?: number; // px gap between green & grey
 
   /** fine-tune vertical position (px). +ve = down, -ve = up */
   centerOffset?: number;
@@ -36,7 +36,7 @@ export default function CapsSemiGauge({
   borderOpacity = 0.08,
   shadowOpacity = 0.18,
   gap = 1.5,
-  centerOffset,                          // optional override
+  centerOffset, // optional override
   valueFontSize,
   labelFontSize,
 }: CapsSemiGaugeProps) {
@@ -45,32 +45,28 @@ export default function CapsSemiGauge({
 
   // colors
   const _track =
-    trackColor ??
-    (theme.palette.mode === 'dark'
-      ? 'rgba(255,255,255,0.16)'
-      : 'rgba(0,0,0,0.08)');
+    trackColor ?? (theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.16)' : 'rgba(0,0,0,0.08)');
   const _arc = arcColor ?? theme.palette.success.main;
 
-// geometry
-const rTrack = (size - thickness) / 2;     // grey rail radius
+  // geometry
+  const rTrack = (size - thickness) / 2; // grey rail radius
 
-// For equal inner & outer gaps of `gap`:
-const rArc = rTrack;                        // SAME radius as track
-const strokeWidthArc = Math.max(1, thickness - 2 * gap); // thinner by 2*gap
+  // For equal inner & outer gaps of `gap`:
+  const rArc = rTrack; // SAME radius as track
+  const strokeWidthArc = Math.max(1, thickness - 2 * gap); // thinner by 2*gap
 
-const cx = size / 2;
-const cy = size / 2;
+  const cx = size / 2;
+  const cy = size / 2;
 
-// dash math for track
-const CTrack = 2 * Math.PI * rTrack;
-const dashArrayTrack = `${CTrack / 2} ${CTrack}`;
+  // dash math for track
+  const CTrack = 2 * Math.PI * rTrack;
+  const dashArrayTrack = `${CTrack / 2} ${CTrack}`;
 
-// dash math for arc (uses rArc)
-const CArc = 2 * Math.PI * rArc;
-const halfArc = CArc / 2;
-const dashArrayArc = `${halfArc} ${CArc}`;
-const dashOffsetArc = halfArc * (1 - pct);
-
+  // dash math for arc (uses rArc)
+  const CArc = 2 * Math.PI * rArc;
+  const halfArc = CArc / 2;
+  const dashArrayArc = `${halfArc} ${CArc}`;
+  const dashOffsetArc = halfArc * (1 - pct);
 
   const svg = (
     <svg
@@ -122,17 +118,17 @@ const dashOffsetArc = halfArc * (1 - pct);
       {/* ACTIVE ARC (flat ends), pulled slightly inward -> creates the gap */}
       <g filter="url(#arcShadow)">
         <circle
-            cx={cx}
-            cy={cy}
-            r={rArc}
-            fill="none"
-            stroke="url(#arcFill)"
-            strokeWidth={strokeWidthArc}
-            strokeLinecap="butt"
-            strokeDasharray={dashArrayArc}
-            strokeDashoffset={dashOffsetArc}
-            transform={`rotate(180 ${cx} ${cy})`}
-            style={{ transition: 'stroke-dashoffset 600ms ease' }}
+          cx={cx}
+          cy={cy}
+          r={rArc}
+          fill="none"
+          stroke="url(#arcFill)"
+          strokeWidth={strokeWidthArc}
+          strokeLinecap="butt"
+          strokeDasharray={dashArrayArc}
+          strokeDashoffset={dashOffsetArc}
+          transform={`rotate(180 ${cx} ${cy})`}
+          style={{ transition: 'stroke-dashoffset 600ms ease' }}
         />
       </g>
     </svg>
@@ -160,19 +156,23 @@ const dashOffsetArc = halfArc * (1 - pct);
   };
 
   return (
-    <Box sx={{
-      ml:{xs: '20px', md: '40px'},
-      height: '100px',
-      width: '120px', 
-      display: 'flex', 
-      flexDirection: 'column', 
-      alignItems: 'center' 
-      }}>
+    <Box
+      sx={{
+        ml: { xs: '20px', md: '40px' },
+        height: '100px',
+        width: '120px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}
+    >
       {tooltipContent ? <Tooltip title={tooltipContent}>{svg}</Tooltip> : svg}
 
       {/* Text block positioned inside the arc */}
       <Box sx={{ position: 'relative', top: offset, textAlign: 'center', pointerEvents: 'none' }}>
-        <Typography sx={{ lineHeight: 1, fontWeight: 500, letterSpacing: '-0.02em', fontSize: '18px', }}>
+        <Typography
+          sx={{ lineHeight: 1, fontWeight: 500, letterSpacing: '-0.02em', fontSize: '18px' }}
+        >
           {/* {(pct * 100).toFixed(2)}% */}
           {determineValueDisplay()}
         </Typography>

@@ -5,6 +5,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import type { NextApiRequest, NextApiResponse } from 'next';
+
 import { runSnapshot } from '../../../lib/purrPoints/snapshot';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {

@@ -50,13 +50,19 @@ export const ListItemWrapper = ({
 
   return (
     <ListItem {...rest}>
-      <ListColumn basis={260} grow={2} overFlow="hidden" maxWidth={DASHBOARD_LIST_COLUMN_WIDTHS.CELL} isRow>
+      <ListColumn
+        basis={260}
+        grow={2}
+        overFlow="hidden"
+        maxWidth={DASHBOARD_LIST_COLUMN_WIDTHS.CELL}
+        isRow
+      >
         <Link
           href={ROUTES.reserveOverview(detailsAddress, currentMarket)}
           noWrap
           sx={{ display: 'inline-flex', alignItems: 'center' }}
         >
-          <TokenIcon symbol={iconSymbol} sx={{ height: '20px',width: '20px'}} />
+          <TokenIcon symbol={iconSymbol} sx={{ height: '20px', width: '20px' }} />
           <Tooltip title={`${name} (${symbol})`} arrow placement="top">
             <Typography variant="subheader1" sx={{ ml: 3 }} noWrap data-cy={`assetName`}>
               {symbol}

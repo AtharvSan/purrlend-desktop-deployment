@@ -6,6 +6,7 @@ import {
   ExternalLinkIcon,
 } from '@heroicons/react/solid';
 import { Trans } from '@lingui/macro';
+import { BorderRight } from '@mui/icons-material';
 import {
   Box,
   Button,
@@ -25,22 +26,21 @@ import {
   useTheme,
 } from '@mui/material';
 import makeBlockie from 'ethereum-blockies-base64';
+import { unset } from 'lodash';
 import React, { useEffect, useState } from 'react';
+import { BasicModal } from 'src/components/primitives/BasicModal';
 import { Warning } from 'src/components/primitives/Warning';
 import { WalletModal } from 'src/components/WalletConnection/WalletModal';
 import { useWalletModalContext } from 'src/hooks/useWalletModal';
 import useGetEns from 'src/libs/hooks/use-get-ens';
 import { useWeb3Context } from 'src/libs/hooks/useWeb3Context';
+import { uiConfig } from 'src/uiConfig';
 
 import { Link } from '../components/primitives/Link';
 import { textCenterEllipsis } from '../helpers/text-center-ellipsis';
 import { ENABLE_TESTNET, getNetworkConfig, STAGING_ENV } from '../utils/marketsAndNetworksConfig';
 import { DrawerWrapper } from './components/DrawerWrapper';
 import { MobileCloseButton } from './components/MobileCloseButton';
-import { BorderRight } from '@mui/icons-material';
-import { uiConfig } from 'src/uiConfig';
-import { unset } from 'lodash';
-import { BasicModal } from 'src/components/primitives/BasicModal';
 import { MobileMenu } from './MobileMenu';
 
 interface WalletWidgetProps {
@@ -117,7 +117,6 @@ export default function WalletWidget({ open, setOpen, headerHeight }: WalletWidg
 
   const hideWalletAccountText = xsm && (ENABLE_TESTNET || STAGING_ENV || readOnlyModeAddress);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  
 
   const accountAvatar = (
     <Box
@@ -168,36 +167,63 @@ export default function WalletWidget({ open, setOpen, headerHeight }: WalletWidg
 
   const Content = ({ component = ListItem }: { component?: typeof MenuItem | typeof ListItem }) => (
     <>
-      <Box sx={{
-      mx: '17px',
-      mt: '12px',
-      mb: {xs: '25px', md: 'unset'} ,
-      }}>
-        <Box sx={{ 
-          display:{xs: 'flex', md: 'none'}, 
-          img: {borderRadius: '50%'},
-          justifyContent: 'center',
-          mb: '15px',
-          }}>
-            <img src={
+      <Box
+        sx={{
+          mx: '17px',
+          mt: '12px',
+          mb: { xs: '25px', md: 'unset' },
+        }}
+      >
+        <Box
+          sx={{
+            display: { xs: 'flex', md: 'none' },
+            img: { borderRadius: '50%' },
+            justifyContent: 'center',
+            mb: '15px',
+          }}
+        >
+          <img
+            src={
+              useBlockie
+                ? makeBlockie(currentAccount !== '' ? currentAccount : 'default')
+                : ensAvatar
+            }
+            alt=""
+            onError={() => setUseBlockie(true)}
+            height={56}
+            width={56}
+          />
+        </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            // backgroundColor: 'red',
+          }}
+        >
+          <Box
+            sx={{ display: { xs: 'none', md: 'unset' }, mr: '10px', img: { borderRadius: '50%' } }}
+          >
+            <img
+              src={
                 useBlockie
                   ? makeBlockie(currentAccount !== '' ? currentAccount : 'default')
                   : ensAvatar
-              } alt="" onError={() => setUseBlockie(true)} height={56} width={56}/>
-        </Box>
-        <Box sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          // backgroundColor: 'red',
-        }}> 
-          <Box sx={{ display: {xs: 'none', md: 'unset'}, mr: '10px' , img: {borderRadius: '50%' }}}>
-              <img src={
-                  useBlockie
-                    ? makeBlockie(currentAccount !== '' ? currentAccount : 'default')
-                    : ensAvatar
-                } alt="" onError={() => setUseBlockie(true)} height={40} width={40}/>
+              }
+              alt=""
+              onError={() => setUseBlockie(true)}
+              height={40}
+              width={40}
+            />
           </Box>
-          <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: {xs: '12px', md: '26px'} }}>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+              gap: { xs: '12px', md: '26px' },
+            }}
+          >
             {ensNameAbbreviated && (
               <Typography variant="h4" color={{ xs: '#F1F1F3', md: 'text.primary' }}>
                 {ensNameAbbreviated}
@@ -209,30 +235,37 @@ export default function WalletWidget({ open, setOpen, headerHeight }: WalletWidg
                 fontWeight: 600,
                 letterSpacing: '-0.02em',
                 lineHeight: '1em',
-                fontSize: {xs: '24px', md: '18px'},
+                fontSize: { xs: '24px', md: '18px' },
               }}
             >
               {textCenterEllipsis(currentAccount, ensNameAbbreviated ? 12 : 4, 4)}
             </Typography>
-              <img src={uiConfig.copy} alt="copy icon" onClick={handleCopy} style={{cursor: 'pointer'}} /> 
+            <img
+              src={uiConfig.copy}
+              alt="copy icon"
+              onClick={handleCopy}
+              style={{ cursor: 'pointer' }}
+            />
           </Box>
         </Box>
       </Box>
-      
-      <Box component={!md ? component: 'unset'} disabled >
-        <Box sx={{ 
-          display: 'flex', 
-          flexDirection: 'row', 
-          width: '100%',
-          justifyContent: 'space-between',
-          backgroundColor: 'rgba(242, 242, 242, 1)',
-          py: '10px',
-          px: '12px',
-          border: '1px solid',
-          borderColor: 'rgba(232, 232, 232, 1)',
-          borderRadius: '8px',
-          gap: '38px'
-          }}>
+
+      <Box component={!md ? component : 'unset'} disabled>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            width: '100%',
+            justifyContent: 'space-between',
+            backgroundColor: 'rgba(242, 242, 242, 1)',
+            py: '10px',
+            px: '12px',
+            border: '1px solid',
+            borderColor: 'rgba(232, 232, 232, 1)',
+            borderRadius: '8px',
+            gap: '38px',
+          }}
+        >
           <Box
             sx={{
               display: 'flex',
@@ -240,105 +273,136 @@ export default function WalletWidget({ open, setOpen, headerHeight }: WalletWidg
               justifyContent: 'space-between',
             }}
           >
-            <Typography sx={{
-              fontWeight: 500,
-              fontSize: '10px',
-              lineHeight: '1em',
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase',
-              color: '#828282',
-            }}>
+            <Typography
+              sx={{
+                fontWeight: 500,
+                fontSize: '10px',
+                lineHeight: '1em',
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                color: '#828282',
+              }}
+            >
               <Trans>Network</Trans>
             </Typography>
           </Box>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <Box sx={{
-            bgcolor: networkColor,
-            width: 8,
-            height: 8,
-            mr: 2,
-            borderRadius: '50%',
-            }}/>
-            <Typography sx={{
-              fontWeight: 400,
-              fontSize: '16px',
-              lineHeight: '1em',
-              letterSpacing: '-0.02em',
-              color: '#252525',
-            }}>
+            <Box
+              sx={{
+                bgcolor: networkColor,
+                width: 8,
+                height: 8,
+                mr: 2,
+                borderRadius: '50%',
+              }}
+            />
+            <Typography
+              sx={{
+                fontWeight: 400,
+                fontSize: '16px',
+                lineHeight: '1em',
+                letterSpacing: '-0.02em',
+                color: '#252525',
+              }}
+            >
               {networkConfig.name}
             </Typography>
           </Box>
         </Box>
       </Box>
-      
+
       {networkConfig?.explorerLinkBuilder && (
         <Link href={networkConfig.explorerLinkBuilder({ address: currentAccount })}>
           <Box
             component={component}
-            sx={{ 
+            sx={{
               color: { xs: '#F1F1F3', md: 'text.primary' },
-              border: md? '1px solid #D7D7D7' : 'unset',
-              borderRadius: md? '16px': 'unset',
+              border: md ? '1px solid #D7D7D7' : 'unset',
+              borderRadius: md ? '16px' : 'unset',
               py: '16px',
               mt: md ? '25px' : 'unset',
             }}
             onClick={handleClose}
           >
             <img src={uiConfig.view} alt="view icon" height={20} width={20} />
-            <Typography sx={{
+            <Typography
+              sx={{
+                fontWeight: 400,
+                fontSize: '16px',
+                lineHeight: '1em',
+                letterSpacing: '-0.02em',
+                color: '#434343',
+                pl: '10px',
+              }}
+            >
+              <Trans>View on Explorer</Trans>
+            </Typography>
+          </Box>
+        </Link>
+      )}
+
+      <Box
+        component={component}
+        onClick={handleSwitchWallet}
+        sx={{
+          mt: md ? '10px' : 'unset',
+          mb: md ? '15px' : 'unset',
+          border: md ? '1px solid #D7D7D7' : 'unset',
+          borderRadius: md ? '16px' : 'unset',
+          py: '16px',
+          // backgroundColor: 'red'
+        }}
+      >
+        <img src={uiConfig.switch} alt="switch" height={20} width={20} />
+        <Typography
+          sx={{
             fontWeight: 400,
             fontSize: '16px',
             lineHeight: '1em',
             letterSpacing: '-0.02em',
             color: '#434343',
             pl: '10px',
-            }}><Trans>View on Explorer</Trans></Typography>
-          </Box>
-        </Link>
-      )}
-
-      <Box component={component} onClick={handleSwitchWallet} sx={{
-        mt: md? '10px' : 'unset',
-        mb: md? '15px' : 'unset',
-        border: md? '1px solid #D7D7D7' : 'unset',
-        borderRadius: md? '16px': 'unset',
-        py: '16px',
-        // backgroundColor: 'red'
-      }}>
-        <img src={uiConfig.switch} alt="switch" height={20} width={20}/>
-        <Typography sx={{
-          fontWeight: 400,
-          fontSize: '16px',
-          lineHeight: '1em',
-          letterSpacing: '-0.02em',
-          color: '#434343',
-          pl: '10px',
-        }}>Switch wallet</Typography>
+          }}
+        >
+          Switch wallet
+        </Typography>
       </Box>
-      
-      <Divider sx={{mx: md? 'unset' : '1em', borderColor: { xs: '#E8E8E8', md: '#E8E8E8' } }} />
-      <Box component={component} onClick={handleDisconnect} sx={{display: 'flex', alignItems: 'center', height: {xs: '54px', md: '64px'},
-        border: md? '1px solid #D7D7D7' : 'unset',
-        borderRadius: md? '16px': 'unset',
-        py: md ? '16px' : '16px',
-        mt: md ? '15px' : 'unset',
-      }}>
-        <Box sx={{
-        display: 'flex',
-        alignItems: 'center',
-        pb: '3.5px'
-        }}>
-          <img src={uiConfig.logout} alt="logout icon"/>
-          <Typography sx={{
-          fontWeight: 400,
-          fontSize: '16px',
-          lineHeight: '1em',
-          letterSpacing: '-0.02em',
-          color: '#F24747',
-          pl: '10px',
-          // pb: '100px',
-          }}>Disconnect</Typography>
+
+      <Divider sx={{ mx: md ? 'unset' : '1em', borderColor: { xs: '#E8E8E8', md: '#E8E8E8' } }} />
+      <Box
+        component={component}
+        onClick={handleDisconnect}
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          height: { xs: '54px', md: '64px' },
+          border: md ? '1px solid #D7D7D7' : 'unset',
+          borderRadius: md ? '16px' : 'unset',
+          py: md ? '16px' : '16px',
+          mt: md ? '15px' : 'unset',
+        }}
+      >
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            pb: '3.5px',
+          }}
+        >
+          <img src={uiConfig.logout} alt="logout icon" />
+          <Typography
+            sx={{
+              fontWeight: 400,
+              fontSize: '16px',
+              lineHeight: '1em',
+              letterSpacing: '-0.02em',
+              color: '#F24747',
+              pl: '10px',
+              // pb: '100px',
+            }}
+          >
+            Disconnect
+          </Typography>
         </Box>
       </Box>
 
@@ -403,10 +467,12 @@ export default function WalletWidget({ open, setOpen, headerHeight }: WalletWidg
               letterSpacing: '-0.02em',
               border: '1px solid',
               borderColor: 'rgba(255, 255, 255, 0.2)',
-              boxShadow: {xs: '0px 4px 10px 0px #FF7E0963', md: 'none'},
+              boxShadow: { xs: '0px 4px 10px 0px #FF7E0963', md: 'none' },
               // backgroundColor: 'red',
             }}
-            startIcon={(connected || readOnlyModeAddress) && !hideWalletAccountText && accountAvatar}
+            startIcon={
+              (connected || readOnlyModeAddress) && !hideWalletAccountText && accountAvatar
+            }
             endIcon={
               (connected || readOnlyModeAddress) &&
               !hideWalletAccountText &&
@@ -419,7 +485,7 @@ export default function WalletWidget({ open, setOpen, headerHeight }: WalletWidg
                   {open ? <ChevronUpIcon /> : <ChevronDownIcon />}
                 </SvgIcon>
               )
-            } 
+            }
           >
             {buttonContent}
           </Button>
@@ -455,7 +521,10 @@ export default function WalletWidget({ open, setOpen, headerHeight }: WalletWidg
             letterSpacing: '-0.02em',
             border: '1px solid',
             borderColor: 'rgba(255, 255, 255, 0.2)',
-            boxShadow: connected || readOnlyModeAddress ? {xs: '0px 4px 10px 0px #FF7E0963', md: 'none'} : '0px 4px 10px 0px #FF7E0963' ,
+            boxShadow:
+              connected || readOnlyModeAddress
+                ? { xs: '0px 4px 10px 0px #FF7E0963', md: 'none' }
+                : '0px 4px 10px 0px #FF7E0963',
             // backgroundColor: 'red',
           }}
           startIcon={(connected || readOnlyModeAddress) && !hideWalletAccountText && accountAvatar}
@@ -471,7 +540,7 @@ export default function WalletWidget({ open, setOpen, headerHeight }: WalletWidg
                 {open ? <ChevronUpIcon /> : <ChevronDownIcon />}
               </SvgIcon>
             )
-          } 
+          }
         >
           {buttonContent}
         </Button>
@@ -494,7 +563,7 @@ export default function WalletWidget({ open, setOpen, headerHeight }: WalletWidg
               outline: 'none', // removes default blue outline
             }}
           >
-            <List sx={{ mb: 2,px: 2, '.MuiListItem-root.Mui-disabled': { opacity: 1 } }}>
+            <List sx={{ mb: 2, px: 2, '.MuiListItem-root.Mui-disabled': { opacity: 1 } }}>
               <Content />
             </List>
           </Box>
@@ -511,8 +580,8 @@ export default function WalletWidget({ open, setOpen, headerHeight }: WalletWidg
           keepMounted={true}
           PaperProps={{
             sx: {
-              borderRadius: '16px',   
-              overflow: 'hidden',     
+              borderRadius: '16px',
+              overflow: 'hidden',
               boxShadow: '0px 14px 24px 0px #0000004D',
               mr: '2000px',
             },

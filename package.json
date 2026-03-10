@@ -100,7 +100,7 @@
     "@types/d3-array": "^3.0.3",
     "@types/d3-time-format": "^4.0.0",
     "@types/lodash": "^4.14.186",
-    "@types/react": "latest",
+    "@types/react": "^19.2.14",
     "@typescript-eslint/eslint-plugin": "^5.38.1",
     "axios": "^0.27.2",
     "babel-loader": "^8.2.5",

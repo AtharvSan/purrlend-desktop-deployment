@@ -1,9 +1,15 @@
+import { MERKL_CONFIG } from 'src/config/merkl';
+import { useEffect, useState } from 'react';
 import { Box, useMediaQuery, useTheme, Divider, Typography } from '@mui/material';
 
 import { BorrowAssetsList } from './lists/BorrowAssetsList/BorrowAssetsList';
 import { BorrowedPositionsList } from './lists/BorrowedPositionsList/BorrowedPositionsList';
 import { SuppliedPositionsList } from './lists/SuppliedPositionsList/SuppliedPositionsList';
 import { SupplyAssetsList } from './lists/SupplyAssetsList/SupplyAssetsList';
+
+import { getMerklOpportunities, getAllMerklOpportunities } from 'src/services/merklService';
+import { buildMerklMarketMap } from 'src/helpers/merklMarketMapper';
+import { MerklRewardsPanel } from 'src/components/merkl/MerklRewardsPanel';
 
 interface DashboardContentWrapperProps {
   isBorrow: boolean;
@@ -12,37 +18,45 @@ interface DashboardContentWrapperProps {
 export const DashboardContentWrapper = ({ isBorrow }: DashboardContentWrapperProps) => {
   const { breakpoints } = useTheme();
   const isDesktop = useMediaQuery(breakpoints.up('lg'));
-  const paperWidth = isDesktop ? 'calc(50% - 8px)' : '100%';
-  // const downToXSM = useMediaQuery(theme.breakpoints.down('xsm'));
+
+  const [merklMap, setMerklMap] = useState<Record<string, any>>({});
+
+  useEffect(() => {
+    if (!MERKL_CONFIG.ENABLED) {
+      console.log('MERKL disabled');
+      return;
+    }
+
+    console.log('MERKL fetch start', 999);
+
+    getAllMerklOpportunities(999)
+      .then((data) => {
+        console.log('MERKL RAW', data?.length || 0);
+        const map = buildMerklMarketMap(data || [], 999);
+        console.log('MERKL MAP', map);
+        setMerklMap(map);
+      })
+      .catch((e) => {
+        console.log('MERKL fetch failed', e.message);
+        setMerklMap({});
+      });
+  }, []);
 
   return (
-    // <Box //main container for all dashboards
-    //   sx={{
-    //     display: isDesktop ? 'flex' : 'block',
-    //     justifyContent: 'space-between',
-    //     alignItems: 'flex-start',
-    //     width: '1190px',
-    //   }}
-    // >
-    //   <Box sx={{ display: { xs: isBorrow ? 'none' : 'block', lg: 'block' }, width: paperWidth }}>
-    //     <SuppliedPositionsList />
-    //     <SupplyAssetsList />
-    //   </Box>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        mx: 'auto',
+        width: { xs: '99%', md: '1199px' },
+      }}
+    >
+    {/* <Box sx={{ width: '100%', mb: 3 }}> */}
+  {/* <MerklRewardsPanel /> */}
+{/* </Box> */}
 
-    //   <Box sx={{ display: { xs: !isBorrow ? 'none' : 'block', lg: 'block' }, width: paperWidth }}>
-    //     <BorrowedPositionsList />
-    //     <BorrowAssetsList />
-    //   </Box>
-    // </Box>
-
-    <Box sx={{
-      display: isDesktop ? 'flex' : 'flex',
-      flexDirection: 'column',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      mx: 'auto',
-      width: {xs:'99%', md: '1199px'},
-      }}>
+      {/* ---------- SUPPLY HEADER ---------- */}
       {isDesktop && (
         <Box sx={{
           display: 'flex',
@@ -77,7 +91,7 @@ export const DashboardContentWrapper = ({ isBorrow }: DashboardContentWrapperPro
             }}/></Box>
       )}
       
-      <Box sx={{ 
+      <Box sx={{
       display: { xs: isBorrow ? 'none' : 'flex', lg: 'flex' }, 
       flexDirection: {xs: 'column', md: 'row'},
       justifyContent: 'space-between',
@@ -87,7 +101,7 @@ export const DashboardContentWrapper = ({ isBorrow }: DashboardContentWrapperPro
       gap: {xs: '12px',md: '19px'},
       }}>
         <SuppliedPositionsList />
-        <SupplyAssetsList />
+        <SupplyAssetsList merklMap={merklMap} />
       </Box>
 
       {isDesktop && (
@@ -116,7 +130,7 @@ export const DashboardContentWrapper = ({ isBorrow }: DashboardContentWrapperPro
             lineHeight: '1em',
             letterSpacing: '0.08em',
             textTransform: 'uppercase',
-            color: 'rgba(255, 126, 9, 1)',
+            color: '#ff7e09',
             }}>borrow</Typography>
           <Divider sx={{ 
             width: '93.7%',

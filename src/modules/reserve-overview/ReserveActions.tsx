@@ -14,7 +14,7 @@ import {
 } from '@mui/material';
 import React, { ReactNode, useState } from 'react';
 import { WalletIcon } from 'src/components/icons/WalletIcon';
-import { getMarketInfoById } from 'src/components/MarketSwitcher';
+import { getMarketInfoById } from 'src/components/MarketSwitcherDashboard';
 import { FormattedNumber } from 'src/components/primitives/FormattedNumber';
 import { Warning } from 'src/components/primitives/Warning';
 import StyledToggleButton from 'src/components/StyledToggleButton';

@@ -45,6 +45,8 @@ if (process.env.NEXT_PUBLIC_ENABLE_STAKING === 'true') pageExtensions.push('stak
 /** @type {import('next').NextConfig} */
 module.exports = withBundleAnalyzer({
   reactStrictMode: true,
+    output: 'export',
+
   trailingSlash: true,
   pageExtensions,
 

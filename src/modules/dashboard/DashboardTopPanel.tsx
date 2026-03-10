@@ -27,6 +27,7 @@ import { TopInfoPanelItem } from '../../components/TopInfoPanel/TopInfoPanelItem
 import { useAppDataContext } from '../../hooks/app-data-provider/useAppDataProvider';
 import { LiquidationRiskParametresInfoModal } from './LiquidationRiskParametresModal/LiquidationRiskParametresModal';
 import { uiConfig } from 'src/uiConfig';
+import { MarketSwitcherDashboard } from 'src/components/MarketSwitcherDashboard';
 
 export const DashboardTopPanel = () => {
   const { currentNetworkConfig, currentMarketData } = useProtocolDataContext();
@@ -106,7 +107,8 @@ export const DashboardTopPanel = () => {
         alignItems: 'center', 
         gap: '16px',
         }}>
-        <img src={uiConfig.hype} height={38} />
+        {/* <img src={uiConfig.hype} height={38} /> */}
+        <MarketSwitcherDashboard></MarketSwitcherDashboard>
         <Typography sx={{ 
           color: '#FFFFFF',
           fontWeight: 600,
@@ -116,7 +118,6 @@ export const DashboardTopPanel = () => {
           }}> 
           {/* {currentNetworkConfig.name}  */}
           {/* {!downToSM && (' Market')} */}
-          Your Position
         </Typography>
       </Box>
 
@@ -203,6 +204,7 @@ export const DashboardTopPanel = () => {
             letterSpacing: '0.08em',
             textTransform: 'uppercase',
             color: '#FFFFFF99',
+            // bgcolor: 'red',
             }}> health factor </Typography>
           <HealthFactorNumber
             fontSize={'24px'}

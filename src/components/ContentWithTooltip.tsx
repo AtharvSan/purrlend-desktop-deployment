@@ -1,4 +1,4 @@
-import { Box, ClickAwayListener, experimental_sx, Popper, styled, Tooltip } from '@mui/material';
+import { Box, ClickAwayListener, Popper, styled, Tooltip } from '@mui/material';
 import { JSXElementConstructor, ReactElement, ReactNode, useState } from 'react';
 
 interface ContentWithTooltipProps {
@@ -12,24 +12,25 @@ interface ContentWithTooltipProps {
   offset?: [number, number];
 }
 
-const PopperComponent = styled(Popper)(
-  experimental_sx({
-    '.MuiTooltip-tooltip': {
-      color: 'text.primary',
-      backgroundColor: 'background.paper',
-      p: 0,
-      borderRadius: '6px',
+// FIX: experimental_sx was removed in MUI v5.1+ and is undefined in newer versions.
+// Replace with the sx prop passed directly to styled() as a second argument,
+// or use a plain object — styled() accepts it natively.
+const PopperComponent = styled(Popper)({
+  '& .MuiTooltip-tooltip': {
+    color: 'text.primary',
+    backgroundColor: 'background.paper',
+    padding: 0,
+    borderRadius: '6px',
+    boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.2), 0px 2px 10px rgba(0, 0, 0, 0.1)',
+    maxWidth: '280px',
+  },
+  '& .MuiTooltip-arrow': {
+    color: 'background.paper',
+    '&:before': {
       boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.2), 0px 2px 10px rgba(0, 0, 0, 0.1)',
-      maxWidth: '280px',
     },
-    '.MuiTooltip-arrow': {
-      color: 'background.paper',
-      '&:before': {
-        boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.2), 0px 2px 10px rgba(0, 0, 0, 0.1)',
-      },
-    },
-  })
-);
+  },
+});
 
 export const ContentWithTooltip = ({
   children,

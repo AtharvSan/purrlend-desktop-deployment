@@ -159,6 +159,12 @@ export const navigation: Navigation[] = [
     activePaths: [ROUTES.markets, ROUTES.reservesOverview],
   },
   {
+    link: ROUTES.leaderboard,
+    title: t`Leaderboard`,
+    dataCy: 'menuLeaderboard',
+    activePaths: [ROUTES.leaderboard],
+  },
+  {
     link: ROUTES.vaults,
     title: t`Vaults`,
     dataCy: 'menuStake',

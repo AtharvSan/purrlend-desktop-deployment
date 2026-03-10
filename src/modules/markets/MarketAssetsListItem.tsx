@@ -1,188 +1,174 @@
+import { useEffect, useState } from 'react';
 import { Trans } from '@lingui/macro';
 import { Box, Button, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
-import { RenFILToolTip } from 'src/components/infoTooltips/RenFILToolTip';
+
+import { getAllMerklOpportunities } from 'src/services/merklService';
+import { buildMerklMarketMap } from 'src/helpers/merklMarketMapper';
+import { MERKL_CONFIG } from 'src/config/merkl';
+import { APYBreakdownTooltip } from 'src/components/merkl/APYBreakdownTooltip';
+
 import { NoData } from 'src/components/primitives/NoData';
 import { ReserveSubheader } from 'src/components/ReserveSubheader';
-import { useProtocolDataContext } from 'src/hooks/useProtocolDataContext';
+import { ListColumn } from 'src/components/lists/ListColumn';
+import { FormattedNumber } from 'src/components/primitives/FormattedNumber';
+import { TokenIcon } from 'src/components/primitives/TokenIcon';
+import { ROUTES } from 'src/components/primitives/Link';
+import { IncentivesCard } from 'src/components/incentives/IncentivesCard';
 
-import { IncentivesCard } from '../../components/incentives/IncentivesCard';
-import { AMPLToolTip } from '../../components/infoTooltips/AMPLToolTip';
-import { ListColumn } from '../../components/lists/ListColumn';
-import { ListItem } from '../../components/lists/ListItem';
-import { FormattedNumber } from '../../components/primitives/FormattedNumber';
-import { Link, ROUTES } from '../../components/primitives/Link';
-import { TokenIcon } from '../../components/primitives/TokenIcon';
-import { ComputedReserveData } from '../../hooks/app-data-provider/useAppDataProvider';
-import { uiConfig } from 'src/uiConfig';
+import { ComputedReserveData } from 'src/hooks/app-data-provider/useAppDataProvider';
+import { useProtocolDataContext } from 'src/hooks/useProtocolDataContext';
 import { useModalContext } from 'src/hooks/useModal';
-import { link } from 'fs';
+
+import { uiConfig } from 'src/uiConfig';
 
 export const MarketAssetsListItem = ({ ...reserve }: ComputedReserveData) => {
   const router = useRouter();
-  const { currentMarket } = useProtocolDataContext();
+  const { currentMarket, currentChainId } = useProtocolDataContext();
   const { openSupply } = useModalContext();
 
+  const [merklMap, setMerklMap] = useState<Record<string, any>>({});
+
+  useEffect(() => {
+    if (!MERKL_CONFIG.ENABLED) return;
+    getAllMerklOpportunities(currentChainId)
+      .then((data) => {
+        const map = buildMerklMarketMap(data || [], currentChainId);
+        setMerklMap(map);
+      })
+      .catch(() => setMerklMap({}));
+  }, [currentChainId]);
+
+  const key = reserve.underlyingAsset?.toLowerCase();
+  const merkl = merklMap[key];
+  const merklApr = Number(merkl?.apr ?? 0);
+  const baseAPY = Number(reserve.supplyAPY || 0);
+  const hasMerkl = merkl?.hasMerkl === true;
+  const dailyRewardsWhole = Number(merkl?.dailyRewardsWhole ?? 0);
+  const pointsPerDollarPerDay = Number(merkl?.pointsPerDollarPerDay ?? 0);
+  const rewardTokenIcon = merkl?.rewardTokenIcon ?? "";
+
   return (
-    <>
-    <Box 
-    onClick={() => router.push(ROUTES.reserveOverview(reserve.underlyingAsset, currentMarket))}
-    sx={{
-    display: 'flex',
-    alignItems: 'center',
-    pt: '16px',
-    pb: '13px',
-    pl: '15px',
-    border: '1px solid',
-    borderRadius: '16px',
-    backgroundColor: '#FFFFFF',
-    borderColor: '#EAEAEA',
-    boxShadow: '0px 3px 5px 0px #0000000A',
-    cursor: 'pointer',
-    '&:hover': { bgcolor: '#f8f8f8ff' }
-    }}>
-      <Box sx={{
-        width: '285px',
-      }}>
+    <Box
+      onClick={() => router.push(ROUTES.reserveOverview(reserve.underlyingAsset, currentMarket))}
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        pt: '16px',
+        pb: '13px',
+        pl: '15px',
+        border: '1px solid',
+        borderRadius: '16px',
+        backgroundColor: '#FFFFFF',
+        borderColor: '#EAEAEA',
+        boxShadow: '0px 3px 5px 0px #0000000A',
+        cursor: 'pointer',
+        '&:hover': { bgcolor: '#f8f8f8ff' },
+      }}
+    >
+      {/* Asset */}
+      <Box sx={{ width: '285px' }}>
         <ListColumn isRow maxWidth={280}>
-          <TokenIcon symbol={reserve.iconSymbol} sx={{height: '32px', width: '32px' }} />
-          <Box sx={{
-          display: 'flex', 
-          flexDirection: 'column',
-          // backgroundColor: 'red',
-          pl: '16px',
-          gap: '7px',
-          overflow: 'hidden'
-          }}>
-            <Typography sx={{
-            fontWeight: 400,
-            fontSize: '16px',
-            lineHeight: '1em',
-            letterSpacing: '-0.02em',
-            color: '#061512',
-            // pb: '5px'
-            }}>
-              {reserve.name}
-            </Typography>
-            <Typography sx={{
-            fontWeight: 400,
-            fontSize: '14px',
-            lineHeight: '1em',
-            letterSpacing: '-0.02em',
-            color: '#828282',
-            }}>
-              {reserve.symbol}
-            </Typography>
+          <TokenIcon symbol={reserve.iconSymbol} sx={{ height: 32, width: 32 }} />
+          <Box sx={{ pl: '16px' }}>
+            <Typography fontSize={16}>{reserve.name}</Typography>
+            <Typography fontSize={14} color="#828282">{reserve.symbol}</Typography>
           </Box>
         </ListColumn>
       </Box>
 
-      <Box sx={{
-        width: '175px',
-      }}>
-        <ListColumn gapVal={'5px'}>
-          <FormattedNumber compact color={'#061512'} visibleDecimals={2} fontWeight={400} fontSize={'16px'} letterSpacing={'-0.02em'} lineHeight={'1em'} value={reserve.totalLiquidity} />
-          <FormattedNumber compact color={'#828282'} symbolsColor={'#828282'} fontWeight={400} fontSize={'14px'} letterSpacing={'-0.02em'} lineHeight={'1em'} symbol="USD" value={reserve.totalLiquidityUSD} />
+      {/* Total Supplied */}
+      <Box sx={{ width: '175px' }}>
+        <ListColumn gapVal="5px">
+          <FormattedNumber compact value={reserve.totalLiquidity} fontSize={16} />
+          <FormattedNumber compact symbol="USD" value={reserve.totalLiquidityUSD} color="#828282" />
         </ListColumn>
       </Box>
 
-      <Box sx={{
-        width: '165px',
-        pb: '23px',
-      }}>
+      {/* Supply APY */}
+      <Box sx={{ width: '165px' }}>
         <ListColumn>
-          <IncentivesCard
-            value={reserve.supplyAPY}
-            incentives={reserve.aIncentivesData || []}
-            symbol={reserve.symbol}
-          />
-        </ListColumn>
-      </Box>
-      
-      <Box sx={{
-        width: '152px',
-      }}>
-        <ListColumn gapVal={'5px'}>
-          {reserve.borrowingEnabled || Number(reserve.totalDebt) > 0 ? (
-            <>
-              <FormattedNumber compact color={'#061512'} visibleDecimals={2} fontWeight={400} fontSize={'16px'} letterSpacing={'-0.02em'} lineHeight={'1em'} value={reserve.totalDebt} />{' '}
-              <FormattedNumber compact color={'#828282'} symbolsColor={'#828282'} fontWeight={400} fontSize={'14px'} letterSpacing={'-0.02em'} lineHeight={'1em'} symbol="USD" value={reserve.totalDebtUSD} />
-            </>
+          {(hasMerkl && currentChainId==999) ? (
+            <APYBreakdownTooltip
+              fontsize='16px'
+              baseAPY={baseAPY}
+              merklApr={merklApr}
+              dailyRewardsWhole={dailyRewardsWhole}
+              pointsPerDollarPerDay={pointsPerDollarPerDay}
+              rewardTokenIcon={rewardTokenIcon}
+              rewardToken={merkl?.rewardToken ?? "Purr points"}
+              hasMerkl={hasMerkl}
+              symbol={reserve.symbol}
+              tvlUsd={merkl?.tvlUsd ?? 0}
+              totalLiquidityUsd={Number(reserve.totalLiquidityUSD ?? 0)}
+            />
           ) : (
-            <NoData variant={'secondary14'} color="text.secondary" />
+            <IncentivesCard
+              value={reserve.supplyAPY}
+              incentives={reserve.aIncentivesData || []}
+              symbol={reserve.symbol}
+            />
           )}
         </ListColumn>
       </Box>
 
-      <Box sx={{
-        width: '137px',
-        pb: '23px',
-      }}>
+      {/* Total Borrowed */}
+      <Box sx={{ width: '152px' }}>
+        <ListColumn gapVal="5px">
+          {reserve.borrowingEnabled || Number(reserve.totalDebt) > 0 ? (
+            <>
+              <FormattedNumber compact value={reserve.totalDebt} fontSize={16}/>
+              <FormattedNumber compact symbol="USD" value={reserve.totalDebtUSD} color="#828282" />
+            </>
+          ) : (
+            <NoData variant="secondary14" />
+          )}
+        </ListColumn>
+      </Box>
+
+      {/* Borrow APY */}
+      <Box sx={{ width: '137px' }}>
         <ListColumn>
           <IncentivesCard
             value={Number(reserve.totalVariableDebtUSD) > 0 ? reserve.variableBorrowAPY : '-1'}
             incentives={reserve.vIncentivesData || []}
             symbol={reserve.symbol}
-            // variant="main16"
-            // symbolsVariant="secondary16"
           />
-          {!reserve.borrowingEnabled &&
-            Number(reserve.totalVariableDebt) > 0 &&
-            !reserve.isFrozen && <ReserveSubheader value={'Disabled'} />}
+          {!reserve.borrowingEnabled && Number(reserve.totalVariableDebt) > 0 && !reserve.isFrozen && (
+            <ReserveSubheader value="Disabled" />
+          )}
         </ListColumn>
       </Box>
 
-      <Box sx={{
-        width: '165px',
-        pb: '15px',
-      }}>
+      {/* Oracle */}
+      <Box sx={{ width: '165px' }}>
         <ListColumn>
-          <Box sx={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '6px',
-            }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
             <img src={uiConfig.pyth} height={22} width={22} alt="pyth" />
-            <Typography sx={{
-              fontWeight: 400,
-              fontSize: '16px',
-              lineHeight: '1em',
-              letterSpacing: '-0.02em',
-              color: '#061512',
-              }}>Pyth</Typography>
+            <Typography fontSize={16}>Pyth</Typography>
           </Box>
         </ListColumn>
       </Box>
-      
-      <Box sx={{
-        pb: '10px',
-        zIndex: 1
-      }}>
+
+      {/* Action */}
+      <Box sx={{ zIndex: 1 }}>
         <ListColumn align="right">
           <Button
-            // disabled={!isActive || isFreezed || Number(walletBalance) <= 0}
             variant="contained"
-            onClick={(e) => {
-              e.stopPropagation();
-              openSupply(reserve.underlyingAsset);
-            }}
+            onClick={(e) => { e.stopPropagation(); openSupply(reserve.underlyingAsset); }}
             sx={{
-              backgroundColor: 'rgba(6, 21, 18, 1)',
+              backgroundColor: '#061512',
               color: '#FFFFFF',
-              border: '1px solid',
-              borderColor: 'rgba(255, 255, 255, 0.2)',
               borderRadius: '70px',
               py: '7px',
               px: '12px',
               fontSize: '14px',
-              lineHeight: '1em',
-              letterSpacing: '-0.02em',
-            }}>
-              Supply
+            }}
+          >
+            <Trans>Supply</Trans>
           </Button>
         </ListColumn>
       </Box>
     </Box>
-    </>
   );
 };

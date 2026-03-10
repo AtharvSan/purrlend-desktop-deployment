@@ -100,7 +100,7 @@ export const BorrowedPositionsListItem = ({
       <Box>
         <ListButtonsColumn>
           <Button
-            disabled={!isActive}
+            disabled={!isActive || !borrowingEnabled || isFrozen}
             variant="contained"
             // onClick={() => openRepay(reserve.underlyingAsset, borrowRateMode, isFrozen)}
             onClick={() => openBorrow(reserve.underlyingAsset)}
@@ -122,7 +122,7 @@ export const BorrowedPositionsListItem = ({
             <Trans>Borrow</Trans>
           </Button>
           <Button
-            disabled={!isActive || !borrowingEnabled || isFrozen}
+            disabled={!isActive}
             // variant="outlined"
             // onClick={() => openBorrow(reserve.underlyingAsset)}
             onClick={() => openRepay(reserve.underlyingAsset, borrowRateMode, isFrozen)}

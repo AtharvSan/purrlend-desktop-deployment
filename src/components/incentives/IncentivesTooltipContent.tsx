@@ -19,7 +19,10 @@ export const IncentivesTooltipContent = ({
 }: IncentivesTooltipContentProps) => {
   const typographyVariant = 'secondary12';
 
-  const Number = ({ incentiveAPR }: { incentiveAPR: 'Infinity' | number | string }) => {
+  // FIX: renamed from `Number` → `IncentiveAPRDisplay`.
+  // `Number` shadows the global Number constructor, breaking FormattedNumber
+  // and any other code that calls Number() inside this render tree.
+  const IncentiveAPRDisplay = ({ incentiveAPR }: { incentiveAPR: 'Infinity' | number | string }) => {
     return (
       <Box sx={{ display: 'inline-flex', alignItems: 'center' }}>
         {incentiveAPR !== 'Infinity' ? (
@@ -73,14 +76,14 @@ export const IncentivesTooltipContent = ({
             key={incentive.rewardTokenAddress}
             width="100%"
           >
-            <Number incentiveAPR={incentive.incentiveAPR} />
+            <IncentiveAPRDisplay incentiveAPR={incentive.incentiveAPR} />
           </Row>
         ))}
 
         {incentives.length > 1 && (
           <Box sx={(theme) => ({ pt: 1, mt: 1, border: `1px solid ${theme.palette.divider}` })}>
             <Row caption={<Trans>Net APR</Trans>} height={32}>
-              <Number incentiveAPR={incentivesNetAPR} />
+              <IncentiveAPRDisplay incentiveAPR={incentivesNetAPR} />
             </Row>
           </Box>
         )}

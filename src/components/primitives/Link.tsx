@@ -131,6 +131,7 @@ export const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(function Link
 export const ROUTES = {
   dashboard: '/',
   markets: '/markets',
+  leaderboard: '/leaderboard',
   vaults: '/vaults',
   governance: '/governance',
   faucet: '/faucet',

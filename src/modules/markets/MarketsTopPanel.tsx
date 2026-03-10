@@ -12,6 +12,7 @@ import { TopInfoPanelItem } from '../../components/TopInfoPanel/TopInfoPanelItem
 import { useAppDataContext } from '../../hooks/app-data-provider/useAppDataProvider';
 import { uiConfig } from 'src/uiConfig';
 import { networkConfigs } from 'src/ui-config/networksConfig';
+import { MarketSwitcherMarkets } from 'src/components/MarketSwitcherMarkets';
 
 export const MarketsTopPanel = () => {
   const { reserves, loading } = useAppDataContext();
@@ -57,7 +58,8 @@ export const MarketsTopPanel = () => {
         alignItems: 'center', 
         gap: '16px',
         }}>
-        <img src={uiConfig.hype} height={38} />
+        {/* <img src={uiConfig.hype} height={38} /> */}
+        <MarketSwitcherMarkets></MarketSwitcherMarkets>
         <Typography sx={{ 
           color: '#FFFFFF',
           fontWeight: 600,
@@ -65,8 +67,8 @@ export const MarketsTopPanel = () => {
           lineHeight: '1em',
           letterSpacing: '-0.02em',
           }}>
-            HyperEVM 
-            {!downToSM && (' Market')}
+            {/* HyperEVM  */}
+            {/* {!downToSM && (' Market')} */}
         </Typography>
       </Box>
 

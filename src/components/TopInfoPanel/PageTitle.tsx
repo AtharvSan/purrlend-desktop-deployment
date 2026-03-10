@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 
 import { NetworkConfig } from '../../ui-config/networksConfig';
 // import { BridgeButton } from '../BridgeButton';
-import { getMarketHelpData, MarketLogo, MarketSwitcher } from '../MarketSwitcher';
+import { getMarketHelpData, MarketLogo, MarketSwitcher } from '../MarketSwitcherDashboard';
 import React from 'react';
 
 export interface PageTitleProps extends Pick<NetworkConfig, 'bridge'> {

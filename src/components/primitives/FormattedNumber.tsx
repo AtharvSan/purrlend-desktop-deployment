@@ -79,7 +79,8 @@ export function FormattedNumber({
     }
   }
 
-  const minValue = 10 ** -(decimals as number);
+  // const minValue = 10 ** -(decimals as number);
+  const minValue = 0.001;
   const isSmallerThanMin = number !== 0 && Math.abs(number) < Math.abs(minValue);
   let formattedNumber = isSmallerThanMin ? minValue : number;
   const forceCompact = compact !== false && (compact || number > 99_999);
@@ -107,7 +108,7 @@ export function FormattedNumber({
       }}
       noWrap
     >
-      {isSmallerThanMin && (
+      {/* {isSmallerThanMin && (
         <Typography
           component="span"
           sx={{ mr: '0.2em' }}
@@ -116,7 +117,7 @@ export function FormattedNumber({
         >
           {'<'}
         </Typography>
-      )}
+      )} */}
       {symbol?.toLowerCase() === 'usd' && !percent && (
         <Typography
           component="span"

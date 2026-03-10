@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import { useRouter } from 'next/router';
 import { CircleIcon } from 'src/components/CircleIcon';
-import { getMarketInfoById, MarketLogo } from 'src/components/MarketSwitcher';
+import { getMarketInfoById, MarketLogo } from 'src/components/MarketSwitcherDashboard';
 import { FormattedNumber } from 'src/components/primitives/FormattedNumber';
 import { Link } from 'src/components/primitives/Link';
 import { useProtocolDataContext } from 'src/hooks/useProtocolDataContext';

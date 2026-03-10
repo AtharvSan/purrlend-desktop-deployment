@@ -353,4 +353,17 @@ export const networkConfigs: Record<string, BaseNetworkConfig> = {
     isTestnet: false,
     networkLogoPath: '/icons/networks/hyperevm.svg',
   },
+  [4326]: {
+    name: 'MegaETH',
+    publicJsonRPCUrl: ['https://mainnet.megaeth.com/rpc'],
+    publicJsonRPCWSUrl: '',
+    // protocolDataUrl: '',
+    baseUniswapAdapter: '0x0',
+    baseAssetSymbol: 'ETH',
+    wrappedBaseAssetSymbol: 'WETH',
+    baseAssetDecimals: 18,
+    explorerLink: 'https://mega.etherscan.io/',
+    isTestnet: false,
+    networkLogoPath: '/icons/networks/megaeth.svg',
+  },
 } as const;

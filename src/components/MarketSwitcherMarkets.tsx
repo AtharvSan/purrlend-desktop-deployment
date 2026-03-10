@@ -95,7 +95,7 @@ enum SelectedMarketVersion {
   V3,
 }
 
-export const MarketSwitcher = () => {
+export const MarketSwitcherMarkets = () => {
   const { currentMarket, setCurrentMarket } = useProtocolDataContext();
   const [selectedMarketVersion, setSelectedMarketVersion] = useState<SelectedMarketVersion>(
     SelectedMarketVersion.V3
@@ -176,6 +176,7 @@ export const MarketSwitcher = () => {
             backgroundColor: 'transparent !important',
           },
           '.MuiSelect-icon': { color: '#F1F1F3' },
+          // backgroundColor: 'red',
         },
         MenuProps: {
           anchorOrigin: {
@@ -192,15 +193,15 @@ export const MarketSwitcher = () => {
         },
       }}
     >
-      <Box>
+      {/* <Box>
         <Typography variant="subheader2" color="text.secondary" sx={{ px: 4, pt: 2 }}>
           <Trans>
             {ENABLE_TESTNET || STAGING_ENV ? 'Select Aave Testnet Market' : 'Select Aave Market'}
           </Trans>
         </Typography>
-      </Box>
+      </Box> */}
 
-      {isV3MarketsAvailable && (
+      {/* {isV3MarketsAvailable && (
         <Box sx={{ mx: '18px', display: 'flex', justifyContent: 'center' }}>
           <StyledToggleButtonGroup
             value={selectedMarketVersion}
@@ -283,7 +284,7 @@ export const MarketSwitcher = () => {
             </StyledToggleButton>
           </StyledToggleButtonGroup>
         </Box>
-      )}
+      )} */}
       {availableMarkets.map((marketId: CustomMarket) => {
         const { market, network } = getMarketInfoById(marketId);
         const marketNaming = getMarketHelpData(market.marketTitle);
@@ -294,6 +295,7 @@ export const MarketSwitcher = () => {
             value={marketId}
             sx={{
               '.MuiListItemIcon-root': { minWidth: 'unset' },
+              // backgroundColor: 'red',
               display:
                 (market.v3 && selectedMarketVersion === SelectedMarketVersion.V2) ||
                 (!market.v3 && selectedMarketVersion === SelectedMarketVersion.V3)

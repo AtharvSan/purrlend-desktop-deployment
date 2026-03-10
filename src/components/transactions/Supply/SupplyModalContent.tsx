@@ -7,7 +7,7 @@ import {
 import { Trans } from '@lingui/macro';
 import { Typography } from '@mui/material';
 import BigNumber from 'bignumber.js';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Warning } from 'src/components/primitives/Warning';
 import { AMPLWarning } from 'src/components/Warnings/AMPLWarning';
 import { CollateralType } from 'src/helpers/types';
@@ -36,6 +36,11 @@ import { AAVEWarning } from '../Warnings/AAVEWarning';
 import { IsolationModeWarning } from '../Warnings/IsolationModeWarning';
 import { SNXWarning } from '../Warnings/SNXWarning';
 import { SupplyActions } from './SupplyActions';
+import { MERKL_CONFIG } from 'src/config/merkl';
+import { getAllMerklOpportunities } from 'src/services/merklService';
+import { buildMerklMarketMap, UNDERLYING_TO_POOL } from 'src/helpers/merklMarketMapper';
+import { normalize } from '@aave/math-utils';
+import { DashboardReserve } from 'src/utils/dashboardSortUtils';
 
 export enum ErrorType {
   CAP_REACHED,
@@ -49,9 +54,10 @@ export const SupplyModalContent = ({
   nativeBalance,
   tokenBalance,
   symbol,
-}: ModalWrapperProps) => {
+  detailsAddress,
+}: ModalWrapperProps & DashboardReserve) => {
   const { marketReferencePriceInUsd, user } = useAppDataContext();
-  const { currentMarketData, currentNetworkConfig } = useProtocolDataContext();
+  const { currentMarketData, currentNetworkConfig, currentChainId } = useProtocolDataContext();
   const { mainTxState: supplyTxState, gasLimit, txError } = useModalContext();
   const { supplyCap, debtCeiling } = useAssetCaps();
   const {
@@ -66,6 +72,17 @@ export const SupplyModalContent = ({
   const walletBalance = supplyUnWrapped ? nativeBalance : tokenBalance;
 
   const supplyApy = poolReserve.supplyAPY;
+  const [merklMap, setMerklMap] = useState<Record<string, any>>({});
+  useEffect(() => {
+      if (!MERKL_CONFIG.ENABLED) return;
+  
+      getAllMerklOpportunities(currentChainId)
+        .then((data) => {
+          const map = buildMerklMarketMap(data || [], currentChainId);
+          setMerklMap(map);
+        })
+        .catch(() => setMerklMap({}));
+    }, [currentChainId]);
 
   // Calculate max amount to supply
   const maxAmountToSupply = getMaxAmountAvailableToSupply(
@@ -212,7 +229,15 @@ export const SupplyModalContent = ({
         addToken={addToken}
       />
     );
+  
+  const normalizedUnderlying =
+    UNDERLYING_TO_POOL[underlyingAsset?.toLowerCase()] 
+      ? underlyingAsset?.toLowerCase()
+      : underlyingAsset?.toLowerCase();
 
+  const merkl = merklMap[normalizedUnderlying];
+  const merklApr = Number(merkl?.apr ?? 0) / 100;
+  const baseApy = Number(poolReserve.supplyAPY ?? 0);
   return (
     <>
       {showIsolationWarning && <IsolationModeWarning asset={poolReserve.symbol} />}
@@ -256,7 +281,7 @@ export const SupplyModalContent = ({
       )}
 
       <TxModalDetails gasLimit={gasLimit}>
-        <DetailsNumberLine description={<Trans>Supply APY</Trans>} value={supplyApy} percent />
+        <DetailsNumberLine description={<Trans>Supply APY</Trans>} value={Number(baseApy + merklApr)} percent />
         <DetailsIncentivesLine
           incentives={poolReserve.aIncentivesData}
           symbol={poolReserve.symbol}

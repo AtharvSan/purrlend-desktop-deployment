@@ -53,17 +53,15 @@ export const ReserveConfiguration: React.FC<ReserveConfigurationProps> = ({ rese
         boxShadow: '0px 3px 5px 0px #0000000A',
         width: {xs: '100%', md: 'unset'},
       }}>
-      <Box>
+      <Box sx={{
+        px: '18px',
+        mt: {xs: '12px', md: '16px'},
+        mb: {xs: '16px', md: '16px'},
+      }}>
         {reserve.isFrozen ? (
-          <Warning sx={{ mt: '16px', mb: '40px' }} severity="error">
+          <Warning  severity="error">
             <Trans>
-              This asset is frozen due to an Aave community decision.{' '}
-              <Link
-                href={getFrozenProposalLink(reserve.symbol, currentMarket)}
-                sx={{ textDecoration: 'underline' }}
-              >
-                <Trans>More details</Trans>
-              </Link>
+              This asset is frozen. You can still repay and withdraw, but you cannot supply or borrow.
             </Trans>
           </Warning>
         ) : (

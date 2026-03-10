@@ -71,16 +71,49 @@ export const MarketAssetsListContainer = () => {
 
       {/* Frozen assets list */}
       {frozenReserves.length > 0 && (
-        <Box sx={{ mt: 10, px: { xs: 4, xsm: 6 } }}>
-          <Typography variant="h4" mb={4}>
+        <Box>
+        {/* <Box sx={{ 
+          mt: 15, 
+          px: { xs: 1, md: '1px' },
+          mb: 4,
+          // backgroundColor: 'red', 
+        }}>
+          <Typography variant="h3" mb={4}>
             <Trans>Frozen assets</Trans>
           </Typography>
-          <Warning severity="info">
-            <Trans>
-              These assets are temporarily frozen by community decisions, meaning that further
-              supply / borrow, or rate swap of these assets are unavailable. Withdrawals and debt
+          
+        </Box> */}
+          <Box sx={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: '15px',
+            mt: 15, 
+            mb: 4, 
+          }}>
+            <Box sx={{
+              width: '3px',
+              height: '23px',
+              backgroundColor: '#FF7E09',
+            }} />
+            <Typography sx={{
+              fontWeight: 600,
+              fontSize: '20px',
+              lineHeight: '1em',
+              letterSpacing: '-0.02em',
+            }}>
+              Frozen assets
+            </Typography>
+          </Box>
+          <Warning severity="info" sx={{ mb: 4 }}>
+            <Typography sx={{
+              fontWeight: 400,
+              fontSize: '13px',
+              lineHeight: '1.5em',
+              letterSpacing: '0em',
+            }}>
+              These assets are temporarily frozen, supply / borrow of these assets are unavailable. Withdrawals and debt
               repayments are allowed.
-            </Trans>
+            </Typography>
           </Warning>
         </Box>
       )}

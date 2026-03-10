@@ -1,3 +1,8 @@
+import { useEffect, useState } from 'react';
+import { getAllMerklOpportunities } from 'src/services/merklService';
+import { buildMerklMarketMap } from 'src/helpers/merklMarketMapper';
+import { MERKL_CONFIG } from 'src/config/merkl';
+import { APYBreakdownTooltip } from 'src/components/merkl/APYBreakdownTooltip';
 import { Trans } from '@lingui/macro';
 import { Box, Button, Typography } from '@mui/material';
 import { NoData } from 'src/components/primitives/NoData';
@@ -19,6 +24,7 @@ import { uiConfig } from 'src/uiConfig';
 import { TokenIcon } from 'src/components/primitives/TokenIcon';
 import { FormattedNumber } from 'src/components/primitives/FormattedNumber';
 import router from 'next/router';
+import { ChainId } from '@aave/contract-helpers';
 
 export const SupplyAssetsListItem = ({
   symbol,
@@ -39,6 +45,29 @@ export const SupplyAssetsListItem = ({
 }: DashboardReserve) => {
   const { currentMarket } = useProtocolDataContext();
   const { openSupply } = useModalContext();
+  const { currentChainId } = useProtocolDataContext();
+  const [merklMap, setMerklMap] = useState<Record<string, any>>({});
+
+  useEffect(() => {
+    if (!MERKL_CONFIG.ENABLED) return;
+
+    getAllMerklOpportunities(currentChainId)
+      .then((data) => {
+        const map = buildMerklMarketMap(data || [], currentChainId);
+        setMerklMap(map);
+      })
+      .catch(() => setMerklMap({}));
+  }, [currentChainId]);
+
+  const key = detailsAddress?.toLowerCase();
+  const merkl = merklMap[key];
+  const hasMerkl = merkl?.hasMerkl === true;
+
+  const merklApr = Number(merkl?.apr ?? 0);
+  const baseAPY = Number(supplyAPY || 0);
+  const dailyRewardsWhole = Number(merkl?.dailyRewardsWhole ?? 0);
+  const pointsPerDollarPerDay = Number(merkl?.pointsPerDollarPerDay ?? 0);
+  const rewardTokenIcon = merkl?.rewardTokenIcon ?? "";
 
   // Hide the asset to prevent it from being supplied if supply cap has been reached
   const { supplyCap: supplyCapUsage, debtCeiling } = useAssetCaps();
@@ -77,7 +106,8 @@ export const SupplyAssetsListItem = ({
       <Box sx={{
         display: 'flex',
         justifyContent: 'start',
-        width: '87px',
+        // width: '87px',
+        width: '80px',
         // backgroundColor: 'red'
         }}>
           <ListValueColumn
@@ -100,25 +130,35 @@ export const SupplyAssetsListItem = ({
       <Box sx={{
       display: 'flex',
       justifyContent: 'start',
-      width: '93px',
+      width: '98px',
+      pl: '7px',
       }}>
-        <FormattedNumber 
-        value={Number(supplyAPY)} 
-        color={'#061512'} 
-        fontWeight={400} 
-        fontSize={'14px'} 
-        size={'14px'}
-        lineHeight={'1em'} 
-        letterSpacing={'-0.02em'} 
-        percent 
-        symbolsColor='#828282' 
-        />
+        {(hasMerkl && currentChainId==999)? (
+          <APYBreakdownTooltip
+            baseAPY={baseAPY}
+            merklApr={merklApr}
+            dailyRewardsWhole={dailyRewardsWhole}
+            pointsPerDollarPerDay={pointsPerDollarPerDay}
+            rewardTokenIcon={rewardTokenIcon}
+            rewardToken={merkl?.rewardToken ?? "Points"}
+            hasMerkl={hasMerkl}
+            symbol={symbol}
+            tvlUsd={merkl?.tvlUsd ?? 0}
+            totalLiquidityUsd={Number(totalLiquidity ?? 0)}
+          />
+        ) : (
+          <FormattedNumber
+            value={baseAPY}
+            percent
+            fontSize={'14px'}
+          />
+        )}
       </Box>
 
       <Box sx={{
       display: 'flex',
       justifyContent: 'start',
-      width: '111px',
+      width: '113px',
       }}>
         <ListColumn basis={72} align="start" shrink={0} sx={{ml: '18px'}} >
           {debtCeiling.isMaxed ? (
